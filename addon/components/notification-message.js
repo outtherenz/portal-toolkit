@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/notification-message';
 
-const { Component, computed, inject, String as EString, Handlebars } = Ember;
+const { Component, computed, inject, Handlebars } = Ember;
 
 export default Component.extend({
   layout,
@@ -28,7 +28,7 @@ export default Component.extend({
   // Apply the clear animation duration rule inline
   notificationClearDuration: computed('notification.clearDuration', function() {
     var duration = Handlebars.Utils.escapeExpression(this.get('notification.clearDuration'));
-    return EString.htmlSafe(`animation-duration: ${duration}ms; -webkit-animation-duration: ${duration}ms`);
+    return Ember.String.htmlSafe(`animation-duration: ${duration}ms; -webkit-animation-duration: ${duration}ms`);
   }),
 
   actions: {
