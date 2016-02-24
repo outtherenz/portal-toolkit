@@ -1,0 +1,28 @@
+<button class='subdued' {{action 'prevYear'}}><b>«</b></button>
+<button class='subdued' {{action 'prevMonth'}}><b>‹</b></button>
+
+<div class="inputs">
+  {{#x-select value=selectedMonth class="month"}}
+    {{#x-option value="01"}}January{{/x-option}}
+    {{#x-option value="02"}}Feburary{{/x-option}}
+    {{#x-option value="03"}}March{{/x-option}}
+    {{#x-option value="04"}}April{{/x-option}}
+    {{#x-option value="05"}}May{{/x-option}}
+    {{#x-option value="06"}}June{{/x-option}}
+    {{#x-option value="07"}}July{{/x-option}}
+    {{#x-option value="08"}}August{{/x-option}}
+    {{#x-option value="09"}}September{{/x-option}}
+    {{#x-option value="10"}}October{{/x-option}}
+    {{#x-option value="11"}}November{{/x-option}}
+    {{#x-option value="12"}}December{{/x-option}}
+  {{/x-select}}
+
+  {{#x-select value=selectedYear class="year"}}
+    {{#each yearList as |year|}}
+      {{#x-option value=year}}{{year}}{{/x-option}}
+    {{/each}}
+  {{/x-select}}
+</div>
+
+<button class='subdued' {{action 'nextMonth'}}><b>›</b></button>
+<button class='subdued' {{action 'nextYear'}}><b>»</b></button>

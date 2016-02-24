@@ -1,0 +1,9 @@
+{{#if isLoading}}
+  {{fa-icon 'circle-o-notch' spin=true}}
+{{else}}
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{buttonText}}
+  {{/if}}
+{{/if}}

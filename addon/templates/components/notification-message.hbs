@@ -1,0 +1,15 @@
+<div class="icon">
+  {{unbound (fa-icon icon)}}
+</div>
+
+<div class="content">
+  {{notification.message}}
+</div>
+
+<a class="close" {{action "clear"}}>
+  {{unbound (fa-icon 'fa-times-circle')}}
+</a>
+
+{{#if notification.autoClear}}
+  <div class="countdown" style={{notificationClearDuration}}></div>
+{{/if}}
