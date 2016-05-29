@@ -3,7 +3,7 @@ import layout from '../templates/components/loading-icon';
 
 const { Component, computed } = Ember;
 
-const LoadingIconComponent = Ember.Component.extend({
+const LoadingIconComponent = Component.extend({
   layout,
 
   classNames: [ 'loading-icon' ],

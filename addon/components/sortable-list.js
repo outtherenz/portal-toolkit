@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/sortable-list';
 
-const { Component, computed, $ } = Ember;
+const { Component, computed, $, get, set } = Ember;
 
 export default Component.extend({
   layout,
@@ -10,7 +10,7 @@ export default Component.extend({
 
   index: 'sortIndex',
   sortBy: computed('index', function() {
-    return [ this.get('index') ];
+    return [ get(this, 'index') ];
   }),
 
   sortedContent: computed.sort('content', 'sortBy'),
@@ -18,10 +18,10 @@ export default Component.extend({
   sort() {
     this.$('li').each((index, li) => {
       const id = $(li).attr('data-id');
-      const item = this.get('content').findBy('id', id);
+      const item = get(this, 'content').findBy('id', id);
 
       if (item) {
-        item.set('sortIndex', index);
+        set(item, 'sortIndex', index);
       }
     });
   },

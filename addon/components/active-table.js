@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import layout from '../templates/components/active-table';
 
-const { computed, Object } = Ember;
+const { Component, computed, Object: EObject, get, set } = Ember;
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
 
   tagName: 'table',
@@ -15,12 +15,12 @@ export default Ember.Component.extend({
   sortable: true,
 
   headers: computed('columns', function() {
-    const [ sortedBy, sortDir ] = this.get('sortedBy.0').split(':');
-    const columns = this.get('columns');
-    const columnCount = columns.get('length');
+    const [ sortedBy, sortDir ] = get(this, 'sortedBy.0').split(':');
+    const columns = get(this, 'columns');
+    const columnCount = get(columns, 'length');
     const headers = [];
     let totalUnits = 0;
-    let flexibleProportion = 1
+    let flexibleProportion = 1;
 
     columns.forEach(column => {
       if (column.width) {
@@ -31,23 +31,23 @@ export default Ember.Component.extend({
     });
 
     columns.forEach(column => {
-      const header = Object.create({
+      const header = EObject.create({
         name: column.name,
         key: column.key
       });
 
       if (column.width && typeof column.width === 'number') {
-        header.set('width', column.width / totalUnits * flexibleProportion * 100 + '%');
+        set(header, 'width', column.width / totalUnits * flexibleProportion * 100 + '%');
       } else if (column.width && typeof column.width === 'string') {
-        header.set('width', column.width);
+        set(header, 'width', column.width);
       } else {
-        header.set('width', 1 / columnCount * 100 + '%');
+        set(header, 'width', 1 / columnCount * 100 + '%');
       }
 
       // If the content is sorted by this column
-      if (sortedBy === header.get('key')) {
-        header.set('sorted', true);
-        header.set('ascending', sortDir !== 'desc');
+      if (sortedBy === get(header, 'key')) {
+        set(header, 'sorted', true);
+        set(header, 'ascending', sortDir !== 'desc');
       }
 
       headers.push(header);
@@ -58,25 +58,25 @@ export default Ember.Component.extend({
 
   actions: {
     sortBy: function(columnToSort) {
-      const toSortBy = columnToSort.get('key');
-      const [ sortedBy, sortDir ] = this.get('sortedBy.0').split(':');
+      const toSortBy = get(columnToSort, 'key');
+      const [ sortedBy, sortDir ] = get(this, 'sortedBy.0').split(':');
 
       if (sortedBy === toSortBy) {
         // set sort order
         const newDir = sortDir !== 'desc' ? 'desc' : 'asc';
-        this.set('sortedBy', [ sortedBy + ':' + newDir ]);
+        set(this, 'sortedBy', [ sortedBy + ':' + newDir ]);
 
         // nofity column
-        columnToSort.set('sorted', true);
-        columnToSort.set('ascending', newDir === 'asc');
+        set(columnToSort, 'sorted', true);
+        set(columnToSort, 'ascending', newDir === 'asc');
       } else {
         // set sort order
-        this.set('sortedBy', [ toSortBy + ':asc' ]);
+        set(this, 'sortedBy', [ toSortBy + ':asc' ]);
 
         // set column meta
-        this.get('headers').forEach(column => column.set('sorted', false));
-        columnToSort.set('sorted', true);
-        columnToSort.set('ascending', true);
+        get(this, 'headers').forEach(column => set(column, 'sorted', false));
+        set(columnToSort, 'sorted', true);
+        set(columnToSort, 'ascending', true);
       }
     }
   }
