@@ -1,17 +1,48 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# compiled output
+# Compiled output
 /dist
 /tmp
 
-# dependencies
+# Dependencies
 /node_modules
 /bower_components
 
-# misc
+# Misc
 /.sass-cache
 /connect.lock
 /coverage/*
 /libpeerconnection.log
 npm-debug.log
 testem.log
+dump.rdb
+.DS_Store
+clean_ember-cli.js
+start guide.txt
+output for bower install after clean script.txt
+
+# Sublime Text
+*.sublime-*
+
+# Webstorm
+.idea*
+
+## File-based project format:
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties

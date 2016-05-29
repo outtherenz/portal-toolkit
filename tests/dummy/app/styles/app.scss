@@ -1,0 +1,91 @@
+@import 'bourbon';
+
+$off-white: #f5f5f5;
+$blue: #59d;
+$border-color: #ccc;
+$gutter: 25px;
+
+body {
+  font: 16px/1.5 sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+a {
+  color: $blue;
+}
+
+h1 { font-size: 26px; }
+h2 { font-size: 20px; }
+h3 { font-size: 18px; }
+h4 { font-size: 15px; }
+
+.page-header {
+  background-color: $blue;
+  border-bottom: 5px solid shade($blue, 20%);
+  padding: $gutter;
+  color: white;
+
+  h1 {
+    font-size: 28px;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.1;
+    margin: 0.6em 0 0;
+  }
+}
+
+main {
+  display: flex;
+}
+
+.sidebar {
+  flex: 0 0 300px;
+  padding: $gutter;
+  background-color: $off-white;
+  border-right: 5px solid $border-color;
+
+  a {
+    color: #444;
+    text-decoration: none;
+
+    &.active {
+      font-weight: bold;
+    }
+  }
+}
+
+.page {
+  flex: 1;
+  padding: $gutter 2*$gutter;
+}
+
+.article-header {
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 3em;
+  padding: 1em 0;
+
+   h1 {
+    margin: 0;
+   }
+}
+
+.title-category {
+  color: #999;
+  font-weight: normal;
+}
+
+code {
+  background: $off-white;
+  color: #222;
+  display: inline-block;
+  padding: 0.1em 0.4em;
+  font-size: 90%;
+  line-height: 1.5;
+}

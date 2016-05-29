@@ -1,0 +1,19 @@
+<thead>
+  <tr>
+    {{#each headers as |header|}}
+      <th width={{header.width}} class="{{if header.sorted 'sorted'}} {{if header.ascending 'ascending'}}">
+        {{#if header.key}}
+          <a {{action 'sortBy' header}}>
+            <span>{{header.name}}</span>
+          </a>
+        {{else}}
+          {{header.name}}
+        {{/if}}
+      </th>
+    {{/each}}
+  </tr>
+</thead>
+
+<tbody>
+  {{yield}}
+</tbody>

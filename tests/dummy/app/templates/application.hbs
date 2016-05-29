@@ -1,3 +1,41 @@
-<h2 id="title">Welcome to Ember</h2>
+<header class="page-header">
+  <h1>Portal Ember Toolkit</h1>
+  <h2>Code to be shared across the Portal’s modules.</h2>
+</header>
 
-{{outlet}}
+<main>
+  <aside class="sidebar">
+    <nav>
+      <h3>Components</h3>
+      <ul>
+        <li>{{#link-to 'app-components.active-table'}}Active table{{/link-to}}</li>
+        <li>{{#link-to 'app-components.charts'}}Charts{{/link-to}}</li>
+        <li>{{#link-to 'app-components.checkbox-list'}}Checkbox list{{/link-to}}</li>
+        <li>{{#link-to 'app-components.file-inputs'}}File inputs{{/link-to}}</li>
+        <li>{{#link-to 'app-components.formatted-input'}}Formatted input{{/link-to}}</li>
+        <li>{{#link-to 'app-components.loading-button'}}Loading button{{/link-to}}</li>
+        <li>{{#link-to 'app-components.loading-icon'}}Loading icon{{/link-to}}</li>
+        <li>{{#link-to 'app-components.month-picker'}}Month picker{{/link-to}}</li>
+        <li>{{#link-to 'app-components.print-button'}}Print button{{/link-to}}</li>
+        <li>{{#link-to 'app-components.sortable-list'}}Sortable list{{/link-to}}</li>
+        <li>{{#link-to 'app-components.untethered-modal-dialog'}}Untethered modal dialog{{/link-to}}</li>
+      </ul>
+
+      <h3>Helpers</h3>
+      <ul>
+        <li>{{#link-to 'helpers.concat'}}Concat{{/link-to}}</li>
+        <li>{{#link-to 'helpers.format-number'}}Format number{{/link-to}}</li>
+        <li>{{#link-to 'helpers.math'}}Math{{/link-to}}</li>
+      </ul>
+
+      <h3>Services</h3>
+      <ul>
+        <li>…</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <article class="page">
+    {{outlet}}
+  </article>
+</main>

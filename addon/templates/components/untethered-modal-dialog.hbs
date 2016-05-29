@@ -1,0 +1,11 @@
+{{#ember-wormhole to=destinationElementId renderInPlace=renderInPlace}}
+  <div class="{{wrapperClassNamesString}} {{wrapper-class}}">
+    {{#modal-dialog-overlay
+      classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
+      action='close'}}
+      <div class="ember-modal-dialog">
+        {{yield}}
+      </div>
+    {{/modal-dialog-overlay}}
+  </div>
+{{/ember-wormhole}}
