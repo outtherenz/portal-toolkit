@@ -1,15 +1,23 @@
 import Ember from 'ember';
+import layout from '../templates/components/loading-icon';
 
 const { Component, computed } = Ember;
 
-export default Ember.Component.extend({
+const LoadingIconComponent = Ember.Component.extend({
+  layout,
+
+  classNames: [ 'loading-icon' ],
   classNameBindings: [
     'isRipple:loading-ripple',
     'isSpinner:loading-spinner'
   ],
 
-  positionalParams: [ 'type' ],
-
   isRipple: computed.equal('type', 'ripple'),
   isSpinner: computed.equal('type', 'spinner')
 });
+
+LoadingIconComponent.reopenClass({
+  positionalParams: [ 'type' ]
+});
+
+export default LoadingIconComponent;

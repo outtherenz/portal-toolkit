@@ -1,0 +1,15 @@
+<header class="article-header">
+  <h1><span class="title-category">Component:</span> Active Table</h1>
+</header>
+
+<p>Like a normal table, but the columns are sortable.</p>
+
+{{#active-table columns=tableContent sortedBy=sort}}
+  {{#each data as |person|}}
+    <tr>
+      <td>{{person.name}}</td>
+      <td>{{person.dob}}</td>
+      <td>{{person.comments}}</td>
+    </tr>
+  {{/each}}
+{{/active-table}}

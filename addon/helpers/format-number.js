@@ -2,28 +2,30 @@ import Ember from 'ember';
 
 const { Helper } = Ember;
 
-export function formatNumber(input, options) {
+export function formatNumber(params, options) {
   options = options || {};
 
-  const number = standardizeInput(input);
+  const [ formatAs, number, rawNumber ] = standardizeInput(params);
+
+  // Defaults
 
   // NaN
   if (isNaN(number)) {
-    return finalize('', input, number, options);
+    return finalize('', formatAs, number, rawNumber, options);
   }
 
   // Dash zero
   if (options.dashZero !== false && number === 0) {
-    return finalize('\u2013', input, number, options);
+    return finalize('\u2013', formatAs, number, rawNumber, options);
   }
 
   // Too large or small
   if (number > 9007199254740991 || number < -9007199254740991) {
-    return finalize('#', input, number, options);
+    return finalize('#', formatAs, number, rawNumber, options);
   }
 
   // Convert sigfigs option to a places option
-  const places = calcPlaces(number, options);
+  const places = calcPlaces(number, formatAs, options);
 
   // First round the number
   const rounded = round(number, places);
@@ -37,20 +39,24 @@ export function formatNumber(input, options) {
   // Nice minus sign and slight space
   const formatted = formatNegativeSign(commaed);
 
-  return finalize(formatted, input, rounded, options);
+  return finalize(formatted, formatAs, rounded, rawNumber, options);
 }
 
-function finalize(formatted, input, number, options) {
+function finalize(formatted, formatAs, number, rawNumber, options) {
+  if (typeof formatted === 'string' && formatted.match(/\d/) !== null) {
+    formatted = applyDecoration(formatted, formatAs);
+  }
+
   if (!options.flags) {
     return formatted;
   }
 
   const res = {
     formatted,
-    raw: input,
+    raw: rawNumber,
     parsedInput: number,
     isNaN: typeof formatted !== 'string' || formatted.match(/\d/) === null,
-    isZero: input === 0,
+    isZero: rawNumber === 0,
     roundsToZero: number === 0,
     isNegative: !isNaN(number) && number < 0
   };
@@ -59,23 +65,47 @@ function finalize(formatted, input, number, options) {
 }
 
 function standardizeInput(input) {
-  if (typeof input !== 'string') {
-    return input == null ? NaN : Number(input);
-  } else if (input === '-' || input === '\u2013') {
-    return 0;
+  let formatAs, value, rawValue;
+
+  if (!Ember.isArray(input) || input.length === 1) {
+    value = Ember.isArray(input) ? input[0] : input;
+    formatAs = 'number';
   } else {
-    return parseFloat(input.replace('\u2212\u2009', '-').replace(/[^\d.-]*/g, ''));
+    [ formatAs, value ] = input;
   }
+
+  formatAs = typeof formatAs === 'string' ? formatAs.toLowerCase() : 'number';
+  rawValue = value;
+
+  if (formatAs === 'percentage') {
+    value *= 100;
+  }
+
+  if (typeof value !== 'string') {
+    value = value == null ? NaN : Number(value);
+  } else if (value === '-' || value === '\u2013') {
+    value = 0;
+  } else {
+    value = parseFloat(value.replace('\u2212\u2009', '-').replace(/[^\d.-]*/g, ''));
+  }
+
+  return [ formatAs, value, rawValue ];
 }
 
-function calcPlaces(number, options) {
-  if (options.places != null) {
-    return (typeof options.places === 'number') ? options.places : 2;
-  } else if (options.sigfigs != null) {
-    return (typeof options.sigfigs === 'number') ? options.sigfigs - Math.abs(Math.floor(number)).toString().length : 3;
-  } else {
-    return 2;
+function calcPlaces(number, formatAs, options) {
+  if (typeof options.places === 'number' && formatAs !== 'integer') {
+    return options.places;
   }
+
+  if (typeof options.sigfigs === 'number') {
+    return options.sigfigs - Math.abs(Math.floor(number)).toString().length;
+  }
+
+  if (formatAs === 'integer') {
+    return 0;
+  }
+
+  return 2;
 }
 
 function round(number, places) {
@@ -149,6 +179,21 @@ function formatNegativeSign(string) {
   }
 
   return string;
+}
+
+function applyDecoration(string, formatAs) {
+  switch (formatAs) {
+    case 'percentage':
+      return string + '%';
+
+    case 'currency':
+      return '$' + string;
+
+    case 'number':
+    case 'integer':
+    default:
+      return string;
+  }
 }
 
 export default Helper.helper(formatNumber);

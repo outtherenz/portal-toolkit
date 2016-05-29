@@ -1,6 +1,5 @@
 import Ember from 'ember';
-import { formatNumber } from '../helpers/fmt-number';
-import { formatPercentage } from '../helpers/fmt-percentage';
+import { formatNumber } from '../helpers/format-number';
 
 const { TextField, run, on, observer } = Ember;
 
@@ -40,28 +39,19 @@ export default TextField.extend({
       return;
     }
 
-    const format = this.get('format');
-    let source = this.get('source.value');
+    let format = this.get('format');
 
-    switch (format) {
-      case 'INTEGER':
-        source = formatNumber(source, { places: 0 });
-        break;
-      case 'CURRENCY':
-        source = formatNumber(source);
-        break;
-      case 'PERCENTAGE':
-        source = formatPercentage(source);
-        break;
-      default:
-        source = formatNumber(source);
+    if (format.toLowerCase() === 'currency') {
+      format = 'number';
     }
+
+    const source = formatNumber([ format, this.get('source.value') ]);
 
     this.set('value', source);
   },
 
   valueDidChange: observer('value', function() {
-    const source = formatNumber(this.get('source.value'));
+    const source = formatNumber([ 'number', this.get('source.value') ]);
     const value = this.get('value');
 
     if (source !== value) {

@@ -10,7 +10,7 @@ export default Ember.Component.extend({
 
   checkPeriod: Ember.on('init', function() {
     if (!moment(this.get('period'), 'YYYY-MM').isValid()) {
-      throw new Error('Date should be provided in YTD format');
+      // throw new Error('Period should be provided in YYYY-MM format');
     }
   }),
 
@@ -27,11 +27,16 @@ export default Ember.Component.extend({
 
   selectedYear: Ember.computed('period', {
     get: function() {
-      return this.get('period').substr(0, 4);
+      const period = this.get('period');
+      return typeof period === 'string' ? period.substr(0, 4) : String(moment().year());
     },
-    set: function(key, value) {
-      const current = this.get('period');
-      this.set('period', value + current.substr(4));
+    set: function(key, year) {
+      const current = moment(this.get('period'), 'YYYY-MM');
+      const month = current.isValid() ? current.format('MM') : moment().format('MM');
+      year = moment(year, 'YYYY').isValid() ? String(year) : moment().format('YYYY');
+
+      this.set('period', `${year}-${month}`);
+
       return value;
     }
   }),

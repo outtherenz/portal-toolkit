@@ -1,23 +1,23 @@
 import Ember from 'ember';
 import C3Chart from 'ember-c3/components/c3-chart';
-import { formatPercentage } from 'portal/helpers/fmt-percentage';
-import { formatNumber } from 'portal/helpers/fmt-number';
-import { formatCurrency } from 'portal/helpers/fmt-currency';
+import { formatNumber } from 'portal/helpers/format-number';
 import moment from 'moment';
+
+const { computed, Logger, isArray, get } = Ember;
 
 export default C3Chart.extend({
   classNames: ['dashboard-module', 'line-chart'],
 
-  data: Ember.computed('metrics', 'series', function() {
+  data: computed('metrics', 'series', function() {
     const periodType = this.get('period.type');
     const dates = [];
     const seriesMeta = this.get('series');
     const metrics = this.get('metrics');
-    const series = Ember.isArray(metrics) ? metrics[0].series : metrics.series;
+    const series = isArray(metrics) ? metrics[0].series : metrics.series;
     const columns = [];
 
     if (!series) {
-      Ember.Logger.warn('No series provided to line chart component.');
+      Logger.warn('No series provided to line chart component.');
       return;
     }
 
@@ -37,7 +37,7 @@ export default C3Chart.extend({
 
       dates.forEach((date, periodIndex) => {
         const period = periods.find(p => p.date === date.toISOString());
-        const value = period ? Ember.get(period, `periodTypes.${periodType}.value`) : null;
+        const value = period ? get(period, `periodTypes.${periodType}.value`) : null;
         columns[seriesIndex][periodIndex + 1] = value != null ? value : null;
         currentPeriod = moment(currentPeriod).add(1, 'month').endOf('month').toDate();
       });
@@ -51,9 +51,9 @@ export default C3Chart.extend({
     };
   }),
 
-  axis: Ember.computed('metrics', function() {
+  axis: computed('metrics', function() {
     const metrics = this.get('metrics');
-    const meta = Ember.isArray(metrics) ? metrics[0].meta : metrics.meta;
+    const meta = isArray(metrics) ? metrics[0].meta : metrics.meta;
     let label;
     let reduction;
     let yAxisPlaces = 0;
@@ -61,7 +61,7 @@ export default C3Chart.extend({
     if (meta.format === 'PERCENTAGE') {
       label = meta.name;
     } else {
-      const series = Ember.isArray(metrics) ? metrics[0].series : metrics.series;
+      const series = isArray(metrics) ? metrics[0].series : metrics.series;
 
       let longest = 0;
 
@@ -124,7 +124,7 @@ export default C3Chart.extend({
         tick: {
           format: function(tick) {
             if (meta.format === 'PERCENTAGE') {
-              return formatPercentage(tick, { sigfigs: 2, dashZero: false });
+              return formatNumber([ 'percentage', tick ], { sigfigs: 2, dashZero: false });
             } else {
               return formatNumber(tick / reduction, { places: yAxisPlaces, dashZero: false });
             }
@@ -143,9 +143,9 @@ export default C3Chart.extend({
     y: { show: true }
   },
 
-  tooltip: Ember.computed('metrics', function() {
+  tooltip: computed('metrics', function() {
     const metrics = this.get('metrics');
-    const meta = Ember.isArray(metrics) ? metrics[0].meta : metrics.meta;
+    const meta = isArray(metrics) ? metrics[0].meta : metrics.meta;
 
     return {
       show: true,
@@ -153,9 +153,9 @@ export default C3Chart.extend({
         title: date => moment(date).format('MMMM YYYY'),
         value: function(value) {
           if (meta.format === 'PERCENTAGE') {
-            return formatPercentage(value, { sigfigs: 2, dashZero: false });
+            return formatNumber([ value, 'percentage' ], { sigfigs: 2, dashZero: false });
           } else if (meta.format === 'CURRENCY') {
-            return formatCurrency(value, { places: 0, dashZero: false });
+            return formatNumber([ value, 'currency' ], { places: 0, dashZero: false });
           }
         }
       }

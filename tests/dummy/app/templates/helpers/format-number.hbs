@@ -1,0 +1,40 @@
+<header class="article-header">
+  <h1><span class="title-category">Helper:</span> Format Number</h1>
+</header>
+
+<h2>Numbers</h2>
+
+<div class="example">
+  <ul>
+    <li>Number: {{format-number 'number' 123.456}}</li>
+    <li>Number, 3 places: {{format-number 'number' 123.456 places=3}}</li>
+    <li>Number, negative: {{format-number 'number' -123.456}}</li>
+  </ul>
+</div>
+
+<h2>Integers</h2>
+
+<div class="example">
+  <ul>
+    <li>Integer: {{format-number 'integer' 3.5}}</li>
+    <li>Integer: {{format-number 'integer' 31235134.123}}</li>
+    <li>Integer: {{format-number 'integer' 31235134.123 sigfigs=4}}</li>
+  </ul>
+</div>
+
+<h2>Currency</h2>
+
+<div class="example">
+  <ul>
+    <li>Currency: {{format-number 'currency' 3.5}}</li>
+  </ul>
+</div>
+
+<h2>Percentage</h2>
+
+<div class="example">
+    <ul>
+      <li>Percentage: {{format-number 'percentage' 0.547}}</li>
+      <li>Percentage, 1 place: {{format-number 'percentage' 0.547 places=1}}</li>
+    </ul>
+</div>

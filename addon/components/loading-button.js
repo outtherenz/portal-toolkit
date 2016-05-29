@@ -1,6 +1,8 @@
 import Ember from 'ember';
+import layout from '../templates/components/loading-button';
 
 export default Ember.Component.extend({
+  layout,
   classNameBindings: ['isLoading:loading'],
   attributeBindings: ['isDisabled:disabled'],
   tagName: 'button',

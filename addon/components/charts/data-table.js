@@ -1,17 +1,16 @@
 import Ember from 'ember';
-import { formatNumber } from 'portal/helpers/fmt-number';
-import { formatCurrency } from 'portal/helpers/fmt-currency';
-import { formatPercentage } from 'portal/helpers/fmt-percentage';
-/* global moment */
+import { formatNumber } from 'portal/helpers/format-number';
+import layout from '../../templates/components/charts/data-table';
+import moment from 'moment';
 
-const { get } = Ember;
+const { Component, computed, get } = Ember;
 
-export default Ember.Component.extend({
-  classNames: ['dashboard-module', 'data-table'],
-
+export default Component.extend({
+  layout,
+  classNames: [ 'dashboard-module', 'data-table' ],
   tagName: 'table',
 
-  data: Ember.computed('metrics', function() {
+  data: computed('metrics', function() {
     const metrics = this.get('metrics');
     const date = moment(this.get('period.start'), 'YYYY-MM').endOf('month').toDate();
     const periodType = this.get('period.type');
@@ -25,23 +24,7 @@ export default Ember.Component.extend({
       let value = period ? get(period, `periodTypes.${periodType}.value`) : null;
 
       if (value != null) {
-        switch (format) {
-          case 'INTEGER':
-            value = formatNumber(value, { places: 0 });
-            break;
-          case 'NUMBER':
-            value = formatNumber(value, { places: 2 });
-            break;
-          case 'CURRENCY':
-            value = formatCurrency(value, { places: 2 });
-            break;
-          case 'PERCENTAGE':
-            value = formatPercentage(value, { places: 2 });
-            break;
-          default:
-            value = formatNumber(value, { places: 2 });
-            break;
-        }
+        value = formatNumber([ format, value ]);
       } else if (typeof value === 'undefined') {
         value = null; // null not undefined
       }
