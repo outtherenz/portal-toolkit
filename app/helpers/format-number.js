@@ -1,1 +1,1 @@
-export { default, formatNumber } from 'portal-client-toolkit/helpers/format-number';
+export { default, formatNumber } from 'portal-toolkit/helpers/format-number';

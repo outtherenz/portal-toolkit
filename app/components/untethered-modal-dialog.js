@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/untethered-modal-dialog';
+export { default } from 'portal-toolkit/components/untethered-modal-dialog';

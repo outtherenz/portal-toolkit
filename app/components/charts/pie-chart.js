@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/charts/pie-chart';
+export { default } from 'portal-toolkit/components/charts/pie-chart';

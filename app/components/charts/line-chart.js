@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/charts/line-chart';
+export { default } from 'portal-toolkit/components/charts/line-chart';

@@ -1,1 +1,1 @@
-export { default, formatCurrency } from 'portal-client-toolkit/helpers/fmt-currency';
+export { default, formatCurrency } from 'portal-toolkit/helpers/fmt-currency';

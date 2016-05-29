@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/loading-button';
+export { default } from 'portal-toolkit/components/loading-button';

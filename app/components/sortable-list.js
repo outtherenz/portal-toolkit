@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/sortable-list';
+export { default } from 'portal-toolkit/components/sortable-list';

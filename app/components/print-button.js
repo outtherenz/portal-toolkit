@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/print-button';
+export { default } from 'portal-toolkit/components/print-button';

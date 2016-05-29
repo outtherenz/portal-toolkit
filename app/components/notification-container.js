@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/notification-container';
+export { default } from 'portal-toolkit/components/notification-container';

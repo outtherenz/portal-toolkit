@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/file-inputs/text';
+export { default } from 'portal-toolkit/components/file-inputs/text';

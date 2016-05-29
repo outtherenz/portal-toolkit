@@ -2,6 +2,6 @@
 'use strict';
 
 module.exports = {
-  name: 'portal-client-toolkit',
+  name: 'portal-toolkit',
   isDevelopingAddon: () => true
 };

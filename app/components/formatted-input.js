@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/formatted-input';
+export { default } from 'portal-toolkit/components/formatted-input';

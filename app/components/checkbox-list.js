@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/checkbox-list';
+export { default } from 'portal-toolkit/components/checkbox-list';

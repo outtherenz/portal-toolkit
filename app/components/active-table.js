@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/active-table';
+export { default } from 'portal-toolkit/components/active-table';

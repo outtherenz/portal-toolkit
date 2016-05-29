@@ -1,1 +1,1 @@
-export { default, math } from 'portal-client-toolkit/helpers/math';
+export { default, math } from 'portal-toolkit/helpers/math';

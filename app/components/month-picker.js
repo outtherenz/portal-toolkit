@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/month-picker';
+export { default } from 'portal-toolkit/components/month-picker';

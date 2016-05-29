@@ -1,1 +1,1 @@
-export { default } from 'portal-client-toolkit/components/charts/data-table';
+export { default } from 'portal-toolkit/components/charts/data-table';

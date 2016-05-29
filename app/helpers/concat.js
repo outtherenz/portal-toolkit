@@ -1,1 +1,1 @@
-export { default, concat } from 'portal-client-toolkit/helpers/concat';
+export { default, concat } from 'portal-toolkit/helpers/concat';
