@@ -1,26 +1,27 @@
-# Portal-client-toolkit
+# Portal Toolkit
 
-This README outlines the details of collaborating on this Ember addon.
+The Portal Toolkit is intended to hold all of the reusable components to be shared between the Portal's modules.
 
-## Installation
+![Portal module structure diagram](http://i.imgur.com/AKDjysP.png)
+
+## Installation and usage
 
 * `git clone` this repository
-* `npm install`
-* `bower install`
+* `npm install && bower install`
+* `npm link` to tell npm you would like to use this locally
+* `cd other-project && npm link portal-client` to install the addon elsewhere
 
-## Running
+## Running standalone
+
+Also this is an addon and therefore intended to be used inside another project, it is possible to serve the addons dummy app outside of testing. This is useful when adding to or updating this addon.
 
 * `ember server`
 * Visit your app at http://localhost:4200.
 
-## Running Tests
+## Running tests
 
 * `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
-
-## Building
-
-* `ember build`
 
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
