@@ -7,13 +7,14 @@ const { Component, computed, get } = Ember;
 
 export default Component.extend({
   layout,
+
   classNames: [ 'dashboard-module', 'data-table' ],
   tagName: 'table',
 
   data: computed('metrics', function() {
-    const metrics = this.get('metrics');
-    const date = moment(this.get('period.start'), 'YYYY-MM').endOf('month').toDate();
-    const periodType = this.get('period.type');
+    const metrics = get(this, 'metrics');
+    const date = moment(get(this, 'period.start'), 'YYYY-MM').endOf('month').toDate();
+    const periodType = get(this, 'period.type');
     const table = [];
 
     metrics.forEach(metric => {

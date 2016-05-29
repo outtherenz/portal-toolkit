@@ -9,10 +9,10 @@ export default C3Chart.extend({
   classNames: ['dashboard-module', 'line-chart'],
 
   data: computed('metrics', 'series', function() {
-    const periodType = this.get('period.type');
+    const periodType = get(this, 'period.type');
     const dates = [];
-    const seriesMeta = this.get('series');
-    const metrics = this.get('metrics');
+    const seriesMeta = get(this, 'series');
+    const metrics = get(this, 'metrics');
     const series = isArray(metrics) ? metrics[0].series : metrics.series;
     const columns = [];
 
@@ -21,8 +21,8 @@ export default C3Chart.extend({
       return;
     }
 
-    const start = moment(this.get('period.start'), 'YYYY-MM').endOf('month').toDate();
-    const end = moment(this.get('period.end'), 'YYYY-MM').endOf('month').toDate();
+    const start = moment(get(this, 'period.start'), 'YYYY-MM').endOf('month').toDate();
+    const end = moment(get(this, 'period.end'), 'YYYY-MM').endOf('month').toDate();
     let currentPeriod = start;
 
     while (currentPeriod <= end) {
@@ -31,9 +31,9 @@ export default C3Chart.extend({
     }
 
     seriesMeta.forEach((meta, seriesIndex) => {
-      const thisSeries = series.find(s => s.branch === meta.get('id') || s.group === meta.get('id')) || {};
+      const thisSeries = series.find(s => s.branch === get(meta, 'id') || s.group === get(meta, 'id')) || {};
       const periods = thisSeries.periods || [];
-      columns.pushObject([ meta.get('name') ]);
+      columns.pushObject([ get(meta, 'name') ]);
 
       dates.forEach((date, periodIndex) => {
         const period = periods.find(p => p.date === date.toISOString());
@@ -52,7 +52,7 @@ export default C3Chart.extend({
   }),
 
   axis: computed('metrics', function() {
-    const metrics = this.get('metrics');
+    const metrics = get(this, 'metrics');
     const meta = isArray(metrics) ? metrics[0].meta : metrics.meta;
     let label;
     let reduction;
@@ -65,8 +65,8 @@ export default C3Chart.extend({
 
       let longest = 0;
 
-      series.forEach(thisSeries => {
-        thisSeries.periods.forEach(period => {
+      series.forEach(({ periods }) => {
+        periods.forEach(period => {
           if (period.value > longest) {
             longest = period.value;
           }
@@ -111,7 +111,7 @@ export default C3Chart.extend({
       x: {
         type: 'timeseries',
         tick: {
-          format: function(tick) {
+          format(tick) {
             return moment(tick).format('MMM-YY');
           }
         }
@@ -122,7 +122,7 @@ export default C3Chart.extend({
           position: 'outer-middle'
         },
         tick: {
-          format: function(tick) {
+          format(tick) {
             if (meta.format === 'PERCENTAGE') {
               return formatNumber([ 'percentage', tick ], { sigfigs: 2, dashZero: false });
             } else {
@@ -144,14 +144,14 @@ export default C3Chart.extend({
   },
 
   tooltip: computed('metrics', function() {
-    const metrics = this.get('metrics');
+    const metrics = get(this, 'metrics');
     const meta = isArray(metrics) ? metrics[0].meta : metrics.meta;
 
     return {
       show: true,
       format: {
         title: date => moment(date).format('MMMM YYYY'),
-        value: function(value) {
+        value(value) {
           if (meta.format === 'PERCENTAGE') {
             return formatNumber([ value, 'percentage' ], { sigfigs: 2, dashZero: false });
           } else if (meta.format === 'CURRENCY') {

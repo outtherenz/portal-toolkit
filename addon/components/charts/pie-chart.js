@@ -1,31 +1,37 @@
 import Ember from 'ember';
 import C3Chart from 'ember-c3/components/c3-chart';
 
-const { computed, Logger, get } = Ember;
+const { computed, isEmpty, Logger: { warn }, get } = Ember;
 
 export default C3Chart.extend({
   classNames: ['dashboard-module', 'pie-chart'],
 
+  markEmptySeries: true,
+
   data: computed('metrics', function() {
-    const metrics = this.get('metrics');
-    const periodType = this.get('period.type');
+    const metrics = get(this, 'metrics');
+    const periodType = get(this, 'period.type');
+    const markEmpty = get(this, 'markEmptySeries');
     const columns = [];
 
-    if (!metrics || !metrics.length) {
-      Logger.warn('No data provided to pie chart component.');
+    if (!metrics || isEmpty(metrics)) {
+      warn('No data provided to pie chart component.');
       return;
     }
 
     metrics.forEach(metric => {
-      let value = null;
+      let name = get(metric, 'meta');
+      const value = get(metric, `series.0.periods.0.periodTypes.${periodType}.value`);
 
-      value = get(metric, `series.0.periods.0.periodTypes.${periodType}.value`);
+      if (markEmpty && !value) {
+        name += ' (no data)';
+      }
 
-      columns.push([
-        metric.meta.name,
-        !isNaN(value) ? value : null
-      ]);
+      columns.push([ name, value ]);
     });
+
+    // Sort by value
+    columns.sort((a, b) => b[1] - a[1]);
 
     return {
       type: 'pie',

@@ -2,47 +2,46 @@ import Ember from 'ember';
 import layout from '../templates/components/month-picker';
 import moment from 'moment';
 
-export default Ember.Component.extend({
+const { Component, computed, get, set } = Ember;
+
+export default Component.extend({
   layout,
 
-  classNames: [ 'month-picker' ],
+  // YYYY-MM string containing the selected period
   period: null,
 
-  checkPeriod: Ember.on('init', function() {
-    if (!moment(this.get('period'), 'YYYY-MM').isValid()) {
-      // throw new Error('Period should be provided in YYYY-MM format');
-    }
-  }),
+  classNames: [ 'month-picker' ],
+  classNameBindings: [ 'closedPeriod' ],
 
-  selectedMonth: Ember.computed('period', {
-    get: function() {
-      return this.get('period').substr(5);
+  selectedMonth: computed('period', {
+    get() {
+      return get(this, 'period').substr(5);
     },
-    set: function(key, value) {
-      const current = this.get('period');
-      this.set('period', current.substr(0, 5) + value);
+    set(key, value) {
+      const current = get(this, 'period');
+      set(this, 'period', current.substr(0, 5) + value);
       return value;
     }
   }),
 
-  selectedYear: Ember.computed('period', {
-    get: function() {
-      const period = this.get('period');
+  selectedYear: computed('period', {
+    get() {
+      const period = get(this, 'period');
       return typeof period === 'string' ? period.substr(0, 4) : String(moment().year());
     },
-    set: function(key, year) {
-      const current = moment(this.get('period'), 'YYYY-MM');
+    set(key, year) {
+      const current = moment(get(this, 'period'), 'YYYY-MM');
       const month = current.isValid() ? current.format('MM') : moment().format('MM');
       year = moment(year, 'YYYY').isValid() ? String(year) : moment().format('YYYY');
 
-      this.set('period', `${year}-${month}`);
+      set(this, 'period', `${year}-${month}`);
 
       return year;
     }
   }),
 
-  yearList: Ember.computed('period', function() {
-    const selected = moment(this.get('period').substr(0, 4), 'YYYY');
+  yearList: computed('period', function() {
+    const selected = moment(get(this, 'period').substr(0, 4), 'YYYY');
     let start = moment([moment().year() - 8]);
     let end = moment([moment().year() + 2]);
 
@@ -65,27 +64,27 @@ export default Ember.Component.extend({
 
   actions: {
     prevYear() {
-      const current = this.get('period');
+      const current = get(this, 'period');
       const prev = moment(current, 'YYYY-MM').subtract(1, 'year').format('YYYY-MM');
-      this.set('period', prev);
+      set(this, 'period', prev);
     },
 
     prevMonth() {
-      const current = this.get('period');
+      const current = get(this, 'period');
       const prev = moment(current, 'YYYY-MM').subtract(1, 'month').format('YYYY-MM');
-      this.set('period', prev);
+      set(this, 'period', prev);
     },
 
     nextMonth() {
-      const current = this.get('period');
+      const current = get(this, 'period');
       const prev = moment(current, 'YYYY-MM').add(1, 'month').format('YYYY-MM');
-      this.set('period', prev);
+      set(this, 'period', prev);
     },
 
     nextYear() {
-      const current = this.get('period');
+      const current = get(this, 'period');
       const prev = moment(current, 'YYYY-MM').add(1, 'year').format('YYYY-MM');
-      this.set('period', prev);
+      set(this, 'period', prev);
     }
   }
 });
