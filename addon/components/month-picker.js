@@ -37,7 +37,7 @@ export default Ember.Component.extend({
 
       this.set('period', `${year}-${month}`);
 
-      return value;
+      return year;
     }
   }),
 

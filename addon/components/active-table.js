@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     const columnCount = columns.get('length');
     const headers = [];
     let totalUnits = 0;
-    let flexibleProportion = 1
+    let flexibleProportion = 1;
 
     columns.forEach(column => {
       if (column.width) {
