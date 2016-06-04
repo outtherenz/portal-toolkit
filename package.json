@@ -12,12 +12,11 @@
     "test": "ember try:testall",
     "lint": "./node_modules/.bin/eslint ."
   },
-  "repository": "",
+  "repository": "https://github.com/outtherenz/portal-toolkit",
   "engines": {
     "node": ">= 0.10.0"
   },
   "author": "",
-  "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
     "ember-ajax": "0.7.1",
