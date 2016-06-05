@@ -2,13 +2,18 @@ import Ember from 'ember';
 import layout from '../templates/components/month-picker';
 import moment from 'moment';
 
-const { Component, computed, get, set } = Ember;
+const {
+  Component,
+  computed,
+  get,
+  set
+} = Ember;
 
 export default Component.extend({
   layout,
 
-  // YYYY-MM string containing the selected period
-  period: null,
+  // Default only. Bind your YYYY-MM string to this.
+  period: moment().format('YYYY-MM'),
 
   classNames: [ 'month-picker' ],
   classNameBindings: [ 'closedPeriod' ],
@@ -33,9 +38,7 @@ export default Component.extend({
       const current = moment(get(this, 'period'), 'YYYY-MM');
       const month = current.isValid() ? current.format('MM') : moment().format('MM');
       year = moment(year, 'YYYY').isValid() ? String(year) : moment().format('YYYY');
-
       set(this, 'period', `${year}-${month}`);
-
       return year;
     }
   }),
