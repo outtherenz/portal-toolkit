@@ -2,6 +2,11 @@ import Ember from 'ember';
 
 const { Helper } = Ember;
 
+const MINUS_SIGN = '\u2212\u2009';
+const DASH = '\u2013';
+const MIN_SAFE_INTEGER = Number.MIN_SAFE_INTEGER || -9007199254740991;
+const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 9007199254740991;
+
 export function formatNumber(params, options) {
   options = options || {};
 
@@ -16,11 +21,11 @@ export function formatNumber(params, options) {
 
   // Dash zero
   if (options.dashZero !== false && number === 0) {
-    return finalize('\u2013', formatAs, number, rawNumber, options);
+    return finalize(DASH, formatAs, number, rawNumber, options);
   }
 
   // Too large or small
-  if (number > 9007199254740991 || number < -9007199254740991) {
+  if (number < MIN_SAFE_INTEGER || number > MAX_SAFE_INTEGER) {
     return finalize('#', formatAs, number, rawNumber, options);
   }
 
@@ -83,10 +88,10 @@ function standardizeInput(input) {
 
   if (typeof value !== 'string') {
     value = value == null ? NaN : Number(value);
-  } else if (value === '-' || value === '\u2013') {
+  } else if (value === '-' || value === DASH) {
     value = 0;
   } else {
-    value = parseFloat(value.replace('\u2212\u2009', '-').replace(/[^\d.-]*/g, ''));
+    value = parseFloat(value.replace(MINUS_SIGN, '-').replace(/[^\d.-]*/g, ''));
   }
 
   return [ formatAs, value, rawValue ];
@@ -175,7 +180,7 @@ function addCommas(string) {
 
 function formatNegativeSign(string) {
   if (string[0] === '-') {
-    string = '\u2212\u2009' + string.substr(1);
+    string = MINUS_SIGN + string.substr(1);
   }
 
   return string;
