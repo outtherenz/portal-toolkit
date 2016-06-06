@@ -9,7 +9,7 @@ The Portal Toolkit is intended to hold all of the reusable components to be shar
 * `git clone` this repository
 * `npm install && bower install`
 * `npm link` to tell npm you would like to use this locally
-* `cd other-project && npm link portal-client` to install the addon elsewhere
+* `cd other-project && npm link portal-toolkit` to install the addon elsewhere
 
 ## Running standalone
 
