@@ -16,7 +16,8 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Out There Business Solutions",
+  "private": true,
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
     "ember-ajax": "^0.7.1",
