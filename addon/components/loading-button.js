@@ -6,11 +6,11 @@ const { Component, computed, get } = Ember;
 export default Component.extend({
   layout,
 
-  classNameBindings: ['isLoading:loading'],
-  attributeBindings: ['isDisabled:disabled'],
+  classNameBindings: [ 'isLoading:loading' ],
+  attributeBindings: [ 'disabled' ],
   tagName: 'button',
 
-  buttonText: 'No label provided',
+  buttonText: 'Submit',
   isLoading: false,
   isDisabled: false,
 
