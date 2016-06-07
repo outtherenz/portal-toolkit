@@ -20,8 +20,8 @@ export default C3Chart.extend({
     }
 
     metrics.forEach(metric => {
-      let name = get(metric, 'meta');
-      const value = get(metric, `series.0.periods.0.periodTypes.${periodType}.value`);
+      let name = get(metric, 'meta.name');
+      const value = get(metric, `series.0.periods.0.periodTypes.${periodType}.value`) || 0;
 
       if (markEmpty && !value) {
         name += ' (no data)';
