@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
-import wait from 'ember-test-helpers/wait';
 
 describeComponent('loading-button', 'Integration: LoadingButtonComponent', { integration: true }, function() {
   it('renders in inline form', function() {

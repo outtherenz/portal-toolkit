@@ -2,9 +2,6 @@ import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
-import Ember from 'ember';
-
-const { run } = Ember;
 
 describeComponent('formatted-input', 'Integration: FormattedInputComponent', { integration: true }, function() {
   it('formats the initial value', function() {
@@ -19,7 +16,7 @@ describeComponent('formatted-input', 'Integration: FormattedInputComponent', { i
     this.set('number', 1.5);
     this.render(hbs`{{formatted-input number=number}}`);
 
-    return wait().then(() => {
+    wait().then(() => {
       expect(this.$('input').val()).to.equal('1.50');
       this.set('number', 5.2);
     });

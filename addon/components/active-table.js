@@ -63,7 +63,7 @@ export default Component.extend({
 
       if (sortedBy === toSortBy) {
         // set sort order
-        const newDir = sortDir !== 'desc' ? 'desc' : 'asc';
+        const newDir = sortDir === 'desc' ? 'asc' : 'desc';
         set(this, 'sortedBy', [ sortedBy + ':' + newDir ]);
 
         // nofity column

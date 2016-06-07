@@ -26,7 +26,6 @@ export default TextField.extend({
     if (get(this, 'selectOnFocus')) {
       this.$().on('click keyup', () => {
         this.$().off('click keyup').select();
-        run.next(() => console.log(getSelection()));
       });
     }
   }),

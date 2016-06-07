@@ -70,7 +70,7 @@ function finalize(formatted, formatAs, number, rawNumber, options) {
 }
 
 function standardizeInput(input) {
-  let formatAs, value, rawValue;
+  let formatAs, value;
 
   if (!Ember.isArray(input) || input.length === 1) {
     value = Ember.isArray(input) ? input[0] : input;
@@ -80,7 +80,7 @@ function standardizeInput(input) {
   }
 
   formatAs = typeof formatAs === 'string' ? formatAs.toLowerCase() : 'number';
-  rawValue = value;
+  const rawValue = value;
 
   if (formatAs === 'percentage') {
     value *= 100;
