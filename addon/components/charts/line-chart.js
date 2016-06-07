@@ -38,7 +38,7 @@ export default C3Chart.extend({
       dates.forEach((date, periodIndex) => {
         const period = periods.find(p => p.date === date.toISOString());
         const value = period ? get(period, `periodTypes.${periodType}.value`) : null;
-        columns[seriesIndex][periodIndex + 1] = value == null ? value : null;
+        columns[seriesIndex][periodIndex + 1] = value == null ? null : value;
         currentPeriod = moment(currentPeriod).add(1, 'month').endOf('month').toDate();
       });
     });
