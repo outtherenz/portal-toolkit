@@ -117,5 +117,30 @@ describe('FormatNumberHelper', function() {
     expect(formatNumber(0, opt)).equals('0.0');
     expect(formatNumber(1, opt)).equals('1.0');
     expect(formatNumber(0.001, opt)).equals('0.0');
+
+    // Shouldn't dash falsey values
+    expect(formatNumber(null, opt)).equals('');
+    expect(formatNumber(false, opt)).equals('');
+    expect(formatNumber(undefined, opt)).equals('');
+  });
+
+  it('obeys the currency symbol option', function() {
+    const opt = {};
+
+    // Empty string
+    opt.currencySymbol = '';
+    expect(formatNumber([ 'currency', 3.5 ], opt)).equals('3.50');
+
+    // Falsey
+    opt.currencySymbol = null;
+    expect(formatNumber([ 'currency', 3.5 ], opt)).equals('3.50');
+
+    // Actual other symbol
+    opt.currencySymbol = '£';
+    expect(formatNumber([ 'currency', 9 ], opt)).equals('£9.00');
+
+    // Other formats shouldn't be affected
+    expect(formatNumber([ 'percentage', 0.5 ], opt)).equals('50.00%');
+    expect(formatNumber([ 'number', 25 ], opt)).equals('25.00');
   });
 });

@@ -52,13 +52,13 @@ export default TextField.extend({
       return;
     }
 
-    let format = get(this, 'format');
+    const format = get(this, 'format');
+    const number = get(this, 'number');
+    const options = {
+      currencySymbol: ''
+    };
 
-    if (!format || format.toLowerCase() === 'currency') {
-      format = 'number';
-    }
-
-    const source = formatNumber([ format, get(this, 'number') ]);
+    const source = formatNumber([ format, number ], options);
 
     set(this, 'value', source);
   },

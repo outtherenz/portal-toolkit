@@ -49,7 +49,7 @@ export function formatNumber(params, options) {
 
 function finalize(formatted, formatAs, number, rawNumber, options) {
   if (typeof formatted === 'string' && formatted.match(/\d/) !== null) {
-    formatted = applyDecoration(formatted, formatAs);
+    formatted = applyDecoration(formatted, formatAs, options.currencySymbol);
   }
 
   if (!options.flags) {
@@ -186,13 +186,17 @@ function formatNegativeSign(string) {
   return string;
 }
 
-function applyDecoration(string, formatAs) {
+function applyDecoration(string, formatAs, currencySymbol = '$') {
+  if (!string) {
+    return '';
+  }
+
   switch (formatAs) {
     case 'percentage':
       return string + '%';
 
     case 'currency':
-      return '$' + string;
+      return (currencySymbol || '') + string;
 
     case 'number':
     case 'integer':
