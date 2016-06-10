@@ -56,6 +56,10 @@ function finalize(formatted, formatAs, number, rawNumber, options) {
     return formatted;
   }
 
+  if (formatAs === 'percentage') {
+    number /= 100;
+  }
+
   const res = {
     formatted,
     raw: rawNumber,
@@ -82,16 +86,16 @@ function standardizeInput(input) {
   formatAs = typeof formatAs === 'string' ? formatAs.toLowerCase() : 'number';
   const rawValue = value;
 
-  if (formatAs === 'percentage') {
-    value *= 100;
-  }
-
   if (typeof value !== 'string') {
-    value = value == null ? NaN : Number(value);
+    value = value == null || typeof value === 'boolean' ? NaN : Number(value);
   } else if (value === '-' || value === DASH) {
     value = 0;
   } else {
     value = parseFloat(value.replace(MINUS_SIGN, '-').replace(/[^\d.-]*/g, ''));
+  }
+
+  if (formatAs === 'percentage' && !isNaN(value)) {
+    value *= 100;
   }
 
   return [ formatAs, value, rawValue ];

@@ -51,6 +51,15 @@ describe('FormatNumberHelper', function() {
     expect(formatNumber('asdf')).equals('');
   });
 
+  it('handles percentage formatting correctly', function() {
+    expect(formatNumber([ 'percentage', 0.5 ])).equals('50.00%');
+    expect(formatNumber([ 'percentage', -0.5 ])).equals(NEG + '50.00%');
+    expect(formatNumber([ 'percentage', null ])).equals('');
+    expect(formatNumber([ 'percentage', false ])).equals('');
+    expect(formatNumber([ 'percentage', undefined ])).equals('');
+    expect(formatNumber([ 'percentage', 0.4 ], { flags: true }).parsedInput).equals(0.4);
+  });
+
   describe('Flags', function() {
     const opt = { flags: true, places: 0 };
 
