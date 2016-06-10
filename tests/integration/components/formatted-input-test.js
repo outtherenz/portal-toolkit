@@ -102,6 +102,37 @@ describeComponent('formatted-input', 'Integration: FormattedInputComponent', { i
     });
   });
 
+  it('properly converts percentages between percentage and decimal forms', function() {
+    this.set('number', 0.5);
+    this.set('manualChange', function(value) {
+      this.set('number', value);
+    });
+
+    this.render(hbs`
+      {{formatted-input
+        number=number
+        format='percentage'
+        manualChange=(action manualChange)
+        isManual=true}}
+    `);
+
+    const $input = this.$('input');
+
+    wait().then(() => {
+      expect($input.val()).to.equal('50.00%');
+      $input.val('60').trigger('change');
+    });
+
+    wait().then(() => {
+      expect($input.val()).to.equal('60'); // shouldn't reformat while user is typing
+      $input.trigger('focusout');
+    });
+
+    return wait().then(() => {
+      expect($input.val()).to.equal('60.00%');
+    });
+  });
+
   it('can deal with null values', function() {
     this.render(hbs`{{formatted-input}}`);
 

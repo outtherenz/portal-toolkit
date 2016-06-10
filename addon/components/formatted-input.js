@@ -58,17 +58,24 @@ export default TextField.extend({
       currencySymbol: ''
     };
 
-    const source = formatNumber([ format, number ], options);
+    const formatted = formatNumber([ format, number ], options);
 
-    set(this, 'value', source);
+    set(this, 'value', formatted);
   },
 
   valueDidChange: observer('value', function() {
-    const source = formatNumber([ 'number', get(this, 'number') ]);
+    const format = get(this, 'format');
+    const source = formatNumber([ format, get(this, 'number') ]);
     const value = get(this, 'value');
 
     if (source !== value) {
-      this.sendAction('manualChange', formatNumber(value, { flags: true }).parsedInput);
+      const parsed = formatNumber([ format, value ], { flags: true }).parsedInput;
+
+      if (format.toLowerCase() === 'percentage') {
+        this.sendAction('manualChange', parsed / 100);
+      } else {
+        this.sendAction('manualChange', parsed);
+      }
     }
   })
 });
