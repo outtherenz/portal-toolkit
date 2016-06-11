@@ -9,7 +9,7 @@ export default C3Chart.extend({
   markEmptySeries: true,
   markNegativeSeries: true,
 
-  data: computed('metrics', function() {
+  data: computed('metrics', 'period', function() {
     const metrics = get(this, 'metrics');
     const periodType = get(this, 'period.type');
     const markEmpty = get(this, 'markEmptySeries');
