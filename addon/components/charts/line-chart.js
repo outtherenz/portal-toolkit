@@ -153,9 +153,9 @@ export default C3Chart.extend({
         title: date => moment(date).format('MMMM YYYY'),
         value(value) {
           if (meta.format === 'PERCENTAGE') {
-            return formatNumber([ value, 'percentage' ], { sigfigs: 2, dashZero: false });
+            return formatNumber([ 'percentage', value ], { sigfigs: 2, dashZero: false });
           } else if (meta.format === 'CURRENCY') {
-            return formatNumber([ value, 'currency' ], { places: 0, dashZero: false });
+            return formatNumber([ 'currency', value ], { places: 0, dashZero: false });
           }
         }
       }
