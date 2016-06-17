@@ -64,8 +64,12 @@ export default TextField.extend({
   },
 
   valueDidChange: observer('value', function() {
+    const options = {
+      flags: true,
+      currencySymbol: ''
+    };
     const format = get(this, 'format');
-    const source = formatNumber([ format, get(this, 'number') ]);
+    const source = formatNumber([ format, get(this, 'number') ], options);
     const value = get(this, 'value');
 
     if (source !== value) {
