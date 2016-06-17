@@ -60,6 +60,14 @@ describe('FormatNumberHelper', function() {
     expect(formatNumber([ 'percentage', 0.4 ], { flags: true }).parsedInput).equals(0.4);
   });
 
+  it('handles currency formatting correctly', function() {
+    expect(formatNumber([ 'currency', 0.5 ])).equals('$0.50');
+    expect(formatNumber([ 'currency', -0.5 ])).equals(NEG + '$0.50');
+    expect(formatNumber([ 'currency', null ])).equals('');
+    expect(formatNumber([ 'currency', false ])).equals('');
+    expect(formatNumber([ 'currency', undefined ])).equals('');
+  });
+
   describe('Flags', function() {
     const opt = { flags: true, places: 0 };
 

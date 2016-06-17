@@ -65,7 +65,6 @@ export default TextField.extend({
 
   valueDidChange: observer('value', function() {
     const options = {
-      flags: true,
       currencySymbol: ''
     };
     const format = get(this, 'format');

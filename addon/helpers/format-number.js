@@ -200,8 +200,11 @@ function applyDecoration(string, formatAs, currencySymbol = '$') {
       return string + '%';
 
     case 'currency':
-      return (currencySymbol || '') + string;
-
+      if (string.indexOf(MINUS_SIGN) === 0) {
+        return (MINUS_SIGN + (currencySymbol || '') + string.substr(2));
+      } else {
+        return (currencySymbol || '') + string;
+      }
     case 'number':
     case 'integer':
     default:
