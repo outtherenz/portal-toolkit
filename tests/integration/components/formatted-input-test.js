@@ -14,8 +14,12 @@ describeComponent('formatted-input', 'Integration: FormattedInputComponent', { i
 
   it('responds to source change', function() {
     this.set('number', 1.5);
-    this.render(hbs`{{formatted-input number=number}}`);
 
+    this.set('manualChange', value => {
+      expect(false).to.be.true;
+      console.log(value);
+    });
+    this.render(hbs`{{formatted-input format='currency' number=number manualChange=(action manualChange)}}`);
     wait().then(() => {
       expect(this.$('input').val()).to.equal('1.50');
       this.set('number', 5.2);
