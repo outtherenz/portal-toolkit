@@ -65,29 +65,27 @@ export default Component.extend({
     return list;
   }),
 
+  changePeriod(diff, type) {
+    const current = get(this, 'period');
+    const updated = moment(current, 'YYYY-MM').add(diff, type).format('YYYY-MM');
+    set(this, 'period', updated);
+  },
+
   actions: {
     prevYear() {
-      const current = get(this, 'period');
-      const prev = moment(current, 'YYYY-MM').subtract(1, 'year').format('YYYY-MM');
-      set(this, 'period', prev);
+      this.changePeriod(-1, 'year');
     },
 
     prevMonth() {
-      const current = get(this, 'period');
-      const prev = moment(current, 'YYYY-MM').subtract(1, 'month').format('YYYY-MM');
-      set(this, 'period', prev);
+      this.changePeriod(-1, 'month');
     },
 
     nextMonth() {
-      const current = get(this, 'period');
-      const prev = moment(current, 'YYYY-MM').add(1, 'month').format('YYYY-MM');
-      set(this, 'period', prev);
+      this.changePeriod(1, 'month');
     },
 
     nextYear() {
-      const current = get(this, 'period');
-      const prev = moment(current, 'YYYY-MM').add(1, 'year').format('YYYY-MM');
-      set(this, 'period', prev);
+      this.changePeriod(1, 'year');
     }
   }
 });
