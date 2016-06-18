@@ -11,7 +11,7 @@ export default Component.extend({
   classNames: [ 'dashboard-module', 'data-table' ],
   tagName: 'table',
 
-  data: computed('metrics', function() {
+  data: computed('metrics', 'period', function() {
     const metrics = get(this, 'metrics');
     const date = moment(get(this, 'period.start'), 'YYYY-MM').endOf('month').toDate();
     const periodType = get(this, 'period.type');

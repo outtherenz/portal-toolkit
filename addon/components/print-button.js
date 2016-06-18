@@ -7,8 +7,8 @@ export default Component.extend({
   layout,
 
   tagName: 'button',
-  classNames: ['subdued'],
-  attributeBindings: ['title'],
+  classNames: [ 'subdued' ],
+  attributeBindings: [ 'title' ],
 
   title: 'Print',
 
@@ -21,5 +21,4 @@ export default Component.extend({
       $(window).resize();
     });
   }
-
 });

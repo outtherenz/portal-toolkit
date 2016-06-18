@@ -1,24 +1,43 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { expect } from 'chai';
+import { describeComponent, it } from 'ember-mocha';
+import { before, after } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('print-button', 'Integration | Component | print button', {
-  integration: true
-});
+describeComponent('print-button', 'Integration: PrintButtonComponent', { integration: true }, function() {
+  let print;
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });"
+  before(function() {
+    // Store the original window.print
+    print = window.print;
 
-  this.render(hbs`{{print-button}}`);
+    // Stub window.print with an event trigger
+    window.print = function() {
+      const event = new Event('print-stub');
+      window.dispatchEvent(event);
+    };
+  });
 
-  assert.equal(this.$().text().trim(), '');
+  after(function() {
+    window.print = print;
+  });
 
-  // Template block usage:"
-  this.render(hbs`
-    {{#print-button}}
-      template block text
-    {{/print-button}}
-  `);
+  it('triggers window.print() when clicked', function(done) {
+    this.render(hbs`{{print-button}}`);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+    // Listen for the event from the window.print stub
+    window.addEventListener('print-stub', () => done());
+
+    // Print
+    this.$('button').click();
+  });
+
+  it('has the correct title attribute', function() {
+    // Default
+    this.render(hbs`{{print-button}}`);
+    expect(this.$('button').attr('title')).to.equal('Print');
+
+    // Custom
+    this.render(hbs`{{print-button title='Send to printer'}}`);
+    expect(this.$('button').attr('title')).to.equal('Send to printer');
+  });
 });

@@ -2,6 +2,11 @@ import Ember from 'ember';
 
 const { Helper } = Ember;
 
+const MINUS_SIGN = '\u2212\u2009';
+const DASH = '\u2013';
+const MIN_SAFE_INTEGER = Number.MIN_SAFE_INTEGER || -9007199254740991;
+const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 9007199254740991;
+
 export function formatNumber(params, options) {
   options = options || {};
 
@@ -16,11 +21,11 @@ export function formatNumber(params, options) {
 
   // Dash zero
   if (options.dashZero !== false && number === 0) {
-    return finalize('\u2013', formatAs, number, rawNumber, options);
+    return finalize(DASH, formatAs, number, rawNumber, options);
   }
 
   // Too large or small
-  if (number > 9007199254740991 || number < -9007199254740991) {
+  if (number < MIN_SAFE_INTEGER || number > MAX_SAFE_INTEGER) {
     return finalize('#', formatAs, number, rawNumber, options);
   }
 
@@ -44,11 +49,15 @@ export function formatNumber(params, options) {
 
 function finalize(formatted, formatAs, number, rawNumber, options) {
   if (typeof formatted === 'string' && formatted.match(/\d/) !== null) {
-    formatted = applyDecoration(formatted, formatAs);
+    formatted = applyDecoration(formatted, formatAs, options.currencySymbol);
   }
 
   if (!options.flags) {
     return formatted;
+  }
+
+  if (formatAs === 'percentage') {
+    number /= 100;
   }
 
   const res = {
@@ -65,7 +74,7 @@ function finalize(formatted, formatAs, number, rawNumber, options) {
 }
 
 function standardizeInput(input) {
-  let formatAs, value, rawValue;
+  let formatAs, value;
 
   if (!Ember.isArray(input) || input.length === 1) {
     value = Ember.isArray(input) ? input[0] : input;
@@ -75,18 +84,18 @@ function standardizeInput(input) {
   }
 
   formatAs = typeof formatAs === 'string' ? formatAs.toLowerCase() : 'number';
-  rawValue = value;
-
-  if (formatAs === 'percentage') {
-    value *= 100;
-  }
+  const rawValue = value;
 
   if (typeof value !== 'string') {
-    value = value == null ? NaN : Number(value);
-  } else if (value === '-' || value === '\u2013') {
+    value = value == null || typeof value === 'boolean' ? NaN : Number(value);
+  } else if (value === '-' || value === DASH) {
     value = 0;
   } else {
-    value = parseFloat(value.replace('\u2212\u2009', '-').replace(/[^\d.-]*/g, ''));
+    value = parseFloat(value.replace(MINUS_SIGN, '-').replace(/[^\d.-]*/g, ''));
+  }
+
+  if (formatAs === 'percentage' && !isNaN(value)) {
+    value *= 100;
   }
 
   return [ formatAs, value, rawValue ];
@@ -175,24 +184,37 @@ function addCommas(string) {
 
 function formatNegativeSign(string) {
   if (string[0] === '-') {
-    string = '\u2212\u2009' + string.substr(1);
+    string = MINUS_SIGN + string.substr(1);
   }
 
   return string;
 }
 
-function applyDecoration(string, formatAs) {
+function applyDecoration(string, formatAs, currencySymbol = '$') {
+  if (!string) {
+    return '';
+  }
+
   switch (formatAs) {
     case 'percentage':
       return string + '%';
 
     case 'currency':
-      return '$' + string;
+      return addCurrencySymbol(string, currencySymbol);
 
     case 'number':
     case 'integer':
     default:
       return string;
+  }
+}
+
+function addCurrencySymbol(string, symbol) {
+  // Negative values should be formatted like -$1.50 not $-1.50
+  if (string.indexOf(MINUS_SIGN) === 0) {
+    return MINUS_SIGN + (symbol || '') + string.substr(MINUS_SIGN.length);
+  } else {
+    return (symbol || '') + string;
   }
 }
 

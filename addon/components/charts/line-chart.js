@@ -8,7 +8,7 @@ const { computed, Logger, isArray, get } = Ember;
 export default C3Chart.extend({
   classNames: ['dashboard-module', 'line-chart'],
 
-  data: computed('metrics', 'series', function() {
+  data: computed('metrics', 'series', 'period', function() {
     const periodType = get(this, 'period.type');
     const dates = [];
     const seriesMeta = get(this, 'series');
@@ -38,7 +38,7 @@ export default C3Chart.extend({
       dates.forEach((date, periodIndex) => {
         const period = periods.find(p => p.date === date.toISOString());
         const value = period ? get(period, `periodTypes.${periodType}.value`) : null;
-        columns[seriesIndex][periodIndex + 1] = value != null ? value : null;
+        columns[seriesIndex][periodIndex + 1] = value == null ? null : value;
         currentPeriod = moment(currentPeriod).add(1, 'month').endOf('month').toDate();
       });
     });
@@ -153,9 +153,9 @@ export default C3Chart.extend({
         title: date => moment(date).format('MMMM YYYY'),
         value(value) {
           if (meta.format === 'PERCENTAGE') {
-            return formatNumber([ value, 'percentage' ], { sigfigs: 2, dashZero: false });
+            return formatNumber([ 'percentage', value ], { sigfigs: 2, dashZero: false });
           } else if (meta.format === 'CURRENCY') {
-            return formatNumber([ value, 'currency' ], { places: 0, dashZero: false });
+            return formatNumber([ 'currency', value ], { places: 0, dashZero: false });
           }
         }
       }

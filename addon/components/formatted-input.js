@@ -14,20 +14,28 @@ export default TextField.extend({
   classNames: [ 'formatted' ],
   classNameBindings: [ 'format' ],
 
-  selectAll: on('focusIn', function(e) {
+  number: null,
+  manual: false,
+  format: 'number',
+  selectOnFocus: false,
+
+  // Select all on focus, if selectOnFocus is true.
+  // Does not allow the user to make their own selection.
+  // http://stackoverflow.com/a/24589806/2833988
+  selectAll: on('focusIn', function(event) {
     if (get(this, 'selectOnFocus')) {
-      run.next(function() {
-        this.$().select();
-      }.bind(this));
+      this.$().on('click keyup', () => {
+        this.$().off('click keyup').select();
+      });
     }
   }),
 
-  sourceChange: observer('source.value', function() {
+  sourceChange: observer('number', function() {
     run.next(() => {
-      const isManual = get(this, 'source.isManual');
+      const isManual = get(this, 'isManual');
 
       // This line makes it work. ¯\_(ツ)_/¯
-      get(this, 'source.value');
+      get(this, 'number');
 
       if (!isManual) {
         this.formatValue();
@@ -35,32 +43,38 @@ export default TextField.extend({
     });
   }),
 
-  triggerReformat: on('init', 'focusOut', function() {
+  triggerReformat: observer('format', on('init', 'focusOut', function() {
     run.next(() => this.formatValue());
-  }),
+  })),
 
   formatValue() {
     if (get(this, 'isDestroying')) {
       return;
     }
 
-    let format = get(this, 'format');
+    const format = get(this, 'format');
+    const number = get(this, 'number');
+    const options = { currencySymbol: '' };
 
-    if (format.toLowerCase() === 'currency') {
-      format = 'number';
-    }
+    const formatted = formatNumber([ format, number ], options);
 
-    const source = formatNumber([ format, get(this, 'source.value') ]);
-
-    set(this, 'value', source);
+    set(this, 'value', formatted);
   },
 
   valueDidChange: observer('value', function() {
-    const source = formatNumber([ 'number', get(this, 'source.value') ]);
+    const options = { currencySymbol: '' };
+    const format = get(this, 'format');
+    const source = formatNumber([ format, get(this, 'number') ], options);
     const value = get(this, 'value');
 
     if (source !== value) {
-      this.sendAction('manualChange', formatNumber(value, { flags: true }).parsedInput);
+      const parsed = formatNumber([ format, value ], { flags: true }).parsedInput;
+
+      if (format.toLowerCase() === 'percentage') {
+        this.sendAction('manualChange', parsed / 100);
+      } else {
+        this.sendAction('manualChange', parsed);
+      }
     }
   })
 });

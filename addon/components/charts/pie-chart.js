@@ -7,11 +7,13 @@ export default C3Chart.extend({
   classNames: ['dashboard-module', 'pie-chart'],
 
   markEmptySeries: true,
+  markNegativeSeries: true,
 
-  data: computed('metrics', function() {
+  data: computed('metrics', 'period', function() {
     const metrics = get(this, 'metrics');
     const periodType = get(this, 'period.type');
     const markEmpty = get(this, 'markEmptySeries');
+    const markNegative = get(this, 'markNegativeSeries');
     const columns = [];
 
     if (!metrics || isEmpty(metrics)) {
@@ -20,11 +22,15 @@ export default C3Chart.extend({
     }
 
     metrics.forEach(metric => {
-      let name = get(metric, 'meta');
-      const value = get(metric, `series.0.periods.0.periodTypes.${periodType}.value`);
+      let name = get(metric, 'meta.name');
+      const value = get(metric, `series.0.periods.0.periodTypes.${periodType}.value`) || 0;
 
       if (markEmpty && !value) {
         name += ' (no data)';
+      }
+
+      if (markNegative && value != null && value < 0) {
+        name += ' (negative)';
       }
 
       columns.push([ name, value ]);
