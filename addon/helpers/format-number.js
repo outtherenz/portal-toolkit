@@ -200,15 +200,21 @@ function applyDecoration(string, formatAs, currencySymbol = '$') {
       return string + '%';
 
     case 'currency':
-      if (string.indexOf(MINUS_SIGN) === 0) {
-        return (MINUS_SIGN + (currencySymbol || '') + string.substr(2));
-      } else {
-        return (currencySymbol || '') + string;
-      }
+      return addCurrencySymbol(string, currencySymbol);
+
     case 'number':
     case 'integer':
     default:
       return string;
+  }
+}
+
+function addCurrencySymbol(string, symbol) {
+  // Negative values should be formatted like -$1.50 not $-1.50
+  if (string.indexOf(MINUS_SIGN) === 0) {
+    return MINUS_SIGN + (symbol || '') + string.substr(MINUS_SIGN.length);
+  } else {
+    return (symbol || '') + string;
   }
 }
 

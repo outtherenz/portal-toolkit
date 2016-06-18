@@ -16,10 +16,11 @@ describeComponent('formatted-input', 'Integration: FormattedInputComponent', { i
     this.set('number', 1.5);
 
     this.set('manualChange', value => {
-      expect(false).to.be.true;
-      console.log(value);
+      throw new Error('The manual change action should not have been called');
     });
+
     this.render(hbs`{{formatted-input format='currency' number=number manualChange=(action manualChange)}}`);
+
     wait().then(() => {
       expect(this.$('input').val()).to.equal('1.50');
       this.set('number', 5.2);
