@@ -57,6 +57,7 @@ export default C3Chart.extend({
     let label;
     let reduction;
     let yAxisPlaces = 0;
+    const periodType = get(this, 'period.type');
 
     if (meta.format === 'PERCENTAGE') {
       label = meta.name;
@@ -64,11 +65,11 @@ export default C3Chart.extend({
       const series = isArray(metrics) ? metrics[0].series : metrics.series;
 
       let longest = 0;
-
       series.forEach(({ periods }) => {
         periods.forEach(period => {
-          if (period.value > longest) {
-            longest = period.value;
+          const current = period ? get(period, `periodTypes.${periodType}.value`) : null;
+          if (current > longest) {
+            longest = current;
           }
         });
       });
