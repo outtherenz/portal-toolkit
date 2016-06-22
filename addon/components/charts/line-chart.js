@@ -124,7 +124,7 @@ export default C3Chart.extend({
         tick: {
           format(tick) {
             if (meta.format === 'PERCENTAGE') {
-              return formatNumber([ 'percentage', tick ], { sigfigs: 2, dashZero: false });
+              return formatNumber([ 'percentage', tick ], { sigfigs: 4, dashZero: false });
             } else {
               return formatNumber(tick / reduction, { places: yAxisPlaces, dashZero: false });
             }
@@ -153,7 +153,7 @@ export default C3Chart.extend({
         title: date => moment(date).format('MMMM YYYY'),
         value(value) {
           if (meta.format === 'PERCENTAGE') {
-            return formatNumber([ 'percentage', value ], { sigfigs: 2, dashZero: false });
+            return formatNumber([ 'percentage', value ], { sigfigs: 4, dashZero: false });
           } else if (meta.format === 'CURRENCY') {
             return formatNumber([ 'currency', value ], { places: 0, dashZero: false });
           }
