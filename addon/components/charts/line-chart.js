@@ -57,6 +57,7 @@ export default C3Chart.extend({
     let label;
     let reduction;
     let yAxisPlaces = 0;
+    const periodType = get(this, 'period.type');
 
     if (meta.format === 'PERCENTAGE') {
       label = meta.name;
@@ -64,11 +65,11 @@ export default C3Chart.extend({
       const series = isArray(metrics) ? metrics[0].series : metrics.series;
 
       let longest = 0;
-
       series.forEach(({ periods }) => {
         periods.forEach(period => {
-          if (period.value > longest) {
-            longest = period.value;
+          const current = period ? get(period, `periodTypes.${periodType}.value`) : null;
+          if (current > longest) {
+            longest = current;
           }
         });
       });
@@ -124,7 +125,7 @@ export default C3Chart.extend({
         tick: {
           format(tick) {
             if (meta.format === 'PERCENTAGE') {
-              return formatNumber([ 'percentage', tick ], { sigfigs: 2, dashZero: false });
+              return formatNumber([ 'percentage', tick ], { sigfigs: 4, dashZero: false });
             } else {
               return formatNumber(tick / reduction, { places: yAxisPlaces, dashZero: false });
             }
@@ -153,7 +154,7 @@ export default C3Chart.extend({
         title: date => moment(date).format('MMMM YYYY'),
         value(value) {
           if (meta.format === 'PERCENTAGE') {
-            return formatNumber([ 'percentage', value ], { sigfigs: 2, dashZero: false });
+            return formatNumber([ 'percentage', value ], { sigfigs: 4, dashZero: false });
           } else if (meta.format === 'CURRENCY') {
             return formatNumber([ 'currency', value ], { places: 0, dashZero: false });
           }
