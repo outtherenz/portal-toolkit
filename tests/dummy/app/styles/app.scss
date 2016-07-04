@@ -1,10 +1,8 @@
-@import 'bourbon';
-
+@import "bourbon";
 $off-white: #f5f5f5;
-$blue: #59d;
+$blue: #5597c4;
 $border-color: #ccc;
 $gutter: 25px;
-
 body {
   font: 16px/1.5 sans-serif;
   margin: 0;
@@ -16,23 +14,36 @@ a {
   color: $blue;
 }
 
-h1 { font-size: 26px; }
-h2 { font-size: 20px; }
-h3 { font-size: 18px; }
-h4 { font-size: 15px; }
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 15px;
+}
 
 .page-header {
   background-color: $blue;
-  border-bottom: 5px solid shade($blue, 20%);
+  border-bottom: 3px solid shade($blue, 20%);
   padding: $gutter;
   color: white;
-
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   h1 {
     font-size: 28px;
     margin: 0;
     line-height: 1.1;
   }
-
   h2 {
     font-size: 18px;
     font-weight: normal;
@@ -46,34 +57,56 @@ main {
 }
 
 .sidebar {
-  flex: 0 0 300px;
+  flex: 0 0 230px;
   padding: $gutter;
   background-color: $off-white;
-  border-right: 5px solid $border-color;
-
+  border-right: 1px solid $border-color;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   a {
     color: #444;
     text-decoration: none;
-
     &.active {
       font-weight: bold;
     }
   }
 }
 
+.construction {
+  background: repeating-linear-gradient( -55deg, #FF8F65, #FF8F65 5px, #FFD865 5px, #FFD865 10px);
+  width: 10px;
+  height: 100%;
+  float: left;
+  margin-top: -$gutter;
+  padding-bottom: 2*$gutter;
+  margin-right: $gutter;
+  margin-left: -$gutter;
+}
+
 .page {
   flex: 1;
-  padding: $gutter 2*$gutter;
+  padding: 3*$gutter 2*$gutter;
+}
+
+.page-toolkit {
+  background-color: $off-white;
+  border-bottom: 1px solid $border-color;
+  padding: 15px;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  vertical-align: middle;
 }
 
 .article-header {
   border-bottom: 1px solid $border-color;
   margin-bottom: 3em;
   padding: 1em 0;
-
-   h1 {
+  h1 {
     margin: 0;
-   }
+  }
 }
 
 .title-category {
@@ -88,4 +121,20 @@ code {
   padding: 0.1em 0.4em;
   font-size: 90%;
   line-height: 1.5;
+}
+
+.modeHead {
+  display: none;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.modeSide {
+  display: none;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }

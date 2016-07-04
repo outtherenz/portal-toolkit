@@ -1,10 +1,10 @@
-<header class="page-header">
+<header class='page-header'>
   <h1>Portal Ember Toolkit</h1>
   <h2>Code to be shared across the Portal’s modules.</h2>
 </header>
-
 <main>
-  <aside class="sidebar">
+  <aside class='sidebar'>
+  <div class='construction'></div>
     <nav>
       <h3>Components</h3>
       <ul>
@@ -34,8 +34,11 @@
       </ul>
     </nav>
   </aside>
-
-  <article class="page">
+  <div class='page-toolkit'>
+    {{input type='checkbox' checked=mode}}
+    {{input type='range' min='1' max='5' value='1' id='theSlider'}}
+  </div>
+  <article class='page'>
     {{outlet}}
   </article>
 </main>

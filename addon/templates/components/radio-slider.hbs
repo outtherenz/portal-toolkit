@@ -3,7 +3,7 @@
   <span class="overlay"></span>
   <div class="checkbox-box">
     {{#each options as |option|}}
-      {{radio-button name='field' checked=selected value=option.value class='field' id=option.value}}
+      {{radio-button name=generatorName checked=selected value=option.value class='field' id=option.value}}
       <label for={{option.value}}>{{option.label}}</label>
     {{/each}}
   </div>
