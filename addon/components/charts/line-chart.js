@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import C3Chart from 'ember-c3/components/c3-chart';
-import { formatNumber } from 'portal/helpers/format-number';
+import { formatNumber } from 'portal-toolkit/helpers/format-number';
 import moment from 'moment';
 
 const { computed, Logger, isArray, get } = Ember;
