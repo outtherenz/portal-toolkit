@@ -7,6 +7,7 @@ export default Controller.extend({
   actions: {
 
   },
+
   mode: undefined,
   watchMode: function() {
     $('.sidebar').toggleClass('modeSide');
@@ -20,7 +21,6 @@ export default Controller.extend({
   hexColor: undefined,
   colorInput: '#ffffff',
   scaledDistThresholdRGB: 'rgb(255,255,255)',
-  pageWidth: '0.75',
 
   thresholdChanged: function() {
     var rVal = this.get('scaledDistThresholdR');
@@ -29,11 +29,9 @@ export default Controller.extend({
     var hexVal = this.get('colorInput');
     var rgbSwitch = this.get('rgbColor');
     var hexSwitch = this.get('hexColor');
-    var pageWidth = this.get('pageWidth');
     var rgbVal = 'rgb(' + rVal + ',' + gVal + ',' + bVal + ')';
     $('.colorBox').css({'background-color': rgbVal});
     $('.rgbStatus').val(rgbVal);
-    $('.page').css({flex: pageWidth});
     $('.colorBox').click(function() {
       $('.page').css({'background-color': rgbVal});
     });
@@ -52,5 +50,22 @@ export default Controller.extend({
       $('.page').css({'background-color': hexVal});
       $('.colorBox').css({'background-color': hexVal});
     }
-  }.observes('scaledDistThresholdR', 'scaledDistThresholdG', 'scaledDistThresholdB', 'pageWidth', 'rgbColor', 'colorInput', 'hexColor')
+  }.observes('scaledDistThresholdR', 'scaledDistThresholdG', 'scaledDistThresholdB', 'rgbColor', 'colorInput', 'hexColor'),
+
+  pageWidth: '0.75',
+  changePageWidth: function() {
+    var pageWidth = this.get('pageWidth');
+    $('.page').css({flex: pageWidth});
+  }.observes('pageWidth'),
+
+  decafe: undefined,
+  watchDecafe: function() {
+    setInterval(function() {
+      var r = Math.floor(Math.random() * 254) + 1;
+      var g = Math.floor(Math.random() * 254) + 1;
+      var b = Math.floor(Math.random() * 254) + 1;
+      var de = 'rgb(' + r + ',' + g + ',' + b + ')';
+      $('.page').css({'background-color': de});
+    }, 30);
+  }.observes('decafe')
 });

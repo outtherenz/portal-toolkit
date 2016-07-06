@@ -99,7 +99,7 @@ main {
   border-right: 1px solid $border-color;
   padding: 15px;
   height: auto;
-  width: 650px;
+  width: 670px;
   position: absolute;
   font-size: 12px;
 }
@@ -214,4 +214,12 @@ h6 {
   width: 100px;
   height: 15px;
   border: 0;
+}
+
+.decafe {
+  position: absolute;
+  cursor: crosshair;
+  opacity: 0;
+  bottom: 0;
+  right: 0;
 }
