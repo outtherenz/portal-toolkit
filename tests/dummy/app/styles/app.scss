@@ -54,6 +54,8 @@ h4 {
 
 main {
   display: flex;
+  background-color: $off-white;
+  border-bottom: 1px solid $border-color;
 }
 
 .sidebar {
@@ -86,18 +88,20 @@ main {
 }
 
 .page {
-  flex: 1;
-  padding: 3*$gutter 2*$gutter;
+  flex: 0.75;
+  padding: 6*$gutter 2*$gutter;
+  background-color: white;
 }
 
 .page-toolkit {
   background-color: $off-white;
   border-bottom: 1px solid $border-color;
+  border-right: 1px solid $border-color;
   padding: 15px;
-  width: 100%;
   height: auto;
+  width: 650px;
   position: absolute;
-  vertical-align: middle;
+  font-size: 12px;
 }
 
 .article-header {
@@ -137,4 +141,77 @@ code {
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
+}
+
+.divider {
+  width: 1px;
+  background-color: $border-color;
+  height: 80px;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.pageControl {
+  width: auto;
+  height: 90px;
+  float: left;
+}
+.colorBox {
+  width: 110px;
+  height: 80px;
+  background-color: white;
+  float: left;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.checkbox {
+  float: left;
+}
+
+h6 {
+  font-size: 11px;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+  float: left;
+}
+
+.rgbStatus, .hexStatus {
+  border: 0;
+  font-weight: bold;
+  background-color: transparent;
+  color: white;
+  mix-blend-mode: difference;
+  width: 100px;
+}
+
+.sliderBoxRange {
+  width: 120px;
+  float: left;
+}
+
+.sliderBoxText {
+  width: 50px;
+  float: left;
+  padding-right: 15px;
+}
+
+.slider {
+  width: 100px;
+  padding: 0;
+}
+
+.sliderText {
+  width: 50px;
+  height: 15px;
+  border: 0;
+  margin-bottom: 5px;
+}
+
+.hexInput {
+  width: 100px;
+  height: 15px;
+  border: 0;
 }
