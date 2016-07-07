@@ -3,6 +3,23 @@ $off-white: #f5f5f5;
 $blue: #5597c4;
 $border-color: #ccc;
 $gutter: 25px;
+$slider-width: 100px;
+$callout-size: 20px;
+$page-description-width: 430px;
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .page * {
+    visibility: visible;
+  }
+  .page {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
 body {
   font: 16px/1.5 sans-serif;
   margin: 0;
@@ -52,10 +69,28 @@ h4 {
   }
 }
 
+.article-header {
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 3em;
+  padding: 1em 0;
+  h1 {
+    margin: 0;
+  }
+}
+
 main {
   display: flex;
   background-color: $off-white;
   border-bottom: 1px solid $border-color;
+}
+
+code {
+  background: $off-white;
+  color: #222;
+  display: inline-block;
+  padding: 0.1em 0.4em;
+  font-size: 90%;
+  line-height: 1.5;
 }
 
 .sidebar {
@@ -67,6 +102,7 @@ main {
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
+  z-index: 10;
   a {
     color: #444;
     text-decoration: none;
@@ -93,24 +129,8 @@ main {
   background-color: white;
 }
 
-.page-toolkit {
-  background-color: $off-white;
-  border-bottom: 1px solid $border-color;
-  border-right: 1px solid $border-color;
-  padding: 15px;
-  height: auto;
-  width: 670px;
-  position: absolute;
-  font-size: 12px;
-}
-
-.article-header {
-  border-bottom: 1px solid $border-color;
-  margin-bottom: 3em;
-  padding: 1em 0;
-  h1 {
-    margin: 0;
-  }
+.none {
+  display: none;
 }
 
 .title-category {
@@ -118,108 +138,178 @@ main {
   font-weight: normal;
 }
 
-code {
-  background: $off-white;
-  color: #222;
-  display: inline-block;
-  padding: 0.1em 0.4em;
-  font-size: 90%;
-  line-height: 1.5;
-}
-
-.modeHead {
-  display: none;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-}
-
-.modeSide {
-  display: none;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-}
-
-.divider {
-  width: 1px;
-  background-color: $border-color;
-  height: 80px;
-  float: left;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.pageControl {
-  width: auto;
-  height: 90px;
-  float: left;
-}
-.colorBox {
-  width: 110px;
-  height: 80px;
-  background-color: white;
-  float: left;
-  text-align: center;
-  margin-right: 10px;
-}
-
-.checkbox {
-  float: left;
-}
-
-h6 {
-  font-size: 11px;
-  font-weight: normal;
-  padding: 0;
-  margin: 0;
-  float: left;
-}
-
-.rgbStatus, .hexStatus {
-  border: 0;
-  font-weight: bold;
-  background-color: transparent;
-  color: white;
-  mix-blend-mode: difference;
-  width: 100px;
-}
-
-.sliderBoxRange {
-  width: 120px;
-  float: left;
-}
-
-.sliderBoxText {
-  width: 50px;
-  float: left;
-  padding-right: 15px;
-}
-
-.slider {
-  width: 90%;
-  padding: 5;
-}
-
-.sliderText {
-  width: 50px;
-  height: 15px;
-  border: 0;
-  margin-bottom: 5px;
-}
-
-.hexInput {
-  width: 100px;
-  height: 15px;
-  border: 0;
-}
-
-.decafe {
+.page-toolkit {
+  background-color: $off-white;
+  border-bottom: 1px solid $border-color;
+  border-right: 1px solid $border-color;
   position: absolute;
-  cursor: crosshair;
-  opacity: 0;
-  bottom: 0;
-  right: 0;
+  font-size: 12px;
+  padding: 15px;
+  display: flex;
+
+  .toolkit-header {
+    flex-direction: row;
+    h5 {
+      font-size: 11px;
+      padding: 0;
+      margin: 0;
+      padding: 5px;
+    }
+  }
+
+  .toolkit-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .toolkit-part-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 5px;
+  }
+
+  .checkbox {
+    margin: 0;
+    padding: 0;
+    margin-top: -14px;
+    align-self: flex-end;
+  }
+
+  h6 {
+    font-size: 11px;
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+    margin-right: 15px;
+  }
+
+  .divider {
+    background-color: $border-color;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 1px;
+    flex: 1;
+  }
+
+  .colorBox {
+    width: 110px;
+    height: 80px;
+    background-color: white;
+    text-align: center;
+  }
+
+  .rgbStatus,
+  .hexStatus {
+    border: 0;
+    font-weight: bold;
+    background-color: transparent;
+    color: white;
+    mix-blend-mode: difference;
+    width: 100px;
+  }
+
+  .sliderBoxRange {
+    width: 120px;
+  }
+
+  .sliderBoxText {
+    width: 50px;
+    padding-right: 15px;
+  }
+
+  .slider {
+    width: $slider-width;
+    padding: 0;
+    height: 15px;
+  }
+
+  .sliderText {
+    width: 50px;
+    height: 15px;
+    border: 0;
+    margin-bottom: 5px;
+  }
+
+  .hexInput {
+    width: 100px;
+    height: 15px;
+    border: 0;
+  }
+
+  .decafe {
+    position: absolute;
+    cursor: help;
+    opacity: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  .printButton {
+    width: 30px;
+    margin-top: 5px;
+  }
+}
+
+.page-description {
+  border: 1px solid $border-color;
+  background-color: $off-white;
+  position: absolute;
+  width: $page-description-width;
+  z-index: 1;
+  padding: 15px;
+  top: 275px;
+  right: -$page-description-width+-31;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+
+  .content {
+    max-height: 600px;
+    font-size: 13px;
+    background-color: white;
+    padding: 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    pre {
+      white-space: pre-wrap;
+      background: $off-white;
+      font-size: 9px;
+    }
+
+    .code {
+      background-color: white;
+    }
+  }
+
+  .callout {
+    background: repeating-linear-gradient( -55deg, #FF8F65, #FF8F65 5px, #FFD865 5px, #FFD865 10px);
+    width: $callout-size;
+    height: $callout-size;
+    position: absolute;
+    left: -1-$callout-size; //border compensation
+    top: 0;
+    margin-top: 3px;
+    cursor: grabbing;
+    text-align: center;
+    vertical-align: middle;
+    font-size: $callout-size;
+    line-height: $callout-size;
+    border-radius: 3px 0px 0px 3px;
+    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+    border-left: 1px solid $border-color;
+    background-color: $off-white;
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  }
+
+  .checkbox {
+    opacity: 0;
+    width: $callout-size;
+    height: $callout-size;
+    position: absolute;
+    left: 0;
+  }
 }

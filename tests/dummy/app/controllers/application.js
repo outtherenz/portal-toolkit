@@ -1,43 +1,68 @@
 import Ember from 'ember';
 
-const { Controller } = Ember;
-const { $ } = Ember;
+const {
+  Controller
+} = Ember;
+const {
+  $
+} = Ember;
 export default Controller.extend({
 
   actions: {
 
   },
 
+  // full screen mode //
   mode: undefined,
   watchMode: function() {
-    $('.sidebar').toggleClass('modeSide');
-    $('.page-header').toggleClass('modeHead');
+    $('.sidebar, .page-header').toggleClass('none');
   }.observes('mode'),
 
-  scaledDistThresholdR: 255,
-  scaledDistThresholdG: 255,
-  scaledDistThresholdB: 255,
+  // description bar //
+  description: undefined,
+  watchDescription: function() {
+    var description = this.get('description');
+    var margin = $('.page-description').outerWidth();
+    if (description) {
+      $('.page-description').css('right', 0);
+    } else {
+      $('.page-description').css('right', -margin);
+    }
+  }.observes('description'),
+
+  // background-color modifying //
+  colorRGB: 'rgb(255,255,255)',
+  colorInput: '#ffffff',
   rgbColor: undefined,
   hexColor: undefined,
-  colorInput: '#ffffff',
-  scaledDistThresholdRGB: 'rgb(255,255,255)',
+  colorLight: 255,
+  colorR: 255,
+  colorG: 255,
+  colorB: 255,
 
-  thresholdChanged: function() {
-    var rVal = this.get('scaledDistThresholdR');
-    var gVal = this.get('scaledDistThresholdG');
-    var bVal = this.get('scaledDistThresholdB');
+  colorChange: function() {
+    var rVal = this.get('colorR');
+    var gVal = this.get('colorG');
+    var bVal = this.get('colorB');
     var hexVal = this.get('colorInput');
     var rgbSwitch = this.get('rgbColor');
     var hexSwitch = this.get('hexColor');
     var rgbVal = 'rgb(' + rVal + ',' + gVal + ',' + bVal + ')';
-    $('.colorBox').css({'background-color': rgbVal});
+    $('.colorBox').css({
+      'background-color': rgbVal
+    });
     $('.rgbStatus').val(rgbVal);
     $('.colorBox').click(function() {
-      $('.page').css({'background-color': rgbVal});
+      $('.page').css({
+        'background-color': rgbVal
+      });
     });
     if (rgbSwitch) {
-      $('.page').css({'background-color': rgbVal});
+      $('.page').css({
+        'background-color': rgbVal
+      });
     }
+    // rgb to hex translation //
     function rgb2hex(rgb) {
       rgb = rgbVal.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
       return (rgb && rgb.length === 4) ? '#' +
@@ -47,17 +72,55 @@ export default Controller.extend({
     }
     $('.hexStatus').val(rgb2hex());
     if (hexSwitch) {
-      $('.page').css({'background-color': hexVal});
-      $('.colorBox').css({'background-color': hexVal});
+      $('.page').css({
+        'background-color': hexVal
+      });
+      $('.colorBox').css({
+        'background-color': hexVal
+      });
     }
-  }.observes('scaledDistThresholdR', 'scaledDistThresholdG', 'scaledDistThresholdB', 'rgbColor', 'colorInput', 'hexColor'),
+  }.observes('colorR', 'colorG', 'colorB', 'rgbColor', 'colorInput', 'hexColor'),
 
+  // white & black values //
+  brightnessChange: function() {
+    var lightVal = this.get('colorLight');
+    var rgbSwitch = this.get('rgbColor');
+    var rgbVal = 'rgb(' + lightVal + ',' + lightVal + ',' + lightVal + ')';
+    $('.colorBox').css({
+      'background-color': rgbVal
+    });
+    $('.rgbStatus').val(rgbVal);
+    $('.colorBox').click(function() {
+      $('.page').css({
+        'background-color': rgbVal
+      });
+    });
+    if (rgbSwitch) {
+      $('.page').css({
+        'background-color': rgbVal
+      });
+    }
+
+    function rgb2hex(rgb) {
+      rgb = rgbVal.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+      return (rgb && rgb.length === 4) ? '#' +
+        ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+        ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+        ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
+    }
+    $('.hexStatus').val(rgb2hex());
+  }.observes('colorLight'),
+
+  // page width modifier //
   pageWidth: '0.75',
   changePageWidth: function() {
     var pageWidth = this.get('pageWidth');
-    $('.page').css({flex: pageWidth});
+    $('.page').css({
+      flex: pageWidth
+    });
   }.observes('pageWidth'),
 
+  // #decafe //
   decafe: undefined,
   watchDecafe: function() {
     setInterval(function() {
@@ -65,7 +128,9 @@ export default Controller.extend({
       var g = Math.floor(Math.random() * 254) + 1;
       var b = Math.floor(Math.random() * 254) + 1;
       var de = 'rgb(' + r + ',' + g + ',' + b + ')';
-      $('.page').css({'background-color': de});
+      $('.page').css({
+        'background-color': de
+      });
     }, 30);
   }.observes('decafe')
 });

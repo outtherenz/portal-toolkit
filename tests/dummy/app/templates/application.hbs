@@ -4,7 +4,7 @@
 </header>
 <main>
   <aside class='sidebar'>
-  <div class='construction'></div>
+    <div class='construction'></div>
     <nav>
       <h3>Components</h3>
       <ul>
@@ -34,32 +34,96 @@
       </ul>
     </nav>
   </aside>
+  <div class='page-description'>
+    <div class='content'>
+      <h3>Header</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas eros eu magna auctor tristique. Donec nisi felis, pharetra eget placerat eget, accumsan vitae elit. Quisque eget est sit amet justo imperdiet imperdiet in ac ex. Vestibulum
+        ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut in tellus sapien. Sed dignissim, mi eu accumsan dictum, nisl leo interdum augue, congue condimentum erat neque quis metus. In suscipit rutrum mauris, vitae venenatis
+        augue interdum in. Maecenas in commodo lacus, ut suscipit libero. Nam sed mauris hendrerit, cursus sem in, bibendum purus. Aliquam molestie elit eget odio posuere hendrerit. Cras rhoncus nisl ac quam pretium, a placerat lectus mollis. Sed tempor
+        tincidunt lorem non vulputate. Aliquam tempus sit amet dolor eget tincidunt. Nulla finibus massa et lacinia pharetra. Duis ac sapien a libero sodales pharetra. Proin maximus cursus faucibus.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mattis nisi massa, id congue leo convallis id. Nullam maximus odio sapien, id sodales metus posuere a. In commodo eu nulla id mollis. Etiam neque lectus, bibendum ut dui non, auctor malesuada
+        nisl. Duis auctor ultricies justo, sit amet iaculis elit mollis at. In nec tempor mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+      <h3>more text</h3>
+      <pre>
+        decafe: undefined,
+        watchDecafe: function() {
+          setInterval(function() {
+            var r = Math.floor(Math.random() * 254) + 1;
+            var g = Math.floor(Math.random() * 254) + 1;
+            var b = Math.floor(Math.random() * 254) + 1;
+            var de = 'rgb(' + r + ',' + g + ',' + b + ')';
+            $('.page').css({'background-color': de});
+          }, 30);
+        }.observes('decafe'),
+      </pre>
+      <p>Duis lobortis maximus massa, eget elementum tellus tincidunt et. Suspendisse nec iaculis nulla. Aenean facilisis feugiat ex at ultricies. Integer aliquet eget est eu ullamcorper. In hac habitasse platea dictumst. Ut commodo lacus vel odio gravida
+        volutpat. Curabitur blandit neque non pellentesque pellentesque. Aliquam ut sollicitudin enim, eu vulputate metus. Fusce id nisi in ante sagittis ultrices. Duis venenatis nulla fermentum arcu placerat, non malesuada arcu feugiat. Fusce ut lorem
+        ut arcu commodo sollicitudin. Donec dapibus dapibus libero a sollicitudin.</p>
+      <h3>more text</h3>
+      <pre>
+        decafe: undefined,
+        watchDecafe: function() {
+          setInterval(function() {
+            var r = Math.floor(Math.random() * 254) + 1;
+            var g = Math.floor(Math.random() * 254) + 1;
+            var b = Math.floor(Math.random() * 254) + 1;
+            var de = 'rgb(' + r + ',' + g + ',' + b + ')';
+            $('.page').css({'background-color': de});
+          }, 30);
+        }.observes('decafe'),
+      </pre>
+      <p>Duis lobortis maximus massa, eget elementum tellus tincidunt et. Suspendisse nec iaculis nulla. Aenean facilisis feugiat ex at ultricies. Integer aliquet eget est eu ullamcorper. In hac habitasse platea dictumst. Ut commodo lacus vel odio gravida
+        volutpat. Curabitur blandit neque non pellentesque pellentesque. Aliquam ut sollicitudin enim, eu vulputate metus. Fusce id nisi in ante sagittis ultrices. Duis venenatis nulla fermentum arcu placerat, non malesuada arcu feugiat. Fusce ut lorem
+        ut arcu commodo sollicitudin. Donec dapibus dapibus libero a sollicitudin.</p>
+    </div>
+    <div class='callout'>{{input type='checkbox' checked=description class='checkbox'}}x</div>
+  </div>
   <div class='page-toolkit'>
-    <div class='sliderBoxText'>
-      {{input type='text' min='0' max='255' value=scaledDistThresholdR class='sliderText'}}
-      {{input type='text' min='0' max='255' value=scaledDistThresholdG class='sliderText'}}
-      {{input type='text' min='0' max='255' value=scaledDistThresholdB class='sliderText'}}
-      <h6>Set:</h6>{{input type='checkbox' checked=rgbColor class='checkbox'}}
-    </div>
-    <div class='sliderBoxRange'>
-      {{input type='range' min='0' max='255' value=scaledDistThresholdR class='slider'}}
-      {{input type='range' min='0' max='255' value=scaledDistThresholdG class='slider'}}
-      {{input type='range' min='0' max='255' value=scaledDistThresholdB class='slider'}}
-    </div>
-    <div class='colorBox'>
-      {{input type='text' value=scaledDistThresholdRGB class='rgbStatus'}}
-      {{input type='text' value=colorInput class='hexStatus'}}
-    </div>
-    <div class='sliderBoxRange'>
-      {{input type='text' value=colorInput class='hexInput'}}
-      <h6>Set:</h6>{{input type='checkbox' checked=hexColor class='checkbox'}}
+    <div class='toolkit-header'>
+      <h5>Color</h5>
+      <div class='toolkit-container'>
+        <div class='toolkit-part-container'>
+          {{input type='text' min='0' max='255' value=colorR class='sliderText'}}
+          {{input type='text' min='0' max='255' value=colorG class='sliderText'}}
+          {{input type='text' min='0' max='255' value=colorB class='sliderText'}}
+          <h6>Set:</h6>{{input type='checkbox' checked=rgbColor class='checkbox'}}
+        </div>
+        <div class='toolkit-part-container'>
+          {{input type='range' min='0' max='255' value=colorR class='slider'}}
+          {{input type='range' min='0' max='255' value=colorG class='slider'}}
+          {{input type='range' min='0' max='255' value=colorB class='slider'}}
+          {{input type='range' min='0' max='255' value=colorLight
+          class='slider'}}
+        </div>
+        <div class='colorBox'>
+          {{input type='text' value=colorRGB class='rgbStatus' disabled=true}}
+          {{input type='text' value=colorInput class='hexStatus' disabled=true}}
+        </div>
+        <div class='toolkit-part-container'>
+          {{input type='text' value=colorInput class='hexInput'}}
+          <h6>Set:</h6>{{input type='checkbox' checked=hexColor class='checkbox'}}
+        </div>
+      </div>
     </div>
     <div class='divider'></div>
-    <div class='pageControl'>
-      <h6>Width:</h6>{{input type='range' min='0.1' max='1' step="0.01" value="0.75" value=pageWidth class='slider'}}
+    <div class='toolkit-header'>
+      <h5>Page</h5>
+      <div class='toolkit-container'>
+        <div class='toolkit-part-container'>
+          <h6>Width:</h6>{{input type='range' min='0.1' max='1' step="0.01" value="0.75" value=pageWidth class='slider'}}
+        </div>
+      </div>
     </div>
     <div class='divider'></div>
-    <h6>Mode:</h6>{{input type='checkbox' checked=mode class='checkbox'}}
+    <div class='toolkit-header'>
+      <h5>View</h5>
+      <div class='toolkit-container'>
+        <div class='toolkit-part-container'>
+          <h6>Fullscreen:</h6>{{input type='checkbox' checked=mode class='checkbox'}}
+          {{print-button class='printButton'}}
+        </div>
+      </div>
+    </div>
     {{input type='checkbox' checked=decafe class='decafe'}}
   </div>
   <article class='page'>
