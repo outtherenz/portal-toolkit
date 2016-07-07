@@ -95,5 +95,13 @@ export default Controller.extend({
     }
   ],
   period: {start: '2016-03', end: '2016-03', type: 'month'},
-  series: []
+  series: [],
+  hideData: true,
+  words: [
+    ["charts/data-table", "adding the chart in this is all in handlebars ipfdsfiohdsngdfjnfldkj;bnsd;kfjbds;fknjsd"],
+    ["series=series", 'setting the series'],
+    ["thisData=data", 'setting the data'],
+    ["metrics=metrics", 'setting the metrics'],
+    ["period=period", 'setting the period'],
+  ]
 });
