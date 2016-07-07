@@ -114,13 +114,7 @@ export default Controller.extend({
   period: {start: '2016-03', end: '2017-03', type: 'month'},
   series: [{branch:6}],
   hideData: true,
-  h1:'this is h1',
-  // h2:'this is h2',
-  // h3:'this is h3',
-  p1:'this isaddddddddddddddddddddddddddddddddddddd dddddddddddddddddddddddddddddddddddddddddds p1',
-  // p2:'this i<br>s p2',
-  // p3:'this is p3',
-  pre:'this is pre',
+
   words: [
     ["charts/data-table", "adding the chart in this is all in handlebars ipfdsfiohdsngdfjnfldkj;bnsd;kfjbds;fknjsd"],
     ["series=series", 'setting the series'],
