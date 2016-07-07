@@ -1,7 +1,27 @@
 <header class="article-header">
   <h1><span class="title-category">Helper:</span> Concat</h1>
 </header>
-
-<div class="example">
-  {{!-- example here --}}
-</div>
+<table class="example">
+  <tr>
+    <td>
+      {{input value=word1}}
+    </td><td>
+      {{input value=word2}}
+    </td><td>
+    </td><td>
+      {{input readonly=true value = (concat word1 word2)}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      {{input value=word3}}
+    </td><td>
+      {{input value=word4}}
+    </td><td>
+      {{input value=word5}}
+    </td><td>
+      {{input readonly=true value = (concat word3 word4 word5)}}
+    </td>
+  </tr>
+</table>
+<p class=description>The Concat Helper concatenates (link things together in a chain or series) as many arguments as are given, into one string</p>
