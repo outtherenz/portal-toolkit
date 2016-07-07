@@ -23,7 +23,11 @@
 <textarea>{{textarea}}</textarea>
   {{/unless}}
 </div>
-{{page-description h1=h1 h2=h2 h3=h3 p1=p1 p2=p2 p3=p3 pre=pre}}
+{{#page-description title='bleh'}}
+<h1>asdasdsa</h1>
+  <p>fdsfdsfsdfds</p>
+{{/page-description}}
+
 <h2><span class="title-category">Component:</span> Line Chart</h2>
 
 {{charts/line-chart series=series thisData=data metrics=metrics period=period}}
