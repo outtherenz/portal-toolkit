@@ -1,26 +1,9 @@
-<header class="article-header">
-  <h1>Charts</h1>
-</header>
+import Ember from 'ember';
 
-<h2><span class="title-category">Component:</span> Data Table</h2>
+const { Controller } = Ember;
 
-{{charts/data-table series=series thisData=data metrics=metrics period=period}}
-<div class='infoBox'>
-  <table style="border:thick solid black">
-    <tr><td>Operation</td><td>description</td></tr>
-    {{#each words as |word|}}
-      <tr>
-        {{#each word as |block|}}
-          <td style="border:thick solid black">{{block}}</td>
-          {{/each}}
-      </tr>
-    {{/each}}
-
-    <p>{charts/data-table series=series thisData=data metrics=metrics period=period}</p>
-  </table>
-  {{input type="checkbox" checked=hideData}}Hide Data
-  {{#unless hideData}}
-  <p>const metrics = [
+export default Controller.extend({
+  metrics: [
     {
       metric: '5760a5836a2fdd76101ea441',
       meta: {
@@ -110,22 +93,15 @@
         }
       ]
     }
-  ];</p>
-  {{/unless}}
-</div>
-
-<h2><span class="title-category">Component:</span> Line Chart</h2>
-
-{{charts/line-chart series=series thisData=data metrics=metrics period=period}}
-<div class='infoBox'>
-<p>""{ {charts/line-chart series=series thisData=data metrics=metrics period=period} }""</p>
-<p></p>
-</div>
-
-
-<h2><span class="title-category">Component:</span> Pie Chart</h2>
-
-{{charts/pie-chart series=series thisData=data metrics=metrics period=period}}
-<div class='infoBox'>
-<p>""{ {charts/pie-chart series=series thisData=data metrics=metrics period=period} }""</p>
-</div>
+  ],
+  period: {start: '2016-03', end: '2016-03', type: 'month'},
+  series: [],
+  hideData: true,
+  words: [
+    ["charts/data-table", "adding the chart in this is all in handlebars ipfdsfiohdsngdfjnfldkj;bnsd;kfjbds;fknjsd"],
+    ["series=series", 'setting the series'],
+    ["thisData=data", 'setting the data'],
+    ["metrics=metrics", 'setting the metrics'],
+    ["period=period", 'setting the period'],
+  ]
+});

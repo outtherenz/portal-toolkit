@@ -1,5 +1,57 @@
 <header class="article-header">
   <h1><span class="title-category">Component:</span> Formatted Input</h1>
 </header>
+<table>
+  <tr>
+    <td colspan="3">Initial values</td>
+    <td>final</td>
+  </tr>
+  <tr class=header-row>
+    <td>Number</td>
+    <td>isManual</td>
+    <td>format</td>
+    <td>formatted input</td>
+  </tr>
+  <tr>
+    <td>
+      5000.666
+    </td>
+    <td>False</td>
+    <td>number</td>
+    <td>
+      {{formatted-input number=5000.666 isManual=false format='number'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      1.5
+    </td>
+    <td>False</td>
+    <td>number</td>
+    <td>
+      {{formatted-input number=1.5 isManual=false format='number'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      5000.666
+    </td>
+    <td>true</td>
+    <td>number</td>
+    <td>
+      {{formatted-input number=5000.666 isManual=true format='number'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      1.5
+    </td>
+    <td>true</td>
+    <td>number</td>
+    <td>
+      {{formatted-input number=1.5 isManual=true format='number'}}
+    </td>
+  </tr>
 
+</table>
 {{!-- example here --}}
