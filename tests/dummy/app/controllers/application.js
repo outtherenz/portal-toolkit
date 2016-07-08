@@ -18,18 +18,6 @@ export default Controller.extend({
     $('.sidebar, .page-header').toggleClass('none');
   }.observes('mode'),
 
-  // description bar //
-  description: undefined,
-  watchDescription: function() {
-    var description = this.get('description');
-    var margin = $('.page-description').outerWidth();
-    if (description) {
-      $('.page-description').css('right', 0);
-    } else {
-      $('.page-description').css('right', -margin);
-    }
-  }.observes('description'),
-
   // background-color modifying //
   colorRGB: 'rgb(255,255,255)',
   colorInput: '#ffffff',

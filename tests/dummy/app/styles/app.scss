@@ -251,6 +251,10 @@ code {
   }
 }
 
+.out {
+  right: 0 !important;
+}
+
 .page-description {
   border: 1px solid $border-color;
   background-color: $off-white;
@@ -259,7 +263,7 @@ code {
   z-index: 1;
   padding: 15px;
   top: 275px;
-  right: -$page-description-width+-31;
+  right: -$page-description-width+-32;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
