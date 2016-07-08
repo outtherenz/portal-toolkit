@@ -4,24 +4,22 @@
 
 <h2><span class="title-category">Component:</span> Data Table</h2>
 
-{{charts/data-table series=series thisData=data metrics=metrics period=period}}
+{{charts/data-table series=series thisData=data metrics=metrics2 period=period}}
 <div class='infoBox'>
   <table style="border:thick solid black">
-    <tr><td>Operation</td><td>description</td></tr>
+    <tr><td>Operation</td><td>description</td><td>Show Data {{input type="checkbox" checked=hideData}}</td></tr>
     {{#each words as |word|}}
       <tr>
-        {{#each word as |block|}}
-          <td style="border:thick solid black">{{block}}</td>
-          {{/each}}
+        <td style="border:thick solid black">{{word.[0]}}</td>
+        <td style="border:thick solid black">{{word.[1]}}</td>
+        {{#unless hideData}}
+        <td style="border:thick solid black"><textarea>{{word.[2]}}</textarea></td>
+        {{/unless}}
       </tr>
     {{/each}}
 
-    <p>{charts/data-table series=series thisData=data metrics=metrics period=period}</p>
+    <p>{charts/data-table series=series thisData=data metrics=metrics2 period=period}</p>
   </table>
-  {{input type="checkbox" checked=hideData}}Hide Data
-  {{#unless hideData}}
-<textarea>{{textarea}}</textarea>
-  {{/unless}}
 </div>
 {{#page-description title='Charts'}}
   <h1>Data Chart</h1>
@@ -34,16 +32,16 @@
 
 <h2><span class="title-category">Component:</span> Line Chart</h2>
 
-{{charts/line-chart series=series thisData=data metrics=metrics period=period}}
+{{charts/line-chart series=series thisData=data metrics=metrics1 period=period}}
 <div class='infoBox'>
-<p>""{ {charts/line-chart series=series thisData=data metrics=metrics period=period} }""</p>
+<p>""{ {charts/line-chart series=series thisData=data metrics=metrics1 period=period} }""</p>
 <p></p>
 </div>
 
 
 <h2><span class="title-category">Component:</span> Pie Chart</h2>
 
-{{charts/pie-chart series=series thisData=data metrics=metrics period=period}}
+{{charts/pie-chart series=series thisData=data metrics=metrics2 period=period}}
 <div class='infoBox'>
-<p>""{ {charts/pie-chart series=series thisData=data metrics=metrics period=period} }""</p>
+<p>""{ {charts/pie-chart series=series thisData=data metrics=metrics2 period=period} }""</p>
 </div>
