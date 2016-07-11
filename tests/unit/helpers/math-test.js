@@ -10,12 +10,7 @@ describe('MathHelper', function() {
     expect(math([ -1, '+', 5 ])).to.equal(4);
     expect(math([ -9, '+', -3 ])).to.equal(-12);
     expect(math([ Infinity, '+', 1 ])).to.equal(Infinity);
-    try {
-      math([ NaN, '+', NaN ]);
-    }
-    catch(err) {
-      expect(err).to.eql(new Error('cant take an input of NaN'));
-    }
+    expect(() => math([ NaN, '+', NaN ])).to.throw();
   });
 
   it('can do subtraction', function() {
@@ -23,12 +18,7 @@ describe('MathHelper', function() {
     expect(math([ -1, '-', 5 ])).to.equal(-6);
     expect(math([ -9, '-', -3 ])).to.equal(-6);
     expect(math([ Infinity, '-', 1 ])).to.equal(Infinity);
-    try {
-      math([ NaN, '-', NaN ]);
-    }
-    catch(err) {
-      expect(err).to.eql(new Error('cant take an input of NaN'));
-    }
+    expect(() => math([ NaN, '-', NaN ])).to.throw();
   });
 
   it('can do multiplication', function() {
@@ -36,12 +26,7 @@ describe('MathHelper', function() {
     expect(math([ -1, '*', 5 ])).to.equal(-5);
     expect(math([ -9, '*', -3 ])).to.equal(27);
     expect(math([ Infinity, '*', 1 ])).to.equal(Infinity);
-    try {
-      math([ NaN, '*', NaN ]);
-    }
-    catch(err) {
-      expect(err).to.eql(new Error('cant take an input of NaN'));
-    }
+    expect(() => math([ NaN, '*', NaN ])).to.throw();
   });
 
   it('can do division', function() {
@@ -50,16 +35,13 @@ describe('MathHelper', function() {
     expect(math([ -9, '/', -3 ])).to.equal(3);
     expect(math([ Infinity, '/', 1 ])).to.equal(Infinity);
     expect(math([ 1, '/', Infinity ])).to.equal(0);
-    try {
-      math([ NaN, '/', NaN ]);
-    }
-    catch(err) {
-      expect(err).to.eql(new Error('cant take an input of NaN'));
-    }
+    expect(() => math([ NaN, '/', NaN ])).to.throw();
   });
 
   it('throws if the operator in invalid', function() {
     expect(() => math([ 1, 2 ])).to.throw();
     expect(() => math()).to.throw();
+    expect(() => math([ 1, '/', 1 ])).not.to.throw();
+
   });
 });

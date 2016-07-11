@@ -3,18 +3,7 @@ import Ember from 'ember';
 const { Helper } = Ember;
 
 export function math([ operand1, operator, operand2 ]) {
-  if (isNaN(operand1) || operand1 === null || operand1 === true) {
-    throw new Error('operator1 is not a number (a NaN): ' + operand1);
-  } else
-  if (isNaN(operand2) || operand2 === null || operand2 === true) {
-    throw new Error('operator2 is not a number (a NaN): ' + operand2);
-  } else {
-    if (operand1 !== Infinity) {
-      operand1 = parseInt(operand1, 10);
-    }
-    if (operand2 !== Infinity) {
-      operand2 = parseInt(operand2, 10);
-    }
+  if (isValidOperand(operand1) && isValidOperand(operand2)) {
     switch (operator) {
       case '+': return (operand1 + operand2);
       case '-': return (operand1 - operand2);
@@ -23,6 +12,16 @@ export function math([ operand1, operator, operand2 ]) {
       default: throw new Error('Unknown operator: ' + operator);
     }
   }
+}
+
+function isValidOperand(value) {
+  if (isNaN(value) || value === null || value === true) {
+    throw new Error('one of the operands is not a number (a NaN): ' + value);
+  }
+  if (value !== Infinity) {
+    value = parseInt(value, 10);
+  }
+  return true;
 }
 
 export default Helper.helper(math);
