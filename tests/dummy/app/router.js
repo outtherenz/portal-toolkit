@@ -18,6 +18,7 @@ Router.map(function() {
     this.route('notification-container');
     this.route('notification-message');
     this.route('print-button');
+    this.route('radio-slider');
     this.route('sortable-list');
     this.route('untethered-modal-dialog');
   });
