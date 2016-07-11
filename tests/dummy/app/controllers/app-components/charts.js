@@ -1003,170 +1003,170 @@ export default Controller.extend({
   }],
   period: {start: '2015-03', end: '2016-03', type: 'month'},
   metrics2: [{
-	"metric": "5760be476a2fdd76101ea492",
-	"series": [{
-		"branch": "5760902c6a2fdd76101ea429",
-		"periods": [{
-			"date": "2016-03-31T10:59:59.999Z",
-			"import": "57688b8dbd59bec40b74f132",
-			"account": "5760be476a2fdd76101ea492",
-			"branch": "5760902c6a2fdd76101ea429",
-			"organisation": "576090186a2fdd76101ea426",
-			"periodTypes": {
-				"month": {
-					"value": 318775.577602233,
-					"isManual": false,
-					"mapsUsed": []
-				},
-				"ytd": {
-					"value": 5250858.144413902,
-					"mapsUsed": []
-				}
-			}
-		}]
-	}],
-	"meta": {
-		"_id": "5760be476a2fdd76101ea492",
-		"name": "Wages",
-		"code": null,
-		"periodic": true,
-		"debitCredit": "DEBIT",
-		"category": "profit-and-loss",
-		"label": null,
-		"sortIndex": 95,
-		"dateCreated": "2016-06-15T02:32:39.517Z",
-		"dateModified": "2016-06-19T22:13:14.338Z",
-		"parent": "5760be476a2fdd76101ea48a",
-		"organisation": "576090186a2fdd76101ea426",
-		"isHeading": false,
-		"status": "ACTIVE",
-		"format": "CURRENCY",
-		"__v": 0
-	}
-}, {
-	"metric": "5760be9c6a2fdd76101ea494",
-	"series": [{
-		"branch": "5760902c6a2fdd76101ea429",
-		"periods": [{
-			"date": "2016-03-31T10:59:59.999Z",
-			"import": "57688b8dbd59bec40b74f132",
-			"account": "5760be9c6a2fdd76101ea494",
-			"branch": "5760902c6a2fdd76101ea429",
-			"organisation": "576090186a2fdd76101ea426",
-			"periodTypes": {
-				"month": {
-					"value": 388355.64077343,
-					"isManual": false,
-					"mapsUsed": []
-				},
-				"ytd": {
-					"value": 5716911.105927095,
-					"mapsUsed": []
-				}
-			}
-		}]
-	}],
-	"meta": {
-		"_id": "5760be9c6a2fdd76101ea494",
-		"name": "Training",
-		"code": null,
-		"periodic": true,
-		"debitCredit": "DEBIT",
-		"category": "profit-and-loss",
-		"label": null,
-		"sortIndex": 101,
-		"dateCreated": "2016-06-15T02:34:04.351Z",
-		"dateModified": "2016-06-19T22:13:14.352Z",
-		"parent": "5760be476a2fdd76101ea48a",
-		"organisation": "576090186a2fdd76101ea426",
-		"isHeading": false,
-		"status": "ACTIVE",
-		"format": "CURRENCY",
-		"__v": 0
-	}
-}, {
-	"metric": "5760be9c6a2fdd76101ea495",
-	"series": [{
-		"branch": "5760902c6a2fdd76101ea429",
-		"periods": [{
-			"date": "2016-03-31T10:59:59.999Z",
-			"import": "57688b8dbd59bec40b74f132",
-			"account": "5760be9c6a2fdd76101ea495",
-			"branch": "5760902c6a2fdd76101ea429",
-			"organisation": "576090186a2fdd76101ea426",
-			"periodTypes": {
-				"month": {
-					"value": 1248393.71537263,
-					"isManual": false,
-					"mapsUsed": []
-				},
-				"ytd": {
-					"value": 8334844.346340096,
-					"mapsUsed": []
-				}
-			}
-		}]
-	}],
-	"meta": {
-		"_id": "5760be9c6a2fdd76101ea495",
-		"name": "Hiring",
-		"code": null,
-		"periodic": true,
-		"debitCredit": "DEBIT",
-		"category": "profit-and-loss",
-		"label": null,
-		"sortIndex": 97,
-		"dateCreated": "2016-06-15T02:34:04.351Z",
-		"dateModified": "2016-06-19T22:13:14.364Z",
-		"parent": "5760be476a2fdd76101ea48a",
-		"organisation": "576090186a2fdd76101ea426",
-		"isHeading": false,
-		"status": "ACTIVE",
-		"format": "CURRENCY",
-		"__v": 0
-	}
-}, {
-	"metric": "5760be9c6a2fdd76101ea496",
-	"series": [{
-		"branch": "5760902c6a2fdd76101ea429",
-		"periods": [{
-			"date": "2016-03-31T10:59:59.999Z",
-			"import": "57688b8dbd59bec40b74f132",
-			"account": "5760be9c6a2fdd76101ea496",
-			"branch": "5760902c6a2fdd76101ea429",
-			"organisation": "576090186a2fdd76101ea426",
-			"periodTypes": {
-				"month": {
-					"value": 256658.733140252,
-					"isManual": false,
-					"mapsUsed": []
-				},
-				"ytd": {
-					"value": 2146032.977590972,
-					"mapsUsed": []
-				}
-			}
-		}]
-	}],
-	"meta": {
-		"_id": "5760be9c6a2fdd76101ea496",
-		"name": "Bonus's",
-		"code": null,
-		"periodic": true,
-		"debitCredit": "DEBIT",
-		"category": "profit-and-loss",
-		"label": null,
-		"sortIndex": 99,
-		"dateCreated": "2016-06-15T02:34:04.356Z",
-		"dateModified": "2016-06-19T22:13:14.368Z",
-		"parent": "5760be476a2fdd76101ea48a",
-		"organisation": "576090186a2fdd76101ea426",
-		"isHeading": false,
-		"status": "ACTIVE",
-		"format": "CURRENCY",
-		"__v": 0
-	}
-}],
+  	"metric": "5760be476a2fdd76101ea492",
+  	"series": [{
+  		"branch": "5760902c6a2fdd76101ea429",
+  		"periods": [{
+  			"date": "2016-03-31T10:59:59.999Z",
+  			"import": "57688b8dbd59bec40b74f132",
+  			"account": "5760be476a2fdd76101ea492",
+  			"branch": "5760902c6a2fdd76101ea429",
+  			"organisation": "576090186a2fdd76101ea426",
+  			"periodTypes": {
+  				"month": {
+  					"value": 318775.577602233,
+  					"isManual": false,
+  					"mapsUsed": []
+  				},
+  				"ytd": {
+  					"value": 5250858.144413902,
+  					"mapsUsed": []
+  				}
+  			}
+  		}]
+  	}],
+  	"meta": {
+  		"_id": "5760be476a2fdd76101ea492",
+  		"name": "Wages",
+  		"code": null,
+  		"periodic": true,
+  		"debitCredit": "DEBIT",
+  		"category": "profit-and-loss",
+  		"label": null,
+  		"sortIndex": 95,
+  		"dateCreated": "2016-06-15T02:32:39.517Z",
+  		"dateModified": "2016-06-19T22:13:14.338Z",
+  		"parent": "5760be476a2fdd76101ea48a",
+  		"organisation": "576090186a2fdd76101ea426",
+  		"isHeading": false,
+  		"status": "ACTIVE",
+  		"format": "CURRENCY",
+  		"__v": 0
+  	}
+  }, {
+  	"metric": "5760be9c6a2fdd76101ea494",
+  	"series": [{
+  		"branch": "5760902c6a2fdd76101ea429",
+  		"periods": [{
+  			"date": "2016-03-31T10:59:59.999Z",
+  			"import": "57688b8dbd59bec40b74f132",
+  			"account": "5760be9c6a2fdd76101ea494",
+  			"branch": "5760902c6a2fdd76101ea429",
+  			"organisation": "576090186a2fdd76101ea426",
+  			"periodTypes": {
+  				"month": {
+  					"value": 388355.64077343,
+  					"isManual": false,
+  					"mapsUsed": []
+  				},
+  				"ytd": {
+  					"value": 5716911.105927095,
+  					"mapsUsed": []
+  				}
+  			}
+  		}]
+  	}],
+  	"meta": {
+  		"_id": "5760be9c6a2fdd76101ea494",
+  		"name": "Training",
+  		"code": null,
+  		"periodic": true,
+  		"debitCredit": "DEBIT",
+  		"category": "profit-and-loss",
+  		"label": null,
+  		"sortIndex": 101,
+  		"dateCreated": "2016-06-15T02:34:04.351Z",
+  		"dateModified": "2016-06-19T22:13:14.352Z",
+  		"parent": "5760be476a2fdd76101ea48a",
+  		"organisation": "576090186a2fdd76101ea426",
+  		"isHeading": false,
+  		"status": "ACTIVE",
+  		"format": "CURRENCY",
+  		"__v": 0
+  	}
+  }, {
+  	"metric": "5760be9c6a2fdd76101ea495",
+  	"series": [{
+  		"branch": "5760902c6a2fdd76101ea429",
+  		"periods": [{
+  			"date": "2016-03-31T10:59:59.999Z",
+  			"import": "57688b8dbd59bec40b74f132",
+  			"account": "5760be9c6a2fdd76101ea495",
+  			"branch": "5760902c6a2fdd76101ea429",
+  			"organisation": "576090186a2fdd76101ea426",
+  			"periodTypes": {
+  				"month": {
+  					"value": 1248393.71537263,
+  					"isManual": false,
+  					"mapsUsed": []
+  				},
+  				"ytd": {
+  					"value": 8334844.346340096,
+  					"mapsUsed": []
+  				}
+  			}
+  		}]
+  	}],
+  	"meta": {
+  		"_id": "5760be9c6a2fdd76101ea495",
+  		"name": "Hiring",
+  		"code": null,
+  		"periodic": true,
+  		"debitCredit": "DEBIT",
+  		"category": "profit-and-loss",
+  		"label": null,
+  		"sortIndex": 97,
+  		"dateCreated": "2016-06-15T02:34:04.351Z",
+  		"dateModified": "2016-06-19T22:13:14.364Z",
+  		"parent": "5760be476a2fdd76101ea48a",
+  		"organisation": "576090186a2fdd76101ea426",
+  		"isHeading": false,
+  		"status": "ACTIVE",
+  		"format": "CURRENCY",
+  		"__v": 0
+  	}
+  }, {
+  	"metric": "5760be9c6a2fdd76101ea496",
+  	"series": [{
+  		"branch": "5760902c6a2fdd76101ea429",
+  		"periods": [{
+  			"date": "2016-03-31T10:59:59.999Z",
+  			"import": "57688b8dbd59bec40b74f132",
+  			"account": "5760be9c6a2fdd76101ea496",
+  			"branch": "5760902c6a2fdd76101ea429",
+  			"organisation": "576090186a2fdd76101ea426",
+  			"periodTypes": {
+  				"month": {
+  					"value": 256658.733140252,
+  					"isManual": false,
+  					"mapsUsed": []
+  				},
+  				"ytd": {
+  					"value": 2146032.977590972,
+  					"mapsUsed": []
+  				}
+  			}
+  		}]
+  	}],
+  	"meta": {
+  		"_id": "5760be9c6a2fdd76101ea496",
+  		"name": "Bonus's",
+  		"code": null,
+  		"periodic": true,
+  		"debitCredit": "DEBIT",
+  		"category": "profit-and-loss",
+  		"label": null,
+  		"sortIndex": 99,
+  		"dateCreated": "2016-06-15T02:34:04.356Z",
+  		"dateModified": "2016-06-19T22:13:14.368Z",
+  		"parent": "5760be476a2fdd76101ea48a",
+  		"organisation": "576090186a2fdd76101ea426",
+  		"isHeading": false,
+  		"status": "ACTIVE",
+  		"format": "CURRENCY",
+  		"__v": 0
+  	}
+  }],
   series: [
     {
     	"name": "Branch 01",
