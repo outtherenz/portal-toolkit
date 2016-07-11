@@ -1,7 +1,45 @@
 <header class="article-header">
-  <h1><span class="title-category">Componesadsant:</span> Checkbox List</h1>
-  {{model}}
-  {{data}}
+  <h1><span class="title-category">Components:</span>Radio Slider</h1>
 </header>
+{{radio-slider options=radioContent selected=periodType}}
 
-{{!-- example here --}}
+{{#page-description title='Radio Slider'}}
+<pre><code>
+  { { radio-slider options=radioContent selected=periodType } }
+  
+</code></pre>
+<p>The radio slider component is designed for use when radio buttons, or multiple selection inputs are required.<br>It is built on top of the radio-button native ember helper.</p>
+<p>The component takes two properties:<br>The first being <b>options</b>. <i>options</i>, generally contained in the Controller defines the content being passed to the radio-slider.
+</p>
+<pre><code>
+  radioContent: [
+    { label: 'Month', value: 'month' },
+    { label: 'YTD', value: 'ytd' }
+  ]
+
+</code></pre>
+<p>The first property <i>label:</i> is the label displayed on the component.<br>The second property, <i>value:</i> is the value of the corresponding radio input.</p>
+<p>The second component property is <b>selected</b>. <i>Selected</i> defines the selected value on the inital render.</p>
+<pre><code>
+    periodType: 'month',
+
+</code></pre>
+<p>This Component does not require a set width, each ellement will be as large as the largest one. This is achived with an unusual <i>inline-flex, column</i> container.<br><br>
+  The container is set at a fixed height (The height of the font-size), this causes the label elements to overflow horizontally. Meaning the width does not have to be set.</p>
+<pre><code>
+  -------------------------------------------^------
+        |----------|----------|----------|   |
+        |          |          |   after  |  16px
+        |----------|----------|----------|   |
+  ------/x-x-x-x-x-/-------------------------v------
+        /  before  /
+        /~~~~~~~~~~/
+        /          /
+        /   the    /
+        /~~~~~~~~~~/
+        /          /
+        /   wrap   /
+        /~~~~~~~~~~/
+
+</code></pre>
+{{/page-description}}

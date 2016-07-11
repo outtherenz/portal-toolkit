@@ -4,7 +4,7 @@ $blue: #5597c4;
 $border-color: #ccc;
 $gutter: 25px;
 $slider-width: 100px;
-$callout-size: 20px;
+$callout-size: 30px;
 $page-description-width: 430px;
 @media print {
   body * {
@@ -289,24 +289,24 @@ code {
   }
 
   .callout {
-    background: repeating-linear-gradient( -55deg, #FF8F65, #FF8F65 5px, #FFD865 5px, #FFD865 10px);
     width: $callout-size;
     height: $callout-size;
     position: absolute;
     left: -1-$callout-size; //border compensation
+    margin-top: -1px;
     top: 0;
-    margin-top: 3px;
     cursor: grabbing;
     text-align: center;
     vertical-align: middle;
-    font-size: $callout-size;
-    line-height: $callout-size;
+    font-size: 24px;
+    line-height: 30px;
     border-radius: 3px 0px 0px 3px;
     border-bottom: 1px solid $border-color;
     border-top: 1px solid $border-color;
     border-left: 1px solid $border-color;
     background-color: $off-white;
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    background: repeating-linear-gradient( -55deg, #FF8F65, #FF8F65 5px, #FFD865 5px, #FFD865 10px);
   }
 
   .checkbox {
@@ -316,4 +316,46 @@ code {
     position: absolute;
     left: 0;
   }
+}
+
+/******************************************************************
+
+  Radio Toggle
+
+******************************************************************/
+
+.radio-wrapper {
+  background-color: #f7f7f7;
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
+  padding-right: 1px;
+  float: left;
+}
+
+.checkbox-box {
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 14px;
+  font-size: 14px;
+  color: black;
+  label {
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  input[type="radio"]:checked + label {
+    background-color: #37a;
+    color: white;
+  }
+}
+
+.field {
+    visibility: hidden;
+    display: none;
 }

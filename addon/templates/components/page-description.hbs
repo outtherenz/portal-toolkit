@@ -4,7 +4,7 @@
     {{yield}}
   </div>
   <div class='callout'>
-    {{input type='checkbox' checked=description class='checkbox'}}
-    x
+    <input type='checkbox' onclick={{action 'toggleDescription'}} class='checkbox'>
+    ↹
   </div>
 </div>
