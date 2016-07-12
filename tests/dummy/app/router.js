@@ -21,6 +21,7 @@ Router.map(function() {
     this.route('radio-slider');
     this.route('sortable-list');
     this.route('untethered-modal-dialog');
+    this.route('value-change-indicator');
   });
 
   this.route('helpers', function() {

@@ -1,0 +1,39 @@
+<table>
+  <tr><td>Difference</td><td>to</td><td>from</td><td>useColor</td><td>increase is good</td><td>Generated arrow</td></tr>
+  {{#each targets as |target|}}
+    <tr>
+      <td>
+        {{input value=target.monthDifference}}
+      </td>
+      <td>
+        {{input value=target.to}}
+      </td>
+      <td>
+        {{input value=target.from}}
+      </td>
+      <td>
+        {{input type="checkbox" checked=target.useColor}}
+      </td>
+      <td>
+        {{input type="checkbox" checked=target.increaseIsGood}}
+      </td>
+      <td>
+        {{value-change-indicator difference=target.monthDifference from=target.from to=target.to useColor=target.useColor increaseIsGood=target.increaseIsGood}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
+<p style='width:90px; word-break: keep-all;'>
+  {{codeSample1}}
+</p>
+{{#page-description title='Value Change Indicator'}}
+  <h1>Variables</h1>
+    <h3>difference</h3>
+    <p>a difference can be supplied and will override any to/from. this should only be submited as a positive/Negative number</p>
+    <h3>to & from</h3>
+    <p>a to and ftrom can be used instead of a difference, if a difference is supplied as well only difference will be taken, these should only be submited as numbers</p>
+    <h3>useColor</h3>
+    <p>this should be assigned to a boolean value that changes based on whether you want it to be 'loading' (true) or not 'loading' (false)</p>
+    <h3>increaseIsGood</h3>
+    <p>Using this helper as a block helper ie. {{example}}. allows you to define the text of the button, otherwise this defaults to "Submit"</p>
+{{/page-description}}

@@ -34,7 +34,7 @@ export default Component.extend({
     return to - from;
   }),
 
-  color: computed('account1', 'account2', '_diff', function() {
+  color: computed('_diff', function() {
     const diff = get(this, '_diff');
     const increaseIsGood = get(this, 'increaseIsGood');
     const useColor = get(this, 'useColor');
