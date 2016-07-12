@@ -22,6 +22,7 @@ $page-description-width: 430px;
 
 body {
   font: 16px/1.5 sans-serif;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
   color: #333;
@@ -91,7 +92,7 @@ code {
 
 .sidebar {
   flex: 0 0 230px;
-  padding: $gutter;
+    padding: $gutter;
   background-color: $off-white;
   border-right: 1px solid $border-color;
   a {
