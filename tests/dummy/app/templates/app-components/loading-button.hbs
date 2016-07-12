@@ -2,8 +2,15 @@
   <h1><span class="title-category">Component:</span> Loading Button</h1>
 </header>
 
-{{loading-button action='save' isLoading=isSaving isDisabled=false}}
+{{loading-button action='save' isLoading=isSaving1 isDisabled=false}}
 
 <button {{action 'reset'}}>Reset</button>
 
-{{buttonCode}}
+{{buttonCode1}}
+
+<h1>Disabled</h1>
+{{loading-button action='save' isLoading=isSaving2 isDisabled=true}}
+
+<button {{action 'reset'}}>Reset</button>
+
+{{buttonCode2}}
