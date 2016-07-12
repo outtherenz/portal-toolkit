@@ -52,10 +52,6 @@ h4 {
   border-bottom: 3px solid shade($blue, 20%);
   padding: $gutter;
   color: white;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
   h1 {
     font-size: 28px;
     margin: 0;
@@ -98,11 +94,6 @@ code {
   padding: $gutter;
   background-color: $off-white;
   border-right: 1px solid $border-color;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  z-index: 10;
   a {
     color: #444;
     text-decoration: none;
@@ -146,7 +137,6 @@ code {
   font-size: 12px;
   padding: 15px;
   display: flex;
-
   .toolkit-header {
     flex-direction: row;
     h5 {
@@ -156,26 +146,22 @@ code {
       padding: 5px;
     }
   }
-
   .toolkit-container {
     display: flex;
     flex-direction: row;
   }
-
   .toolkit-part-container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     margin: 0 5px;
   }
-
   .checkbox {
     margin: 0;
     padding: 0;
     margin-top: -14px;
     align-self: flex-end;
   }
-
   h6 {
     font-size: 11px;
     font-weight: normal;
@@ -183,7 +169,6 @@ code {
     margin: 0;
     margin-right: 15px;
   }
-
   .divider {
     background-color: $border-color;
     margin-left: 10px;
@@ -191,14 +176,12 @@ code {
     width: 1px;
     flex: 1;
   }
-
   .colorBox {
     width: 110px;
     height: 80px;
     background-color: white;
     text-align: center;
   }
-
   .rgbStatus,
   .hexStatus {
     border: 0;
@@ -208,35 +191,29 @@ code {
     mix-blend-mode: difference;
     width: 100px;
   }
-
   .sliderBoxRange {
     width: 120px;
   }
-
   .sliderBoxText {
     width: 50px;
     padding-right: 15px;
   }
-
   .slider {
     width: $slider-width;
     padding: 0;
     height: 15px;
   }
-
   .sliderText {
     width: 50px;
     height: 15px;
     border: 0;
     margin-bottom: 5px;
   }
-
   .hexInput {
     width: 100px;
     height: 15px;
     border: 0;
   }
-
   .decafe {
     position: absolute;
     cursor: help;
@@ -244,9 +221,8 @@ code {
     bottom: 0;
     right: 0;
   }
-
   .printButton {
-    width: 30px;
+    width: 60%;
     margin-top: 5px;
   }
 }
@@ -260,15 +236,13 @@ code {
   background-color: $off-white;
   position: absolute;
   width: $page-description-width;
-  z-index: 1;
   padding: 15px;
   top: 275px;
   right: -$page-description-width+-32;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
   .content {
     max-height: 600px;
     font-size: 13px;
@@ -276,18 +250,15 @@ code {
     padding: 15px;
     overflow-y: scroll;
     overflow-x: hidden;
-
     pre {
       white-space: pre-wrap;
       background: $off-white;
       font-size: 9px;
     }
-
     .code {
       background-color: white;
     }
   }
-
   .callout {
     width: $callout-size;
     height: $callout-size;
@@ -298,7 +269,7 @@ code {
     cursor: grabbing;
     text-align: center;
     vertical-align: middle;
-    font-size: 24px;
+    font-size: 16px;
     line-height: 30px;
     border-radius: 3px 0px 0px 3px;
     border-bottom: 1px solid $border-color;
@@ -308,7 +279,6 @@ code {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     background: repeating-linear-gradient( -55deg, #FF8F65, #FF8F65 5px, #FFD865 5px, #FFD865 10px);
   }
-
   .checkbox {
     opacity: 0;
     width: $callout-size;
@@ -317,6 +287,7 @@ code {
     left: 0;
   }
 }
+
 
 /******************************************************************
 
@@ -356,6 +327,6 @@ code {
 }
 
 .field {
-    visibility: hidden;
-    display: none;
+  visibility: hidden;
+  display: none;
 }

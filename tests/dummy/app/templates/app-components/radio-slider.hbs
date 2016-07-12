@@ -6,7 +6,7 @@
 {{#page-description title='Radio Slider'}}
 <pre><code>
   { { radio-slider options=radioContent selected=periodType } }
-  
+
 </code></pre>
 <p>The radio slider component is designed for use when radio buttons, or multiple selection inputs are required.<br>It is built on top of the radio-button native ember helper.</p>
 <p>The component takes two properties:<br>The first being <b>options</b>. <i>options</i>, generally contained in the Controller defines the content being passed to the radio-slider.
@@ -29,16 +29,16 @@
 <pre><code>
   -------------------------------------------^------
         |----------|----------|----------|   |
-        |          |          |   after  |  16px
+        |          |          |          |  16px
         |----------|----------|----------|   |
   ------/x-x-x-x-x-/-------------------------v------
-        /  before  /
+        /          /
+        /~~~~~~~~~~/    This space is before the
+        /          /    column flex-wrap
+        /          /
         /~~~~~~~~~~/
         /          /
-        /   the    /
-        /~~~~~~~~~~/
         /          /
-        /   wrap   /
         /~~~~~~~~~~/
 
 </code></pre>
