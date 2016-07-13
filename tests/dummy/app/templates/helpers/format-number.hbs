@@ -5,11 +5,27 @@
 <h2>Numbers</h2>
 
 <div class="example">
-  <ul>
-    <li>Number: {{format-number 'number' 123.456}}  {{formulae1}}</li>
-    <li>Number, 3 places: {{format-number 'number' 123.456 places=3}} {{formulae2}}</li>
-    <li>Number, negative: {{format-number 'number' -123.456}} {{formulae3}}</li>
-  </ul>
+  <table>
+    <tr><th>original</th><th>format</th><th>Places</th><th>SigFigs</th><th>Output</th><th>generated formulae</th></tr>
+    {{#each numberExamples as |example|}}
+    <tr>
+      <td>{{example.original}}</td>
+      <td>{{example.format}}</td>
+      <td>{{example.places}}</td>
+      <td>{{example.sigfigs}}</td>
+      <td>{{format-number example.format example.original places=example.places sigfigs=example.sigfigs}}</td>
+      <td><textarea>{{example.equation}}</textarea></td>
+  </tr>
+  {{/each}}
+  <tr>
+    <td>{{input type='number' value=(mut thisExample.original)}}</td>
+    <td>{{input value=thisExample.format}}</td>
+    <td>{{input type='number' value=thisExample.places}}</td>
+    <td>{{input type='number' value=(mut thisExample.sigfigs)}}</td>
+    <td>{{format-number thisExample.format thisExample.original places=thisExample.places sigfigs=thisExample.sigfigs}}</td>
+    <td><textarea>{{concat "{{format-number '" thisExample.format "' places="thisExample.places " Sigfigs="thisExample.sigfigs }}</textarea></td>
+  </tr>
+</table>
 </div>
 
 <h2>Integers</h2>
@@ -25,9 +41,27 @@
 <h2>Currency</h2>
 
 <div class="example">
-  <ul>
-    <li>Currency: {{format-number 'currency' 3.5}}{{formulae7}}</li>
-  </ul>
+  <table>
+    <tr><th>original</th><th>format</th><th>Places</th><th>SigFigs</th><th>Output</th><th>generated formulae</th></tr>
+    {{#each currencyExamples as |example|}}
+    <tr>
+      <td>{{example.original}}</td>
+      <td>{{example.format}}</td>
+      <td>{{example.places}}</td>
+      <td>{{example.sigfigs}}</td>
+      <td>{{format-number example.format example.original places=example.places sigfigs=example.sigfigs}}</td>
+      <td><textarea>{{example.equation}}</textarea></td>
+  </tr>
+  {{/each}}
+  <tr>
+    <td>{{input type='number' value=(mut thisExample.original)}}</td>
+    <td>{{input value=thisExample.format}}</td>
+    <td>{{input type='number' value=thisExample.places}}</td>
+    <td>{{input type='number' value=(mut thisExample.sigfigs)}}</td>
+    <td>{{format-number thisExample.format thisExample.original places=thisExample.places sigfigs=thisExample.sigfigs}}</td>
+    <td><textarea>{{concat "{{format-number '" thisExample.format "' places="thisExample.places " Sigfigs="thisExample.sigfigs }}</textarea></td>
+  </tr>
+</table>
 </div>
 
 <h2>Percentage</h2>
