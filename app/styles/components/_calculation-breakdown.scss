@@ -1,0 +1,51 @@
+.calculation-breakdown {
+  .steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
+    white-space: nowrap;
+  }
+
+  .operator {
+    padding: 0 1em;
+    font-size: 140%;
+    color: tint($copy-color, 70%);
+
+    & + .operator {
+      padding-left: 0;
+    }
+  }
+
+  .input {
+    border: 1px solid $border-color;
+    border-radius: 3px;
+  }
+
+  .name {
+    background-color: $off-white;
+    color: tint($copy-color, 30%);
+    text-align: center;
+    font-size: 90%;
+    padding: 0.25em 0.8em;
+  }
+
+  .value {
+    line-height: 30px;
+    font-size: 110%;
+    text-align: center;
+    padding: 0.25em 0.8em;
+    border-top: 1px solid $border-color;
+    color: tint($copy-color, 10%);
+  }
+
+  .number {
+    font-size: 120%;
+    color: tint($copy-color, 10%);
+  }
+}

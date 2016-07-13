@@ -2,5 +2,10 @@
 
 module.exports = {
   name: 'portal-toolkit',
-  isDevelopingAddon: () => true
+  isDevelopingAddon: () => true,
+  sassOptions: {
+    includePaths: [
+      'app/styles/**/*'
+    ]
+  }
 };

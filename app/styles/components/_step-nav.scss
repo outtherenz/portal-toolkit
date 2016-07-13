@@ -1,0 +1,121 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Step Navigation
+******************************************************************/
+
+nav.steps {
+  @include clearfix;
+  counter-reset: nav-steps;
+
+  ol {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  li {
+    flex: 0 0 auto;
+    line-height: 2em;
+
+    a {
+      padding: 1em;
+    }
+
+    a::before {
+      counter-increment: nav-steps;
+      content: counter(nav-steps);
+      margin-right: 1em;
+      background-color: $off-white;
+      display: inline-block;
+      width: 2.2em;
+      height: 2.2em;
+      border: 1px solid $border-color;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 2.2em;
+    }
+  }
+
+  %past {
+    &::before {
+      content: '\f00c';
+      font: normal normal normal 14px/2.2em 'FontAwesome';
+      font-size: inherit;
+      display: inline-block;
+      color: #bbb;
+    }
+
+    &:hover::before {
+      background-color: tint(desaturate($link-hover-color, 15%), 90%);
+      border-color:     tint(desaturate($link-hover-color, 10%), 50%);
+      color:            tint(desaturate($link-hover-color, 10%), 30%);
+    }
+  }
+
+  %current {
+    color: $copy-color;
+    pointer-events: none;
+
+    &::before {
+      font-size: inherit;
+      display: inline-block;
+      background-color: $button-primary;
+      background-image: -webkit-linear-gradient(top, tint($button-primary, 10%), $button-primary);
+      border-color: shade($button-primary, 10%);
+      color: white;
+    }
+  }
+
+  %future {}
+
+  &.step-1 {
+    li:nth-child(1) a {
+      @extend %current;
+    }
+    li:nth-child(n+1) a {
+      //@extend %future;
+    }
+  }
+
+  &.step-2 {
+    li:nth-child(1) a  {
+      @extend %past;
+    }
+    li:nth-child(2) a {
+      @extend %current;
+    }
+    li:nth-child(n+3) a {
+      //@extend %future;
+    }
+  }
+
+  &.step-3 {
+    li:nth-child(-n+2) a {
+      @extend %past;
+    }
+     li:nth-child(3) a {
+      @extend %current;
+    }
+    li:nth-child(n+4) a {
+      //@extend %future;
+    }
+  }
+
+  &.step-4 {
+    li:nth-child(-n+3) a {
+      @extend %past;
+    }
+    li:nth-child(4) a {
+      @extend %current;
+    }
+  }
+
+  &.step-5 {
+    li a {
+      @extend %past;
+    }
+  }
+}

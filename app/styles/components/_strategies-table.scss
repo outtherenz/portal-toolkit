@@ -1,0 +1,63 @@
+.strategies-table {
+  .target-name.has-breakdown {
+    a:hover {
+      text-decoration: none;
+
+      span {
+        text-decoration: underline;
+      }
+    }
+
+    .fa {
+      font-weight: bold;
+      width: 1em;
+    }
+  }
+
+  .target-name.breakdown-not-empty {
+    font-weight: bold;
+  }
+
+  .strategy-breakdown {
+    background-color: shade($off-white, 2.5%);
+    padding: 0;
+    padding-left: 4px;
+    box-shadow: inset 4px 0 0 $border-color;
+    border-bottom: 0;
+
+    table {
+      font-size: 100%;
+      margin: 0;
+    }
+
+    thead:first-child tr:first-child th {
+      border-top: 0;
+    }
+    tr > :first-child {
+      border-left: 0;
+    }
+    tr > :last-child {
+      border-right: 0;
+    }
+
+    th {
+      font-weight: normal;
+      color: $subdued;
+      font-size: 90%;
+    }
+
+    td, input {
+      background: $off-white;
+    }
+
+    td > input:not([type=checkbox]):first-child:last-child:hover,
+    td > input:not([type=checkbox]):first-child:last-child:focus {
+      background-color: white;
+    }
+
+    button.new-strategy {
+      font-size: 95%;
+      padding: 0.8em 2em;
+    }
+  }
+}
