@@ -1070,6 +1070,6 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true 
 
   it('renders pie-chart component', function() {
     this.render(hbs`{{charts/pie-chart series=series thisData=data metrics=metrics period=period}}`);
-    expect(this.$('.c3-arc-egg')).to.have.lengthOf(1);
+    expect(this.$('.c3-arc')).to.have.lengthOf(1);
   });
 });

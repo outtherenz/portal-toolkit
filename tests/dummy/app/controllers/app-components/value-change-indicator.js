@@ -16,6 +16,8 @@ export default Controller.extend({
       'increaseIsGood': true
     },{
       'monthDifference': -3,
+      'to': 8,
+      'from': 10,
       'useColor': true,
       'increaseIsGood': false
     },{
