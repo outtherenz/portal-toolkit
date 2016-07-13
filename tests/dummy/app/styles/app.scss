@@ -1,4 +1,44 @@
+
+// Reset
+@import "global/normalize";
+
+// Config
+@import "global/settings";
+
+// Libraries and dependencies
 @import "bourbon";
+@import "bower_components/neat/app/assets/stylesheets/neat";
+
+// Setup
+@import "global/colors";
+@import "global/typography";
+@import "global/mixins";
+
+// Components
+@import "components/buttons";
+@import "components/charts";
+@import "components/calculation-breakdown";
+@import "components/coa-editor";
+@import "components/dashboard-modules";
+@import "components/data-lists";
+@import "components/data-trees";
+@import "components/forms";
+@import "components/loading-icon";
+@import "components/modals";
+@import "components/modules";
+@import "components/notifications";
+@import "components/period-selector";
+@import "components/selector";
+@import "components/sortable-list";
+@import "components/step-nav";
+@import "components/strategies-table";
+@import "components/tables";
+@import "components/tabs";
+@import "components/terms-of-service";
+@import "components/validation";
+@import "components/value-change-indicator";
+
+
 $off-white: #f5f5f5;
 $blue: #5597c4;
 $border-color: #ccc;
@@ -52,13 +92,14 @@ h4 {
   background-color: $blue;
   border-bottom: 3px solid shade($blue, 20%);
   padding: $gutter;
-  color: white;
   h1 {
+    color: white;
     font-size: 28px;
     margin: 0;
     line-height: 1.1;
   }
   h2 {
+      color: white;
     font-size: 18px;
     font-weight: normal;
     line-height: 1.1;
@@ -92,7 +133,7 @@ code {
 
 .sidebar {
   flex: 0 0 230px;
-    padding: $gutter;
+  padding: $gutter;
   background-color: $off-white;
   border-right: 1px solid $border-color;
   a {
@@ -102,17 +143,6 @@ code {
       font-weight: bold;
     }
   }
-}
-
-.construction {
-  background: repeating-linear-gradient( -55deg, #FF8F65, #FF8F65 5px, #FFD865 5px, #FFD865 10px);
-  width: 10px;
-  height: 100%;
-  float: left;
-  margin-top: -$gutter;
-  padding-bottom: 2*$gutter;
-  margin-right: $gutter;
-  margin-left: -$gutter;
 }
 
 .page {
@@ -187,6 +217,7 @@ code {
   .hexStatus {
     border: 0;
     font-weight: bold;
+    font-size: 10px;
     background-color: transparent;
     color: white;
     mix-blend-mode: difference;
@@ -195,24 +226,30 @@ code {
   .sliderBoxRange {
     width: 120px;
   }
-  .sliderBoxText {
-    width: 50px;
-    padding-right: 15px;
-  }
   .slider {
     width: $slider-width;
     padding: 0;
-    height: 15px;
+    height: 17px;
+    margin: 1px;
+    overflow: visible;
+    padding: 0;
+    border: 0;
   }
   .sliderText {
     width: 50px;
-    height: 15px;
+    height: 17px;
+    margin: 1px;
+    overflow: visible;
+    padding: 0;
     border: 0;
     margin-bottom: 5px;
   }
   .hexInput {
     width: 100px;
-    height: 15px;
+    height: 17px;
+    margin: 1px;
+    overflow: visible;
+    padding: 0;
     border: 0;
   }
   .decafe {
@@ -223,7 +260,6 @@ code {
     right: 0;
   }
   .printButton {
-    width: 60%;
     margin-top: 5px;
   }
 }
@@ -239,7 +275,7 @@ code {
   width: $page-description-width;
   padding: 15px;
   top: 275px;
-  right: -$page-description-width+-32;
+  right: -$page-description-width;
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
@@ -254,7 +290,7 @@ code {
     pre {
       white-space: pre-wrap;
       background: $off-white;
-      font-size: 9px;
+      font-size: 10px;
     }
     .code {
       background-color: white;
@@ -300,8 +336,9 @@ code {
   background-color: #f7f7f7;
   border: 1px solid #d2d2d2;
   border-radius: 2px;
-  padding-right: 1px;
   float: left;
+  padding: 0;
+  margin: 0;
 }
 
 .checkbox-box {
@@ -310,16 +347,20 @@ code {
   flex-wrap: wrap;
   height: 14px;
   font-size: 14px;
+  line-height: 14px;
   color: black;
   label {
     cursor: pointer;
     width: 100%;
     text-align: center;
-    position: relative;
+    vertical-align: middle;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding-bottom: 19px;
+    -webkit-transition: all 0.05s ease-in-out;
+    -moz-transition: all 0.05s ease-in-out;
+    -o-transition: all 0.05s ease-in-out;
+    transition: all 0.05s ease-in-out;
   }
   input[type="radio"]:checked + label {
     background-color: #37a;

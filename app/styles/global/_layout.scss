@@ -1,0 +1,161 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Layout
+
+This is for the structural layout of the app. Color, typography
+and so on doesn’t belong here.
+******************************************************************/
+
+.wrapper {
+  padding: 0 $gutter;
+  @include clearfix;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: $gutter + $max-width + $gutter;
+  overflow-y: scroll;
+}
+
+// Application view
+body > .ember-view {
+  // Ensure the footer is always at the bottom of the window, even if the page is short
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.page {
+  flex: 1; // Make the footer sticky
+  display: flex;
+}
+
+.sidebar {
+  flex: 0 0 220px;
+}
+
+main {
+  padding-top: $gutter;
+  padding-bottom: 2*$gutter;
+  flex: 1;
+
+  @include outer-container;
+
+  .limit-large  { max-width: 1024px - 50px; }
+  .limit-medium { max-width: 1024px - 250px; }
+  .limit-small  { max-width: 1024px - 450px; }
+  .limit-tiny   { max-width: 1024px - 650px; }
+}
+
+[class^=grid-] {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+
+  @include clearfix;
+}
+
+@for $i from 1 through 12 {
+  .grid-#{$i} > * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    @include span-columns($i);
+  }
+}
+
+.pull-left {
+  float: left;
+  margin: 0 $gutter 0 0;
+  text-align: left;
+}
+
+.pull-right {
+  float: right;
+  margin: 0 0 0 $gutter;
+  text-align: right;
+}
+
+.pull-none {
+  float: none;
+  margin: 0;
+}
+
+.tuck-for-controls {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.loading-page {
+  padding: 100px;
+
+  > * {
+    margin: 0 auto;
+  }
+}
+
+.master-detail {
+  display: flex;
+  padding: 0;
+
+  > aside {
+    flex: 0 0 auto;
+    border-right: 1px solid $border-color;
+    // max-width: 300px;
+
+    ul, ol {
+      padding: $gutter/2 0 $gutter/2 $gutter/2;
+      margin: 0;
+    }
+
+    li {
+      list-style-type: none;
+
+      &.sortable-ghost {
+        visibility: hidden;
+      }
+    }
+
+    a {
+      display: block;
+      padding: 0.5em $gutter 0.5em $gutter/2;
+      outline: 0;
+      line-height: 1.3;
+
+      &.active,
+      &:hover {
+        background-color: tint(desaturate($alert-blue, 30%), 90%);
+        text-decoration: none;
+        position: relative;
+      }
+
+      &.active {
+        color: white;
+        background-color: $alert-blue;
+        margin-right: -1px;
+        padding-right: $gutter + 1px;
+
+        &::after {
+          content: '';
+          wdith: 0;
+          height: 0;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          margin-top: -6px;
+          border: 6px solid transparent;
+          border-right-color: white;
+        }
+      }
+    }
+  }
+
+  > article {
+    flex: 4;
+    padding: $gutter;
+  }
+}
