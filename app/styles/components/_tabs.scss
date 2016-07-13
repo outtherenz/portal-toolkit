@@ -1,0 +1,35 @@
+header.tabs {
+  @include clearfix;
+  border-bottom: 1px solid $border-color;
+  margin-left: (-$gutter);
+  margin-right: (-$gutter);
+  padding-left: $gutter;
+  padding-right: $gutter;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    float: left;
+  }
+
+  a {
+    background-color: $off-white;
+    display: inline-block;
+    border: 1px solid $border-color;
+    border-bottom: 0;
+    border-radius: 4px 4px 0 0;
+    padding: 0.5em 1em;
+    margin-right: 0.5em;
+    color: tint($copy-color, 40%);
+
+    &.active {
+      color: $copy-color;
+      background-color: shade($off-white, 2%);
+      border-color: shade($border-color, 10%);
+    }
+  }
+}

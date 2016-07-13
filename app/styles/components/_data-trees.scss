@@ -1,0 +1,66 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Data trees
+
+This is for expandable and collapsable data tree components.
+******************************************************************/
+
+.data-tree {
+    border: 1px solid shade($off-white, 20%);
+    background-color: white;
+    border-radius: 4px;
+    padding: $gutter;
+    height: 400px;
+    overflow-y: auto;
+}
+
+/* Branch */
+.data-tree-branch {
+    padding: 0px;
+    margin: 0px;
+}
+.data-tree-node .data-tree-branch {
+    padding-left: 1.5em; /* Nested tree branches should be indented */
+}
+
+/* Node */
+.data-tree-node {
+    list-style: none;
+
+    ul {
+        max-height: 5000px;
+        -webkit-transition: max-height 1s ease;
+        transition: max-height 1s ease;
+        overflow: hidden;
+    }
+
+    &.closed ul {
+        max-height: 0;
+        -webkit-transition: max-height 1s ease;
+        transition: max-height 1s ease;
+    }
+}
+
+/* Label */
+.data-tree-node .selected {
+    font-weight: bold;
+}
+
+/* Arrow */
+.data-tree-node .toggle-icon {
+    cursor: pointer;
+    display: inline-block;
+    width: 10px;
+    margin-right: 0.5em;
+    font-size: 10px;
+    user-select: none;
+    color: tint($copy-color, 25%);
+}
+.data-tree-node .toggle-icon:hover {
+    color: $copy-color;
+}
+.data-tree-node .toggle-icon.leaf {
+    visibility: hidden;
+}
