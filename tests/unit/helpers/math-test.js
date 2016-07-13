@@ -7,6 +7,7 @@ describe('MathHelper', function() {
   var fn = function () { throw err; }
   it('can do addition', function() {
     expect(math([ 1, '+', 1 ])).to.equal(2);
+    expect(math([ '1', '+', '1' ])).to.equal(2);
     expect(math([ -1, '+', 5 ])).to.equal(4);
     expect(math([ -9, '+', -3 ])).to.equal(-12);
     expect(math([ Infinity, '+', 1 ])).to.equal(Infinity);
