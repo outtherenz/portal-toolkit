@@ -10,8 +10,6 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:testall",
-    "posttest": "npm run lint",
-    "postinstall": "./node_modules/.bin/bower install",
     "lint": "./node_modules/.bin/eslint ."
   },
   "repository": "https://github.com/outtherenz/portal-toolkit",
