@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Controller, computed } = Ember;
+const { Controller } = Ember;
 
 export default Controller.extend({
   dataOptions: ['data1', 'data2'],
@@ -1001,7 +1001,7 @@ export default Controller.extend({
       __V: 0
     }
   }],
-  period: {start: '2015-03', end: '2016-03', type: month},
+  period: {start: '2015-03', end: '2016-03', type: 'month'},
   metrics2: [{
     metric: '5760be476a2fdd76101ea492',
     series: [{
@@ -1215,9 +1215,13 @@ export default Controller.extend({
 
   words: [
     ['charts/data-table', 'Call for the component'],
-    ['series=series', 'this sets the series, takes an array of objects eg', "{name: 'Branch 05',system: null,id: '5760903a6a2fdd76101ea42c',balanceMonth: null,dateCreated: '2016-06-14T23:16:06.036Z',organisation: '576090186a2fdd76101ea426'", true],
+    [
+      'series=series',
+      'this sets the series, takes an array of objects eg',
+      "{name: 'Branch 05',system: null,id: '5760903a6a2fdd76101ea42c',balanceMonth: null,dateCreated: '2016-06-14T23:16:06.036Z',organisation: '576090186a2fdd76101ea426'",
+      true],
     ['thisData=data', 'setting the data'],
     ['metrics=metrics', 'setting the metrics, the metrics makes up most of the table', "metric: '5760be476a2fdd76101ea492'", false],
-    ['period=period', 'setting the period'],
+    ['period=period', 'setting the period']
   ]
 });
