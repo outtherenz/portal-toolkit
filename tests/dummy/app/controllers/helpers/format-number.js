@@ -92,7 +92,50 @@ export default Controller.extend({
           places: 5,
           sigfigs: 5,
           equation: "{{format-number 'percentage' 12345.6789 sigfigs=5 places=5}}"
-        }]}, {name: 'Currency Examples', examples: [
+        }]},  {name: 'integer Examples', examples: [
+          {
+            original: 12345.6789,
+            format: 'integer',
+            places: null,
+            sigfigs: null,
+            equation: "{{format-number 'integer' 12345.6789}}"
+          }, {
+            original: 12345.6789,
+            format: 'integer',
+            places: null,
+            sigfigs: 1,
+            equation: "{{format-number 'integer' 12345.6789 sigfigs=2}}"
+          }, {
+            original: 12345.6789,
+            format: 'integer',
+            places: 1,
+            sigfigs: null,
+            equation: "{{format-number 'integer' 12345.6789 places=3}}"
+          }, {
+            original: 12345.6789,
+            format: 'integer',
+            places: 1,
+            sigfigs: 1,
+            equation: "{{format-number 'integer' 12345.6789 sigfigs=2 places=2}}"
+          }, {
+            original: 12345.6789,
+            format: 'integer',
+            places: 5,
+            sigfigs: null,
+            equation: "{{format-number 'integer' 12345.6789 places=5}}"
+          }, {
+            original: 12345.6789,
+            format: 'integer',
+            places: null,
+            sigfigs: 5,
+            equation: "{{format-number 'integer' 12345.6789 sigfigs=5}}"
+          }, {
+            original: 12345.6789,
+            format: 'integer',
+            places: 5,
+            sigfigs: 5,
+            equation: "{{format-number 'integer' 12345.6789 sigfigs=5 places=5}}"
+          }]}, {name: 'Currency Examples', examples: [
           {
             original: 12345.6789,
             format: 'currency',
