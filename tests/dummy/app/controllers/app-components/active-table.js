@@ -15,7 +15,7 @@ export default Controller.extend({
       key: 'dob',
       width: 2
     }, {
-      name: 'Numers',
+      name: 'Numbers',
       key: 'numbers',
       width: 5
     }];
@@ -30,6 +30,10 @@ export default Controller.extend({
   }, {
     letters: 'A',
     dob: new Date('1987-02-11'),
+    numbers: '2'
+  }, {
+    letters: 'a',
+    dob: new Date('1987-02-12'),
     numbers: '2'
   }, {
     letters: 'b',
