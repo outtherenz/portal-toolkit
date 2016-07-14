@@ -1150,7 +1150,7 @@ export default Controller.extend({
     }],
     'meta': {
       '_id': '5760be9c6a2fdd76101ea496',
-      'name': 'Bonus's',
+      'name': "Bonus's",
       'code': null,
       'periodic': true,
       'debitCredit': 'DEBIT',
@@ -1215,9 +1215,9 @@ export default Controller.extend({
 
   words: [
     ['charts/data-table', 'Call for the component'],
-    ['series=series', 'this sets the series, takes an array of objects eg', '{'name': 'Branch 05','system': null,'id': '5760903a6a2fdd76101ea42c','balanceMonth': null,'dateCreated': '2016-06-14T23:16:06.036Z','organisation': '576090186a2fdd76101ea426'', true],
+    ['series=series', 'this sets the series, takes an array of objects eg', "{'name': 'Branch 05','system': null,'id': '5760903a6a2fdd76101ea42c','balanceMonth': null,'dateCreated': '2016-06-14T23:16:06.036Z','organisation': '576090186a2fdd76101ea426'", true],
     ['thisData=data', 'setting the data'],
-    ['metrics=metrics', 'setting the metrics, the metrics makes up most of the table', ''metric': '5760be476a2fdd76101ea492'', false],
+    ['metrics=metrics', 'setting the metrics, the metrics makes up most of the table', "'metric': '5760be476a2fdd76101ea492'", false],
     ['period=period', 'setting the period'],
   ]
 });
