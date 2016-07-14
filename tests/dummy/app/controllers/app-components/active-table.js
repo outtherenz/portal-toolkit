@@ -18,7 +18,7 @@ export default Controller.extend({
       name: 'Numers',
       key: 'numbers',
       width: 5
-    }]
+    }];
     return columns;
 
   }),

@@ -29,6 +29,9 @@ Router.map(function() {
     this.route('format-number');
     this.route('math');
   });
+  this.route('services', function() {
+    this.route('notifications');
+  });
 
   this.route('404', { path: '*path' });
 });
