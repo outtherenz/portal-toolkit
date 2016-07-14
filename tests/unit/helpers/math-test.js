@@ -3,8 +3,6 @@ import { describe, it } from 'mocha';
 import { math } from 'portal-toolkit/helpers/math';
 
 describe('MathHelper', function() {
-  var err = new ReferenceError('operator1 is not a number (a NaN): NaN');
-  var fn = function () { throw err; }
   it('can do addition', function() {
     expect(math([ 1, '+', 1 ])).to.equal(2);
     expect(math([ '1', '+', '1' ])).to.equal(2);
