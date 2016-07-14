@@ -6,10 +6,10 @@
         {{input value=target.monthDifference}}
       </td>
       <td>
-        {{input value=target.to}}
+        {{input value=target.to}}{{input type='range' min='-25' max='25' value=target.to class='slider'}}
       </td>
       <td>
-        {{input value=target.from}}
+        {{input value=target.from}}{{input type='range' min='-25' max='25' value=target.from class='slider'}}
       </td>
       <td>
         {{input type="checkbox" checked=target.useColor}}
@@ -23,7 +23,7 @@
     </tr>
   {{/each}}
 </table>
-<p style='width:90px; word-break: keep-all;'>
+<p style='word-break: keep-all;'>
   {{codeSample1}}
 </p>
 {{#page-description title='Value Change Indicator'}}
