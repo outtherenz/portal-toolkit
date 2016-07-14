@@ -2,12 +2,12 @@
   <h1><span class="title-category">Helper:</span> Format Number</h1>
 </header>
 
-<h2>Numbers</h2>
-
+{{#each formats as |format|}}
+<h2>{{format.name}}</h2>
 <div class="example">
   <table>
     <tr><th>original</th><th>format</th><th>Places</th><th>SigFigs</th><th>Output</th><th>generated formulae</th></tr>
-    {{#each numberExamples as |example|}}
+    {{#each format.examples as |example|}}
     <tr>
       <td>{{example.original}}</td>
       <td>{{example.format}}</td>
@@ -27,48 +27,4 @@
   </tr>
 </table>
 </div>
-
-<h2>Integers</h2>
-
-<div class="example">
-  <ul>
-    <li>Integer: {{format-number 'integer' 3.5}}  {{formulae4}}</li>
-    <li>Integer: {{format-number 'integer' 31235134.123}} {{formulae5}}</li>
-    <li>Integer: {{format-number 'integer' 31235134.123 sigfigs=4}} {{formulae6}}</li>
-  </ul>
-</div>
-
-<h2>Currency</h2>
-
-<div class="example">
-  <table>
-    <tr><th>original</th><th>format</th><th>Places</th><th>SigFigs</th><th>Output</th><th>generated formulae</th></tr>
-    {{#each currencyExamples as |example|}}
-    <tr>
-      <td>{{example.original}}</td>
-      <td>{{example.format}}</td>
-      <td>{{example.places}}</td>
-      <td>{{example.sigfigs}}</td>
-      <td>{{format-number example.format example.original places=example.places sigfigs=example.sigfigs}}</td>
-      <td><textarea>{{example.equation}}</textarea></td>
-  </tr>
-  {{/each}}
-  <tr>
-    <td>{{input type='number' value=(mut thisExample.original)}}</td>
-    <td>{{input value=thisExample.format}}</td>
-    <td>{{input type='number' value=thisExample.places}}</td>
-    <td>{{input type='number' value=(mut thisExample.sigfigs)}}</td>
-    <td>{{format-number thisExample.format thisExample.original places=thisExample.places sigfigs=thisExample.sigfigs}}</td>
-    <td><textarea>{{concat "{{format-number '" thisExample.format "' places="thisExample.places " Sigfigs="thisExample.sigfigs }}</textarea></td>
-  </tr>
-</table>
-</div>
-
-<h2>Percentage</h2>
-
-<div class="example">
-    <ul>
-      <li>Percentage: {{format-number 'percentage' 0.547}}{{formulae8}}</li>
-      <li>Percentage, 1 place: {{format-number 'percentage' 0.547 places=1}}{{formulae9}}</li>
-    </ul>
-</div>
+{{/each}}
