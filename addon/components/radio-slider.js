@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     var radioWrapperLength = this.$('.radio-wrapper label').length;
     var labelWidth = this.$('label').outerWidth();
     var labelHeight = this.$('label').outerHeight();
-    radioWrapper.width(labelWidth * radioWrapperLength + 1);
+    radioWrapper.width(labelWidth * radioWrapperLength);
     radioWrapper.height(labelHeight);
     checkboxBox.height(labelHeight);
   }
