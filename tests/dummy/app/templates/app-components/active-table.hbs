@@ -4,12 +4,12 @@
 
 <p>Like a normal table, but the columns are sortable.</p>
 
-{{#active-table columns=headers sortedBy=sort}}
-  {{#each data as |person|}}
+{{#active-table columns=tableColumns sortedBy=sort}}
+  {{#each tableContent as |person|}}
     <tr>
-      <td>{{person.name}}</td>
+      <td>{{person.letters}}</td>
       <td>{{person.dob}}</td>
-      <td>{{person.comments}}</td>
+      <td>{{person.numbers}}</td>
     </tr>
   {{/each}}
 {{/active-table}}

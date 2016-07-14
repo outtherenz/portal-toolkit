@@ -1,36 +1,48 @@
 import Ember from 'ember';
 
-const { Controller } = Ember;
+const { Controller, computed } = Ember;
 
 export default Controller.extend({
   sort: [ 'name:asc' ],
 
-  headers: [{
-    name: 'Name',
-    key: 'name',
-    width: 3
-  }, {
-    name: 'Date of birth',
-    key: 'dob',
-    width: 2
-  }, {
-    name: 'Comments',
-    key: 'comment',
-    width: 5
-  }],
+  tableColumns: computed(function() {
+    const columns = [{
+      name: 'letters',
+      key: 'letters',
+      width: 3
+    }, {
+      name: 'Dates',
+      key: 'dob',
+      width: 2
+    }, {
+      name: 'Numers',
+      key: 'numbers',
+      width: 5
+    }]
+    return columns;
+
+  }),
 
   data: [{
-    name: 'Joe Bloggs',
+    letters: 'a',
     dob: new Date('1984-05-21'),
-    comments: 'Lorem ipsum dolor sit amet, veniam quasi enim nostrum, molestiae suscipit blanditiis.'
+    numbers: '1'
   }, {
-    name: 'Jane Clive',
+    letters: 'A',
     dob: new Date('1987-02-11'),
-    comments: 'Veniam quasi enim nostrum, lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+    numbers: '2'
   }, {
-    name: 'Joe Bloggs',
-    dob: new Date('1984-05-21'),
-    comments: 'Consectetur adipisicing elit. Veniam quasi enim nostrum, molestiae suscipit blanditiis.'
+    letters: 'b',
+    dob: new Date('1986-03-22'),
+    numbers: '12'
+  }, {
+    letters: 'B',
+    dob: new Date('1987-02-10'),
+    numbers: '01'
+  }, {
+    letters: 'ab',
+    dob: new Date('1983-04-20'),
+    numbers: '02'
   }],
 
   tableContent: Ember.computed.sort('data', 'sort')
