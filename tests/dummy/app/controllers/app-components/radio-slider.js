@@ -15,7 +15,7 @@ export default Controller.extend({
     { label: '5', value: '5' },
     { label: '6', value: '6' }
   ],
-  codeSnippet: "{{radio-slider options=radioContent selected=periodType}}",
+  codeSnippet: '{{radio-slider options=radioContent selected=periodType}}',
   periodType1: 'month',
   periodType2: '4'
 

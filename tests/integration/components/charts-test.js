@@ -1002,7 +1002,7 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true 
         __v: 0
       }
     }];
-    const period = {start: '2016-03', end: '2016-03', type: month};
+    const period = {start: '2016-03', end: '2016-03', type: 'month'};
     const series = [
       {
         name: 'Branch 01',

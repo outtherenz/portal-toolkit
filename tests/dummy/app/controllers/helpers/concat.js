@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Controller, computed } = Ember;
+const { Controller } = Ember;
 
 export default Controller.extend({
   word1: 'test word 1',
