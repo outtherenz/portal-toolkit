@@ -11,8 +11,12 @@ export default Ember.Component.extend({
     this.set('generator', Math.floor(Math.random() * (999 - 1) + 1));
     // dimensions //
     var radioWrapper = this.$('.radio-wrapper');
+    var checkboxBox = this.$('.radio-box');
     var radioWrapperLength = this.$('.radio-wrapper label').length;
     var labelWidth = this.$('label').outerWidth();
-    radioWrapper.width(labelWidth * radioWrapperLength - 1);
+    var labelHeight = this.$('label').outerHeight();
+    radioWrapper.width(labelWidth * radioWrapperLength + 1);
+    radioWrapper.height(labelHeight);
+    checkboxBox.height(labelHeight);
   }
 });

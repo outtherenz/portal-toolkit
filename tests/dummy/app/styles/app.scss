@@ -341,22 +341,17 @@ code {
   margin: 0;
 }
 
-.checkbox-box {
+.radio-box {
   display: inline-flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 14px;
-  font-size: 14px;
-  line-height: 14px;
   color: black;
   label {
+    overflow: hidden;
     cursor: pointer;
     width: 100%;
     text-align: center;
-    vertical-align: middle;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 19px;
+    padding: 0 15px 0 15px;
     -webkit-transition: all 0.05s ease-in-out;
     -moz-transition: all 0.05s ease-in-out;
     -o-transition: all 0.05s ease-in-out;
