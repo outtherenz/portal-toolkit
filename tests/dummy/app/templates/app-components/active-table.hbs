@@ -2,7 +2,8 @@
   <h1><span class="title-category">Component:</span> Active Table</h1>
 </header>
 
-<p>Like a normal table, but the columns are sortable.</p>
+<p>like a normal table, but the columns are sortable.</p>
+<p>NB: Has Issues if numbers are passed in as Strings,</p>
 
 {{#active-table columns=tableColumns sortedBy=sort}}
   {{#each tableContent as |item|}}
@@ -10,6 +11,7 @@
       <td>{{item.letters}}</td>
       <td>{{item.dates}}</td>
       <td>{{item.numbers}}</td>
+      <td>{{item.numbersAsStrings}}</td>
     </tr>
   {{/each}}
 {{/active-table}}
@@ -19,7 +21,8 @@
   tr
    td\{{item.letters}}/td
      td\{{item.dates}}/td
-    td\{{item.numbers}}/td
+     td\{{item.numbers}}/td
+    td\{{item.numbersAsStrings}}/td
   /tr
   \{{/each}}
 \{{/active-table}}</textarea>
