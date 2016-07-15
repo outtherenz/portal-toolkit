@@ -3,8 +3,9 @@ import Ember from 'ember';
 const { Controller } = Ember;
 
 export default Controller.extend({
+  closebraces: '}}',
   formats: [
-    {name: 'Number Examples',
+    {name: 'Number',
       examples: [
         {
           original: 12345.6789,
@@ -49,7 +50,7 @@ export default Controller.extend({
           sigfigs: 5,
           equation: "{{format-number 'number' 12345.6789 sigfigs=5 places=5}}"
         }
-      ]},  {name: 'Percentage Examples', examples: [
+      ]},  {name: 'Percentage', examples: [
         {
           original: 12345.6789,
           format: 'percentage',
@@ -92,7 +93,7 @@ export default Controller.extend({
           places: 5,
           sigfigs: 5,
           equation: "{{format-number 'percentage' 12345.6789 sigfigs=5 places=5}}"
-        }]},  {name: 'integer Examples', examples: [
+        }]},  {name: 'Integer', examples: [
           {
             original: 12345.6789,
             format: 'integer',
@@ -137,7 +138,7 @@ export default Controller.extend({
             equation: "{{format-number 'integer' 12345.6789 sigfigs=5 places=5}}"
           }]
         }, {
-          name: 'Currency Examples', examples: [
+          name: 'Currency', examples: [
             {
               original: 12345.6789,
               format: 'currency',
