@@ -25,27 +25,27 @@ export default Controller.extend({
 
   data: [{
     letters: 'a',
-    dob: new Date('1984-05-21'),
+    dates: new Date('1984-05-21'),
     numbers: '1'
   }, {
     letters: 'A',
-    dob: new Date('1987-02-11'),
+    dates: new Date('1987-02-11'),
     numbers: '2'
   }, {
     letters: 'a',
-    dob: new Date('1987-02-12'),
+    dates: new Date('1987-02-12'),
     numbers: '2'
   }, {
     letters: 'b',
-    dob: new Date('1986-03-22'),
+    dates: new Date('1986-03-22'),
     numbers: '12'
   }, {
     letters: 'B',
-    dob: new Date('1987-02-10'),
+    dates: new Date('1987-02-10'),
     numbers: '01'
   }, {
     letters: 'ab',
-    dob: new Date('1983-04-20'),
+    dates: new Date('1983-04-20'),
     numbers: '02'
   }],
 

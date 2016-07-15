@@ -5,11 +5,21 @@
 <p>Like a normal table, but the columns are sortable.</p>
 
 {{#active-table columns=tableColumns sortedBy=sort}}
-  {{#each tableContent as |person|}}
+  {{#each tableContent as |item|}}
     <tr>
-      <td>{{person.letters}}</td>
-      <td>{{person.dob}}</td>
-      <td>{{person.numbers}}</td>
+      <td>{{item.letters}}</td>
+      <td>{{item.dates}}</td>
+      <td>{{item.numbers}}</td>
     </tr>
   {{/each}}
 {{/active-table}}
+
+<textarea>\{{#active-table columns=tableColumns sortedBy=sort}}
+\{{#each tableContent as |item|}}
+  tr
+   td\{{item.letters}}/td
+     td\{{item.dates}}/td
+    td\{{item.numbers}}/td
+  /tr
+  \{{/each}}
+\{{/active-table}}</textarea>
