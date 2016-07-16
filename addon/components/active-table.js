@@ -1,11 +1,13 @@
 import Ember from 'ember';
 import layout from '../templates/components/active-table';
 
-const { Component, computed, Object: EObject, get, set } = Ember;
-
-/*
-width attribute on each column must be a number and applies as a ratio in a flex box
-*/
+const {
+  Component,
+  computed,
+  Object: EObject,
+  get,
+  set
+} = Ember;
 
 export default Component.extend({
   layout,
