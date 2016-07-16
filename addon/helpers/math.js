@@ -21,7 +21,7 @@ function parseOperand(value) {
   }
 
   if (value !== Infinity) {
-    value = parseInt(value, 10);
+    value = parseFloat(value, 10);
   }
 
   return value;
