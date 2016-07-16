@@ -13,12 +13,8 @@
     "lodash": "4.6",
     "c3": "~0.4.10",
     "neat": "^1.8.0",
-    "nestedSortable": "https://raw.githubusercontent.com/mjsarfatti/nestedSortable/2.0alpha/jquery.mjs.nestedSortable.js",
     "papaparse": "~4.1.1",
-    "showdown": "~1.2.3",
-    "socket.io-client": "~1.3.5",
     "sortable": "RubaXa/Sortable",
-    "Stickyfill": "~1.1.2",
     "pretender": "~0.12.0",
     "Faker": "~3.0.0"
   }
