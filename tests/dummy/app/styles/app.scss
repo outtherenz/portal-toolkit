@@ -262,10 +262,10 @@ code {
 .page-description {
   border: 1px solid $border-color;
   background-color: $off-white;
-  position: absolute;
+  position: fixed;
   width: $page-description-width;
   padding: 15px;
-  top: 275px;
+  top: 135px;
   right: -$page-description-width;
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
