@@ -31,12 +31,12 @@ describeComponent('radio-slider', 'Integration: RadioSliderComponent', { integra
     this.set('periodType', periodType);
 
     this.render(hbs` {{radio-slider options=radioContent selected=periodType}}`);
-    this.$('#ytd').click();
-    this.$('#min').click();
-    this.$('#day').click();
+    this.$("input[value='ytd']").next().click();
+    this.$("input[value='min']").next().click();
+    this.$("input[value='day']").next().click();
     expect(this.get('periodType')).to.equal('day');
 
-    this.$('#hour').click();
+    this.$("input[value='hour']").next().click();
     expect(this.get('periodType')).to.equal('hour');
   });
   it('initial value is initial value', function() {
@@ -86,10 +86,10 @@ describeComponent('radio-slider', 'Integration: RadioSliderComponent', { integra
     `);
     expect(this.get('periodType')).to.equal('day');
     expect(this.get('secondaryType')).to.equal('dayTest');
-    this.$('#min').click();
+    this.$("input[value='min']").next().click();
     expect(this.get('periodType')).to.equal('min');
     expect(this.get('secondaryType')).to.equal('dayTest');
-    this.$('#monthTest').click();
+    this.$("input[value='monthTest']").next().click();
     expect(this.get('periodType')).to.equal('min');
     expect(this.get('secondaryType')).to.equal('monthTest');
   });
