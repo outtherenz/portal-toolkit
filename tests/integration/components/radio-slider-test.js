@@ -1,33 +1,29 @@
 import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
+import {beforeEach} from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent('radio-slider', 'Integration: RadioSliderComponent', { integration: true }, function() {
-  it('renders', function() {
+  beforeEach(function() {
     var radioContent = [
-     { label: 'Month', value: 'month' },
-     { label: 'YTD', value: 'ytd' }
+      { label: 'Minutes', value: 'min' },
+      { label: 'Hours', value: 'hour' },
+      { label: 'Days', value: 'day' },
+      { label: 'Weeks', value: 'week' },
+      { label: 'Month', value: 'month' },
+      { label: 'YTD', value: 'ytd' }
     ];
-    var periodType = 'month';
     this.set('radioContent', radioContent);
-
+  });
+  it('renders', function() {
+    var periodType = 'month';
     this.set('periodType', periodType);
 
     this.render(hbs` {{radio-slider options=radioContent selected=periodType}}`);
-    expect(this.$('.radio-wrapper')).to.have.lengthOf(1);
+    expect(this.$('.radio-wrapper .radio-box .ember-view')).to.have.lengthOf(6);
   });
   it('clicking stuff works', function() {
-    var radioContent = [
-     { label: 'Minutes', value: 'min' },
-     { label: 'Hours', value: 'hour' },
-     { label: 'Days', value: 'day' },
-     { label: 'Weeks', value: 'week' },
-     { label: 'Month', value: 'month' },
-     { label: 'YTD', value: 'ytd' }
-    ];
     var periodType = 'month';
-    this.set('radioContent', radioContent);
-
     this.set('periodType', periodType);
 
     this.render(hbs` {{radio-slider options=radioContent selected=periodType}}`);
@@ -59,14 +55,6 @@ describeComponent('radio-slider', 'Integration: RadioSliderComponent', { integra
     expect(this.get('periodType')).to.equal('day');
   });
   it('two sliders work on one page', function() {
-    var radioContent = [
-     { label: 'Minutes', value: 'min' },
-     { label: 'Hours', value: 'hour' },
-     { label: 'Days', value: 'day' },
-     { label: 'Weeks', value: 'week' },
-     { label: 'Month', value: 'month' },
-     { label: 'YTD', value: 'ytd' }
-    ];
     var secondaryContent = [
      { label: 'MinutesTest', value: 'minTest' },
      { label: 'HoursTest', value: 'hourTest' },
@@ -77,7 +65,6 @@ describeComponent('radio-slider', 'Integration: RadioSliderComponent', { integra
     ];
     var periodType = 'day';
     var secondaryType = 'dayTest';
-    this.set('radioContent', radioContent);
     this.set('periodType', periodType);
     this.set('secondaryContent', secondaryContent);
     this.set('secondaryType', secondaryType);

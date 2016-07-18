@@ -1054,7 +1054,8 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true 
 
   it('renders data-table component', function() {
     this.render(hbs`{{charts/data-table series=series thisData=data metrics=metrics period=period}}`);
-    expect(this.$('.data-table')).to.have.lengthOf(1);
+    expect(this.$('table tr td').text()).to.equal('Sales');
+    expect(this.$('table tr td').next().text()).to.equal('');
   });
 
   it('renders line-chart component', function() {
@@ -1065,6 +1066,6 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true 
 
   it('renders pie-chart component', function() {
     this.render(hbs`{{charts/pie-chart series=series thisData=data metrics=metrics period=period}}`);
-    expect(this.$('.c3-arc')).to.have.lengthOf(1);
+    expect(this.$('.c3-arc-Sales')).to.have.lengthOf(1);
   });
 });
