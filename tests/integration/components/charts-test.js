@@ -999,10 +999,10 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true 
         isHeading: true,
         status: 'ACTIVE',
         format: 'CURRENCY',
-        __v: 0
+        __V: 0
       }
     }];
-    const period = {start: '2016-03', end: '2016-03', type: 'month'};
+    const period = {start: '2015-03', end: '2016-03', type: 'month'};
     const series = [
       {
         name: 'Branch 01',
@@ -1052,11 +1052,6 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true 
     this.set('series', series);
   });
 
-  it('renders test page', function() {
-    this.render(hbs`{{charts}}`);
-    expect(this.$()).to.have.lengthOf(1);
-  });
-
   it('renders data-table component', function() {
     this.render(hbs`{{charts/data-table series=series thisData=data metrics=metrics period=period}}`);
     expect(this.$('.data-table')).to.have.lengthOf(1);
@@ -1064,7 +1059,8 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true 
 
   it('renders line-chart component', function() {
     this.render(hbs`{{charts/line-chart series=series thisData=data metrics=metrics period=period}}`);
-    expect(this.$('.line-chart')).to.have.lengthOf(1);
+    expect(this.$('.c3-event-rect-11')).to.have.lengthOf(1);
+    expect(this.$('.c3-event-rect-13')).to.not.have.lengthOf(1);
   });
 
   it('renders pie-chart component', function() {
