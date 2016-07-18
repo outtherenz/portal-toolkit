@@ -4,7 +4,7 @@ import {beforeEach} from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent('charts', 'Integration: ChartsComponent', { integration: true }, function() {
-  beforeEach(function specialstuff() {
+  beforeEach(function() {
     const metrics = [{
       metric: '5760a0026a2fdd76101ea43c',
       series: [{

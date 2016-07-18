@@ -54,6 +54,8 @@ describeComponent('radio-slider', 'Integration: RadioSliderComponent', { integra
     this.set('periodType', periodType);
 
     this.render(hbs` {{radio-slider options=radioContent selected=periodType}}`);
+    expect(this.$("input[value='day']")).to.be.checked;
+    expect(this.$("input[value='month']")).to.not.be.checked;
     expect(this.get('periodType')).to.equal('day');
   });
   it('two sliders work on one page', function() {
