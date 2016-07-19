@@ -35,7 +35,7 @@ describeComponent('sortable-list', 'Integration: SortableListComponent', { integ
     expect(this.$('ol li:nth-child(5)').text()).to.equal('janyk');
     expect(this.$('ol li:nth-child(6)').text()).to.equal('steve');
   });
-  it('works as expected when not supplied with a name value', function() {
+  it('works as expected when not supplied with a property value', function() {
     this.render(hbs`{{sortable-list content=content class="testClass"}}`);
     expect(this.$('.testClass li')).to.have.lengthOf(6);
     expect(this.$('ol.testClass li:nth-child(1)').text()).to.equal('');
@@ -48,5 +48,68 @@ describeComponent('sortable-list', 'Integration: SortableListComponent', { integ
   it('works as expected when not supplied with content', function() {
     this.render(hbs`{{sortable-list property='name' class="testClass"}}`);
     expect(this.$('.testClass li')).to.have.lengthOf(0);
+  });
+  it('works as expected when supplied with valueless content', function() {
+    var testcontent = [
+      { name: 'john' },
+      { name: 'ben' },
+      { name: 'janyk' },
+      { name: 'greg' },
+      { name: 'fraser' },
+      { name: 'steve' }
+    ];
+    this.set('testcontent', testcontent);
+    this.render(hbs`{{sortable-list content=testcontent property='name' class="testClass"}}`);
+    expect(this.$('.testClass li')).to.have.lengthOf(6);
+    expect(this.$('ol.testClass li:nth-child(1)').text()).to.equal('john');
+    expect(this.$('ol.testClass li:nth-child(2)').text()).to.equal('ben');
+    expect(this.$('ol.testClass li:nth-child(3)').text()).to.equal('janyk');
+    expect(this.$('ol.testClass li:nth-child(4)').text()).to.equal('greg');
+    expect(this.$('ol.testClass li:nth-child(5)').text()).to.equal('fraser');
+    expect(this.$('ol.testClass li:nth-child(6)').text()).to.equal('steve');
+  });
+  it('works as expected when supplied with nameless content', function() {
+    var testcontent = [
+      { value: '1' },
+      { value: '2' },
+      { value: '3' },
+      { value: '4' },
+      { value: '5' },
+      { value: '6' }
+    ];
+    this.set('testcontent', testcontent);
+    this.render(hbs`{{sortable-list content=testcontent property='name' class="testClass"}}`);
+    expect(this.$('.testClass li')).to.have.lengthOf(6);
+    expect(this.$('ol.testClass li:nth-child(1)').text()).to.equal('');
+    expect(this.$('ol.testClass li:nth-child(2)').text()).to.equal('');
+    expect(this.$('ol.testClass li:nth-child(3)').text()).to.equal('');
+    expect(this.$('ol.testClass li:nth-child(4)').text()).to.equal('');
+    expect(this.$('ol.testClass li:nth-child(5)').text()).to.equal('');
+    expect(this.$('ol.testClass li:nth-child(6)').text()).to.equal('');
+  });
+  it('works as expected when supplied with mixed content', function() {
+    var testcontent = [
+      { name: 'john' },
+      { value: '2' },
+      { name: 'greg' },
+      { value: '4' },
+      { name: 'janyk', value: '5' },
+      { name: 'steve', value: '6' }
+    ];
+    this.set('testcontent', testcontent);
+    this.render(hbs`{{sortable-list content=testcontent property='name' class="testClass"}}`);
+    expect(this.$('.testClass li')).to.have.lengthOf(6);
+    expect(this.$('ol.testClass li:nth-child(1)').text()).to.equal('john');
+    expect(this.$('ol.testClass li:nth-child(2)').text()).to.equal('');
+    expect(this.$('ol.testClass li:nth-child(3)').text()).to.equal('greg');
+    expect(this.$('ol.testClass li:nth-child(4)').text()).to.equal('');
+    expect(this.$('ol.testClass li:nth-child(5)').text()).to.equal('janyk');
+    expect(this.$('ol.testClass li:nth-child(6)').text()).to.equal('steve');
+  });
+  it.skip('failing test with draggable', function() {
+    this.render(hbs`{{sortable-list content=content property='name' class="testClass"}}`);
+    expect(this.$('.testClass li')).to.have.lengthOf(6);
+    this.$('ol.testClass li:nth-child(1)').mousedown;
+    expect(this.$('ol.testClass li:nth-child(1)').text()).to.equal('draggable');
   });
 });
