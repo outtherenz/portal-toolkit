@@ -44,10 +44,10 @@ main {
 
   @include outer-container;
 
-  .limit-large  { max-width: 1024px - 50px; }
+  .limit-large { max-width: 1024px - 50px; }
   .limit-medium { max-width: 1024px - 250px; }
-  .limit-small  { max-width: 1024px - 450px; }
-  .limit-tiny   { max-width: 1024px - 650px; }
+  .limit-small { max-width: 1024px - 450px; }
+  .limit-tiny { max-width: 1024px - 650px; }
 }
 
 [class^=grid-] {
@@ -141,7 +141,7 @@ main {
 
         &::after {
           content: '';
-          wdith: 0;
+          width: 0;
           height: 0;
           position: absolute;
           right: 0;
