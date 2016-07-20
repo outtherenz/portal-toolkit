@@ -11,16 +11,19 @@ Stylesheet: Animations
 
 @include keyframes(shake) {
   0% {
-    @include transform(translateX(0px));
+    @include transform(translateX(0));
   }
+
   25% {
     @include transform(translateX(-8px));
   }
+
   75% {
     @include transform(translateX(8px));
   }
+
   100% {
-    @include transform(translateX(0px));
+    @include transform(translateX(0));
   }
 }
 
@@ -28,6 +31,7 @@ Stylesheet: Animations
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 100%;
   }
@@ -36,14 +40,16 @@ Stylesheet: Animations
 @include keyframes(loadingCircle) {
   0% {
     opacity: 1;
-    r: 0;
+    // r: 0;
   }
+
   25% {
     opacity: 0.9;
   }
+
   60% {
     opacity: 0;
-    r: 44;
+    // r: 44;
   }
 }
 
@@ -51,6 +57,7 @@ Stylesheet: Animations
   from {
     @include transform(rotate(0deg));
   }
+
   to {
     @include transform(rotate(360deg));
   }
@@ -64,13 +71,13 @@ NOTIFICATIONS
 
 @include keyframes(notification-show) {
   0% {
-    opacity: 0;
     @include transform(perspective(450px) translate(0, -30px) rotateX(90deg));
+    opacity: 0;
   }
 
   100% {
-    opacity: 1;
     @include transform(perspective(450px) translate(0, 0) rotateX(0deg));
+    opacity: 1;
   }
 }
 
@@ -78,17 +85,17 @@ NOTIFICATIONS
 
 @include keyframes(notification-shrink) {
   0% {
+    @include transform(scale(.8));
     opacity: 0;
     max-height: 35px;
     margin-bottom: 0.5em;
-    @include transform(scale(.8));
   }
 
   100% {
+    @include transform(scale(.8));
     opacity: 0;
     max-height: 0;
     margin-bottom: 0;
-    @include transform(scale(.8));
   }
 }
 
@@ -96,13 +103,13 @@ NOTIFICATIONS
 
 @include keyframes(notification-hide) {
   0% {
-    opacity: 1;
     @include transform(scale(1));
+    opacity: 1;
   }
 
   100% {
-    opacity: 0;
     @include transform(scale(.8));
+    opacity: 0;
   }
 }
 
