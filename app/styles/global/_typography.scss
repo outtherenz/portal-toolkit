@@ -22,9 +22,17 @@ GENERIC
 *******************/
 
 // Text alignment
-.text-left   { text-align: left; }
-.text-center { text-align: center; }
-.text-right  { text-align: right; }
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
 
 // Placeholders
 .placeholder {
@@ -67,9 +75,9 @@ h6, .h6 {
 h1, .h1 { font-size: 200%; }
 h2, .h2 { font-size: 180%; }
 h3, .h3 { font-size: 150%; }
-h4, .h4 {}
-h5, .h5 {}
-h6, .h6 {}
+// h4, .h4 {}
+// h5, .h5 {}
+// h6, .h6 {}
 
 .subtitle {
   color: $subdued;
@@ -98,28 +106,28 @@ body {
   color: $copy-color;
   word-wrap: break-word;
 }
-p {}
+// p {}
 
 // Lists
-ul, ol {}
+// ul, ol {}
 li > ul,
 li > ol {
   margin-top: 0;
   margin-bottom: 0;
 }
-li {}
-dl {
-}
+// li {}
+// dl {}
 dt {
   font-weight: bold;
 }
+
 dd {
   margin: 0 0 $gutter;
 }
 
 // Quotes
-blockquote {}
-q {}
+// blockquote {}
+// q {}
 
 header > h1:first-child:last-child,
 header > h2:first-child:last-child,
