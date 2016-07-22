@@ -15,12 +15,15 @@
       padding-left: $gutter;
       margin-left: (-$gutter);
     }
+
     &:nth-of-type(2) {
       padding-right: 0.45em;
     }
+
     &:nth-of-type(3) {
       padding-left: 0.45em;
     }
+
     &:nth-of-type(4) {
       padding-right: $gutter;
       margin-right: (-$gutter);

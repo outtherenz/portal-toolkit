@@ -28,7 +28,8 @@ form:not(.plain) {
     background-color: white;
   }
 }
-fieldset {}
+
+// fieldset {}
 
 .permissions-description {
   font-weight: bold;
@@ -43,26 +44,30 @@ fieldset {}
 
   margin-bottom: $gutter / 2;
 }
+
 .description {
   flex-grow: 1;
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
 .ember-select-guru {
   width: grid-width(5.9);
   float: left;
   text-align: left;
+
+  .inline {
+    float: none;
+    display: inline-block;
+  }
 }
-.ember-select-guru.inline {
-  float: none;
-  display: inline-block;
-}
+
 .ember-select-guru__container {
   position: relative;
   border-radius: 0;
   overflow: visible;
   background-color: white;
-  margin: -1px -1px 0 -1px;
+  margin: -1px -1px 0;
 }
 
 .ember-select-guru__trigger {
@@ -86,17 +91,18 @@ fieldset {}
     overflow-y: auto;
     position: absolute;
     top: 28px;
-    bottom: 0px;
+    bottom: 0;
     left: 0;
     right: 0;
+
     .is-active {
-      background: #dfdfdf
+      background: #dfdfdf;
     }
   }
 }
 
 .ember-select-guru__search {
-  border-width: 0 0 1px 0;
+  border-width: 0 0 1px;
   padding: 0.5em 1em;
 
   &:focus {
@@ -124,6 +130,12 @@ label {
   input[type=radio],
   input[type=checkbox] {
     margin: 0 0.5em 0 0;
+  }
+
+  .replace-file-input {
+    @include button($button-secondary);
+    float: none;
+    vertical-align: middle;
   }
 
   &.fluid {
@@ -179,6 +191,7 @@ textarea {
     }
   }
 }
+
 input[type=radio],
 input[type=checkbox] {
   font-size: 16px; // Enlarges the checkbox slightly
@@ -187,31 +200,25 @@ input[type=checkbox] {
   cursor: pointer;
 
   &:focus {
-    border: none;
+    border: 0;
     box-shadow: none;
   }
 }
+
 input[type=file] {
   width: auto;
   max-width: 100%;
-  border: none;
+  border: 0;
   line-height: 0;
   padding: 7px 0 23px; // So many magic numbers :(
 
   &:focus {
-    border: none;
+    border: 0;
     box-shadow: none;
     outline: none;
   }
 }
-label.replace-file-input {
-  @include button($button-secondary);
-  float: none;
-  vertical-align: middle;
-}
-label.replace-file-input + input[type=file] {
-  display: none;
-}
+
 textarea {
   resize: vertical;
 }
@@ -223,15 +230,20 @@ input.formatted {
 select[multiple] {
   width: auto;
   height: 250px;
+
+  option {
+    padding: 0.2em 0.5em;
+    font-size: inherit;
+  }
+
+  optgroup {
+    padding: 0.2em 0.5em;
+    margin-bottom: 0.5em;
+  }
 }
-select[multiple] option {
-  padding: 0.2em 0.5em;
-  font-size: inherit;
-}
-select[multiple] optgroup {
-  padding: 0.2em 0.5em;
-  margin-bottom: 0.5em;
-}
+
+select[multiple]
+
 /* input[type=number] {
   width: 50px;
 } */

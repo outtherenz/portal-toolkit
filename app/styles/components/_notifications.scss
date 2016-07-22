@@ -56,7 +56,7 @@ Stylesheet: Notifications
 
   &.warning { background-color: $alert-amber; }
   &.success { background-color: $alert-green; }
-  &.error   { background-color: $alert-red; }
+  &.errorq { background-color: $alert-red; }
 
   &.in {
     @include animation(notification-show 180ms cubic-bezier(.175, .885, .32, 1.27499));

@@ -1,4 +1,4 @@
-/******************************************************************
+  /******************************************************************
 Site Name: Portal
 Author: Carl Bennett <carlbennettnz@gmail.com>
 
@@ -8,6 +8,11 @@ Stylesheet: Modals
 .ember-modal-overlay {
   display: flex;
   justify-content: center;
+
+  .translucent {
+    background-color: rgba(#222, 0.5);
+    @include animation(fadeIn 0.25s);
+  }
 }
 
 .ember-modal-dialog {
@@ -19,11 +24,6 @@ Stylesheet: Modals
   margin: 0 auto;
   position: static;
   @include animation(modal-appear 0.2s ease-in);
-}
-
-.ember-modal-overlay.translucent {
-  background-color: rgba(#222, 0.5);
-  @include animation(fadeIn 0.25s);
 }
 
 @include keyframes(modal-appear) {
