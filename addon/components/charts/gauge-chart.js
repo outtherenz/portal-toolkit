@@ -47,11 +47,7 @@ export default C3Chart.extend({
         show: true // to turn off the min/max labels.
     },
     min: 50, // 0 is default, //can handle negative min e.g. vacuum / voltage / current flow / rate of change
-    max: computed('target', function() {
-      const target = get(this, 'target');
-      console.log(target);
-      return target.value
-    }), // 100 is default
+    max: 150, // 100 is default
     units: ' %',
     width: 36 // for adjusting arc thickness
   },
@@ -59,8 +55,8 @@ export default C3Chart.extend({
     pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
     threshold: {
       unit: 'value', // percentage is default
-      max: 200, // 100 is default
-      values: [50, 83, 116, 150]
+      max: 150, // 100 is default
+      values: [70, 90, 110, 130]
     }
   },
   legend: { position: 'right' }
