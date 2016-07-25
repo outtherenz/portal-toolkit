@@ -1,20 +1,27 @@
 import Ember from 'ember';
 
-const { Controller } = Ember;
+const {
+  Controller,
+  inject: { service },
+  get,
+  set,
+  $
+} = Ember;
 
 export default Controller.extend({
-  isSaving: false,
-  buttonCode1: "{{loading-button action='save' isLoading=isSaving isDisabled=false}}",
-  buttonCode2: "{{loading-button action='save' isLoading=isSaving isDisabled=true}}",
-  buttonCode3: "{{#loading-button action='save' isLoading=isSaving isDisabled=false}} test {{/loading-button}}",
-  example: '{{#loading-button}} test {{/loading-button}}',
-
+  notifications: service(),
   actions: {
-    save() {
-      this.set('isSaving', true);
+    notifyError() {
+      get(this, 'notifications').error('Error');
     },
-    reset() {
-      this.set('isSaving', false);
+    notifysuccess() {
+      get(this, 'notifications').success('Success');
+    },
+    notifyInfo() {
+      get(this, 'notifications').info('Info');
+    },
+    notifyWarning() {
+      get(this, 'notifications').warning('Warning');
     }
   }
 });

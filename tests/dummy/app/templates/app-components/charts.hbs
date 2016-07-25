@@ -5,19 +5,19 @@
 <div class='component-box'>
 <h2><span class="title-category">Component:</span> Data Table</h2>
   {{charts/data-table series=series thisData=data metrics=metrics2 period=period}}
-  <p>{charts/data-table series=series thisData=data metrics=metrics2 period=period}</p>
+  <p>"\{{charts/data-table series=series thisData=data metrics=metrics2 period=period}}"</p>
 </div>
 
 <div class='component-box'>
 <h2><span class="title-category">Component:</span> Line Chart</h2>
 {{charts/line-chart series=series thisData=data metrics=metrics1 period=period}}
-<p>"{ {charts/line-chart series=series thisData=data metrics=metrics1 period=period} }"</p>
+<p>"\{{charts/line-chart series=series thisData=data metrics=metrics1 period=period}}"</p>
 </div>
 
 <div class='component-box'>
 <h2><span class="title-category">Component:</span> Pie Chart</h2>
 {{charts/pie-chart series=series thisData=data metrics=metrics2 period=period}}
-<p>"{ {charts/pie-chart series=series thisData=data metrics=metrics2 period=period} }"</p>
+<p>"\{{charts/pie-chart series=series thisData=data metrics=metrics2 period=period}}"</p>
 </div>
 
 <div class='component-box'>
@@ -33,5 +33,6 @@
   <h1>Pie Chart</h1>
   <p>pie charts take the normal chart input and formats it into a pie chart with up to ten colours, also automatically catches values of the wrong polarity or empty values</p>
   <h1>Gauge Chart</h1>
-  <p>Gauge charts take the normal chart input and formats it into a gauge chart, taking only the first value.</p>
+  <p>Gauge charts take the normal chart input and formats it into a gauge chart, taking only the first value.
+    At the moment it gives a measurement between 50-150 as targets have not been implemented</p>
 {{/page-description}}
