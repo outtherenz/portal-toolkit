@@ -23,10 +23,8 @@
 <div class='component-box'>
 <h2><span class="title-category">Component:</span> gauge Chart</h2>
 {{charts/gauge-chart series=series target=100 metrics=metrics2 period=period}}
-<!-- <p>"{ {charts/gauge-chart series=series target=thisTarget metrics=metrics2 period=period} }"</p> -->
+<p>"\{{charts/gauge-chart series=series target=100 metrics=metrics2 period=period}}"</p>
 </div>
-{{input type='range' min='-125' max='125' value= metrics2.[0].series.[0].periods.[0].periodTypes.[month].value class='slider'}}
-{{input value= metrics2.[0].series.[0].periods.[0].periodTypes.month.value}}
 {{#page-description title='Charts'}}
   <h1>Data Chart</h1>
   <p>Data charts take the normal chart input and format into a table</p>
