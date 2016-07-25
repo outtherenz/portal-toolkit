@@ -1014,7 +1014,7 @@ export default Controller.extend({
         organisation: '576090186a2fdd76101ea426',
         periodTypes: {
           month: {
-            value: 318775.577602233,
+            value: 95,
             isManual: false,
             mapsUsed: []
           },

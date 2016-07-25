@@ -20,11 +20,19 @@
 <p>"{ {charts/pie-chart series=series thisData=data metrics=metrics2 period=period} }"</p>
 </div>
 
+<div class='component-box'>
+<h2><span class="title-category">Component:</span> gauge Chart</h2>
+{{charts/gauge-chart series=series target=100 metrics=metrics2 period=period}}
+<!-- <p>"{ {charts/gauge-chart series=series target=thisTarget metrics=metrics2 period=period} }"</p> -->
+</div>
+
 {{#page-description title='Charts'}}
   <h1>Data Chart</h1>
   <p>Data charts take the normal chart input and format into a table</p>
   <h1>Line Chart</h1>
   <p>Line charts take the normal chart input and format into a pretty line chart with ten colours</p>
   <h1>Pie Chart</h1>
-  <p>pie charts take the normal chart input and format into a pie chart with up to ten colours, also automatically catches values of the wrong polarity or empty values</p>
+  <p>pie charts take the normal chart input and formats it into a pie chart with up to ten colours, also automatically catches values of the wrong polarity or empty values</p>
+  <h1>Gauge Chart</h1>
+  <p>Gauge charts take the normal chart input and formats it into a gauge chart, taking only the first value.</p>
 {{/page-description}}
