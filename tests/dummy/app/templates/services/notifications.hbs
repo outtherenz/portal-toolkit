@@ -1,10 +1,29 @@
 <header class="article-header">
   <h1><span class="title-category">Service:</span> Notifications</h1>
-<p>  notifications: Ember.inject.service(),</p>
-  <pre>const error = get(this, 'notifications').error('Please check the guides and try again.');
-  set(this, 'error', error);</pre>
-  <button {{action 'notifyError'}}>notifyError</button>
-  <button {{action 'notifysuccess'}}>notifysuccess</button>
-  <button {{action 'notifyInfo'}}>notifyInfo</button>
-  <button {{action 'notifyWarning'}}>notifyWarning</button>
+<pre>const {inject: { service }} = Ember;</pre>
+<pre>actions: {
+  notifyAll() {
+    get(this, 'notifications').error('Error');
+    get(this, 'notifications').success('success');
+    get(this, 'notifications').info('info');
+    get(this, 'notifications').warning('warning');
+  },
+}</pre>
+
+  <button {{action 'notifyAll'}}>Notify All</button>
+  <button {{action 'notifyError'}}>Notify Error</button>
+  <button {{action 'notifysuccess'}}>Notify success</button>
+  <button {{action 'notifyInfo'}}>Notify Info</button>
+  <button {{action 'notifyWarning'}}>Notify Warning</button>
+  <button {{action 'clearAll'}}>Clear All</button>
+  <pre>
+    make sure to add
+    \{{notification-container notifications=notifications}}
+    to the parent template ie application.hbs.. and :
+    make sure to add
+    const {inject: { service }} = Ember;
+    and
+    notifications: service(),
+    to the parent controller ie application.js..
+  </pre>
 </header>

@@ -11,6 +11,12 @@ const {
 export default Controller.extend({
   notifications: service(),
   actions: {
+    notifyAll() {
+      get(this, 'notifications').error('Error');
+      get(this, 'notifications').success('success');
+      get(this, 'notifications').info('info');
+      get(this, 'notifications').warning('warning');
+    },
     notifyError() {
       get(this, 'notifications').error('Error');
     },
@@ -22,6 +28,9 @@ export default Controller.extend({
     },
     notifyWarning() {
       get(this, 'notifications').warning('Warning');
+    },
+    clearAll() {
+      get(this, 'notifications').clearAll();
     }
   }
 });
