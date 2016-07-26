@@ -22,8 +22,9 @@
 
 <div class='component-box'>
 <h2><span class="title-category">Component:</span> gauge Chart</h2>
-{{charts/gauge-chart series=series target=100 metrics=metrics2 period=period}}
+{{charts/gauge-chart series=series target=120 metrics=gaugeSlider period=period}}
 <p>"\{{charts/gauge-chart series=series target=100 metrics=metrics2 period=period}}"</p>
+{{input type='range' min='0' max='300' value=gaugeSlider class='slider'}}
 </div>
 {{#page-description title='Charts'}}
   <h1>Data Chart</h1>

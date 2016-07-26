@@ -3,6 +3,7 @@ import Ember from 'ember';
 const { Controller } = Ember;
 
 export default Controller.extend({
+  gaugeSlider: 97.6,
   dataOptions: ['data1', 'data2'],
   metrics1: [{
     metric: '5760a0026a2fdd76101ea43c',
@@ -1014,7 +1015,7 @@ export default Controller.extend({
         organisation: '576090186a2fdd76101ea426',
         periodTypes: {
           month: {
-            value: 95,
+            value: 55,
             isManual: false,
             mapsUsed: []
           },

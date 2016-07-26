@@ -1,24 +1,17 @@
 import Ember from 'ember';
 import C3Chart from 'ember-c3/components/c3-chart';
 import { formatNumber } from 'portal-toolkit/helpers/format-number';
-import moment from 'moment';
 
-const { computed, isEmpty, isArray, Logger: { warn }, get } = Ember;
+const { computed, isEmpty, Logger: { warn }, get } = Ember;
 
 export default C3Chart.extend({
   classNames: ['dashboard-module', 'gauge-chart'],
 
-  markEmptySeries: true,
-  markNegativeSeries: true,
-
-  data: computed('metrics', 'period', function() {
+  data: computed('metrics', 'period', 'target', function() {
     const metrics = get(this, 'metrics');
+    const target = get(this, 'target');
     const periodType = get(this, 'period.type');
     const columns = [];
-    const seriesMeta = get(this, 'series');
-    const series = isArray(metrics) ? metrics[0].series : metrics.series;
-
-
 
     if (!metrics || isEmpty(metrics)) {
       warn('No data provided to gauge chart component.');
@@ -41,22 +34,22 @@ export default C3Chart.extend({
   target: 100,
   gauge: {
     label: {
-        format: function(value, ratio) {
-            return value;
-        },
-        show: true // to turn off the min/max labels.
+      format: function(value, ratio) {
+        return value;
+      },
+      show: true // to turn off the min/max labels.
     },
-    min: 50, // 0 is default, //can handle negative min e.g. vacuum / voltage / current flow / rate of change
-    max: 150, // 100 is default
-    units: ' %',
+    min: 30,
+    max: 180, // 100 is default
+    units: '% of Target',
     width: 36 // for adjusting arc thickness
   },
   color: {
-    pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
+    pattern: ['#FF0000', '#d7390e', '#f66000', '#f6ab19', '#def619', '#bcf619', '#66f619', '#42b406', '#66f619', '#bcf619', '#def619', '#f6ab19', '#f66000', '#d7390e', '#FF0000'],
     threshold: {
       unit: 'value', // percentage is default
-      max: 150, // 100 is default
-      values: [70, 90, 110, 130]
+      max: 180, // 100 is default
+      values: [40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 150, 160, 170, 180]
     }
   },
   legend: { position: 'right' }
