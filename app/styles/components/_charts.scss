@@ -9,6 +9,15 @@ Stylesheet: Charts
   font: 12px $copy-font;
 }
 
+.gauge-chart {
+  .c3-chart-arcs-gauge-unit{
+    font-size: 10px;
+  }
+  .c3-chart-arcs {
+    font-size: 8px;
+  }
+}
+
 .c3-line {
   stroke-width: 1.8px;
 }

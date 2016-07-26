@@ -42,7 +42,7 @@ export default C3Chart.extend({
     min: 30,
     max: 180, // 100 is default
     units: '% of Target',
-    width: 36 // for adjusting arc thickness
+    width: 80 // for adjusting arc thickness
   },
   color: {
     pattern: ['#FF0000', '#d7390e', '#f66000', '#f6ab19', '#def619', '#bcf619', '#66f619', '#42b406', '#66f619', '#bcf619', '#def619', '#f6ab19', '#f66000', '#d7390e', '#FF0000'],
