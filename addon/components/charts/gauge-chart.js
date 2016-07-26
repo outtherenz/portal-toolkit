@@ -18,8 +18,9 @@ export default C3Chart.extend({
       return;
     }
     let name = get(metrics[0], 'meta.name');
-    const value = get(metrics[0], `series.0.periods.0.periodTypes.${periodType}.value`) || 0;
 
+    const metric = get(metrics[0], `series.0.periods.0.periodTypes.${periodType}.value`) || 0;
+    const value = formatNumber(metric/target*100, { places: 2, dashZero: false });
     columns.push([ name, value ]);
 
     return {
@@ -31,7 +32,6 @@ export default C3Chart.extend({
   size: {
     height: 220
   },
-  target: 100,
   gauge: {
     label: {
       format: function(value, ratio) {

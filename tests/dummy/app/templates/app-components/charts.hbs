@@ -22,9 +22,8 @@
 
 <div class='component-box'>
 <h2><span class="title-category">Component:</span> gauge Chart</h2>
-{{charts/gauge-chart series=series target=120 metrics=gaugeSlider period=period}}
+{{charts/gauge-chart series=series target=2512357 metrics=metrics2 period=period}}
 <p>"\{{charts/gauge-chart series=series target=100 metrics=metrics2 period=period}}"</p>
-{{input type='range' min='0' max='300' value=gaugeSlider class='slider'}}
 </div>
 {{#page-description title='Charts'}}
   <h1>Data Chart</h1>
@@ -35,5 +34,5 @@
   <p>pie charts take the normal chart input and formats it into a pie chart with up to ten colours, also automatically catches values of the wrong polarity or empty values</p>
   <h1>Gauge Chart</h1>
   <p>Gauge charts take the normal chart input and formats it into a gauge chart, taking only the first value.
-    At the moment it gives a measurement between 50-150 as targets have not been implemented</p>
+    At the moment it takes a target value and gives a ration in the form of a percentage based on how well you've met that target</p>
 {{/page-description}}
