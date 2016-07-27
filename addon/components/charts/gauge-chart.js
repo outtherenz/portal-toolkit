@@ -2,10 +2,20 @@ import Ember from 'ember';
 import C3Chart from 'ember-c3/components/c3-chart';
 import { formatNumber } from 'portal-toolkit/helpers/format-number';
 
-const { computed, isEmpty, Logger: { warn }, get } = Ember;
+const {
+  computed,
+  isEmpty,
+  warn,
+  get,
+} = Ember;
 
 export default C3Chart.extend({
   classNames: ['dashboard-module', 'gauge-chart'],
+
+  reverseColors: false,
+  min: 0,
+  max: 1,
+  label: '% of target',
 
   data: computed('metrics', 'period', 'target', function() {
     const metrics = get(this, 'metrics');
@@ -17,10 +27,14 @@ export default C3Chart.extend({
       warn('No data provided to gauge chart component.');
       return;
     }
-    let name = get(metrics[0], 'meta.name');
+
+    const name = get(metrics[0], 'meta.name');
+    const min = get(this, 'min');
+    const max = get(this, 'max');
 
     const metric = get(metrics[0], `series.0.periods.0.periodTypes.${periodType}.value`) || 0;
-    const value = formatNumber(metric/target*100, { places: 2, dashZero: false });
+    const value = metric / target;
+
     columns.push([ name, value ]);
 
     return {
@@ -30,27 +44,59 @@ export default C3Chart.extend({
   }),
 
   size: {
-    height: 220
+    height: 180
   },
-  gauge: {
-    label: {
-      format: function(value, ratio) {
-        return value;
+  gauge: computed('min', 'max', 'units', function() {
+    return {
+      label: {
+        format: (value, ratio) => formatNumber([ 'percentage', value ], { places: 2, dashZero: false }),
+        show: true // to turn off the min/max labels
       },
-      show: true // to turn off the min/max labels.
-    },
-    min: 30,
-    max: 180, // 100 is default
-    units: '% of Target',
-    width: 80 // for adjusting arc thickness
-  },
-  color: {
-    pattern: ['#FF0000', '#d7390e', '#f66000', '#f6ab19', '#def619', '#bcf619', '#66f619', '#42b406', '#66f619', '#bcf619', '#def619', '#f6ab19', '#f66000', '#d7390e', '#FF0000'],
-    threshold: {
-      unit: 'value', // percentage is default
-      max: 180, // 100 is default
-      values: [40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 150, 160, 170, 180]
+      min: get(this, 'min'),
+      max: get(this, 'max'), // 100 is default
+      units: get(this, 'label'),
+      width: 60 // for adjusting arc thickness
     }
-  },
+  }),
+
+  color: computed('min', 'max', function() {
+    const min = get(this, 'min');
+    const max = get(this, 'max');
+    const reverseColors = get(this, 'reverseColors');
+    const values = [];
+
+    let colors = [
+      '#ca1528',
+      '#d02329',
+      '#db382b',
+      '#e6502e',
+      '#ef6931',
+      '#f08033',
+      '#f09136',
+      '#d0973c',
+      '#b0973e',
+      '#8c9341',
+      '#688c44',
+      '#498646'
+    ];
+
+    if (reverseColors) {
+      colors = colors.reverse();
+    }
+
+    for (let i = 0; i < colors.length; i++) {
+      values.push(min + i / colors.length * (max - min));
+    }
+
+    return {
+      pattern: colors,
+      threshold: {
+        unit: 'value', // percentage is default
+        max: get(this, 'max'), // 100 is default
+        values
+      }
+    }
+  }),
+
   legend: { position: 'right' }
 });
