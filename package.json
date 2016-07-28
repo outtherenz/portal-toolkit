@@ -45,7 +45,6 @@
     "ember-font-awesome": "^2.1.1",
     "ember-load-initializers": "^0.5.0",
     "ember-modal-dialog": "0.8.1",
-    "ember-multiselect-checkboxes": "0.4.4",
     "ember-radio-button": "^1.0.7",
     "ember-radio-buttons": "^4.0.1",
     "ember-resolver": "^2.0.3",
@@ -64,6 +63,7 @@
     "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-moment": "6.0.0",
+    "ember-multiselect-checkboxes": "0.9.1",
     "ember-truth-helpers": "^1.2.0",
     "emberx-select": "2.0.2"
   },
