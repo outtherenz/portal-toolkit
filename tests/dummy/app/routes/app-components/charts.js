@@ -1,11 +1,9 @@
 import Ember from 'ember';
-import _ from 'lodash';
 
 const {
   Route,
-  get,
-  set,
-  RSVP
+  RSVP,
+  $
 } = Ember;
 
 export default Route.extend({

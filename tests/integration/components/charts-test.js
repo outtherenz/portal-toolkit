@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
-import { beforeEach, afterEach } from 'mocha';
+import { beforeEach, afterEach } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage from '../../helpers/setup-mirage-for-integration';
-import Ember from 'ember';
 import fakeReporter from '../../../mirage/fake-reporter';
+/* global server */
 
 describeComponent('charts', 'Integration: ChartsComponent', { integration: true, setup: () => startMirage(this.container) }, function() {
   beforeEach(function() {

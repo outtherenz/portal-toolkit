@@ -23,14 +23,16 @@
     </tr>
   {{/each}}
 </table>
-<p style='word-break: keep-all;'>
-  {{codeSample1}}
-</p>
+<code>
+    <pre>
+    \{{value-change-indicator difference=target.monthDifference from=target.from to=target.to useColor=target.useColor increaseIsGood=target.increaseIsGood}}
+    </pre>
+</code>
 {{#page-description title='Value Change Indicator'}}
   <h1>Variables</h1>
     <h3>difference</h3>
     <p>a difference can be supplied and will override any to/from. this should only be submited as a positive/Negative number</p>
-    <h3>to & from</h3>
+    <h3>to &amp; from</h3>
     <p>a to and ftrom can be used instead of a difference, if a difference is supplied as well only difference will be taken, these should only be submited as numbers</p>
     <h3>useColor</h3>
     <p>this should be assigned to a boolean value that changes based on whether you want it to be 'loading' (true) or not 'loading' (false)</p>

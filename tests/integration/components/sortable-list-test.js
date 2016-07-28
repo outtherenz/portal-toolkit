@@ -2,12 +2,6 @@ import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
 import { beforeEach } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
-import wait from 'ember-test-helpers/wait';
-
-const {
-  $
-} = Ember;
 
 describeComponent('sortable-list', 'Integration: SortableListComponent', { integration: true }, function() {
   beforeEach(function() {

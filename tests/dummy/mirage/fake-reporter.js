@@ -42,8 +42,8 @@ function buildPeriods(qp) {
     };
 
     qp.periodTypes = qp.periodTypes || [];
-    const includeMonth = qp.periodTypes.includes('month');
-    const includeYTD = qp.periodTypes.includes('ytd');
+    const includeMonth = qp.periodTypes.contains('month');
+    const includeYTD = qp.periodTypes.contains('ytd');
 
     // Include month data if asked for, or as a default if nothing was asked for
     if (includeMonth || (!includeMonth && !includeYTD)) {

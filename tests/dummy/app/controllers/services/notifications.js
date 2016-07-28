@@ -3,9 +3,7 @@ import Ember from 'ember';
 const {
   Controller,
   inject: { service },
-  get,
-  set,
-  $
+  get
 } = Ember;
 
 export default Controller.extend({

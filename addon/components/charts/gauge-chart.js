@@ -6,7 +6,7 @@ const {
   computed,
   isEmpty,
   warn,
-  get,
+  get
 } = Ember;
 
 export default C3Chart.extend({
@@ -29,9 +29,6 @@ export default C3Chart.extend({
     }
 
     const name = get(metrics[0], 'meta.name');
-    const min = get(this, 'min');
-    const max = get(this, 'max');
-
     const metric = get(metrics[0], `series.0.periods.0.periodTypes.${periodType}.value`) || 0;
     const value = metric / target;
 
@@ -56,7 +53,7 @@ export default C3Chart.extend({
       max: get(this, 'max'), // 100 is default
       units: get(this, 'label'),
       width: 60 // for adjusting arc thickness
-    }
+    };
   }),
 
   color: computed('min', 'max', function() {
@@ -95,7 +92,7 @@ export default C3Chart.extend({
         max: get(this, 'max'), // 100 is default
         values
       }
-    }
+    };
   }),
 
   legend: { position: 'right' }

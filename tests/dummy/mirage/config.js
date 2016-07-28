@@ -1,16 +1,6 @@
 import fakeReporter from './fake-reporter';
 
 export default function() {
-  // Usually http://localhost:3000 during development.
-  // Set PORTAL_API_URL env variable to change.
-  this.urlPrefix = window.location.origin;
-
-  // Conditionally passthrough everything
-  if (false) {
-    this.passthrough();
-    return;
-  }
-
   // Add a 400 ms delay to all requests during development
   this.timing = 400;
 

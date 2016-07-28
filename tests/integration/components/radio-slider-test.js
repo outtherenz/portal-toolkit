@@ -67,7 +67,6 @@ describeComponent('radio-slider', 'Integration: RadioSliderComponent', { integra
      { label: 'YTD 2', value: 'ytd2' }
     ];
 
-    const secondaryType = 'dayTest';
     this.set('periodType1', 'day');
     this.set('periodType2', 'day2');
 
