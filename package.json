@@ -36,6 +36,7 @@
     "ember-cli-release": "^0.2.8",
     "ember-cli-sass": "^5.3.1",
     "ember-cli-sri": "^2.0.0",
+    "ember-cli-test-loader": "1.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-cli-uploader": "^0.3.7",
     "ember-d3": "^0.2.0",
@@ -44,7 +45,6 @@
     "ember-export-application-global": "^1.0.4",
     "ember-font-awesome": "^2.1.1",
     "ember-load-initializers": "^0.5.0",
-    "ember-modal-dialog": "0.8.1",
     "ember-multiselect-checkboxes": "0.4.4",
     "ember-radio-button": "^1.0.7",
     "ember-radio-buttons": "^4.0.1",
@@ -61,8 +61,9 @@
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.5",
-    "ember-cli-htmlbars": "^1.0.1",
+    "ember-cli-htmlbars": "^1.0.10",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
+    "ember-modal-dialog": "0.8.8",
     "ember-moment": "6.0.0",
     "ember-truth-helpers": "^1.2.0",
     "emberx-select": "2.0.2"
