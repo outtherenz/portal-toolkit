@@ -21,6 +21,7 @@ module.exports = {
     },
     {
       name: 'ember-beta',
+      allowedToFail: true,
       bower: {
         dependencies: {
           ember: 'components/ember#beta'
@@ -32,6 +33,7 @@ module.exports = {
     },
     {
       name: 'ember-canary',
+      allowedToFail: true,
       bower: {
         dependencies: {
           ember: 'components/ember#canary'
