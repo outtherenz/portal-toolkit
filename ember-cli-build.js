@@ -4,7 +4,12 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
   const app = new EmberAddon(defaults, {
-    hinting: false
+    hinting: false,
+
+    eslint: {
+      // Prevents linting tests from being automatically generated
+      testGenerator: () => null
+    }
   });
 
   /*
@@ -17,5 +22,7 @@ module.exports = function(defaults) {
   // Lodash
   app.import('bower_components/lodash/lodash.js');
 
+  // Another sortable plugin
+  app.import('vendor/sortable/jquery.fn.nativeSortable.js');
   return app.toTree();
 };

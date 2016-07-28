@@ -1,10 +1,9 @@
-<header class="page-header">
-  <h1>Portal Ember Toolkit</h1>
+<header class='page-header'>
+  <h1>Portal Toolkit</h1>
   <h2>Code to be shared across the Portal’s modules.</h2>
 </header>
-
 <main>
-  <aside class="sidebar">
+  <aside class='sidebar'>
     <nav>
       <h3>Components</h3>
       <ul>
@@ -17,8 +16,10 @@
         <li>{{#link-to 'app-components.loading-icon'}}Loading icon{{/link-to}}</li>
         <li>{{#link-to 'app-components.month-picker'}}Month picker{{/link-to}}</li>
         <li>{{#link-to 'app-components.print-button'}}Print button{{/link-to}}</li>
+        <li>{{#link-to 'app-components.radio-slider'}}Radio Slider{{/link-to}}</li>
         <li>{{#link-to 'app-components.sortable-list'}}Sortable list{{/link-to}}</li>
         <li>{{#link-to 'app-components.untethered-modal-dialog'}}Untethered modal dialog{{/link-to}}</li>
+        <li>{{#link-to 'app-components.value-change-indicator'}}Value Change Indicator{{/link-to}}</li>
       </ul>
 
       <h3>Helpers</h3>
@@ -30,12 +31,60 @@
 
       <h3>Services</h3>
       <ul>
-        <li>…</li>
+        <li>{{#link-to 'services.notifications'}}Notifications{{/link-to}}</li>
       </ul>
     </nav>
   </aside>
-
-  <article class="page">
+  <div class='page-toolkit'>
+    <div class='toolkit-header'>
+      <h5>Color</h5>
+      <div class='toolkit-container'>
+        <div class='toolkit-part-container'>
+          {{input type='text' min='0' max='255' value=colorR class='sliderText'}}
+          {{input type='text' min='0' max='255' value=colorG class='sliderText'}}
+          {{input type='text' min='0' max='255' value=colorB class='sliderText'}}
+          <h6>Set:</h6>{{input type='checkbox' checked=rgbColor class='checkbox'}}
+        </div>
+        <div class='toolkit-part-container'>
+          {{input type='range' min='0' max='255' value=colorR class='slider'}}
+          {{input type='range' min='0' max='255' value=colorG class='slider'}}
+          {{input type='range' min='0' max='255' value=colorB class='slider'}}
+          {{input type='range' min='0' max='255' value=colorLight
+          class='slider'}}
+        </div>
+        <div class='colorBox'>
+          {{input type='text' value=colorRGB class='rgbStatus' disabled=true}}
+          {{input type='text' value=colorInput class='hexStatus' disabled=true}}
+        </div>
+        <div class='toolkit-part-container'>
+          {{input type='text' value=colorInput class='hexInput'}}
+          <h6>Set:</h6>{{input type='checkbox' checked=hexColor class='checkbox'}}
+        </div>
+      </div>
+    </div>
+    <div class='divider'></div>
+    <div class='toolkit-header'>
+      <h5>Page</h5>
+      <div class='toolkit-container'>
+        <div class='toolkit-part-container'>
+          <h6>Width:</h6>{{input type='range' min='0.1' max='1' step="0.01" value="0.75" value=pageWidth class='slider'}}
+        </div>
+      </div>
+    </div>
+    <div class='divider'></div>
+    <div class='toolkit-header'>
+      <h5>View</h5>
+      <div class='toolkit-container'>
+        <div class='toolkit-part-container'>
+          <h6>Fullscreen:</h6>{{input type='checkbox' checked=mode class='checkbox'}}
+          {{print-button class='printButton'}}
+        </div>
+      </div>
+    </div>
+    {{input type='checkbox' checked=decafe class='decafe'}}
+  </div>
+  <article class='page'>
     {{outlet}}
   </article>
 </main>
+{{notification-container notifications=notifications}}

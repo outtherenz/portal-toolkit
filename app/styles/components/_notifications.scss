@@ -1,0 +1,64 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Notifications
+******************************************************************/
+
+.notifications {
+  position: fixed;
+  top: 0.5em;
+  left: 50%;
+  width: 450px;
+  margin-left: -225px;
+  z-index: 100;
+}
+
+.notification {
+  background: $alert-blue;
+  color: white;
+  margin-bottom: 0.5em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  display: flex;
+  position: relative;
+  @include animation(
+    notification-hide 250ms cubic-bezier(.33859, -.42, 1, -.22),
+    notification-shrink 250ms 250ms cubic-bezier(.5, 0, 0, 1)
+  );
+
+  .icon, .close {
+    flex: 0 0 35px;
+    background: rgba(0, 0, 0, 0.15);
+    text-align: center;
+    line-height: 35px;
+    font-size: 110%;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .content {
+    flex: 1 0;
+    padding: 0.5em 1em;
+  }
+
+  a:hover {
+    color: white;
+  }
+
+  .countdown {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.3);
+    @include animation(notification-countdown linear 1);
+  }
+
+  &.warning { background-color: $alert-amber; }
+  &.success { background-color: $alert-green; }
+  &.error   { background-color: $alert-red; }
+
+  &.in {
+    @include animation(notification-show 180ms cubic-bezier(.175, .885, .32, 1.27499));
+  }
+}

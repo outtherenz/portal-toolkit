@@ -18,14 +18,19 @@ Router.map(function() {
     this.route('notification-container');
     this.route('notification-message');
     this.route('print-button');
+    this.route('radio-slider');
     this.route('sortable-list');
     this.route('untethered-modal-dialog');
+    this.route('value-change-indicator');
   });
 
   this.route('helpers', function() {
     this.route('concat');
     this.route('format-number');
     this.route('math');
+  });
+  this.route('services', function() {
+    this.route('notifications');
   });
 
   this.route('404', { path: '*path' });

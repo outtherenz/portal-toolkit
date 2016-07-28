@@ -1,0 +1,41 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Loading Icon
+******************************************************************/
+
+.loading-icon.ripple {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  @include animation(fadeIn 3s ease-out both);
+
+  circle {
+    opacity: 0;
+    @include animation(loadingCircle 6s infinite cubic-bezier(0.215, 0.610, 0.355, 1));
+  }
+
+  circle:nth-child(2) { @include animation-delay(1.5s); }
+  circle:nth-child(3) { @include animation-delay(3s); }
+  circle:nth-child(4) { @include animation-delay(4.5s); }
+}
+
+.loading-icon.spinner {
+  width: 1em;
+  height: 1em;
+  margin: 0 0.5em;
+  display: inline-block;
+
+  circle {
+    stroke: $secondary;
+    stroke-width: 20px;
+    stroke-dasharray: 80 100;
+    fill: none;
+    @include transform-origin(50% 50%);
+    @include animation(
+      spin 1s linear infinite,
+      fadeIn 0.2s ease-in
+    );
+  }
+}

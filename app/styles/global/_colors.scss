@@ -1,0 +1,51 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Colors
+
+Most stuff is covered by Bourbon, so this is mostly just stuff
+that’s Portal-specific.
+******************************************************************/
+
+/*******************
+COLORS
+*******************/
+
+// Generic
+$primary:           #494949;
+$primary-shade:     shade($primary, 40%);
+$primary-tint:      tint($primary, 40%);
+
+$secondary:         #37a;
+
+$subdued:           #999;
+$whisp:             #ddd;
+
+$off-black:         #333;
+$off-white:         #f7f7f7;
+
+$border-color:      shade($off-white, 15%);
+
+// Typography
+$heading-color:     #444;
+$copy-color:        #333;
+
+$link-color:        #37a;
+$link-hover-color:  shade($link-color, 20%);
+$link-active-color: $primary;
+$nav-link-color:    tint($copy-color, 40%);
+
+// Buttons
+$button-primary:    #37a;
+$button-secondary:  #555;
+$button-disabled:   #ddd;
+$button-plain:      #ddd;
+$button-green:      #494;
+$button-red:        #c43;
+
+// Alerts
+$alert-amber:       #f73;
+$alert-red:         #c44;
+$alert-green:       #5a5;
+$alert-blue:        #39e;

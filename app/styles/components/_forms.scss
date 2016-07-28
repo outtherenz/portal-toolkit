@@ -1,0 +1,305 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Forms
+******************************************************************/
+
+form:not(.plain) {
+  @extend %module;
+
+  header, footer {
+    p {
+      padding: 4px 0;
+      float: left;
+      margin: 0 $gutter 0 0;
+      opacity: 0.7;
+    }
+
+    input[type=submit], input[type=reset], button, .button {
+      &.subdued {
+        line-height: 28px;
+      }
+    }
+  }
+
+  select {
+    border-color: $border-color;
+    background-color: white;
+  }
+}
+
+// fieldset {}
+
+.permissions-description {
+  font-weight: bold;
+}
+
+#organisation-description {
+  color: red;
+}
+
+.control-wrapper {
+  @include row();
+
+  margin-bottom: $gutter / 2;
+}
+
+.description {
+  flex-grow: 1;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.ember-select-guru {
+  width: grid-width(5.9);
+  float: left;
+  text-align: left;
+
+  .inline {
+    float: none;
+    display: inline-block;
+  }
+}
+
+.ember-select-guru__container {
+  position: relative;
+  border-radius: 0;
+  overflow: visible;
+  background-color: white;
+  margin: -1px -1px 0;
+}
+
+.ember-select-guru__trigger {
+  padding: 0.5em 1em;
+}
+
+.ember-select-guru__search-wrapper {
+  padding: 0;
+}
+
+.ember-select-guru__dropdown {
+  position: absolute;
+  top: 100%;
+  height: 300px;
+  border: solid 1px $border-color;
+  left: -1px;
+  width: 100%;
+  @include calc('width', '100% + 2px');
+
+  .options-wrapper {
+    overflow-y: auto;
+    position: absolute;
+    top: 28px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .is-active {
+      background: #dfdfdf;
+    }
+  }
+}
+
+.ember-select-guru__search {
+  border-width: 0 0 1px;
+  padding: 0.5em 1em;
+
+  &:focus {
+    border-color: $border-color;
+  }
+}
+
+.input-group .control-wrapper:not(:last-of-type) {
+  margin-bottom: 0;
+}
+
+.input-group .control-wrapper:not(:first-of-type) input {
+  border-top-color: white;
+
+  &:focus {
+    border-top-color: $primary;
+  }
+}
+
+label {
+  width: grid-width(2);
+  float: left;
+  padding: 6px 0;
+
+  input[type=radio],
+  input[type=checkbox] {
+    margin: 0 0.5em 0 0;
+  }
+
+  .replace-file-input {
+    @include button($button-secondary);
+    float: none;
+    vertical-align: middle;
+  }
+
+  &.fluid {
+    width: auto;
+    float: none;
+    margin: $gutter 0;
+
+    input[type=radio],
+    input[type=checkbox] {
+      margin: 0.25em 0.5em 0.25em 0;
+    }
+  }
+
+  &.pull-right {
+    width: auto;
+    padding: 0;
+
+    input[type=radio],
+    input[type=checkbox] {
+      margin-left: 0.5em;
+      margin-right: 0;
+    }
+  }
+}
+
+// Normal form fields
+input,
+textarea {
+  width: grid-width(3);
+  float: left;
+  border-radius: 0;
+  border: 1px solid #ccc;
+  box-shadow: none;
+  color: $copy-color;
+  font-size: inherit;
+  padding: 0.5em 0.7em;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    z-index: 10;
+  }
+
+  & + input,
+  & + textarea {
+    clear: both;
+    margin-top: 0;
+    border-top-width: 0;
+
+    &:focus {
+      margin-top: -1px;
+      border-top-width: 1px;
+    }
+  }
+}
+
+input[type=radio],
+input[type=checkbox] {
+  font-size: 16px; // Enlarges the checkbox slightly
+  width: auto;
+  margin-top: 10px; // Magic number :(
+  cursor: pointer;
+
+  &:focus {
+    border: 0;
+    box-shadow: none;
+  }
+}
+
+input[type=file] {
+  width: auto;
+  max-width: 100%;
+  border: 0;
+  line-height: 0;
+  padding: 7px 0 23px; // So many magic numbers :(
+
+  &:focus {
+    border: 0;
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+input.formatted {
+  text-align: right;
+}
+
+select[multiple] {
+  width: auto;
+  height: 250px;
+
+  option {
+    padding: 0.2em 0.5em;
+    font-size: inherit;
+  }
+
+  optgroup {
+    padding: 0.2em 0.5em;
+    margin-bottom: 0.5em;
+  }
+}
+
+select[multiple]
+
+/* input[type=number] {
+  width: 50px;
+} */
+
+select {
+  font-size: inherit;
+  margin: 0;
+  height: 34px;
+  border-color: $whisp;
+  background-color: $off-white;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+progress {
+  width: 100%;
+}
+
+form.plain {
+  margin: $gutter 0;
+}
+
+form.horizontal {
+  label, input, select {
+    float: none;
+    margin-right: 1em;
+    width: auto;
+  }
+
+  &.pull-right {
+    label, input, select {
+      margin-right: 0;
+      margin-left: 1em;
+    }
+  }
+}
+
+.match-height {
+  display: flex;
+}
+
+.markdown-output {
+  width: 300px;
+  float: left;
+  border: 1px solid $border-color;
+  color: #333;
+  padding: 0.5em 0.7em;
+  background-color: white;
+  overflow-y: auto;
+  margin-left: 1em;
+
+  p {
+    margin: 0 0 1em;
+    line-height: normal;
+    font-size: 14px;
+  }
+}

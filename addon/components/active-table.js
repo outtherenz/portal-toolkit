@@ -1,7 +1,13 @@
 import Ember from 'ember';
 import layout from '../templates/components/active-table';
 
-const { Component, computed, Object: EObject, get, set } = Ember;
+const {
+  Component,
+  computed,
+  Object: EObject,
+  get,
+  set
+} = Ember;
 
 export default Component.extend({
   layout,

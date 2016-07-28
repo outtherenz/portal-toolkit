@@ -1,7 +1,42 @@
 <header class="article-header">
   <h1><span class="title-category">Helper:</span> Math</h1>
 </header>
-
-<div class="example">
-  {{!-- example here --}}
-</div>
+<table>
+  <tr>
+    <td>
+      {{input value=operand1}}
+    </td><td>
+      {{input value=operator}}
+    </td><td>
+      {{input value=operand2}}
+    </td><td>
+      {{input readonly=true value = (math operand1 operator operand2)}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      {{input type='range' min='-125' max='125' value=operand1 class='slider'}}
+      </td><td>
+      {{input type='range' min='1' max='4' value=operatorunselect class='slider'}}
+      </td><td>
+      {{input type='range' min='-125' max='125' value=operand2 class='slider'}}
+      </td>
+  </tr>
+  <tr>\{{math operand1 operator operand2}}</tr>
+</table>
+{{#page-description title='Maths Helper'}}
+  <h2>Inputs</h2>
+  <h4>Operands</h4>
+    <p>Operands for the maths helper can be passed in as string or as raw number objects, no other input is accepted, incorrect input will throw an error.</p>
+  <h4>Operators</h4>
+    <p>Operators for the maths helper can only be passed in as a string, no other input is accepted, incorrect input will throw an error.</p>
+    <p>Currently the only valid inputs are '+', '-', '*', and '/'.</p>
+  <h1>Addition (+)</h1>
+  works just like you'd expect it to, only works with two numbers at the moment
+  <h1>Subtraction (-)</h1>
+  works just like you'd expect it to, only works with two numbers at the moment
+  <h1>Multiplication (*)</h1>
+  works just like you'd expect it to, only works with two numbers at the moment
+  <h1>Division (/)</h1>
+  works just like you'd expect it to, only works with two numbers at the moment
+{{/page-description}}

@@ -2,15 +2,40 @@
   <h1>Charts</h1>
 </header>
 
-<h2><span class="title-category">Component:</span> Data Table</h2>
+<div class='component-box'>
+  <h2><span class="title-category">Component:</span> Data Table</h2>
+  {{charts/data-table metrics=model.kpis period=period}}
+  <code><pre>\{{charts/data-table metrics=model.kpis period=period}}</pre></code>
+</div>
 
-{{!-- example here --}}
+<div class='component-box'>
+  <h2><span class="title-category">Component:</span> Line Chart</h2>
+  {{charts/line-chart series=model.series metrics=model.kpis period=period}}
+  <code><pre>\{{charts/line-chart series=model.series metrics=model.kpis.data period=period}}</pre></code>
+</div>
 
-<h2><span class="title-category">Component:</span> Line Chart</h2>
+<div class='component-box'>
+  <h2><span class="title-category">Component:</span> Pie Chart</h2>
+  {{charts/pie-chart series=model.series metrics=model.kpis period=period}}
+  <code><pre>\{{charts/pie-chart series=model.series metrics=model.kpis period=period}}</pre></code>
+</div>
 
+<div class='component-box'>
+  <h2><span class="title-category">Component:</span> gauge Chart</h2>
+  {{charts/gauge-chart series=model.series target=1 metrics=model.kpis period=period}}
+  <code><pre>\{{charts/gauge-chart series=model.series target=100 metrics=model.kpis period=period}}</pre></code>
+</div>
 
-{{!-- example here --}}
+{{#page-description title='Charts'}}
+  <h1>Data Chart</h1>
+  <p>Data charts take the normal chart input and format into a table</p>
 
-<h2><span class="title-category">Component:</span> Pie Chart</h2>
+  <h1>Line Chart</h1>
+  <p>Line charts take the normal chart input and format into a pretty line chart with ten colours</p>
 
-{{!-- example here --}}
+  <h1>Pie Chart</h1>
+  <p>pie charts take the normal chart input and formats it into a pie chart with up to ten colours, also automatically catches values of the wrong polarity or empty values</p>
+
+  <h1>Gauge Chart</h1>
+  <p>Gauge charts take the normal chart input and formats it into a gauge chart, taking only the first value. At the moment it takes a target value and gives a ration in the form of a percentage based on how well you've met that target</p>
+{{/page-description}}

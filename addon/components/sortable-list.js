@@ -8,6 +8,9 @@ export default Component.extend({
   tagName: 'ol',
   classNames: [ 'sortable-list' ],
 
+  content: null,
+  property: 'value',
+
   index: 'sortIndex',
   sortBy: computed('index', function() {
     return [ get(this, 'index') ];

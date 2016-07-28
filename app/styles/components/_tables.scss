@@ -1,0 +1,156 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Tables
+******************************************************************/
+
+table {
+  width: 100%;
+  margin: $gutter 0;
+  font-size: 90%;
+
+  &.shrink {
+    width: auto;
+  }
+
+  .timeline {
+    width: auto;
+
+    th {
+      font-size: 90%;
+      padding: 0.5em 0.75em;
+    }
+
+    td {
+      padding: 0.4em 1em;
+
+      .present {
+        background-color: $alert-green;
+      }
+    }
+
+    tfoot td {
+      font-size: 100%;
+      padding: 0.5em 1em;
+
+      &:not(:first-child) {
+        padding: 0.5em 0;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.active-table th {
+  @include user-select(none);
+}
+
+td {
+  padding: 0.5em 1em;
+  border: 1px solid $whisp;
+  background-color: white;
+}
+
+.negative {
+  color: #f00;
+  white-space: nowrap;
+}
+
+tr.total,
+tr.total td {
+  border-top: 2px solid shade($border-color, 15%);
+  border-bottom: 2px solid shade($border-color, 15%);
+}
+
+.headerRow th {
+  width: auto;
+  white-space: nowrap;
+  min-width: 15em;
+}
+
+th {
+  text-align: left;
+  border: 1px solid $whisp;
+  background-color: $off-white;
+  border-bottom-color: $whisp;
+  padding: 0.5em 1em;
+  cursor: default;
+  margin: 0 -10em -0.5em;
+
+  .helper {
+    float: right;
+    font-weight: normal;
+    font-size: 90%;
+    font-style: italic;
+    color: $subdued;
+  }
+
+  a {
+    padding: 0 1em 0.5em;
+    margin: 0 -1em -0.5em;
+    display: block;
+
+    &:hover {
+      text-decoration: none;
+
+      span {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &.sorted {
+    a::after {
+      content: '\25be';
+      display: inline-block;
+      margin-left: 0.5em;
+      @include transition(all, 0.2s, linear);
+    }
+
+    &.ascending a::after {
+      @include transform(scaleY(-1));
+      display: inline-block;
+    }
+  }
+}
+
+td, th {
+  position: relative;
+  background-clip: padding-box; // show borders in Firefox
+  white-space: nowrap;
+
+  > input:not([type=checkbox]):first-child:last-child {
+    border: 0;
+    width: 100%;
+
+    &:hover,
+    &:focus {
+      background-color: $off-white;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+thead tr.subheading th {
+  background-color: mix($off-white, white);
+  color: tint($copy-color, 50%);
+  font-size: 85%;
+  font-weight: normal;
+}
+
+tr.subdued {
+  color: $subdued;
+
+  button.subdued:not(:hover) {
+    color: $subdued;
+  }
+}
+
+tfoot td {
+  @extend th;
+  font-weight: normal;
+}
