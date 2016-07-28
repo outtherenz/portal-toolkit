@@ -43,11 +43,13 @@ export default Component.extend({
       return;
     }
 
-    if (diff > 0 === increaseIsGood) {
+    console.log(increaseIsGood, diff)
+
+    if ((increaseIsGood && diff > 0) || (!increaseIsGood && diff < 0)) {
       return 'good';
-    } else if (diff < 0 === increaseIsGood) {
+    } else if ((increaseIsGood && diff < 0) || (!increaseIsGood && diff > 0)) {
       return 'bad';
-    } else if (diff === 0) {
+    } else {
       return 'no-change';
     }
   }),

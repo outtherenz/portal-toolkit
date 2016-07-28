@@ -3,60 +3,81 @@ import { describeComponent, it } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent('value-change-indicator', 'Integration: ValueChangeIndicatorComponent', { integration: true }, function() {
-  it('works with a positive difference', function() {
-    this.render(hbs`{{value-change-indicator difference=10}}`);
+  it('shows uses the correct classes and arrows', function() {
+    this.set('diff', 10);
 
-    expect(this.$('.value-change-indicator').hasClass('good')).to.be.true;
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.be.true;
+    this.render(hbs`{{value-change-indicator difference=diff}}`);
+
+    expect(this.$('.value-change-indicator').hasClass('good')).to.equal(true, 'good class on increase');
+    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.equal(true, 'up arrow on increase');
+
+    this.set('diff', -10);
+
+    expect(this.$('.value-change-indicator').hasClass('bad')).to.equal(true, 'bad class on decrease');
+    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.equal(true, 'down arrow on decrease');
+
+    this.set('diff', 0);
+
+    expect(this.$('.value-change-indicator').hasClass('no-change')).to.equal(true, 'no-change class on no change');
+    expect(this.$('.value-change-indicator .fa').text()).to.equal('', 'no icon on no change');
   });
 
-  it('works with a negative difference', function() {
-    this.render(hbs`{{value-change-indicator difference=-10}}`);
+  it('does not add good, bad, and no-change classes if useColor is false', function() {
+    this.set('diff', 10);
 
-    expect(this.$('.value-change-indicator').hasClass('bad')).to.be.true;
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.be.true;
+    this.render(hbs`{{value-change-indicator difference=diff useColor=false}}`);
+
+    expect(this.$('.value-change-indicator').hasClass('good')).to.equal(false, 'no good class on increase');
+    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.equal(true, 'up arrow on increase');
+
+    this.set('diff', -10);
+
+    expect(this.$('.value-change-indicator').hasClass('bad')).to.equal(false, 'no bad class on decrease');
+    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.equal(true, 'down arrow on decrease');
+
+    this.set('diff', 0);
+
+    expect(this.$('.value-change-indicator').hasClass('no-change')).to.equal(false, 'no no-change class on no change');
+    expect(this.$('.value-change-indicator .fa').text()).to.equal('', 'no icon on no change');
   });
 
-  it('works with no difference', function() {
-    this.render(hbs`{{value-change-indicator difference=0}}`);
+  it('inverts behaviour when increaseIsGood is false', function() {
+    this.set('diff', -10);
 
-    expect(this.$('.value-change-indicator').hasClass('no-change')).to.be.true;
-    expect(this.$('.value-change-indicator .fa').text()).to.be.empty;
-  });
+    this.render(hbs`{{value-change-indicator difference=diff increaseIsGood=false}}`);
 
-  it('obeys the useColor option', function() {
-    this.render(hbs`{{value-change-indicator difference=5 useColor=false}}`);
+    expect(this.$('.value-change-indicator').hasClass('good')).to.equal(true, 'good class on increase');
+    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.equal(true, 'down arrow on increase');
 
-    expect(this.$('.value-change-indicator').hasClass('good')).to.be.false;
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.be.true;
-  });
+    this.set('diff', 10);
 
-  it('obeys the increaseIsGood option', function() {
-    this.render(hbs`{{value-change-indicator difference=5 increaseIsGood=false}}`);
+    expect(this.$('.value-change-indicator').hasClass('bad')).to.equal(true, 'bad class on decrease');
+    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.equal(true, 'up arrow on decrease');
 
-    expect(this.$('.value-change-indicator').hasClass('bad')).to.be.true;
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.be.true;
+    this.set('diff', 0);
 
-    this.render(hbs`{{value-change-indicator difference=-5 increaseIsGood=false}}`);
-
-    expect(this.$('.value-change-indicator').hasClass('good')).to.be.true;
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.be.true;
+    expect(this.$('.value-change-indicator').hasClass('no-change')).to.equal(true, 'no-change class on no change');
+    expect(this.$('.value-change-indicator .fa').text()).to.equal('', 'no icon on no change');
   });
 
   it('can calculate a difference between two values', function() {
-    this.render(hbs`{{value-change-indicator from=50 to=100}}`);
+    this.set('from', 50);
+    this.set('to', 100);
 
-    expect(this.$('.value-change-indicator').hasClass('good')).to.be.true;
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.be.true;
+    this.render(hbs`{{value-change-indicator from=from to=to}}`);
 
-    this.render(hbs`{{value-change-indicator from=100 to=50}}`);
+    expect(this.$('.value-change-indicator').hasClass('good')).to.equal(true, 'good class on increase');
+    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.equal(true, 'up arrow on increase');
 
-    expect(this.$('.value-change-indicator').hasClass('bad')).to.be.true;
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.be.true;
+    this.set('from', 100);
+    this.set('to', 50);
 
-    this.render(hbs`{{value-change-indicator from=100 to=100}}`);
+    expect(this.$('.value-change-indicator').hasClass('bad')).to.equal(true, 'bad class on decrease');
+    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.equal(true, 'down arrow on decrease');
 
-    expect(this.$('.value-change-indicator').hasClass('no-change')).to.be.true;
-    expect(this.$('.value-change-indicator .fa').text()).to.be.empty;
+    this.set('to', 100);
+
+    expect(this.$('.value-change-indicator').hasClass('no-change')).to.equal(true, 'no-change class on no change');
+    expect(this.$('.value-change-indicator .fa').text()).to.equal('', 'no icon on no change');
   });
 });
