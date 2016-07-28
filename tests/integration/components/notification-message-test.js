@@ -1,83 +1,82 @@
 import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
+import { beforeEach } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
-const { Service } = Ember;
+const {
+  Service,
+  assign,
+  run
+} = Ember;
 
 describeComponent('notification-message', 'Integration: NotificationMessageComponent', { integration: true }, function() {
+  beforeEach(function() {
+    this.set('notification', {
+      autoClear: true,
+      clearDuration: 100,
+      message: 'content'
+    });
+  });
 
   it('renders error notification in inline form', function() {
-    const errorNotification = {autoClear: true, clearDuration: 3500, message: 'test-error', type: 'error'};
-    this.set('notification', errorNotification);
     this.render(hbs`{{notification-message notification=notification}}`);
-    expect(this.$('div.content').text()).to.contain('test-error');
-    expect(this.$('div.icon i').attr('class')).to.contain('fa-exclamation-circle');
+
+    expect(this.$('.content').text()).to.contain('content', 'message is correct');
+    expect(this.$('.icon i').attr('class')).to.contain('fa-info-circle', 'default icon is correct');
+
+    this.set('notification.type', 'info');
+    expect(this.$('.notification').hasClass('info')).to.equal(true, 'has info class');
+    expect(this.$('.icon i').attr('class')).to.contain('fa-info-circle', 'info icon is correct');
+
+    this.set('notification.type', 'error');
+    expect(this.$('.notification').hasClass('error')).to.equal(true, 'has error class');
+    expect(this.$('.icon i').attr('class')).to.contain('fa-exclamation-circle', 'error icon is correct');
+
+    this.set('notification.type', 'warning');
+    expect(this.$('.notification').hasClass('warning')).to.equal(true, 'has warning class');
+    expect(this.$('.icon i').attr('class')).to.contain('fa-warning', 'warning icon is correct');
+
+    this.set('notification.type', 'success');
+    expect(this.$('.notification').hasClass('success')).to.equal(true, 'has success class');
+    expect(this.$('.icon i').attr('class')).to.contain('fa-check', 'success icon is correct');
   });
 
-  it('renders info notification in inline form', function() {
-    const infoNotification = {autoClear: true, clearDuration: 3500, message: 'test-info', type: 'info'};
-    this.set('notification', infoNotification);
+  it('shows a progress bar if autoClear is true', function(done) {
     this.render(hbs`{{notification-message notification=notification}}`);
-    expect(this.$('div.content').text()).to.contain('test-info');
-    expect(this.$('div.icon i').attr('class')).to.contain('fa-info-circle');
-  });
 
-  it('renders warning notification in inline form', function() {
-    const warningNotification = {autoClear: true, clearDuration: 3500, message: 'test-warning', type: 'warning'};
-    this.set('notification', warningNotification);
-    this.render(hbs`{{notification-message notification=notification}}`);
-    expect(this.$('div.content').text()).to.contain('test-warning');
-    expect(this.$('div.icon i').attr('class')).to.contain('fa-warning');
-  });
+    expect(this.$('.countdown')).to.have.length(1, 'progress bar exists');
+    expect(this.$('.countdown').css('animation-duration')).to.equal('0.1s', 'progress bar has correct animation duration');
 
-  it('renders success notification in inline form', function() {
-    const successNotification = {autoClear: true, clearDuration: 3500, message: 'test-success', type: 'success'};
-    this.set('notification', successNotification);
-    this.render(hbs`{{notification-message notification=notification}}`);
-    expect(this.$('div.content').text()).to.contain('test-success');
-    expect(this.$('div.icon i').attr('class')).to.contain('fa-check');
-  });
+    const initialWidth = this.$('.countdown').width();
 
-  it('If not autoClear, doesnt display counter', function() {
-    const notAutoclear = {autoClear: false, clearDuration: 3500, message: 'test-success', type: 'success'};
-    this.set('notification', notAutoclear);
-    this.render(hbs`{{notification-message notification=notification}}`);
-    expect(this.$('div.countdown')).to.have.lengthOf(0);
-  });
+    run.later(() => {
+      expect(this.$('.countdown').width()).to.be.lt(initialWidth, 'progress bar shrunk');
+      done();
+    }, 50);
+  })
 
-  it('If autoClear, displays counter', function() {
-    const notAutoclear = {autoClear: true, clearDuration: 3500, message: 'test-success', type: 'success'};
-    this.set('notification', notAutoclear);
-    this.render(hbs`{{notification-message notification=notification}}`);
-    expect(this.$('div.countdown')).not.to.have.lengthOf(0);
-  });
+  it('does not show progress bar is autoClear is false', function() {
+    this.set('notification.autoClear', false);
 
-  it('test long duration testing', function() {
-    const longDuration = {autoClear: true, clearDuration: 35000, message: 'test-success', type: 'success'};
-    this.set('notification', longDuration);
     this.render(hbs`{{notification-message notification=notification}}`);
-    expect(this.$('div.countdown').css('animation-duration')).to.be.equal('35s');
-  });
 
-  it('test short duration testing', function() {
-    const shortDuration = {autoClear: true, clearDuration: 350, message: 'test-success', type: 'success'};
-    this.set('notification', shortDuration);
-    this.render(hbs`{{notification-message notification=notification}}`);
-    expect(this.$('div.countdown').css('animation-duration')).to.be.equal('0.35s');
+    expect(this.$('.countdown')).to.have.length(0);
   });
 
   it('clicking on close runs close action', function(done) {
-    const stub = Service.extend({
+    const notification = this.get('notification');
 
-      clear() {
+    const notificationsServiceStub = Service.extend({
+      clear(n) {
+        expect(n).to.equal(notification);
         done();
       }
     });
-    const longDuration = {autoClear: true, clearDuration: 35000, message: 'test-success', type: 'success'};
-    this.register('service:notifications', stub);
-    this.set('notification', longDuration);
+
+    this.register('service:notifications', notificationsServiceStub);
     this.render(hbs`{{notification-message notification=notification}}`);
+
     this.$('a').click();
   });
 
