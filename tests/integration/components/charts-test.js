@@ -3,6 +3,7 @@ import { describeComponent, it } from 'ember-mocha';
 import { beforeEach, afterEach } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage from '../../helpers/setup-mirage-for-integration';
+import { formatNumber } from 'portal-toolkit/helpers/format-number';
 import fakeReporter from '../../../mirage/fake-reporter';
 /* global server */
 
@@ -20,10 +21,11 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true,
     const series = [ server.schema.branches.find(1) ];
 
     const period = {
-      start: '2015-03',
+      start: '2015-04',
       end: '2016-03',
       type: 'month'
     };
+
     this.set('metrics', metrics);
     this.set('series', series);
     this.set('period', period);
@@ -36,11 +38,13 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true,
   it('fills in data-table properly', function() {
     this.render(hbs`{{charts/data-table series=series metrics=metrics period=period}}`);
     expect(this.$('table tr td')[0].firstChild.data).to.equal('Sales');
-    expect(this.$('td.text-right').text()).to.equal('testNumber');
+    let metrics = this.get('metrics');
+    var shouldBe = formatNumber(['currency', metrics[0].series[0].periods[0].periodTypes['month'].value]);
+    expect(this.$('td.text-right').text()).to.equal(shouldBe);
   });
 
   it('renders line-chart component', function() {
-    this.render(hbs`{{charts/line-chart series=series thisData=data metrics=metrics period=period}}`);
+    this.render(hbs`{{charts/line-chart series=series metrics=metrics period=period}}`);
     expect(this.$('.c3-event-rect-11')).to.have.lengthOf(1);
     expect(this.$('.c3-event-rect-13')).to.not.have.lengthOf(1);
   });
@@ -50,7 +54,7 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true,
       metrics[0].series[0].periods[i].periodTypes['month'].value = i;
     }
     this.set('metrics', metrics);
-    this.render(hbs`{{charts/line-chart series=series thisData=data metrics=metrics period=period}}`);
+    this.render(hbs`{{charts/line-chart series=series metrics=metrics period=period}}`);
     let portion1 = this.$('.c3-shape-1')[0].cy.animVal.value;
     let portion2 = this.$('.c3-shape-2')[0].cy.animVal.value;
     let portion3 = this.$('.c3-shape-3')[0].cy.animVal.value;
@@ -59,24 +63,23 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true,
   });
 
   it('renders pie-chart component', function() {
-    this.render(hbs`{{charts/pie-chart series=series thisData=data metrics=metrics period=period}}`);
+    this.render(hbs`{{charts/pie-chart series=series metrics=metrics period=period}}`);
     expect(this.$('.c3-arc-Sales')).to.have.lengthOf(1);
   });
   it('fills in pie-chart data properly', function() {
-    this.render(hbs`{{charts/pie-chart series=series thisData=data metrics=metrics period=period}}`);
+    this.render(hbs`{{charts/pie-chart series=series metrics=metrics period=period}}`);
     let metrics = this.get('metrics');
     let temp = metrics[0].series[0].periods[0].periodTypes['month'].value;
     expect(this.$('.c3-arc-Sales')[0].__data__.value).to.equal(temp);
   });
   it('renders gauge-chart component', function() {
-    this.render(hbs`{{charts/gauge-chart series=series thisData=data metrics=metrics period=period}}`);
+    this.render(hbs`{{charts/gauge-chart series=series metrics=metrics period=period}}`);
     expect(this.$('.c3-arc-Sales')).to.have.lengthOf(1);
   });
   it('fills in gauge-chart data properly', function() {
-    this.render(hbs`{{charts/gauge-chart series=series target=80 thisData=data metrics=metrics period=period}}`);
+    this.render(hbs`{{charts/gauge-chart series=series target=80 metrics=metrics period=period}}`);
     let metrics = this.get('metrics');
     let temp = metrics[0].series[0].periods[0].periodTypes['month'].value;
-    console.log(this.$('.c3-arc-Sales')[0]);
     expect(this.$('.c3-arc-Sales')[0].__data__.value).to.equal(temp/80);
   });
 });
