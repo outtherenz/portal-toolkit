@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
-import { beforeEach, afterEach } from 'mocha';
+import { beforeEach } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
 import startMirage from '../../helpers/setup-mirage-for-integration';
 import { formatNumber } from 'portal-toolkit/helpers/format-number';
@@ -38,8 +38,8 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true,
   it('fills in data-table properly', function() {
     this.render(hbs`{{charts/data-table series=series metrics=metrics period=period}}`);
     expect(this.$('table tr td')[0].firstChild.data).to.equal('Sales');
-    let metrics = this.get('metrics');
-    var shouldBe = formatNumber(['currency', metrics[0].series[0].periods[0].periodTypes['month'].value]);
+    const metrics = this.get('metrics');
+    const shouldBe = formatNumber(['currency', metrics[0].series[0].periods[0].periodTypes['month'].value]);
     expect(this.$('td.text-right').text()).to.equal(shouldBe);
   });
 
@@ -49,15 +49,15 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true,
     expect(this.$('.c3-event-rect-13')).to.not.have.lengthOf(1);
   });
   it('fills in line-chart data properly', function() {
-    let metrics = this.get('metrics');
-    for(var i = 0; i<3; i++){
+    const metrics = this.get('metrics');
+    for (var i = 0; i < 3; i++) {
       metrics[0].series[0].periods[i].periodTypes['month'].value = i;
     }
     this.set('metrics', metrics);
     this.render(hbs`{{charts/line-chart series=series metrics=metrics period=period}}`);
-    let portion1 = this.$('.c3-shape-1')[0].cy.animVal.value;
-    let portion2 = this.$('.c3-shape-2')[0].cy.animVal.value;
-    let portion3 = this.$('.c3-shape-3')[0].cy.animVal.value;
+    const portion1 = this.$('.c3-shape-1')[0].cy.animVal.value;
+    const portion2 = this.$('.c3-shape-2')[0].cy.animVal.value;
+    const portion3 = this.$('.c3-shape-3')[0].cy.animVal.value;
     expect(portion1).to.be.above(portion2);
     expect(portion2).to.be.above(portion3);
   });
@@ -68,8 +68,8 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true,
   });
   it('fills in pie-chart data properly', function() {
     this.render(hbs`{{charts/pie-chart series=series metrics=metrics period=period}}`);
-    let metrics = this.get('metrics');
-    let temp = metrics[0].series[0].periods[0].periodTypes['month'].value;
+    const metrics = this.get('metrics');
+    const temp = metrics[0].series[0].periods[0].periodTypes['month'].value;
     expect(this.$('.c3-arc-Sales')[0].__data__.value).to.equal(temp);
   });
   it('renders gauge-chart component', function() {
@@ -78,8 +78,8 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true,
   });
   it('fills in gauge-chart data properly', function() {
     this.render(hbs`{{charts/gauge-chart series=series target=80 metrics=metrics period=period}}`);
-    let metrics = this.get('metrics');
-    let temp = metrics[0].series[0].periods[0].periodTypes['month'].value;
-    expect(this.$('.c3-arc-Sales')[0].__data__.value).to.equal(temp/80);
+    const metrics = this.get('metrics');
+    const temp = metrics[0].series[0].periods[0].periodTypes['month'].value;
+    expect(this.$('.c3-arc-Sales')[0].__data__.value).to.equal(temp / 80);
   });
 });

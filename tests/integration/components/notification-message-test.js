@@ -6,7 +6,6 @@ import Ember from 'ember';
 
 const {
   Service,
-  assign,
   run
 } = Ember;
 
@@ -54,7 +53,7 @@ describeComponent('notification-message', 'Integration: NotificationMessageCompo
       expect(this.$('.countdown').width()).to.be.lt(initialWidth, 'progress bar shrunk');
       done();
     }, 50);
-  })
+  });
 
   it('does not show progress bar is autoClear is false', function() {
     this.set('notification.autoClear', false);

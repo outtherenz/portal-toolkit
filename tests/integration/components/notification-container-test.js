@@ -10,10 +10,10 @@ describeComponent('notification-container', 'Integration: NotificationContainerC
 
   it('lists the notifications', function() {
     const notifications = [
-      { autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
-      { autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
-      { autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
-      { autoClear: false, clearDuration: 100, message: 'content', type: 'warning'}
+      {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
+      {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
+      {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
+      {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'}
     ];
 
     this.set('notifications', { list: notifications });
