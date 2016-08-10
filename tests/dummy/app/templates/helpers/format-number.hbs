@@ -2,39 +2,32 @@
   <h1><span class="title-category">Helper:</span> Format Number</h1>
 </header>
 
-<h2>Numbers</h2>
-
 <div class="example">
-  <ul>
-    <li>Number: {{format-number 'number' 123.456}}</li>
-    <li>Number, 3 places: {{format-number 'number' 123.456 places=3}}</li>
-    <li>Number, negative: {{format-number 'number' -123.456}}</li>
-  </ul>
-</div>
-
-<h2>Integers</h2>
-
-<div class="example">
-  <ul>
-    <li>Integer: {{format-number 'integer' 3.5}}</li>
-    <li>Integer: {{format-number 'integer' 31235134.123}}</li>
-    <li>Integer: {{format-number 'integer' 31235134.123 sigfigs=4}}</li>
-  </ul>
-</div>
-
-<h2>Currency</h2>
-
-<div class="example">
-  <ul>
-    <li>Currency: {{format-number 'currency' 3.5}}</li>
-  </ul>
-</div>
-
-<h2>Percentage</h2>
-
-<div class="example">
-    <ul>
-      <li>Percentage: {{format-number 'percentage' 0.547}}</li>
-      <li>Percentage, 1 place: {{format-number 'percentage' 0.547 places=1}}</li>
-    </ul>
+  <table>
+    <tr><th>original</th><th>format</th><th>Places</th><th>SigFigs</th><th>Output</th><th>generated formulae</th></tr>
+    <tr><h2>Custom</h2></tr>
+    <tr>
+      <td>{{input type='number' value=numberExample.original}}</td>
+      <td>{{input value=numberExample.format}}</td>
+      <td>{{input type='number' value=numberExample.places}}</td>
+      <td>{{input type='number' value=(mut numberExample.sigfigs)}}</td>
+      <td>{{format-number thisExample.format numberExample.original places=numberExample.places sigfigs=numberExample.sigfigs}}</td>
+      <td><textarea>\{{format-number '{{~numberExample.format}}' places={{~numberExample.places}} Sigfigs={{~numberExample.sigfigs}}
+        {{~closebraces}}
+      </textarea></td>
+    </tr>
+    {{#each formats as |format|}}
+      <tr><h2>{{format.name}}</h2></tr>
+      {{#each format.examples as |example|}}
+        <tr>
+          <td>{{example.original}}</td>
+          <td>{{example.format}}</td>
+          <td>{{example.places}}</td>
+          <td>{{example.sigfigs}}</td>
+          <td>{{format-number example.format example.original places=example.places sigfigs=example.sigfigs}}</td>
+          <td><textarea>{{example.equation}}</textarea></td>
+        </tr>
+      {{/each}}
+    {{/each}}
+  </table>
 </div>

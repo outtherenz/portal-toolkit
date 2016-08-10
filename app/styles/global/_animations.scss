@@ -1,0 +1,126 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Animations
+******************************************************************/
+
+.shake {
+  @include animation(shake 150ms ease-in-out 3);
+}
+
+@include keyframes(shake) {
+  0% {
+    @include transform(translateX(0));
+  }
+
+  25% {
+    @include transform(translateX(-8px));
+  }
+
+  75% {
+    @include transform(translateX(8px));
+  }
+
+  100% {
+    @include transform(translateX(0));
+  }
+}
+
+@include keyframes(fadeIn) {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}
+
+@include keyframes(loadingCircle) {
+  0% {
+    opacity: 1;
+    // r: 0;
+  }
+
+  25% {
+    opacity: 0.9;
+  }
+
+  60% {
+    opacity: 0;
+    // r: 44;
+  }
+}
+
+@include keyframes(spin) {
+  from {
+    @include transform(rotate(0deg));
+  }
+
+  to {
+    @include transform(rotate(360deg));
+  }
+}
+
+/*********************
+NOTIFICATIONS
+*********************/
+
+// Show
+
+@include keyframes(notification-show) {
+  0% {
+    @include transform(perspective(450px) translate(0, -30px) rotateX(90deg));
+    opacity: 0;
+  }
+
+  100% {
+    @include transform(perspective(450px) translate(0, 0) rotateX(0deg));
+    opacity: 1;
+  }
+}
+
+// Shrink
+
+@include keyframes(notification-shrink) {
+  0% {
+    @include transform(scale(.8));
+    opacity: 0;
+    max-height: 35px;
+    margin-bottom: 0.5em;
+  }
+
+  100% {
+    @include transform(scale(.8));
+    opacity: 0;
+    max-height: 0;
+    margin-bottom: 0;
+  }
+}
+
+// Hide
+
+@include keyframes(notification-hide) {
+  0% {
+    @include transform(scale(1));
+    opacity: 1;
+  }
+
+  100% {
+    @include transform(scale(.8));
+    opacity: 0;
+  }
+}
+
+// Countdown
+
+@include keyframes(notification-countdown) {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}

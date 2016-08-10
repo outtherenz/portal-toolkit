@@ -1,3 +1,7 @@
 {{#each sortedContent as |item|}}
-  <li data-id={{item.id}}>{{get item property}}</li>
+  {{#if hasBlock}}
+    {{yield item}}
+  {{else}}
+    <li data-id={{item.id}}>{{get item property}}</li>
+  {{/if}}
 {{/each}}

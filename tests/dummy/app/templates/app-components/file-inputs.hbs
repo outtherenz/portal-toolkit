@@ -3,13 +3,26 @@
 </header>
 
 <h2><span class="title-category">Component:</span> General</h2>
+{{file-inputs/general file=importData accept='.csv,.txt'}}
+\{{file-inputs/general file=importData accept='.csv,.txt'}}
 
-{{!-- example here --}}
 
 <h2><span class="title-category">Component:</span> CSV</h2>
-
-{{!-- example here --}}
+{{file-inputs/csv file=importData accept='.csv,.txt'}}
+\{{file-inputs/csv file=importData accept='.csv,.txt'}}
 
 <h2><span class="title-category">Component:</span> Text</h2>
+{{file-inputs/text file=importData accept='.csv,.txt'}}
+\{{file-inputs/text file=importData accept='.csv,.txt'}}
 
-{{!-- example here --}}
+{{#page-description title='Loading Button'}}
+<h1>Variables</h1>
+  <h3>action</h3>
+  <p>The action to be triggered upon clicking. Must be defined in the controller of the page</p>
+  <h3>isLoading</h3>
+  <p>this should be assigned to a boolean value that changes based on whether you want it to be 'loading' (true) or not 'loading' (false)</p>
+  <h3>isDisabled</h3>
+  <p>this should be assigned to a boolean value that changes based on whether you want it to be 'loading' (true) or not 'loading' (false)</p>
+  <h3>Using as a Block</h3>
+  <p>Using this helper as a block helper ie. {{example}}. allows you to define the text of the button, otherwise this defaults to "Submit"</p>
+{{/page-description}}

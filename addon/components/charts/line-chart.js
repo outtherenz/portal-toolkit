@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import C3Chart from 'ember-c3/components/c3-chart';
-import { formatNumber } from 'portal/helpers/format-number';
+import { formatNumber } from 'portal-toolkit/helpers/format-number';
 import moment from 'moment';
 
 const { computed, Logger, isArray, get } = Ember;
@@ -31,7 +31,7 @@ export default C3Chart.extend({
     }
 
     seriesMeta.forEach((meta, seriesIndex) => {
-      const thisSeries = series.find(s => s.branch === get(meta, 'id') || s.group === get(meta, 'id')) || {};
+      const thisSeries = series.find(s => s.entity === get(meta, 'id') || s.group === get(meta, 'id')) || {};
       const periods = thisSeries.periods || [];
       columns.pushObject([ get(meta, 'name') ]);
 

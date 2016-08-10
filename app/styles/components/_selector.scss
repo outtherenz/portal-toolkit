@@ -1,0 +1,31 @@
+.selector {
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-family: inherit;
+    margin: 0.5em 0;
+  }
+
+  label {
+    float: none;
+    display: block;
+    font-weight: normal;
+    width: auto;
+    padding: 0.2em 0.5em;
+    cursor: pointer;
+
+    &.heading {
+      font-weight: bold;
+      color: tint($copy-color, 40%);
+    }
+
+    @for $i from 0 through 5 {
+      &.depth-#{$i} input {
+        margin-right: $i * 1em + 0.5em;
+      }
+    }
+  }
+
+  input {
+    float: none;
+  }
+}

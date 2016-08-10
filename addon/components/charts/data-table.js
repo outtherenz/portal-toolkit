@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { formatNumber } from 'portal/helpers/format-number';
+import { formatNumber } from 'portal-toolkit/helpers/format-number';
 import layout from '../../templates/components/charts/data-table';
 import moment from 'moment';
 

@@ -2,7 +2,8 @@ import Ember from 'ember';
 import config from './config/environment';
 
 const Router = Ember.Router.extend({
-  location: config.locationType
+  location: config.locationType,
+  rootURL: config.rootURL
 });
 
 Router.map(function() {
@@ -18,14 +19,19 @@ Router.map(function() {
     this.route('notification-container');
     this.route('notification-message');
     this.route('print-button');
+    this.route('radio-slider');
     this.route('sortable-list');
     this.route('untethered-modal-dialog');
+    this.route('value-change-indicator');
   });
 
   this.route('helpers', function() {
     this.route('concat');
     this.route('format-number');
     this.route('math');
+  });
+  this.route('services', function() {
+    this.route('notifications');
   });
 
   this.route('404', { path: '*path' });

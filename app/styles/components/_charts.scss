@@ -1,0 +1,27 @@
+/******************************************************************
+Site Name: Portal
+Author: Carl Bennett <carlbennettnz@gmail.com>
+
+Stylesheet: Charts
+******************************************************************/
+
+.c3 svg {
+  font: 12px $copy-font;
+}
+
+.gauge-chart {
+  .c3-chart-arcs-gauge-unit{
+    font-size: 10px;
+  }
+  .c3-chart-arcs {
+    font-size: 8px;
+  }
+}
+
+.c3-line {
+  stroke-width: 1.8px;
+}
+
+.c3-tooltip-container {
+  margin-top: -30px; // temporary workaround for cut-off tooltips
+}
