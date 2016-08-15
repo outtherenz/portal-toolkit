@@ -50,9 +50,9 @@ describeComponent('charts', 'Integration: ChartsComponent', { integration: true,
   });
   it('fills in line-chart data properly', function() {
     const metrics = this.get('metrics');
-    for (var i = 0; i < 3; i++) {
-      metrics[0].series[0].periods[i].periodTypes['month'].value = i;
-    }
+    metrics[0].series[0].periods.forEach((period, index) => {
+      period.periodTypes.month.value = index;
+    });
     this.set('metrics', metrics);
     this.render(hbs`{{charts/line-chart series=series metrics=metrics period=period}}`);
     const portion1 = this.$('.c3-shape-1')[0].cy.animVal.value;

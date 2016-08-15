@@ -71,7 +71,7 @@ function buildSeries(schema, qp, periods) {
   // Take the periods we generated earlier and use them to populate branch lists
   branches.forEach(branch => {
     series.push({
-      branch,
+      entity: branch,
       meta: { name: _.get(schema.branches.find(branch), 'name') },
       periods: _.cloneDeep(periods)
     });
