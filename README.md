@@ -13,7 +13,7 @@ The Portal Toolkit is intended to hold all of the reusable components to be shar
 
 ## Running standalone
 
-Also this is an addon and therefore intended to be used inside another project, it is possible to serve the addons dummy app outside of testing. This is useful when adding to or updating this addon.
+Although this is an addon and therefore intended to be used inside another project, it is possible to serve the addon's dummy app outside of testing. This is useful when adding to or updating this addon.
 
 * `ember server`
 * Visit your app at http://localhost:4200.
