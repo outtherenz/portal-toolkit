@@ -9,7 +9,7 @@ Stylesheet: Modals
   display: flex;
   justify-content: center;
 
-  .translucent {
+  &.translucent {
     background-color: rgba(#222, 0.5);
     @include animation(fadeIn 0.25s);
   }

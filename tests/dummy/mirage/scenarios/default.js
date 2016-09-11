@@ -3,7 +3,9 @@
 /* eslint-disable no-unused-vars */
 
 export default function(server) {
-  server.logging = false;
+  server.logging = true;
+
+  // toolkit
 
   const organisations = server.createList('organisation', 2);
   const branches = server.createList('branch', 10, { organisation: organisations[0] });

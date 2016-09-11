@@ -42,8 +42,6 @@ main {
   padding-bottom: 2*$gutter;
   flex: 1;
 
-  @include outer-container;
-
   .limit-large { max-width: 1024px - 50px; }
   .limit-medium { max-width: 1024px - 250px; }
   .limit-small { max-width: 1024px - 450px; }

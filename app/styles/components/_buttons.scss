@@ -18,6 +18,7 @@ Stylesheet: Buttons
   width: auto;
   overflow: hidden;
   text-align: center;
+  text-decoration: none;
 
   &[disabled] {
     background: $button-disabled;
@@ -67,10 +68,7 @@ Stylesheet: Buttons
   @include button();
 }
 
-input[type=submit],
-input[type=reset],
-button,
-a.button {
+.button {
   @extend %button-base;
 
   &.add {
@@ -111,6 +109,14 @@ a.button {
       background-color: shade($button-plain, 10%);
     }
   }
+}
+
+.button--save {
+  @include button($button-green);
+}
+
+.button--cancel {
+  @include button(#888);
 }
 
 // A button with a piece of status text

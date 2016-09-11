@@ -13,10 +13,16 @@ const {
   get
 } = Ember;
 
+const {
+  alias
+} = computed;
+
 export default Model.extend({
   quoter: belongsTo('user'),
   quoteNumber: attr('number'),
+  number: alias('quoteNumber'),
   date: attr('date'),
+  entity: belongsTo('entity'),
 
   // Content
   items: hasMany('quote-item'),

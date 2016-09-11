@@ -61,7 +61,7 @@ h6, .h6 {
   color: $heading-color;
   margin: 0 0 0.5em;
 
-  a, a:visited, a.active {
+  .link, .link:visited, .link.active {
     // Keep things consistent
     text-decoration: none;
     color: inherit;
@@ -142,7 +142,7 @@ header > h6:first-child:last-child {
 LINKS
 *******************/
 
-a, a:visited {
+.link, .link:visited {
   color: $link-color;
   text-decoration: none;
   cursor: pointer;

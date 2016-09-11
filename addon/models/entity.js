@@ -18,6 +18,6 @@ export default Model.extend({
 
   parent: belongsTo('entity', { inverse: null }),
 
-  dateCreated: attr('date'),
-  dateModified: attr('date')
+  // dateCreated: attr('date'),
+  // dateModified: attr('date')
 });
