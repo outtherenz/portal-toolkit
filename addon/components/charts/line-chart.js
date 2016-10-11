@@ -125,7 +125,7 @@ export default C3Chart.extend({
         tick: {
           format(tick) {
             if (meta.format === 'PERCENTAGE') {
-              return formatNumber([ 'percentage', tick ], { sigfigs: 4, dashZero: false });
+              return formatNumber([ 'percentage', tick ], { places: 2, dashZero: false });
             } else {
               return formatNumber(tick / reduction, { places: yAxisPlaces, dashZero: false });
             }
