@@ -31,6 +31,12 @@ body > .ember-view {
 .page {
   flex: 1; // Make the footer sticky
   display: flex;
+  flex-direction: column;
+}
+
+.sidebar-page {
+  display: flex;
+  flex: 1;
 }
 
 .sidebar {
@@ -38,16 +44,15 @@ body > .ember-view {
 }
 
 main {
-  padding-top: $gutter;
+  padding: $gutter;
   padding-bottom: 2*$gutter;
+  overflow-x: auto;
   flex: 1;
 
-  @include outer-container;
-
-  .limit-large { max-width: 1024px - 50px; }
+  .limit-large  { max-width: 1024px - 50px; }
   .limit-medium { max-width: 1024px - 250px; }
-  .limit-small { max-width: 1024px - 450px; }
-  .limit-tiny { max-width: 1024px - 650px; }
+  .limit-small  { max-width: 1024px - 450px; }
+  .limit-tiny   { max-width: 1024px - 650px; }
 }
 
 [class^=grid-] {
@@ -101,6 +106,7 @@ main {
 .master-detail {
   display: flex;
   padding: 0;
+  margin: 0 (-$gutter);
 
   > aside {
     flex: 0 0 auto;
