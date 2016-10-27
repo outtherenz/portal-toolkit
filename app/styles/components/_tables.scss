@@ -101,6 +101,14 @@ Stylesheet: Tables
   }
 }
 
+.table__text-input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
 .table__row--subheading .table__row--heading {
   background-color: mix($off-white, white);
   color: tint($copy-color, 50%);

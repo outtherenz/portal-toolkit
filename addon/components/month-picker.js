@@ -20,11 +20,18 @@ export default Component.extend({
 
   selectedMonth: computed('period', {
     get() {
-      return get(this, 'period').substr(5);
+      const period = moment(get(this, 'period'), 'YYYY-MM');
+      const month = period.isValid() ? period.format('MM') : moment().format('MM');
+
+      return month;
     },
+
     set(key, value) {
-      const current = get(this, 'period');
-      set(this, 'period', current.substr(0, 5) + value);
+      const period = get(this, 'period');
+      const currentYear = period ? period.substr(0, 4) : moment().format('YYYY');
+
+      set(this, 'period', `${currentYear}-${value}`);
+
       return value;
     }
   }),
@@ -32,19 +39,24 @@ export default Component.extend({
   selectedYear: computed('period', {
     get() {
       const period = get(this, 'period');
-      return typeof period === 'string' ? period.substr(0, 4) : String(moment().year());
+
+      return period ? period.substr(0, 4) : String(moment().year());
     },
+
     set(key, year) {
       const current = moment(get(this, 'period'), 'YYYY-MM');
       const month = current.isValid() ? current.format('MM') : moment().format('MM');
       year = moment(year, 'YYYY').isValid() ? String(year) : moment().format('YYYY');
+
       set(this, 'period', `${year}-${month}`);
+
       return year;
     }
   }),
 
   yearList: computed('period', function() {
-    const selected = moment(get(this, 'period').substr(0, 4), 'YYYY');
+    const period = moment(get(this, 'period'), 'YYYY-MM');
+    const selected = period.isValid() ? period : moment();
     let start = moment([moment().year() - 8]);
     let end = moment([moment().year() + 2]);
 
