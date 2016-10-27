@@ -1,0 +1,37 @@
+// Internet Explorer
+html.ie-7, html.ie-8, html.ie-9, html.ie-10 {
+  .old-ie-only {
+    display: block;
+  }
+}
+
+.old-ie-only {
+  display: none;
+}
+
+// display: flex causes crazy layout issues in IE11
+html.ie-11 body > .ember-view,
+html.ie-11 .page {
+  display: block;
+}
+
+// Prevents a weird block of colour from appearing on the left of the nav bar
+html.ie-11 .dashboard {
+  background-color: transparent;
+}
+
+html.ie-11 .right-options {
+  flex: none!important;
+}
+
+// Safari
+.safari {
+  // Default webkit-appearance in Safari bloats the selects outside of their containers
+  select {
+    -webkit-appearance: none;
+    padding: 5px 10px 5px;
+  }
+  .nav-bar .tabs a {
+    padding: 0.45em 1em 0.7em;
+  }
+}

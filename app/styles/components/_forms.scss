@@ -132,12 +132,6 @@ label {
     margin: 0 0.5em 0 0;
   }
 
-  .replace-file-input {
-    @include button($button-secondary);
-    float: none;
-    vertical-align: middle;
-  }
-
   &.fluid {
     width: auto;
     float: none;
@@ -158,6 +152,16 @@ label {
       margin-left: 0.5em;
       margin-right: 0;
     }
+  }
+
+  &.replace-file-input {
+    @include button($button-secondary);
+    float: none;
+    vertical-align: middle;
+  }
+
+  &.replace-file-input + input[type=file] {
+    display: none;
   }
 }
 
@@ -241,8 +245,6 @@ select[multiple] {
     margin-bottom: 0.5em;
   }
 }
-
-select[multiple]
 
 /* input[type=number] {
   width: 50px;
