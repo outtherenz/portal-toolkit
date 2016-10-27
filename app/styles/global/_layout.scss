@@ -21,7 +21,7 @@ body {
 }
 
 // Application view
-body > .ember-view {
+body > .ember-view:not(.draggable-map) {
   // Ensure the footer is always at the bottom of the window, even if the page is short
   display: flex;
   min-height: 100vh;
