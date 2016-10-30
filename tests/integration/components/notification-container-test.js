@@ -1,25 +1,31 @@
-import { expect } from 'chai';
-import { describeComponent, it } from 'ember-mocha';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-describeComponent('notification-container', 'Integration: NotificationContainerComponent', { integration: true }, function() {
-  it('has correct class', function() {
-    this.render(hbs`{{notification-container}}`);
-    expect(this.$('.notifications')).to.have.lengthOf(1);
-  });
+moduleForComponent('notification-container', 'Integration | Component | notification container', {
+  integration: true
+});
 
-  it('lists the notifications', function() {
-    const notifications = [
-      {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
-      {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
-      {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
-      {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'}
-    ];
+test('it has correct class', function(assert) {
+  assert.expect(1);
 
-    this.set('notifications', { list: notifications });
+  this.render(hbs`{{notification-container}}`);
 
-    this.render(hbs`{{notification-container notifications=notifications}}`);
+  assert.equal(this.$('.notifications').length, 1);
+});
 
-    expect(this.$('.notification')).to.have.lengthOf(4, 'lists all four notifications');
-  });
+test('it lists the notifications', function(assert) {
+  assert.expect(1);
+
+  const notifications = [
+    {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
+    {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
+    {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'},
+    {autoClear: false, clearDuration: 100, message: 'content', type: 'warning'}
+  ];
+
+  this.set('notifications', { list: notifications });
+
+  this.render(hbs`{{notification-container notifications=notifications}}`);
+
+  assert.equal(this.$('.notification').length, 4, 'lists all four notifications');
 });

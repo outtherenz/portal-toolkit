@@ -1,70 +1,78 @@
 import Ember from 'ember';
-import { expect } from 'chai';
-import { describeModule, it } from 'ember-mocha';
+import { moduleFor, test } from 'ember-qunit';
 
 const { get } = Ember;
 
-describeModule('service:cache', 'CacheService', {}, function() {
-  it('exists', function() {
-    expect(this.subject()).to.be.ok;
-  });
+moduleFor('service:cache', 'Unit | Service | cache', {
+  // Specify the other units that are required for this test.
+  // needs: ['service:foo']
+});
 
-  it('throws when not provided with a cache or key name to store under', function() {
-    expect(() => this.subject().store()).to.throw();
-    expect(() => this.subject().store('test')).to.throw();
-  });
+test('it exists', function(assert) {
+  assert.ok(this.subject());
+});
 
-  it('can store data', function() {
-    this.subject().store('test', 'key', 'x');
-    expect(get(this.subject(), '_cache.test.0.value')).equals('x');
-  });
+test('it throws when not provided with a cache or key name to store under', function(assert) {
+  assert.throws(() => this.subject().store());
+  assert.throws(() => this.subject().store('test'));
+});
 
-  it('can store data with an object as a key', function() {
-    this.subject().store('test', { a: 1 }, 'y');
-    expect(get(this.subject(), '_cache.test.1.key.a')).equals(1);
-    expect(get(this.subject(), '_cache.test.1.value')).equals('y');
-  });
+test('it can store data', function(assert) {
+  this.subject().store('test', 'key', 'x');
+  assert.equal(get(this.subject(), '_cache.test.0.value'), 'x');
+});
 
-  it('can store data with a falsey value as a key', function() {
-    this.subject().store('test', 0, 'z');
-    expect(get(this.subject(), '_cache.test.2.key')).equals(0);
-    expect(get(this.subject(), '_cache.test.2.value')).equals('z');
-  });
+test('it can store data with an object as a key', function(assert) {
+  this.subject().store('test', { a: 1 }, 'y');
+  assert.equal(get(this.subject(), '_cache.test.1.key.a'), 1);
+  assert.equal(get(this.subject(), '_cache.test.1.value'), 'y');
+});
 
-  it('throws when not provided with a cache or key name to lookup', function() {
-    expect(() => this.subject().lookup()).to.throw();
-    expect(() => this.subject().lookup('test')).to.throw();
-  });
+test('it can store data with a falsey value as a key', function(assert) {
+  this.subject().store('test', 0, 'z');
+  assert.equal(get(this.subject(), '_cache.test.2.key'), 0);
+  assert.equal(get(this.subject(), '_cache.test.2.value'), 'z');
+});
 
-  it('can lookup data', function() {
-    const value = this.subject().lookup('test', 'key');
-    expect(value).equals('x');
-  });
+test('it throws when not provided with a cache or key name to lookup', function(assert) {
+  assert.throws(() => this.subject().lookup());
+  assert.throws(() => this.subject().lookup('test'));
+});
 
-  it('can lookup data with an object as a key', function() {
-    const value = this.subject().lookup('test', { a: 1 });
-    expect(value).equals('y');
-  });
+test('it can lookup data', function(assert) {
+  const value = this.subject().lookup('test', 'key');
+  assert.equal(value, 'x');
+});
 
-  it('can lookup data with an falsey value as a key', function() {
-    const value = this.subject().lookup('test', 0);
-    expect(value).equals('z');
-  });
+test('it can lookup data with an object as a key', function(assert) {
+  const value = this.subject().lookup('test', { a: 1 });
+  assert.equal(value, 'y');
+});
 
-  it('throws when not provided with a cache to clear', function() {
-    expect(() => this.subject().clear()).to.throw();
-  });
+test('it can lookup data with an falsey value as a key', function(assert) {
+  const value = this.subject().lookup('test', 0);
+  assert.equal(value, 'z');
+});
 
-  it('can clear one item from the cache', function() {
-    const initial = get(this.subject(), '_cache.test.length');
-    const success = this.subject().clear('test', 'key');
-    expect(success).to.be.ok;
-    expect(get(this.subject(), '_cache.test')).to.have.lengthOf(initial - 1);
-  });
+test('it throws when not provided with a cache to clear', function(assert) {
+  assert.throws(() => this.subject().clear());
+});
 
-  it('can clear the cache', function() {
-    const success = this.subject().clear('test');
-    expect(success).to.be.ok;
-    expect(get(this.subject(), '_cache.test')).to.have.lengthOf(0);
-  });
+test('it can clear one item from the cache', function(assert) {
+  this.subject().store('test', 'key', 'x');
+  
+  const initial = get(this.subject(), '_cache.test.length');
+  const success = this.subject().clear('test', 'key');
+  
+  assert.ok(success);
+  assert.equal(get(this.subject(), '_cache.test').length, initial - 1);
+});
+
+test('it can clear the cache', function(assert) {
+  this.subject().store('test', 'key', 'x');
+  
+  const success = this.subject().clear('test');
+  
+  assert.ok(success);
+  assert.equal(get(this.subject(), '_cache.test').length, 0);
 });

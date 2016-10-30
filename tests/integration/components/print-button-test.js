@@ -1,12 +1,12 @@
-import { expect } from 'chai';
-import { describeComponent, it } from 'ember-mocha';
-import { before, after } from 'mocha';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-describeComponent('print-button', 'Integration: PrintButtonComponent', { integration: true }, function() {
-  let print;
+let print;
 
-  before(function() {
+moduleForComponent('print-button', 'Integration | Component | print button', {
+  integration: true,
+
+  beforeEach() {
     // Store the original window.print
     print = window.print;
 
@@ -15,29 +15,35 @@ describeComponent('print-button', 'Integration: PrintButtonComponent', { integra
       const event = new Event('print-stub');
       window.dispatchEvent(event);
     };
-  });
+  },
 
-  after(function() {
+  afterEach() {
     window.print = print;
-  });
+  }
+});
 
-  it('triggers window.print() when clicked', function(done) {
-    this.render(hbs`{{print-button}}`);
+test('it triggers window.print() when clicked', function(assert) {
+  assert.expect(0);
 
-    // Listen for the event from the window.print stub
-    window.addEventListener('print-stub', () => done());
+  const done = assert.async();
 
-    // Print
-    this.$('button').click();
-  });
+  this.render(hbs`{{print-button}}`);
 
-  it('has the correct title attribute', function() {
-    // Default
-    this.render(hbs`{{print-button}}`);
-    expect(this.$('button').attr('title')).to.equal('Print');
+  // Listen for the event from the window.print stub
+  window.addEventListener('print-stub', () => done());
 
-    // Custom
-    this.render(hbs`{{print-button title='Send to printer'}}`);
-    expect(this.$('button').attr('title')).to.equal('Send to printer');
-  });
+  // Print
+  this.$('button').click();
+});
+
+test('it has the correct title attribute', function(assert) {
+  assert.expect(2);
+
+  // Default
+  this.render(hbs`{{print-button}}`);
+  assert.equal(this.$('button').attr('title'), 'Print');
+
+  // Custom
+  this.render(hbs`{{print-button title='Send to printer'}}`);
+  assert.equal(this.$('button').attr('title'), 'Send to printer');
 });

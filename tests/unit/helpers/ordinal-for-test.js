@@ -1,52 +1,52 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
-import { ordinalFor } from 'portal-toolkit/helpers/ordinal-for';
 
-describe('OrdinalForHelper', function() {
-  it('returns st when it should', function() {
-    expect(ordinalFor(1)).to.equal('st');
-    expect(ordinalFor(21)).to.equal('st');
-    expect(ordinalFor(31)).to.equal('st');
-    expect(ordinalFor(101)).to.equal('st');
-    expect(ordinalFor(123451)).to.equal('st');
-    expect(ordinalFor(11)).to.not.equal('st');
-  });
+import { ordinalFor } from 'dummy/helpers/ordinal-for';
+import { module, test } from 'qunit';
 
-  it('returns nd when it should', function() {
-    expect(ordinalFor(2)).to.equal('nd');
-    expect(ordinalFor(22)).to.equal('nd');
-    expect(ordinalFor(32)).to.equal('nd');
-    expect(ordinalFor(102)).to.equal('nd');
-    expect(ordinalFor(123452)).to.equal('nd');
-    expect(ordinalFor(12)).to.not.equal('nd');
-  });
+module('Unit | Helper | ordinal for');
 
-  it('returns rd when it should', function() {
-    expect(ordinalFor(3)).to.equal('rd');
-    expect(ordinalFor(23)).to.equal('rd');
-    expect(ordinalFor(33)).to.equal('rd');
-    expect(ordinalFor(103)).to.equal('rd');
-    expect(ordinalFor(123453)).to.equal('rd');
-    expect(ordinalFor(13)).to.not.equal('rd');
-  });
+test('it returns st when it should', function(assert) {
+  assert.equal(ordinalFor(1), 'st');
+  assert.equal(ordinalFor(21), 'st');
+  assert.equal(ordinalFor(31), 'st');
+  assert.equal(ordinalFor(101), 'st');
+  assert.equal(ordinalFor(123451), 'st');
+  assert.notEqual(ordinalFor(11), 'st');
+});
 
-  it('returns th when it should', function() {
-    expect(ordinalFor(0)).to.equal('th');
-    expect(ordinalFor(4)).to.equal('th');
-    expect(ordinalFor(9)).to.equal('th');
-    expect(ordinalFor(10)).to.equal('th');
-    expect(ordinalFor(11)).to.equal('th');
-    expect(ordinalFor(12)).to.equal('th');
-    expect(ordinalFor(13)).to.equal('th');
-    expect(ordinalFor(14)).to.equal('th');
-    expect(ordinalFor(24)).to.equal('th');
-    expect(ordinalFor(104)).to.equal('th');
-  });
+test('it returns nd when it should', function(assert) {
+  assert.equal(ordinalFor(2), 'nd');
+  assert.equal(ordinalFor(22), 'nd');
+  assert.equal(ordinalFor(32), 'nd');
+  assert.equal(ordinalFor(102), 'nd');
+  assert.equal(ordinalFor(123452), 'nd');
+  assert.notEqual(ordinalFor(12), 'nd');
+});
 
-  it('returns nothing when it should', function() {
-    expect(ordinalFor(-1)).to.be.null;
-    expect(ordinalFor(1.5)).to.be.null;
-    expect(ordinalFor(Infinity)).to.be.null;
-    expect(ordinalFor(5e100)).to.be.null;
-  });
+test('it returns rd when it should', function(assert) {
+  assert.equal(ordinalFor(3), 'rd');
+  assert.equal(ordinalFor(23), 'rd');
+  assert.equal(ordinalFor(33), 'rd');
+  assert.equal(ordinalFor(103), 'rd');
+  assert.equal(ordinalFor(123453), 'rd');
+  assert.notEqual(ordinalFor(13), 'rd');
+});
+
+test('it returns th when it should', function(assert) {
+  assert.equal(ordinalFor(0), 'th');
+  assert.equal(ordinalFor(4), 'th');
+  assert.equal(ordinalFor(9), 'th');
+  assert.equal(ordinalFor(10), 'th');
+  assert.equal(ordinalFor(11), 'th');
+  assert.equal(ordinalFor(12), 'th');
+  assert.equal(ordinalFor(13), 'th');
+  assert.equal(ordinalFor(14), 'th');
+  assert.equal(ordinalFor(24), 'th');
+  assert.equal(ordinalFor(104), 'th');
+});
+
+test('it returns nothing when it should', function(assert) {
+  assert.equal(ordinalFor(-1), null);
+  assert.equal(ordinalFor(1.5), null);
+  assert.equal(ordinalFor(Infinity), null);
+  assert.equal(ordinalFor(5e100), null);
 });
