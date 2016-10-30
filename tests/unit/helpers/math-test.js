@@ -1,46 +1,44 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
-import { math } from 'portal-toolkit/helpers/math';
+import { math } from 'dummy/helpers/math';
+import { module, test } from 'qunit';
 
-describe('MathHelper', function() {
-  it('can do addition', function() {
-    expect(math([ 1, '+', 1 ])).to.equal(2);
-    expect(math([ '1', '+', '1' ])).to.equal(2);
-    expect(math([ -1, '+', 5 ])).to.equal(4);
-    expect(math([ -9, '+', -3 ])).to.equal(-12);
-    expect(math([ Infinity, '+', 1 ])).to.equal(Infinity);
-    expect(() => math([ NaN, '+', NaN ])).to.throw();
-  });
+module('Unit | Helper | math');
 
-  it('can do subtraction', function() {
-    expect(math([ 1, '-', 1 ])).to.equal(0);
-    expect(math([ -1, '-', 5 ])).to.equal(-6);
-    expect(math([ -9, '-', -3 ])).to.equal(-6);
-    expect(math([ Infinity, '-', 1 ])).to.equal(Infinity);
-    expect(() => math([ NaN, '-', NaN ])).to.throw();
-  });
+test('it can do addition', function(assert) {
+  assert.equal(math([ 1, '+', 1 ]), 2);
+  assert.equal(math([ '1', '+', '1' ]), 2);
+  assert.equal(math([ -1, '+', 5 ]), 4);
+  assert.equal(math([ -9, '+', -3 ]), -12);
+  assert.equal(math([ Infinity, '+', 1 ]), Infinity);
+  assert.throws(() => math([ NaN, '+', NaN ]));
+});
 
-  it('can do multiplication', function() {
-    expect(math([ 1, '*', 1 ])).to.equal(1);
-    expect(math([ -1, '*', 5 ])).to.equal(-5);
-    expect(math([ -9, '*', -3 ])).to.equal(27);
-    expect(math([ Infinity, '*', 1 ])).to.equal(Infinity);
-    expect(() => math([ NaN, '*', NaN ])).to.throw();
-  });
+test('it can do subtraction', function(assert) {
+  assert.equal(math([ 1, '-', 1 ]), 0);
+  assert.equal(math([ -1, '-', 5 ]), -6);
+  assert.equal(math([ -9, '-', -3 ]), -6);
+  assert.equal(math([ Infinity, '-', 1 ]), Infinity);
+  assert.throws(() => math([ NaN, '-', NaN ]));
+});
 
-  it('can do division', function() {
-    expect(math([ 1, '/', 1 ])).to.equal(1);
-    expect(math([ 5, '/', -1 ])).to.equal(-5);
-    expect(math([ -9, '/', -3 ])).to.equal(3);
-    expect(math([ Infinity, '/', 1 ])).to.equal(Infinity);
-    expect(math([ 1, '/', Infinity ])).to.equal(0);
-    expect(() => math([ NaN, '/', NaN ])).to.throw();
-  });
+test('it can do multiplication', function(assert) {
+  assert.equal(math([ 1, '*', 1 ]), 1);
+  assert.equal(math([ -1, '*', 5 ]), -5);
+  assert.equal(math([ -9, '*', -3 ]), 27);
+  assert.equal(math([ Infinity, '*', 1 ]), Infinity);
+  assert.throws(() => math([ NaN, '*', NaN ]));
+});
 
-  it('throws if the operator in invalid', function() {
-    expect(() => math([ 1, 2 ])).to.throw();
-    expect(() => math()).to.throw();
-    expect(() => math([ 1, '/', 1 ])).not.to.throw();
+test('it can do division', function(assert) {
+  assert.equal(math([ 1, '/', 1 ]), 1);
+  assert.equal(math([ 5, '/', -1 ]), -5);
+  assert.equal(math([ -9, '/', -3 ]), 3);
+  assert.equal(math([ Infinity, '/', 1 ]), Infinity);
+  assert.equal(math([ 1, '/', Infinity ]), 0);
+  assert.throws(() => math([ NaN, '/', NaN ]));
+});
 
-  });
+test('it throws if the operator in invalid', function(assert) {
+  assert.throws(() => math([ 1, 2 ]));
+  assert.throws(() => math());
+  math([ 1, '/', 1 ]);
 });

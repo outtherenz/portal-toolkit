@@ -1,83 +1,92 @@
-import { expect } from 'chai';
-import { describeComponent, it } from 'ember-mocha';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-describeComponent('value-change-indicator', 'Integration: ValueChangeIndicatorComponent', { integration: true }, function() {
-  it('shows uses the correct classes and arrows', function() {
-    this.set('diff', 10);
+moduleForComponent('value-change-indicator', 'Integration | Component | value change indicator', {
+  integration: true
+});
 
-    this.render(hbs`{{value-change-indicator difference=diff}}`);
+test('it shows uses the correct classes and arrows', function(assert) {
+  assert.expect(6);
 
-    expect(this.$('.value-change-indicator').hasClass('good')).to.equal(true, 'good class on increase');
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.equal(true, 'up arrow on increase');
+  this.set('diff', 10);
 
-    this.set('diff', -10);
+  this.render(hbs`{{value-change-indicator difference=diff}}`);
 
-    expect(this.$('.value-change-indicator').hasClass('bad')).to.equal(true, 'bad class on decrease');
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.equal(true, 'down arrow on decrease');
+  assert.ok(this.$('.value-change-indicator').hasClass('good'), 'good class on increase');
+  assert.ok(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up'), 'up arrow on increase');
 
-    this.set('diff', 0);
+  this.set('diff', -10);
 
-    expect(this.$('.value-change-indicator').hasClass('no-change')).to.equal(true, 'no-change class on no change');
-    expect(this.$('.value-change-indicator .fa').text()).to.equal('', 'no icon on no change');
-  });
+  assert.ok(this.$('.value-change-indicator').hasClass('bad'), 'bad class on decrease');
+  assert.ok(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down'), 'down arrow on decrease');
 
-  it('does not add good, bad, and no-change classes if useColor is false', function() {
-    this.set('diff', 10);
+  this.set('diff', 0);
 
-    this.render(hbs`{{value-change-indicator difference=diff useColor=false}}`);
+  assert.ok(this.$('.value-change-indicator').hasClass('no-change'), 'no-change class on no change');
+  assert.equal(this.$('.value-change-indicator .fa').text(), '', 'no icon on no change');
+});
 
-    expect(this.$('.value-change-indicator').hasClass('good')).to.equal(false, 'no good class on increase');
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.equal(true, 'up arrow on increase');
+test('it does not add good, bad, and no-change classes if useColor is false', function(assert) {
+  assert.expect(6);
 
-    this.set('diff', -10);
+  this.set('diff', 10);
 
-    expect(this.$('.value-change-indicator').hasClass('bad')).to.equal(false, 'no bad class on decrease');
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.equal(true, 'down arrow on decrease');
+  this.render(hbs`{{value-change-indicator difference=diff useColor=false}}`);
 
-    this.set('diff', 0);
+  assert.notOk(this.$('.value-change-indicator').hasClass('good'), 'no good class on increase');
+  assert.ok(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up'), 'up arrow on increase');
 
-    expect(this.$('.value-change-indicator').hasClass('no-change')).to.equal(false, 'no no-change class on no change');
-    expect(this.$('.value-change-indicator .fa').text()).to.equal('', 'no icon on no change');
-  });
+  this.set('diff', -10);
 
-  it('inverts behaviour when increaseIsGood is false', function() {
-    this.set('diff', -10);
+  assert.notOk(this.$('.value-change-indicator').hasClass('bad'), 'no bad class on decrease');
+  assert.ok(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down'), 'down arrow on decrease');
 
-    this.render(hbs`{{value-change-indicator difference=diff increaseIsGood=false}}`);
+  this.set('diff', 0);
 
-    expect(this.$('.value-change-indicator').hasClass('good')).to.equal(true, 'good class on increase');
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.equal(true, 'down arrow on increase');
+  assert.notOk(this.$('.value-change-indicator').hasClass('no-change'), 'no no-change class on no change');
+  assert.equal(this.$('.value-change-indicator .fa').text(), '', 'no icon on no change');
+});
 
-    this.set('diff', 10);
+test('it inverts behaviour when increaseIsGood is false', function(assert) {
+  assert.expect(6);
 
-    expect(this.$('.value-change-indicator').hasClass('bad')).to.equal(true, 'bad class on decrease');
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.equal(true, 'up arrow on decrease');
+  this.set('diff', -10);
 
-    this.set('diff', 0);
+  this.render(hbs`{{value-change-indicator difference=diff increaseIsGood=false}}`);
 
-    expect(this.$('.value-change-indicator').hasClass('no-change')).to.equal(true, 'no-change class on no change');
-    expect(this.$('.value-change-indicator .fa').text()).to.equal('', 'no icon on no change');
-  });
+  assert.ok(this.$('.value-change-indicator').hasClass('good'), 'good class on increase');
+  assert.ok(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down'), 'down arrow on increase');
 
-  it('can calculate a difference between two values', function() {
-    this.set('from', 50);
-    this.set('to', 100);
+  this.set('diff', 10);
 
-    this.render(hbs`{{value-change-indicator from=from to=to}}`);
+  assert.ok(this.$('.value-change-indicator').hasClass('bad'), 'bad class on decrease');
+  assert.ok(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up'), 'up arrow on decrease');
 
-    expect(this.$('.value-change-indicator').hasClass('good')).to.equal(true, 'good class on increase');
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up')).to.equal(true, 'up arrow on increase');
+  this.set('diff', 0);
 
-    this.set('from', 100);
-    this.set('to', 50);
+  assert.ok(this.$('.value-change-indicator').hasClass('no-change'), 'no-change class on no change');
+  assert.equal(this.$('.value-change-indicator .fa').text(), '', 'no icon on no change');
+});
 
-    expect(this.$('.value-change-indicator').hasClass('bad')).to.equal(true, 'bad class on decrease');
-    expect(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down')).to.equal(true, 'down arrow on decrease');
+test('it can calculate a difference between two values', function(assert) {
+  assert.expect(6);
 
-    this.set('to', 100);
+  this.set('from', 50);
+  this.set('to', 100);
 
-    expect(this.$('.value-change-indicator').hasClass('no-change')).to.equal(true, 'no-change class on no change');
-    expect(this.$('.value-change-indicator .fa').text()).to.equal('', 'no icon on no change');
-  });
+  this.render(hbs`{{value-change-indicator from=from to=to}}`);
+
+  assert.ok(this.$('.value-change-indicator').hasClass('good'), 'good class on increase');
+  assert.ok(this.$('.value-change-indicator .fa').hasClass('fa-arrow-up'), 'up arrow on increase');
+
+  this.set('from', 100);
+  this.set('to', 50);
+
+  assert.ok(this.$('.value-change-indicator').hasClass('bad'), 'bad class on decrease');
+  assert.ok(this.$('.value-change-indicator .fa').hasClass('fa-arrow-down'), 'down arrow on decrease');
+
+  this.set('to', 100);
+
+  assert.ok(this.$('.value-change-indicator').hasClass('no-change'), 'no-change class on no change');
+  assert.equal(this.$('.value-change-indicator .fa').text(), '', 'no icon on no change');
 });

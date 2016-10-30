@@ -1,6 +1,5 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
-import sortAccounts from 'portal-toolkit/utils/sort-accounts';
+import sortAccounts from 'dummy/utils/sort-accounts';
+import { module, test } from 'qunit';
 
 const accounts = [{
   name: 'Expenses',
@@ -31,49 +30,49 @@ accounts.forEach(account => {
   };
 });
 
-describe('sortAccounts', function() {
-  it('groups and sorts by category, then sort index', function() {
-    const sortedNames = sortAccounts(accounts).map(account => account.name);
+module('Unit | Utility | sort accounts');
 
-    expect(sortedNames).to.deep.equal([
-      'Income',
-      'Expenses',
-      'Assets',
-      'Liabilities',
-      'Number of Employees'
-    ]);
+test('groups and sorts by category, then sort index', function(assert) {
+  const sortedNames = sortAccounts(accounts).map(account => account.name);
+
+  assert.deepEqual(sortedNames, [
+    'Income',
+    'Expenses',
+    'Assets',
+    'Liabilities',
+    'Number of Employees'
+  ]);
+});
+
+test('uses custom sort keys', function(assert) {
+  accounts.forEach(account => {
+    delete account.sortIndex;
   });
 
-  it('uses custom sort keys', function() {
-    accounts.forEach(account => {
-      delete account.sortIndex;
-    });
+  const sortedNames = sortAccounts(accounts, 'custom.sort').map(account => account.name);
 
-    const sortedNames = sortAccounts(accounts, 'custom.sort').map(account => account.name);
+  assert.deepEqual(sortedNames, [
+    'Income',
+    'Expenses',
+    'Assets',
+    'Liabilities',
+    'Number of Employees'
+  ]);
+});
 
-    expect(sortedNames).to.deep.equal([
-      'Income',
-      'Expenses',
-      'Assets',
-      'Liabilities',
-      'Number of Employees'
-    ]);
+test('uses custom sort and category keys', function(assert) {
+  accounts.forEach(account => {
+    delete account.category;
   });
 
-  it('uses custom sort and category keys', function() {
-    accounts.forEach(account => {
-      delete account.category;
-    });
+  const sortedNames = sortAccounts(accounts, 'custom.sort', 'custom.category')
+    .map(account => account.name);
 
-    const sortedNames = sortAccounts(accounts, 'custom.sort', 'custom.category')
-      .map(account => account.name);
-
-    expect(sortedNames).to.deep.equal([
-      'Income',
-      'Expenses',
-      'Assets',
-      'Liabilities',
-      'Number of Employees'
-    ]);
-  });
+  assert.deepEqual(sortedNames, [
+    'Income',
+    'Expenses',
+    'Assets',
+    'Liabilities',
+    'Number of Employees'
+  ]);
 });

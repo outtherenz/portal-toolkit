@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import { describeComponent, it } from 'ember-mocha';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -7,85 +6,95 @@ const {
   Object: EmberObject
 } = Ember;
 
-describeComponent('checkbox-list', 'Integration: CheckboxListComponent', { integration: true }, function() {
-  const cars = [
-    { make: 'BMW', color: 'black' },
-    { make: 'Ferari', color: 'red' },
-    { make: 'Volvo', color: 'blue' }
-  ];
+moduleForComponent('checkbox-list', 'Integration | Component | checkbox list', {
+  integration: true
+});
 
-  const Person = EmberObject.extend({
-    name: null,
-    gender: null
-  });
+const cars = [
+  { make: 'BMW', color: 'black' },
+  { make: 'Ferari', color: 'red' },
+  { make: 'Volvo', color: 'blue' }
+];
 
-  const persons = [
-    Person.create({ name: 'Lisa', gender: 'Female' }),
-    Person.create({ name: 'Bob', gender: 'Male' }),
-    Person.create({ name: 'John', gender: 'Male' })
-  ];
+const Person = EmberObject.extend({
+  name: null,
+  gender: null
+});
 
-  it('renders the list items', function() {
-    this.set('options', cars);
+const persons = [
+  Person.create({ name: 'Lisa', gender: 'Female' }),
+  Person.create({ name: 'Bob', gender: 'Male' }),
+  Person.create({ name: 'John', gender: 'Male' })
+];
 
-    this.render(hbs`{{checkbox-list options=options labelProperty='make'}}`);
+test('it renders the list items', function(assert) {
+  assert.expect(3);
 
-    const labels = this.$('label');
+  this.set('options', cars);
 
-    expect(this.$(labels[0]).text().trim()).to.equal('BMW');
-    expect(this.$(labels[1]).text().trim()).to.equal('Ferari');
-    expect(this.$(labels[2]).text().trim()).to.equal('Volvo');
-  });
+  this.render(hbs`{{checkbox-list options=options labelProperty='make'}}`);
 
-  it('has the selected item checked on init', function() {
-    this.set('options', cars);
-    this.set('selection', cars.slice(0, 2));
+  const labels = this.$('label');
 
-    this.render(hbs`{{checkbox-list options=options labelProperty='make' selection=selection}}`);
+  assert.equal(this.$(labels[0]).text().trim(), 'BMW');
+  assert.equal(this.$(labels[1]).text().trim(), 'Ferari');
+  assert.equal(this.$(labels[2]).text().trim(), 'Volvo');
+});
 
-    const labels = this.$('label');
-    const checkboxes = this.$('input');
+test('it has the selected item checked on init', function(assert) {
+  assert.expect(6);
 
-    expect(labels.eq(0).text().trim()).to.equal('BMW');
-    expect(labels.eq(1).text().trim()).to.equal('Ferari');
-    expect(labels.eq(2).text().trim()).to.equal('Volvo');
+  this.set('options', cars);
+  this.set('selection', cars.slice(0, 2));
 
-    expect(checkboxes.eq(0).prop('checked')).to.equal(true);
-    expect(checkboxes.eq(1).prop('checked')).to.equal(true);
-    expect(checkboxes.eq(2).prop('checked')).to.equal(false);
-  });
+  this.render(hbs`{{checkbox-list options=options labelProperty='make' selection=selection}}`);
 
-  it('adds the value a checkbox represents to the selection when that checkbox is checked', function() {
-    this.set('options', persons);
-    this.set('selection', persons.slice(0, 1));
+  const labels = this.$('label');
+  const checkboxes = this.$('input');
 
-    this.render(hbs`{{checkbox-list options=options labelProperty='name' selection=selection}}`);
+  assert.equal(labels.eq(0).text().trim(), 'BMW');
+  assert.equal(labels.eq(1).text().trim(), 'Ferari');
+  assert.equal(labels.eq(2).text().trim(), 'Volvo');
 
-    const checkboxes = this.$('input[type="checkbox"]');
+  assert.equal(checkboxes.eq(0).prop('checked'), true);
+  assert.equal(checkboxes.eq(1).prop('checked'), true);
+  assert.equal(checkboxes.eq(2).prop('checked'), false);
+});
 
-    expect(checkboxes.eq(2).prop('checked')).to.equal(false);
+test('it adds the value a checkbox represents to the selection when that checkbox is checked', function(assert) {
+  assert.expect(5);
 
-    checkboxes.eq(2).click();
+  this.set('options', persons);
+  this.set('selection', persons.slice(0, 1));
 
-    expect(checkboxes.eq(2).prop('checked')).to.equal(true);
-    expect(this.get('selection.length')).to.equal(2);
-    expect(this.get('selection')[0]).to.exist;
-    expect(this.get('selection')[1]).to.exist;
-  });
+  this.render(hbs`{{checkbox-list options=options labelProperty='name' selection=selection}}`);
 
-  it('removes the value a checkbox represents from the selection when that checkbox is unchecked', function() {
-    this.set('options', persons);
-    this.set('selection', persons.slice(0, 1));
+  const checkboxes = this.$('input[type="checkbox"]');
 
-    this.render(hbs`{{checkbox-list options=options labelProperty='name' selection=selection}}`);
+  assert.equal(checkboxes.eq(2).prop('checked'), false);
 
-    const checkboxes = this.$('input[type="checkbox"]');
+  checkboxes.eq(2).click();
 
-    expect(checkboxes.eq(0).prop('checked')).to.equal(true);
+  assert.ok(checkboxes.eq(2).prop('checked'));
+  assert.equal(this.get('selection.length'), 2);
+  assert.ok(this.get('selection')[0]);
+  assert.ok(this.get('selection')[1]);
+});
 
-    checkboxes.eq(0).click();
+test('it removes the value a checkbox represents from the selection when that checkbox is unchecked', function(assert) {
+  assert.expect(3);
 
-    expect(checkboxes.eq(0).prop('checked')).to.equal(false);
-    expect(this.get('selection.length')).to.equal(0);
-  });
+  this.set('options', persons);
+  this.set('selection', persons.slice(0, 1));
+
+  this.render(hbs`{{checkbox-list options=options labelProperty='name' selection=selection}}`);
+
+  const checkboxes = this.$('input[type="checkbox"]');
+
+  assert.ok(checkboxes.eq(0).prop('checked'));
+
+  checkboxes.eq(0).click();
+
+  assert.notOk(checkboxes.eq(0).prop('checked'));
+  assert.equal(this.get('selection.length'), 0);
 });

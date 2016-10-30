@@ -1,64 +1,66 @@
 import Ember from 'ember';
-import { expect } from 'chai';
-import { describeModule, it } from 'ember-mocha';
+import { moduleFor, test } from 'ember-qunit';
 
 const { get } = Ember;
 
-describeModule('service:notifications', 'NotificationsService', {}, function() {
-  it('exists', function() {
-    const service = this.subject();
-    expect(service).to.be.ok;
+moduleFor('service:notifications', 'Unit | Service | notifications', {
+  // Specify the other units that are required for this test.
+  // needs: ['service:foo']
+});
+
+test('it exists', function(assert) {
+  const service = this.subject();
+  assert.ok(service);
+});
+
+test('it can add a notification with show(message)', function(assert) {
+  this.subject().show('Message 1');
+  const notification = get(this.subject(), 'list.lastObject');
+  assert.equal(get(notification, 'type'), 'info');
+  assert.equal(get(notification, 'message'), 'Message 1');
+  assert.notOk(get(notification, 'autoClear'));
+});
+
+test('it can add a notification with show(message, duration)', function(assert) {
+  this.subject().show('Message 2', 2000);
+  const notification = get(this.subject(), 'list.lastObject');
+  assert.equal(get(notification, 'type'), 'info');
+  assert.equal(get(notification, 'message'), 'Message 2');
+  assert.ok(get(notification, 'autoClear'));
+  assert.equal(get(notification, 'clearDuration'), 2000);
+});
+
+test('it can add notifications with info(), warning(), success(), and error()', function(assert) {
+  let notification;
+
+  [ 'info', 'warning', 'success', 'error' ].forEach(type => {
+    this.subject()[type](type);
+    notification = get(this.subject(), 'list.lastObject');
+    assert.equal(get(notification, 'type'), type);
+    assert.equal(get(notification, 'message'), type);
+
+    this.subject()[type](`${type} auto clear`, 1234);
+    notification = get(this.subject(), 'list.lastObject');
+    assert.equal(get(notification, 'type'), type);
+    assert.equal(get(notification, 'message'), `${type} auto clear`);
+    assert.ok(get(notification, 'autoClear'));
+    assert.equal(get(notification, 'clearDuration'), 1234);
   });
+});
 
-  it('can add a notification with show(message)', function() {
-    this.subject().show('Message 1');
-    const notification = get(this.subject(), 'list.lastObject');
-    expect(get(notification, 'type')).equals('info');
-    expect(get(notification, 'message')).equals('Message 1');
-    expect(get(notification, 'autoClear')).to.be.false;
-  });
+test('it can clear a single notification', function(assert) {
+  const list = get(this.subject(), 'list');
+  const toRemove = list.findBy('autoClear', false);
+  this.subject().clear(toRemove);
+  assert.ok(get(toRemove, 'dismiss'));
+});
 
-  it('can add a notification with show(message, duration)', function() {
-    this.subject().show('Message 2', 2000);
-    const notification = get(this.subject(), 'list.lastObject');
-    expect(get(notification, 'type')).equals('info');
-    expect(get(notification, 'message')).equals('Message 2');
-    expect(get(notification, 'autoClear')).to.be.true;
-    expect(get(notification, 'clearDuration')).equals(2000);
-  });
+test('it throws if no notification is provided for clearance', function(assert) {
+  assert.throws(() => this.subject().clear());
+});
 
-  it('can add notifications with info(), warning(), success(), and error()', function() {
-    let notification;
-
-    [ 'info', 'warning', 'success', 'error' ].forEach(type => {
-      this.subject()[type](type);
-      notification = get(this.subject(), 'list.lastObject');
-      expect(get(notification, 'type')).equals(type);
-      expect(get(notification, 'message')).equals(type);
-
-      this.subject()[type](`${type} auto clear`, 1234);
-      notification = get(this.subject(), 'list.lastObject');
-      expect(get(notification, 'type')).equals(type);
-      expect(get(notification, 'message')).equals(`${type} auto clear`);
-      expect(get(notification, 'autoClear')).to.be.true;
-      expect(get(notification, 'clearDuration')).equals(1234);
-    });
-  });
-
-  it('can clear a single notification', function() {
-    const list = get(this.subject(), 'list');
-    const toRemove = list.findBy('autoClear', false);
-    this.subject().clear(toRemove);
-    expect(get(toRemove, 'dismiss')).to.be.true;
-  });
-
-  it('throws if no notification is provided for clearance', function() {
-    expect(() => this.subject().clear()).to.throw();
-  });
-
-  it('can clear all notifications', function() {
-    this.subject().clearAll();
-    const notifications = get(this.subject(), 'list');
-    expect(notifications).to.have.lengthOf(get(notifications.filterBy('dismiss'), 'length'));
-  });
+test('it can clear all notifications', function(assert) {
+  this.subject().clearAll();
+  const notifications = get(this.subject(), 'list');
+  assert.equal(notifications.length, get(notifications.filterBy('dismiss'), 'length'));
 });

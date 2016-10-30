@@ -1,6 +1,4 @@
-import { expect } from 'chai';
-import { describeComponent, it } from 'ember-mocha';
-import { beforeEach } from 'mocha';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
@@ -9,74 +7,86 @@ const {
   run
 } = Ember;
 
-describeComponent('notification-message', 'Integration: NotificationMessageComponent', { integration: true }, function() {
-  beforeEach(function() {
+moduleForComponent('notification-message', 'Integration | Component | notification message', {
+  integration: true,
+
+  beforeEach() {
     this.set('notification', {
       autoClear: true,
       clearDuration: 100,
       message: 'content'
     });
-  });
+  }
+});
 
-  it('renders error notification in inline form', function() {
-    this.render(hbs`{{notification-message notification=notification}}`);
+test('it renders error notification in inline form', function(assert) {
+  assert.expect(10);
 
-    expect(this.$('.content').text()).to.contain('content', 'message is correct');
-    expect(this.$('.icon i').attr('class')).to.contain('fa-info-circle', 'default icon is correct');
+  this.render(hbs`{{notification-message notification=notification}}`);
 
-    this.set('notification.type', 'info');
-    expect(this.$('.notification').hasClass('info')).to.equal(true, 'has info class');
-    expect(this.$('.icon i').attr('class')).to.contain('fa-info-circle', 'info icon is correct');
+  assert.ok(this.$('.content').text().match(/content/), 'message is correct');
+  assert.ok(this.$('.icon i').attr('class').match(/fa-info-circle/), 'default icon is correct');
 
-    this.set('notification.type', 'error');
-    expect(this.$('.notification').hasClass('error')).to.equal(true, 'has error class');
-    expect(this.$('.icon i').attr('class')).to.contain('fa-exclamation-circle', 'error icon is correct');
+  this.set('notification.type', 'info');
+  assert.ok(this.$('.notification').hasClass('info'), 'has info class');
+  assert.ok(this.$('.icon i').attr('class').match(/fa-info-circle/), 'info icon is correct');
 
-    this.set('notification.type', 'warning');
-    expect(this.$('.notification').hasClass('warning')).to.equal(true, 'has warning class');
-    expect(this.$('.icon i').attr('class')).to.contain('fa-warning', 'warning icon is correct');
+  this.set('notification.type', 'error');
+  assert.ok(this.$('.notification').hasClass('error'), 'has error class');
+  assert.ok(this.$('.icon i').attr('class').match(/fa-exclamation-circle/), 'error icon is correct');
 
-    this.set('notification.type', 'success');
-    expect(this.$('.notification').hasClass('success')).to.equal(true, 'has success class');
-    expect(this.$('.icon i').attr('class')).to.contain('fa-check', 'success icon is correct');
-  });
+  this.set('notification.type', 'warning');
+  assert.ok(this.$('.notification').hasClass('warning'), 'has warning class');
+  assert.ok(this.$('.icon i').attr('class').match(/fa-warning/), 'warning icon is correct');
 
-  it('shows a progress bar if autoClear is true', function(done) {
-    this.render(hbs`{{notification-message notification=notification}}`);
+  this.set('notification.type', 'success');
+  assert.ok(this.$('.notification').hasClass('success'), 'has success class');
+  assert.ok(this.$('.icon i').attr('class').match(/fa-check/), 'success icon is correct');
+});
 
-    expect(this.$('.countdown')).to.have.length(1, 'progress bar exists');
-    expect(this.$('.countdown').css('animation-duration')).to.equal('0.1s', 'progress bar has correct animation duration');
+test('it shows a progress bar if autoClear is true', function(assert) {
+  assert.expect(3);
 
-    const initialWidth = this.$('.countdown').width();
+  const done = assert.async();
 
-    run.later(() => {
-      expect(this.$('.countdown').width()).to.be.lt(initialWidth, 'progress bar shrunk');
+  this.render(hbs`{{notification-message notification=notification}}`);
+
+  assert.equal(this.$('.countdown').length, 1, 'progress bar exists');
+  assert.equal(this.$('.countdown').css('animation-duration'), '0.1s', 'progress bar has correct animation duration');
+
+  const initialWidth = this.$('.countdown').width();
+
+  run.later(() => {
+    assert.ok(this.$('.countdown').width() < initialWidth, 'progress bar shrunk');
+    done();
+  }, 50);
+});
+
+test('it does not show progress bar is autoClear is false', function(assert) {
+  assert.expect(1);
+
+  this.set('notification.autoClear', false);
+
+  this.render(hbs`{{notification-message notification=notification}}`);
+
+  assert.equal(this.$('.countdown').length, 0);
+});
+
+test('it clicking on close runs close action', function(assert) {
+  assert.expect(1);
+
+  const done = assert.async();
+  const notification = this.get('notification');
+
+  const notificationsServiceStub = Service.extend({
+    clear(n) {
+      assert.equal(n, notification);
       done();
-    }, 50);
+    }
   });
 
-  it('does not show progress bar is autoClear is false', function() {
-    this.set('notification.autoClear', false);
+  this.register('service:notifications', notificationsServiceStub);
+  this.render(hbs`{{notification-message notification=notification}}`);
 
-    this.render(hbs`{{notification-message notification=notification}}`);
-
-    expect(this.$('.countdown')).to.have.length(0);
-  });
-
-  it('clicking on close runs close action', function(done) {
-    const notification = this.get('notification');
-
-    const notificationsServiceStub = Service.extend({
-      clear(n) {
-        expect(n).to.equal(notification);
-        done();
-      }
-    });
-
-    this.register('service:notifications', notificationsServiceStub);
-    this.render(hbs`{{notification-message notification=notification}}`);
-
-    this.$('a').click();
-  });
-
+  this.$('a').click();
 });

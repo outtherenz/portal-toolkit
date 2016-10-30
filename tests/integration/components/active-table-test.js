@@ -1,65 +1,34 @@
-import { expect } from 'chai';
-import { describeComponent, it } from 'ember-mocha';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 
-describeComponent('active-table', 'Integration: ActiveTableComponent', { integration: true }, function() {
-  it('sorts columns when their headers are clicked', function() {
-    this.set('tableColumns', [
-      { name: 'A', key: 'a' },
-      { name: 'B', key: 'b' },
-      { name: 'C', key: 'c' }
-    ]);
+moduleForComponent('active-table', 'Integration | Component | active table', {
+  integration: true
+});
 
-    this.set('sort', [ 'a:asc' ]);
+test('sorts columns when their headers are clicked', function(assert) {
+  assert.expect(4);
 
-    this.render(hbs`{{#active-table columns=tableColumns sortedBy=sort}}{{/active-table}}`);
+  this.set('tableColumns', [
+    { name: 'A', key: 'a' },
+    { name: 'B', key: 'b' },
+    { name: 'C', key: 'c' }
+  ]);
 
-    expect(this.$('.sorted')).to.have.lengthOf(1, 'only one heading should have the sorted class');
-    expect(this.$('th:not(.sorted)')).to.have.lengthOf(2, 'two headings should not have the sorted class');
+  this.set('sort', [ 'a:asc' ]);
 
-    const col1 = this.$('th:eq(0)');
-    const col2 = this.$('th:eq(1)');
+  this.render(hbs`{{#active-table columns=tableColumns sortedBy=sort}}{{/active-table}}`);
 
-    col2.find('a').click();
+  assert.equal(this.$('.sorted').length, 1, 'only one heading should have the sorted class');
+  assert.equal(this.$('th:not(.sorted)').length, 2, 'two headings should not have the sorted class');
 
-    return wait().then(() => {
-      expect(col1.hasClass('sorted')).to.equal(false, 'previously sorted column no longer has sorted class');
-      expect(col2.hasClass('sorted')).to.equal(true, 'clicked header gets sorted class');
-    });
-  });
+  const col1 = this.$('th:eq(0)');
+  const col2 = this.$('th:eq(1)');
 
-  it('clicking a sorted heading inverses the sort order', function() {
-    this.set('tableColumns', [
-      { name: 'A', key: 'a' },
-      { name: 'B', key: 'b' },
-      { name: 'C', key: 'c' }
-    ]);
+  col2.find('a').click();
 
-    this.set('sort', [ 'a:asc' ]);
-
-    this.render(hbs`{{#active-table columns=tableColumns sortedBy=sort}}{{/active-table}}`);
-
-    const col1 = this.$('th.sorted.ascending');
-
-    col1.find('a').click();
-
-    expect(col1.hasClass('ascending')).to.equal(false, 'ascending class is removed');
-  });
-
-  it('proportionally scales column widths', function() {
-    this.set('tableColumns', [
-      { name: 'A', key: 'a', width: 1 },
-      { name: 'B', key: 'b', width: 2 },
-      { name: 'C', key: 'c', width: 3 }
-    ]);
-
-    this.set('sort', [ 'a:asc' ]);
-
-    this.render(hbs`{{#active-table columns=tableColumns sortedBy=sort}}{{/active-table}}`);
-
-    expect(this.$('th:eq(0)').prop('width')).to.contain('16.6', 'width of column 1');
-    expect(this.$('th:eq(1)').prop('width')).to.contain('33.3', 'width of column 2');
-    expect(this.$('th:eq(2)').prop('width')).to.contain('50', 'width of column 3');
+  return wait().then(() => {
+    assert.equal(col1.hasClass('sorted'), false, 'previously sorted column no longer has sorted class');
+    assert.equal(col2.hasClass('sorted'), true, 'clicked header gets sorted class');
   });
 });

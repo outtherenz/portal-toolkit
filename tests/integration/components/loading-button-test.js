@@ -1,44 +1,57 @@
-import { expect } from 'chai';
-import { describeComponent, it } from 'ember-mocha';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-describeComponent('loading-button', 'Integration: LoadingButtonComponent', { integration: true }, function() {
-  it('renders in inline form', function() {
-    this.render(hbs`{{loading-button buttonText='Test'}}`);
-    expect(this.$('button').text()).to.equal('Test');
-  });
+moduleForComponent('loading-button', 'Integration | Component | loading button', {
+  integration: true
+});
 
-  it('renders in block form', function() {
-    this.render(hbs`{{#loading-button}}Test{{/loading-button}}`);
-    expect(this.$('button').text()).to.equal('Test');
-  });
+test('renders in inline form', function(assert) {
+  assert.expect(1);
 
-  it('shows a loading icon when loading', function() {
-    this.render(hbs`{{loading-button isLoading=isLoading}}`);
+  this.render(hbs`{{loading-button buttonText='Test'}}`);
 
-    // Record the inital style attributes for comparison later
-    const styleBefore = getComputedStyle(this.$('button')[0]);
+  assert.equal(this.$('button').text(), 'Test');
+});
 
-    // Start loading
-    this.set('isLoading', true);
+test('renders in block form', function(assert) {
+  assert.expect(1);
 
-    // Check the button is disabled and the icon is shown
-    expect(this.$('button')[0].disabled).to.be.true;
-    expect(this.$('button i.fa')).to.have.lengthOf(1);
+  this.render(hbs`{{#loading-button}}Test{{/loading-button}}`);
 
-    // Check the dimensions of the button didn't change
-    const styleAfter = getComputedStyle(this.$('button')[0]);
-    expect(styleBefore.width).to.equal(styleAfter.width);
-    expect(styleBefore.height).to.equal(styleAfter.height);
+  assert.equal(this.$('button').text(), 'Test');
+});
 
-    // Check everything returns to normal once loading finishes
-    this.set('isLoading', false);
-    expect(this.$('button').text()).to.equal('Submit');
-  });
+test('shows a loading icon when loading', function(assert) {
+  assert.expect(5);
 
-  it('triggers action when clicked', function(done) {
-    this.set('test', done);
-    this.render(hbs`{{loading-button action=(action test)}}`);
-    this.$('button').click();
-  });
+  this.render(hbs`{{loading-button isLoading=isLoading}}`);
+
+  // Record the inital style attributes for comparison later
+  const styleBefore = getComputedStyle(this.$('button')[0]);
+
+  // Start loading
+  this.set('isLoading', true);
+
+  // Check the button is disabled and the icon is shown
+  assert.ok(this.$('button')[0].disabled);
+  assert.equal(this.$('button i.fa').length, 1);
+
+  // Check the dimensions of the button didn't change
+  const styleAfter = getComputedStyle(this.$('button')[0]);
+  assert.equal(styleBefore.width, styleAfter.width);
+  assert.equal(styleBefore.height, styleAfter.height);
+
+  // Check everything returns to normal once loading finishes
+  this.set('isLoading', false);
+  assert.equal(this.$('button').text(), 'Submit');
+});
+
+test('triggers action when clicked', function(assert) {
+  assert.expect(0);
+
+  const done = assert.async();
+
+  this.set('test', done);
+  this.render(hbs`{{loading-button action=(action test)}}`);
+  this.$('button').click();
 });

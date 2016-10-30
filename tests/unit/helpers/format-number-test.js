@@ -1,163 +1,158 @@
-/* jshint expr:true */
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
-import { formatNumber } from 'portal-toolkit/helpers/format-number';
+import { formatNumber } from 'dummy/helpers/format-number';
+import { module, test } from 'qunit';
 
 const NEG = '\u2212\u2009';
 const DASH = '\u2013';
+const opt = { flags: true, places: 0 };
 
-describe('FormatNumberHelper', function() {
-  it('formats strings correctly', function() {
-    expect(formatNumber('1.2')).equals('1.20');
-    expect(formatNumber('3.009')).equals('3.01');
-    expect(formatNumber('-0.005')).equals('0.00');
-    expect(formatNumber('0.00001')).equals('0.00');
-    expect(formatNumber('100')).equals('100.00');
-    expect(formatNumber('$2')).equals('2.00');
-    expect(formatNumber('0')).equals(DASH);
-    expect(formatNumber('-')).equals(DASH);
-    expect(formatNumber(DASH)).equals(DASH);
-    expect(formatNumber('-100')).equals(NEG + '100.00');
-    expect(formatNumber(NEG + '1')).equals(NEG + '1.00');
-  });
+module('Unit | Helper | format number');
 
-  it('formats numbers correctly', function() {
-    expect(formatNumber(2.2)).equals('2.20');
-    expect(formatNumber(3.009)).equals('3.01');
-    expect(formatNumber(-0.005)).equals('0.00');
-    expect(formatNumber(0.0000)).equals(DASH);
-    expect(formatNumber(3e-50)).equals('0.00');
-    expect(formatNumber(100)).equals('100.00');
-    expect(formatNumber(-100)).equals(NEG + '100.00');
-    expect(formatNumber(2e21)).equals('#');
-    expect(formatNumber(0)).equals(DASH);
-  });
+test('it formats strings correctly', function(assert) {
+  assert.equal(formatNumber('1.2'), '1.20');
+  assert.equal(formatNumber('3.009'), '3.01');
+  assert.equal(formatNumber('-0.005'), '0.00');
+  assert.equal(formatNumber('0.00001'), '0.00');
+  assert.equal(formatNumber('100'), '100.00');
+  assert.equal(formatNumber('$2'), '2.00');
+  assert.equal(formatNumber('0'), DASH);
+  assert.equal(formatNumber('-'), DASH);
+  assert.equal(formatNumber(DASH), DASH);
+  assert.equal(formatNumber('-100'), NEG + '100.00');
+  assert.equal(formatNumber(NEG + '1'), NEG + '1.00');
+});
 
-  it('accepts places and sigfigs options', function() {
-    expect(formatNumber(32.6, { places: 0 })).equals('33');
-    expect(formatNumber(-0.02, { places: 0 })).equals('0');
-    expect(formatNumber(32456.623123, { places: 6 })).equals('32,456.623,123');
-    expect(formatNumber(12345, { sigfigs: 2 })).equals('12,000');
-    expect(formatNumber(-1234, { sigfigs: 2 })).equals(NEG + '1,200');
-    expect(formatNumber(12.345, { sigfigs: 3 })).equals('12.3');
-    expect(formatNumber(1234.56789, { sigfigs: 8 })).equals('1,234.567,9');
-  });
+test('it formats numbers correctly', function(assert) {
+  assert.equal(formatNumber(2.2), '2.20');
+  assert.equal(formatNumber(3.009), '3.01');
+  assert.equal(formatNumber(-0.005), '0.00');
+  assert.equal(formatNumber(0.0000), DASH);
+  assert.equal(formatNumber(3e-50), '0.00');
+  assert.equal(formatNumber(100), '100.00');
+  assert.equal(formatNumber(-100), NEG + '100.00');
+  assert.equal(formatNumber(2e21), '#');
+  assert.equal(formatNumber(0), DASH);
+});
 
-  it('formats NaNs correctly', function() {
-    expect(formatNumber(NaN)).equals('');
-    expect(formatNumber(null)).equals('');
-    expect(formatNumber(undefined)).equals('');
-    expect(formatNumber('')).equals('');
-    expect(formatNumber('asdf')).equals('');
-  });
+test('it accepts places and sigfigs options', function(assert) {
+  assert.equal(formatNumber(32.6, { places: 0 }), '33');
+  assert.equal(formatNumber(-0.02, { places: 0 }), '0');
+  assert.equal(formatNumber(32456.623123, { places: 6 }), '32,456.623,123');
+  assert.equal(formatNumber(12345, { sigfigs: 2 }), '12,000');
+  assert.equal(formatNumber(-1234, { sigfigs: 2 }), NEG + '1,200');
+  assert.equal(formatNumber(12.345, { sigfigs: 3 }), '12.3');
+  assert.equal(formatNumber(1234.56789, { sigfigs: 8 }), '1,234.567,9');
+});
 
-  it('handles percentage formatting correctly', function() {
-    expect(formatNumber([ 'percentage', 0.5 ])).equals('50.00%');
-    expect(formatNumber([ 'percentage', -0.5 ])).equals(NEG + '50.00%');
-    expect(formatNumber([ 'percentage', null ])).equals('');
-    expect(formatNumber([ 'percentage', false ])).equals('');
-    expect(formatNumber([ 'percentage', undefined ])).equals('');
-    expect(formatNumber([ 'percentage', 0.4 ], { flags: true }).parsedInput).equals(0.4);
-  });
+test('it formats NaNs correctly', function(assert) {
+  assert.equal(formatNumber(NaN), '');
+  assert.equal(formatNumber(null), '');
+  assert.equal(formatNumber(undefined), '');
+  assert.equal(formatNumber(''), '');
+  assert.equal(formatNumber('asdf'), '');
+});
 
-  it('handles currency formatting correctly', function() {
-    expect(formatNumber([ 'currency', 0.5 ])).equals('$0.50');
-    expect(formatNumber([ 'currency', -0.5 ])).equals(NEG + '$0.50');
-    expect(formatNumber([ 'currency', null ])).equals('');
-    expect(formatNumber([ 'currency', false ])).equals('');
-    expect(formatNumber([ 'currency', undefined ])).equals('');
-  });
+test('it handles percentage formatting correctly', function(assert) {
+  assert.equal(formatNumber([ 'percentage', 0.5 ]), '50.00%');
+  assert.equal(formatNumber([ 'percentage', -0.5 ]), NEG + '50.00%');
+  assert.equal(formatNumber([ 'percentage', null ]), '');
+  assert.equal(formatNumber([ 'percentage', false ]), '');
+  assert.equal(formatNumber([ 'percentage', undefined ]), '');
+  assert.equal(formatNumber([ 'percentage', 0.4 ], { flags: true }).parsedInput, 0.4);
+});
 
-  describe('Flags', function() {
-    const opt = { flags: true, places: 0 };
+test('it handles currency formatting correctly', function(assert) {
+  assert.equal(formatNumber([ 'currency', 0.5 ]), '$0.50');
+  assert.equal(formatNumber([ 'currency', -0.5 ]), NEG + '$0.50');
+  assert.equal(formatNumber([ 'currency', null ]), '');
+  assert.equal(formatNumber([ 'currency', false ]), '');
+  assert.equal(formatNumber([ 'currency', undefined ]), '');
+});
 
-    it('adds proper flags to null', function() {
-      const res = formatNumber(null, opt);
-      expect(res.isNaN).equals(true);
-      expect(res.isZero).equals(false);
-      expect(res.roundsToZero).equals(false);
-      expect(res.isNegative).equals(false);
-    });
+test('it adds proper flags to null', function(assert) {
+  const res = formatNumber(null, opt);
+  assert.ok(res.isNaN);
+  assert.notOk(res.isZero);
+  assert.notOk(res.roundsToZero);
+  assert.notOk(res.isNegative);
+});
 
-    it('adds proper flags to 0', function() {
-      const res = formatNumber(0, opt);
-      expect(res.isNaN).equals(true);
-      expect(res.isZero).equals(true);
-      expect(res.roundsToZero).equals(true);
-      expect(res.isNegative).equals(false);
-    });
+test('it adds proper flags to 0', function(assert) {
+  const res = formatNumber(0, opt);
+  assert.ok(res.isNaN);
+  assert.ok(res.isZero);
+  assert.ok(res.roundsToZero);
+  assert.notOk(res.isNegative);
+});
 
-    it('adds proper flags to 1', function() {
-      const res = formatNumber(1, opt);
-      expect(res.isNaN).equals(false);
-      expect(res.isZero).equals(false);
-      expect(res.roundsToZero).equals(false);
-      expect(res.isNegative).equals(false);
-    });
+test('it adds proper flags to 1', function(assert) {
+  const res = formatNumber(1, opt);
+  assert.notOk(res.isNaN);
+  assert.notOk(res.isZero);
+  assert.notOk(res.roundsToZero);
+  assert.notOk(res.isNegative);
+});
 
-    it('adds proper flags to -1', function() {
-      const res = formatNumber(-1, opt);
-      expect(res.isNaN).equals(false);
-      expect(res.isZero).equals(false);
-      expect(res.roundsToZero).equals(false);
-      expect(res.isNegative).equals(true);
-    });
+test('it adds proper flags to -1', function(assert) {
+  const res = formatNumber(-1, opt);
+  assert.notOk(res.isNaN);
+  assert.notOk(res.isZero);
+  assert.notOk(res.roundsToZero);
+  assert.ok(res.isNegative);
+});
 
-    it('adds proper flags to 0.1', function() {
-      const res = formatNumber(0.1, opt);
-      expect(res.isNaN).equals(false);
-      expect(res.isZero).equals(false);
-      expect(res.roundsToZero).equals(true);
-      expect(res.isNegative).equals(false);
-    });
+test('it adds proper flags to 0.1', function(assert) {
+  const res = formatNumber(0.1, opt);
+  assert.notOk(res.isNaN);
+  assert.notOk(res.isZero);
+  assert.ok(res.roundsToZero);
+  assert.notOk(res.isNegative);
+});
 
-    it('adds proper flags to -0.1', function() {
-      const res = formatNumber(-0.1, opt);
-      expect(res.isNaN).equals(false);
-      expect(res.isZero).equals(false);
-      expect(res.roundsToZero).equals(true);
-      expect(res.isNegative).equals(false);
-    });
+test('it adds proper flags to -0.1', function(assert) {
+  const res = formatNumber(-0.1, opt);
+  assert.notOk(res.isNaN);
+  assert.notOk(res.isZero);
+  assert.ok(res.roundsToZero);
+  assert.notOk(res.isNegative);
+});
 
-    it('adds proper flags to 1e50', function() {
-      const res = formatNumber(1e50, opt);
-      expect(res.isNaN).equals(true);
-      expect(res.isZero).equals(false);
-      expect(res.roundsToZero).equals(false);
-      expect(res.isNegative).equals(false);
-    });
-  });
+test('it adds proper flags to 1e50', function(assert) {
+  const res = formatNumber(1e50, opt);
+  assert.ok(res.isNaN);
+  assert.notOk(res.isZero);
+  assert.notOk(res.roundsToZero);
+  assert.notOk(res.isNegative);
+});
 
-  it('obeys the dash zero option', function() {
-    const opt = { sigfigs: 2, dashZero: false };
+test('it obeys the dash zero option', function(assert) {
+  const opt = { sigfigs: 2, dashZero: false };
 
-    expect(formatNumber(0, opt)).equals('0.0');
-    expect(formatNumber(1, opt)).equals('1.0');
-    expect(formatNumber(0.001, opt)).equals('0.0');
+  assert.equal(formatNumber(0, opt), '0.0');
+  assert.equal(formatNumber(1, opt), '1.0');
+  assert.equal(formatNumber(0.001, opt), '0.0');
 
-    // Shouldn't dash falsey values
-    expect(formatNumber(null, opt)).equals('');
-    expect(formatNumber(false, opt)).equals('');
-    expect(formatNumber(undefined, opt)).equals('');
-  });
+  // Shouldn't dash falsey values
+  assert.equal(formatNumber(null, opt), '');
+  assert.equal(formatNumber(false, opt), '');
+  assert.equal(formatNumber(undefined, opt), '');
+});
 
-  it('obeys the currency symbol option', function() {
-    const opt = {};
+test('it obeys the currency symbol option', function(assert) {
+  const opt = {};
 
-    // Empty string
-    opt.currencySymbol = '';
-    expect(formatNumber([ 'currency', 3.5 ], opt)).equals('3.50');
+  // Empty string
+  opt.currencySymbol = '';
+  assert.equal(formatNumber([ 'currency', 3.5 ], opt), '3.50');
 
-    // Falsey
-    opt.currencySymbol = null;
-    expect(formatNumber([ 'currency', 3.5 ], opt)).equals('3.50');
+  // Falsey
+  opt.currencySymbol = null;
+  assert.equal(formatNumber([ 'currency', 3.5 ], opt), '3.50');
 
-    // Actual other symbol
-    opt.currencySymbol = '£';
-    expect(formatNumber([ 'currency', 9 ], opt)).equals('£9.00');
+  // Actual other symbol
+  opt.currencySymbol = '£';
+  assert.equal(formatNumber([ 'currency', 9 ], opt), '£9.00');
 
-    // Other formats shouldn't be affected
-    expect(formatNumber([ 'percentage', 0.5 ], opt)).equals('50.00%');
-    expect(formatNumber([ 'number', 25 ], opt)).equals('25.00');
-  });
+  // Other formats shouldn't be affected
+  assert.equal(formatNumber([ 'percentage', 0.5 ], opt), '50.00%');
+  assert.equal(formatNumber([ 'number', 25 ], opt), '25.00');
 });
