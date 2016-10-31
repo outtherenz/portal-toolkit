@@ -1,13 +1,3 @@
-/******************************************************************
-Site Name: Portal
-Author: Carl Bennett <carlbennettnz@gmail.com>
-
-Stylesheet: Mixins
-
-Most stuff is covered by Bourbon, so this is mostly Portal-specific.
-******************************************************************/
-
-
 // Neat override to use a fixed width
 @mixin outer-container {
   @include clearfix;

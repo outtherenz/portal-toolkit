@@ -1,13 +1,3 @@
-/******************************************************************
-Site Name: Portal
-Author: Carl Bennett <carlbennettnz@gmail.com>
-
-Stylesheet: Layout
-
-This is for the structural layout of the app. Color, typography
-and so on doesn’t belong here.
-******************************************************************/
-
 .wrapper {
   padding: 0 $gutter;
   @include clearfix;
