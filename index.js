@@ -5,6 +5,9 @@ module.exports = {
 
   isDevelopingAddon: () => true,
 
+  bowerDirectory: 'bower_components',
+  otherAssetPaths: [],
+
   sassOptions: {
     includePaths: [
       'app/styles/**/*'

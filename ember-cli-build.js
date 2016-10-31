@@ -6,6 +6,11 @@ module.exports = function(defaults) {
   const app = new EmberAddon(defaults, {
     hinting: false,
 
+    'ember-font-awesome': {
+      includeFontFiles: false,
+      useScss: true
+    },
+
     eslint: {
       // Prevents linting tests from being automatically generated
       testGenerator: () => null
