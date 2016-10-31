@@ -53,16 +53,6 @@ main {
   @include clearfix;
 }
 
-@for $i from 1 through 12 {
-  .grid-#{$i} > * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-
-    @include span-columns($i);
-  }
-}
-
 .pull-left {
   float: left;
   margin: 0 $gutter 0 0;

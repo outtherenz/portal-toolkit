@@ -1,34 +1,4 @@
-
-// Reset
-@import "global/normalize";
-
-// Config
-@import "global/settings";
-
-// Libraries and dependencies
-@import "bourbon";
-@import "bower_components/neat/app/assets/stylesheets/neat";
-
-// Setup
-@import "global/colors";
-@import "global/typography";
-@import "global/mixins";
-
-// Components
-@import "components/buttons";
-@import "components/charts";
-@import "components/data-lists";
-@import "components/forms";
-@import "components/loading-icon";
-@import "components/modals";
-@import "components/modules";
-@import "components/notifications";
-@import "components/period-selector";
-@import "components/selector";
-@import "components/sortable-list";
-@import "components/tables";
-@import "components/tabs";
-@import "components/value-change-indicator";
+@import "portal-toolkit";
 
 $off-white: #f5f5f5;
 $blue: #5597c4;

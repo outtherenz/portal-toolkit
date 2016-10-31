@@ -33,8 +33,7 @@ form:not(.plain) {
 }
 
 .control-wrapper {
-  @include row();
-
+  @include clearfix;
   margin-bottom: $gutter / 2;
 }
 
