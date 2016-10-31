@@ -1,6 +1,6 @@
-dist/
-tmp/
-vendor/
-bower_components/
-public/
-blueprints/*/files/
+/dist/
+/tmp/
+/vendor/
+/bower_components/
+/public/
+/coverage/
