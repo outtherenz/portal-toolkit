@@ -1,0 +1,41 @@
+.radio-slider {
+  display: inline-flex;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow: hidden;
+  background: #f7f7f7;
+  color: $copy-color;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  position: relative;
+  padding: 3px;
+
+  @include user-select(none);
+
+  input {
+    display: none;
+  }
+
+  label {
+    line-height: 2em;
+    cursor: pointer;
+    text-align: center;
+    width: auto;
+    padding: 0 1em;
+    border-radius: 3px;
+    flex: 0 0 auto;
+    @include transition(all 0.05s ease-in-out);
+  }
+
+  input:checked + label {
+    color: white;
+    background-color: #37a;
+    cursor: default;
+    @include transition(all 0.1s ease-out);
+  }
+
+  input:not(:checked) + label {
+    color: $copy-color;
+    @include transition(all 0.1s ease-out);
+  }
+}

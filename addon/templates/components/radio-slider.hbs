@@ -1,13 +1,9 @@
-<div class="radio-wrapper">
-  <div class="radio-box">
-    {{#each options as |option i|}}
-      {{radio-button
-        name=(concat 'radio-slider-option-' elementId '-' i)
-        checked=selected
-        value=option.value
-        class='field'
-        id=(concat 'radio-slider-option-' elementId '-' i)}}
-      <label for="{{concat 'radio-slider-option-' elementId '-' i}}">{{option.label}}</label>
-    {{/each}}
-  </div>
-</div>
+{{#each options as |option i|}}
+  {{radio-button
+    name=(concat 'radio-slider-option-' elementId '-' i)
+    checked=selected
+    value=option.value
+    class='field'
+    id=(concat 'radio-slider-option-' elementId '-' i)}}
+  <label for="{{concat 'radio-slider-option-' elementId '-' i}}">{{option.label}}</label>
+{{/each}}
