@@ -22,25 +22,9 @@ form:not(.plain) {
   }
 }
 
-// fieldset {}
-
-.permissions-description {
-  font-weight: bold;
-}
-
-#organisation-description {
-  color: red;
-}
-
 .control-wrapper {
   @include clearfix;
   margin-bottom: $gutter / 2;
-}
-
-.description {
-  flex-grow: 1;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 .ember-select-guru {
@@ -99,18 +83,6 @@ form:not(.plain) {
 
   &:focus {
     border-color: $border-color;
-  }
-}
-
-.input-group .control-wrapper:not(:last-of-type) {
-  margin-bottom: 0;
-}
-
-.input-group .control-wrapper:not(:first-of-type) input {
-  border-top-color: white;
-
-  &:focus {
-    border-top-color: $primary;
   }
 }
 
@@ -238,10 +210,6 @@ select[multiple] {
   }
 }
 
-/* input[type=number] {
-  width: 50px;
-} */
-
 select {
   font-size: inherit;
   margin: 0;
@@ -251,29 +219,6 @@ select {
 
   &:focus {
     outline: none;
-  }
-}
-
-progress {
-  width: 100%;
-}
-
-form.plain {
-  margin: $gutter 0;
-}
-
-form.horizontal {
-  label, input, select {
-    float: none;
-    margin-right: 1em;
-    width: auto;
-  }
-
-  &.pull-right {
-    label, input, select {
-      margin-right: 0;
-      margin-left: 1em;
-    }
   }
 }
 
