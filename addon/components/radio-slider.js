@@ -2,22 +2,29 @@ import Ember from 'ember';
 import layout from '../templates/components/radio-slider';
 
 const {
-  Component
+  Component,
+  $
 } = Ember;
 
 export default Component.extend({
   layout,
 
+  classNames: [ 'radio-slider' ],
+
   didInsertElement() {
-    const radioWrapper = this.$('.radio-wrapper');
-    const checkboxBox = this.$('.radio-box');
+    this._super(...arguments);
+    this.equaliseLabelWidths();
+  },
 
-    const radioWrapperLength = this.$('.radio-wrapper label').length;
-    const labelWidth = this.$('label').outerWidth();
-    const labelHeight = this.$('label').outerHeight();
+  equaliseLabelWidths() {
+    const widths = this.$('label').map(function() {
+      return $(this).width();
+    }).toArray();
 
-    radioWrapper.width(labelWidth * radioWrapperLength);
-    radioWrapper.height(labelHeight);
-    checkboxBox.height(labelHeight);
+    const maxWidth = widths.reduce((max, width) => width > max ? width : max, 0);
+
+    this.$('label').map(function() {
+      $(this).width(maxWidth);
+    });
   }
 });

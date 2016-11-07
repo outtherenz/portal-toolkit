@@ -6,14 +6,12 @@
 
 // Libraries and dependencies
 @import "bourbon";
-@import "neat";
 @import "font-awesome";
 @import "ember-modal-dialog/ember-modal-structure";
 
 // Setup
 @import "global/colors";
 @import "global/typography";
-@import "global/mixins";
 
 // General
 @import "global/layout";
@@ -30,6 +28,7 @@
 @import "components/modules";
 @import "components/notifications";
 @import "components/period-selector";
+@import "components/radio-slider";
 @import "components/selector";
 @import "components/sortable-list";
 @import "components/tables";

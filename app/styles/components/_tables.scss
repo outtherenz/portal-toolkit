@@ -6,60 +6,24 @@ table {
   &.shrink {
     width: auto;
   }
-
-  &.timeline {
-    width: auto;
-
-    th {
-      font-size: 90%;
-      padding: 0.5em 0.75em;
-    }
-
-    td {
-      padding: 0.4em 1em;
-
-      &.present {
-        background-color: $alert-green;
-      }
-    }
-
-    tfoot td {
-      font-size: 100%;
-      padding: 0.5em 1em;
-
-      &:not(:first-child) {
-        padding: 0.5em 0;
-        text-align: center;
-      }
-    }
-  }
 }
 
 .active-table th {
   @include user-select(none);
 }
-
 td {
   padding: 0.5em 1em;
   border: 1px solid $whisp;
   background-color: white;
 }
-
 .negative {
   color: #f00;
   white-space: nowrap;
 }
-
 tr.total,
 tr.total td {
-  border-top: 2px solid shade($border-color, 15%);
+  border-top:    2px solid shade($border-color, 15%);
   border-bottom: 2px solid shade($border-color, 15%);
-}
-
-.headerRow th {
-  width: auto;
-  white-space: nowrap;
-  min-width: 15em;
 }
 
 th {
@@ -116,6 +80,11 @@ td, th {
   > input:not([type=checkbox]):first-child:last-child {
     border: 0;
     width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
     &:hover,
     &:focus {
@@ -146,4 +115,31 @@ tr.subdued {
 tfoot td {
   @extend th;
   font-weight: normal;
+}
+
+table.timeline {
+  width: auto;
+
+  th {
+    font-size: 90%;
+    padding: 0.5em 0.75em;
+  }
+
+  td {
+    padding: 0.4em 1em;
+  }
+
+  tfoot td {
+    font-size: 100%;
+    padding: 0.5em 1em;
+
+    &:not(:first-child) {
+      padding: 0.5em 0;
+      text-align: center;
+    }
+  }
+
+  td.present {
+    background-color: $alert-green;
+  }
 }

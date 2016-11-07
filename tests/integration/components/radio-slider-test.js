@@ -24,7 +24,7 @@ test('it renders the correct number of options', function(assert) {
   this.set('periodType', 'month');
   this.render(hbs` {{radio-slider options=radioContent selected=periodType}}`);
 
-  assert.equal(this.$('.radio-wrapper .radio-box .ember-view').length, 6);
+  assert.equal(this.$('label').length, 6);
 });
 
 test('it changes the selected option when one if clicked', function(assert) {
