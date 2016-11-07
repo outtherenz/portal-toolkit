@@ -46,6 +46,7 @@ form:not(.plain) {
 
 .ember-select-guru {
   width: grid-width(5.9);
+  z-index: 10;
   float: left;
   text-align: left;
 
@@ -53,6 +54,10 @@ form:not(.plain) {
     float: none;
     display: inline-block;
   }
+}
+
+.ember-select-guru__expanded {
+  z-index: 11;
 }
 
 .ember-select-guru__container {
