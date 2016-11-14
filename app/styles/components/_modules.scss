@@ -19,6 +19,13 @@
       float: left;
     }
 
+    h2 {
+      font-size: 16px;
+      margin: 0;
+      float: left;
+      font-weight: normal;
+    }
+
     .pull-right:not(button) {
       color: tint($copy-color, 30%);
     }
