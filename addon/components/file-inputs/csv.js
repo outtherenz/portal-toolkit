@@ -5,7 +5,8 @@ import EmberUploader from 'ember-uploader';
 const {
   isEmpty,
   get,
-  set
+  set,
+  run
 } = Ember;
 
 export default EmberUploader.FileField.extend({
@@ -19,21 +20,19 @@ export default EmberUploader.FileField.extend({
       return;
     }
 
-    Papa.parse(files[0], {
-      skipEmptyLines: true,
-      complete: results => {
-        // This is a very strange case that arose in production.
-        // Somehow a new line char was being missed at the end of the file,
-        // causing it to be in a line by itself and breaking the format.
-        // This may get fixed in subsequent versions of papaparse but for
-        // now they are not accepting issues.
-        const lastLine = get(results, 'data.lastObject');
-        if (get(lastLine, 'length') === 1 && lastLine[0] === '\n') {
-          get(results, 'data').removeObject(lastLine);
-        }
+    const reader = new FileReader();
 
-        set(this, 'file', results);
-      }
+    reader.addEventListener('loadend', () => {
+      const sanitizedText = reader.result.replace('\r', '\n');
+      const sanitizedFile = new File([ sanitizedText ], files[0].name);
+
+      Papa.parse(sanitizedFile, {
+        skipEmptyLines: true,
+        newline: '\n',
+        complete: results => run(() => set(this, 'file', results))
+      });
     });
+
+    reader.readAsText(files[0]);
   }
 });
