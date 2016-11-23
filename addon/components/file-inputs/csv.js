@@ -23,7 +23,7 @@ export default EmberUploader.FileField.extend({
     const reader = new FileReader();
 
     reader.addEventListener('loadend', () => {
-      const sanitizedText = reader.result.replace('\r', '\n');
+      const sanitizedText = reader.result.replace(/[\r\n]+/g, '\n');
       const sanitizedFile = new File([ sanitizedText ], files[0].name);
 
       Papa.parse(sanitizedFile, {
