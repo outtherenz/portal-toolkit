@@ -2,7 +2,12 @@ import Ember from 'ember';
 import EmberUploader from 'ember-uploader';
 /* global Papa */
 
-const { isEmpty, set } = Ember;
+const {
+  isEmpty,
+  get,
+  set,
+  run
+} = Ember;
 
 export default EmberUploader.FileField.extend({
   attributeBindings: [ 'accept' ],
@@ -15,9 +20,19 @@ export default EmberUploader.FileField.extend({
       return;
     }
 
-    Papa.parse(files[0], {
-      skipEmptyLines: true,
-      complete: results => set(this, 'file', results)
+    const reader = new FileReader();
+
+    reader.addEventListener('loadend', () => {
+      const sanitizedText = reader.result.replace('\r', '\n');
+      const sanitizedFile = new File([ sanitizedText ], files[0].name);
+
+      Papa.parse(sanitizedFile, {
+        skipEmptyLines: true,
+        newline: '\n',
+        complete: results => run(() => set(this, 'file', results))
+      });
     });
+
+    reader.readAsText(files[0]);
   }
 });
