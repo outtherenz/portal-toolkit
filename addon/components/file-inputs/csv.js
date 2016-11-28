@@ -24,9 +24,8 @@ export default EmberUploader.FileField.extend({
 
     reader.addEventListener('loadend', () => {
       const sanitizedText = reader.result.replace(/[\r\n]+/g, '\n');
-      const sanitizedFile = new File([ sanitizedText ], files[0].name);
 
-      Papa.parse(sanitizedFile, {
+      Papa.parse(sanitizedText, {
         skipEmptyLines: true,
         newline: '\n',
         complete: results => run(() => set(this, 'file', results))
