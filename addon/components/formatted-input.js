@@ -54,7 +54,8 @@ export default TextField.extend({
 
     const format = get(this, 'format');
     const number = get(this, 'number');
-    const options = { currencySymbol: '' };
+    const symbol = get(this, 'currencySymbol');
+    const options = {currencySymbol: symbol || ''};
 
     const formatted = formatNumber([ format, number ], options);
 
