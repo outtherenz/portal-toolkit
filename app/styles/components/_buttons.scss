@@ -25,13 +25,14 @@
   font-family: $secondary-font;
   font-weight: normal;
   padding: 0.4em 0.8em;
-  font-size: inherit;
+  font-size: $mobile-font-size;
   border-radius: 3px;
   cursor: pointer;
   border: 0;
   width: auto;
   overflow: hidden;
   text-align: center;
+  text-decoration: none;
 
   &[disabled] {
     pointer-events: none;
@@ -41,6 +42,10 @@
   &:hover {
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
     text-decoration: none;
+  }
+
+  @media (min-width: $breakpoint-desktop) {
+    font-size: $desktop-font-size;
   }
 }
 

@@ -2,7 +2,8 @@ $heading-font:      "proxima-nova", "Proxima Nova", sans-serif;
 $copy-font:         sans-serif;
 $secondary-font:    "proxima-nova", "Proxima Nova", sans-serif;
 
-// $root-font-size: 13px;
+$mobile-font-size: 13px;
+$desktop-font-size: 14px;
 
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: $heading-font;
@@ -58,13 +59,13 @@ $secondary-font:    "proxima-nova", "Proxima Nova", sans-serif;
 
 .page {
   font-family: $copy-font;
-  font-size: 13px;
+  font-size: $mobile-font-size;
   line-height: 1.5;
   color: $copy-color;
   word-wrap: break-word;
 
   @media (min-width: $breakpoint-desktop) {
-    font-size: 14px;
+    font-size: $desktop-font-size;
   }
 }
 
