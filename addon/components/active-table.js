@@ -13,7 +13,7 @@ export default Component.extend({
   layout,
 
   tagName: 'table',
-  classNames: [ 'active-table' ],
+  classNames: [ 'active-table', 'data-table' ],
   classNameBindings: [ 'sortable' ],
 
   data: [],

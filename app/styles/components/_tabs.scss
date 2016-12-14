@@ -1,35 +1,105 @@
-header.tabs {
-  @include clearfix;
-  border-bottom: 1px solid $border-color;
-  margin-left: (-$gutter);
-  margin-right: (-$gutter);
-  padding-left: $gutter;
-  padding-right: $gutter;
+.tabs {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0 $desktop-gutter;
+}
 
-  ul {
-    margin: 0;
-    padding: 0;
-  }
+@mixin tab-color($tab-color, $tab-text-color: white) {
+  $tab-hover-color: tint($tab-color, 15%);
+  $tab-active-color: tint($tab-color, 25%);
 
-  li {
-    list-style: none;
-    float: left;
-  }
+  > a {
+    background-color: $tab-color;
+    color: $tab-text-color;
 
-  a {
-    background-color: $off-white;
-    display: inline-block;
-    border: 1px solid $border-color;
-    border-bottom: 0;
-    border-radius: 4px 4px 0 0;
-    padding: 0.5em 1em;
-    margin-right: 0.5em;
-    color: tint($copy-color, 40%);
+    &::before {
+      background-image: linear-gradient(to left top, $tab-color 50%, transparent 50%);
+    }
+
+    &::after {
+      background-image: linear-gradient(to right top, $tab-color 50%, transparent 50%);
+    }
+
+    &:hover {
+      background-color: $tab-hover-color;
+    }
+
+    &:hover::before {
+      background-image: linear-gradient(to left top, $tab-hover-color 50%, transparent 50%);
+    }
+
+    &:hover::after {
+      background-image: linear-gradient(to right top, $tab-hover-color 50%, transparent 50%);
+    }
 
     &.active {
-      color: $copy-color;
-      background-color: shade($off-white, 2%);
-      border-color: shade($border-color, 10%);
+      background-color: $tab-active-color;
+    }
+
+    &.active::before {
+      background-image: linear-gradient(to left top, $tab-active-color 50%, transparent 50%);
+    }
+
+    &.active::after {
+      background-image: linear-gradient(to right top, $tab-active-color 50%, transparent 50%);
+    }
+  }
+}
+
+.tabs__tab {
+  @include tab-color($secondary);
+
+  $tab-top-padding: 0.55em;
+  $tab-bottom-padding: 0.5em;
+
+  list-style-type: none;
+  position: relative;
+  margin: 0 30px 0 -10px;
+  padding: 0;
+
+  &:first-of-type {
+    margin-left: -5px;
+  }
+
+  > a {
+    padding: $tab-top-padding 1em $tab-bottom-padding;
+    height: 100%;
+    display: block;
+    text-decoration: none;
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 20px;
+      background-size: cover;
+    }
+
+    &::before {
+      right: 100%;
+    }
+
+    &::after {
+      left: 100%;
+    }
+
+    &:hover::before {
+      z-index: 1;
+    }
+
+    &:hover::after {
+      z-index: 1;
+    }
+
+    &.active::before {
+      z-index: 2;
+    }
+
+    &.active::after {
+      z-index: 2;
     }
   }
 }

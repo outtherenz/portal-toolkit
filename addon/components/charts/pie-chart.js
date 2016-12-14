@@ -4,7 +4,7 @@ import C3Chart from 'ember-c3/components/c3-chart';
 const { computed, isEmpty, Logger: { warn }, get } = Ember;
 
 export default C3Chart.extend({
-  classNames: ['dashboard-module', 'pie-chart'],
+  classNames: [ 'chart', 'chart--pie' ],
 
   markEmptySeries: true,
   markNegativeSeries: true,

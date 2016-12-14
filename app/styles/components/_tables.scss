@@ -1,110 +1,89 @@
-table {
-  width: 100%;
+.data-table {
   margin: $gutter 0;
   font-size: 90%;
+  border-spacing: 0;
+  border-collapse: collapse;
 
-  &.shrink {
-    width: auto;
-  }
-}
+  $cell-padding: 0.5em 1em;
 
-.active-table th {
-  @include user-select(none);
-}
-td {
-  padding: 0.5em 1em;
-  border: 1px solid $whisp;
-  background-color: white;
-}
-.negative {
-  color: #f00;
-  white-space: nowrap;
-}
-tr.total,
-tr.total td {
-  border-top:    2px solid shade($border-color, 15%);
-  border-bottom: 2px solid shade($border-color, 15%);
-}
-
-th {
-  text-align: left;
-  border: 1px solid $whisp;
-  background-color: $off-white;
-  border-bottom-color: $whisp;
-  padding: 0.5em 1em;
-  cursor: default;
-  margin: 0 -10em -0.5em;
-
-  .helper {
-    float: right;
-    font-weight: normal;
-    font-size: 90%;
-    font-style: italic;
-    color: $subdued;
+  td, th {
+    padding: $cell-padding;
+    border: 1px solid $whisp;
+    position: relative;
+    background-clip: padding-box; // show borders in Firefox
+    white-space: nowrap;
   }
 
-  a {
-    padding: 0 1em 0.5em;
-    margin: 0 -1em -0.5em;
-    display: block;
+  td {
+    background-color: white;
+  }
 
-    &:hover {
-      text-decoration: none;
+  th,
+  tfoot td {
+    background-color: $off-white;
+    text-align: left;
+    cursor: default;
+    // margin: 0 -10em -0.5em;
 
-      span {
-        text-decoration: underline;
+    // .helper {
+    //   float: right;
+    //   font-weight: normal;
+    //   font-size: 90%;
+    //   font-style: italic;
+    //   color: $subdued;
+    // }
+
+    a {
+      padding: 0 1em 0.5em;
+      margin: 0 -1em -0.5em;
+      display: block;
+
+      &:hover {
+        text-decoration: none;
+
+        span {
+          text-decoration: underline;
+        }
       }
     }
   }
 
-  &.sorted {
-    a::after {
-      content: '\25be';
-      display: inline-block;
-      margin-left: 0.5em;
-      @include transition(all, 0.2s, linear);
-    }
-
-    &.ascending a::after {
-      @include transform(scaleY(-1));
-      display: inline-block;
-    }
-  }
-}
-
-td, th {
-  position: relative;
-  background-clip: padding-box; // show borders in Firefox
-  white-space: nowrap;
-
-  > input:not([type=checkbox]):first-child:last-child {
-    border: 0;
-    width: 100%;
+  .data-table__cell-cover {
+    margin: 0;
+    padding: $cell-padding;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-
-    &:hover,
-    &:focus {
-      background-color: $off-white;
-    }
-
-    &:focus {
-      box-shadow: none;
-    }
+    width: 100%;
+    border: 0;
   }
 }
 
-thead tr.subheading th {
+.data-table--sortable th {
+  @include user-select(none);
+}
+
+.data-table__sorted-column-header a::after {
+  content: '\25be';
+  display: inline-block;
+  margin-left: 0.5em;
+  @include transition(all, 0.2s, linear);
+}
+
+.data-table__sorted-column-header--ascending a::after {
+  @include transform(scaleY(-1));
+}
+
+.data-table__subheading-row th {
   background-color: mix($off-white, white);
   color: tint($copy-color, 50%);
   font-size: 85%;
   font-weight: normal;
 }
 
-tr.subdued {
+.data-table__subdued-row {
   color: $subdued;
 
   button.subdued:not(:hover) {
@@ -112,34 +91,8 @@ tr.subdued {
   }
 }
 
-tfoot td {
-  @extend th;
-  font-weight: normal;
-}
-
-table.timeline-table {
-  width: auto;
-
-  th {
-    font-size: 90%;
-    padding: 0.5em 0.75em;
-  }
-
-  td {
-    padding: 0.4em 1em;
-  }
-
-  tfoot td {
-    font-size: 100%;
-    padding: 0.5em 1em;
-
-    &:not(:first-child) {
-      padding: 0.5em 0;
-      text-align: center;
-    }
-  }
-
-  td.present {
-    background-color: $alert-green;
-  }
+.data-table__total-row,
+.data-table__total-row td {
+  border-top:    2px solid shade($border-color, 15%);
+  border-bottom: 2px solid shade($border-color, 15%);
 }

@@ -10,7 +10,7 @@ const {
 } = Ember;
 
 export default C3Chart.extend({
-  classNames: ['dashboard-module', 'gauge-chart'],
+  classNames: [ 'chart', 'chart--gauge' ],
 
   reverseColors: false,
   min: 0,

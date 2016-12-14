@@ -1,53 +1,14 @@
-/*******************
-FONTS
-*******************/
-
-// Font stacks
 $heading-font:      "proxima-nova", "Proxima Nova", sans-serif;
 $copy-font:         sans-serif;
 $secondary-font:    "proxima-nova", "Proxima Nova", sans-serif;
 
-/*******************
-GENERIC
-*******************/
+$root-font-size: 13px;
 
-// Text alignment
-.text-left {
-  text-align: left;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-// Placeholders
-.placeholder {
-  color: $subdued;
-  font-style: italic;
-}
-
-// Subtext
-.subtext {
-  font-size: 90%;
-}
-
-/*******************
-HEADINGS
-*******************/
-
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-h5, .h5,
-h6, .h6 {
+.h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: $heading-font;
   font-weight: 700;
-  text-rendering: optimizelegibility;
+  line-height: 1.1;
+  text-rendering: optimizeLegibility;
   color: $heading-color;
   margin: 0 0 0.5em;
 
@@ -56,98 +17,67 @@ h6, .h6 {
     text-decoration: none;
     color: inherit;
   }
-
-  &:first-child {
-    margin-top: 0;
-  }
 }
 
-h1, .h1 { font-size: 200%; }
-h2, .h2 { font-size: 180%; }
-h3, .h3 { font-size: 150%; }
-// h4, .h4 {}
-// h5, .h5 {}
-// h6, .h6 {}
+.h1 { font-size: 200%; }
+.h2 { font-size: 160%; }
+.h3 { font-size: 140%; }
+.h4 { font-size: 120%; font-weight: normal; }
+.h5 { font-size: 110%; font-weight: normal; }
+.h6 { font-size: 100%; font-weight: normal; }
 
-.subtitle {
+.h1--inverted,
+.h2--inverted,
+.h3--inverted,
+.h4--inverted,
+.h5--inverted,
+.h6--inverted {
+  color: white;
+  font-weight: normal;
+}
+
+.h1--subtitle,
+.h2--subtitle,
+.h3--subtitle,
+.h4--subtitle,
+.h5--subtitle,
+.h6--subtitle {
   color: $subdued;
   font-weight: normal;
-  font-size: 130%;
   margin-top: -0.6em;
 }
 
-main > header {
-  h1, h2, h3, h4, h5, h6 {
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+.h1--inverted.h1--subtitle,
+.h2--inverted.h2--subtitle,
+.h3--inverted.h3--subtitle,
+.h4--inverted.h4--subtitle,
+.h5--inverted.h5--subtitle,
+.h6--inverted.h6--subtitle {
+  color: rgba(white, 0.6);
 }
 
-/*******************
-COPY
-*******************/
-
-// Base
-body {
+.page {
   font-family: $copy-font;
   font-size: $root-font-size;
   line-height: 1.5;
   color: $copy-color;
   word-wrap: break-word;
 }
-// p {}
 
-// Lists
-// ul, ol {}
-li > ul,
-li > ol {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-// li {}
-// dl {}
-dt {
-  font-weight: bold;
-}
-
-dd {
-  margin: 0 0 $gutter;
-}
-
-// Quotes
-// blockquote {}
-// q {}
-
-header > h1:first-child:last-child,
-header > h2:first-child:last-child,
-header > h3:first-child:last-child,
-header > h4:first-child:last-child,
-header > h5:first-child:last-child,
-header > h6:first-child:last-child {
-  margin-bottom: 0;
-}
-
-/*******************
-LINKS
-*******************/
-
-a, a:visited {
+.link, .link:visited {
   color: $link-color;
   text-decoration: none;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:active {
     color: $link-hover-color;
+    outline: none;
     text-decoration: underline;
   }
 
-  &:active {
-    color: $link-active-color;
-  }
-
-  // {{link-to}}s that have been clicked
-  &.active {
-    outline: none;
+  // Fix inconsistency between Chrome and other browsers
+  &:focus {
+    outline: thin dotted;
   }
 }

@@ -1,15 +1,15 @@
-<div class="icon">
+<div class="notification-message__icon">
   {{fa-icon icon}}
 </div>
 
-<div class="content">
+<div class="notification-message__content">
   {{notification.message}}
 </div>
 
-<a class="close" {{action "clear"}}>
+<a class="notification-message__close-button" {{action "clear"}}>
   {{fa-icon 'fa-times-circle'}}
 </a>
 
 {{#if notification.autoClear}}
-  <div class="countdown" style={{notificationClearDuration}}></div>
+  <div class="notification-message__countdown" style={{notificationClearDuration}}></div>
 {{/if}}

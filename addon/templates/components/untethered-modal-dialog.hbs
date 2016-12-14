@@ -3,7 +3,7 @@
     {{#modal-dialog-overlay
       classNameBindings='overlayClassNamesString translucentOverlay:translucent overlay-class'
       action='close'}}
-      <div class="ember-modal-dialog">
+      <div class="ember-modal-dialog block-module {{container-class}}">
         {{yield}}
       </div>
     {{/modal-dialog-overlay}}

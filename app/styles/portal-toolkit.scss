@@ -1,9 +1,3 @@
-// Reset
-@import "global/normalize";
-
-// Config
-@import "global/settings";
-
 // Libraries and dependencies
 @import "bourbon";
 @import "font-awesome";
@@ -14,31 +8,42 @@
 @import "global/typography";
 
 // General
-@import "global/layout";
+// @import "global/layout";
 @import "global/animations";
+@import "global/breakpoints";
+
+// Layout
+@import "layout/page";
+@import "layout/page-header";
+@import "layout/page-body";
+@import "layout/page-footer";
 
 // Components
+@import "components/block-module";
 @import "components/buttons";
-@import "components/charts";
-@import "components/data-lists";
+// @import "components/charts";
+// @import "components/data-lists";
 @import "components/forms";
-@import "components/info-popup";
+// @import "components/info-popup";
 @import "components/loading-icon";
+@import "components/master-detail";
 @import "components/modals";
-@import "components/modules";
+@import "components/module-navigation";
+@import "components/month-picker";
 @import "components/notifications";
-@import "components/period-selector";
+// @import "components/period-selector";
+@import "components/print-button";
 @import "components/radio-slider";
-@import "components/selector";
-@import "components/sortable-list";
+// @import "components/selector";
+// @import "components/sortable-list";
 @import "components/tables";
 @import "components/tabs";
-@import "components/value-change-indicator";
+// @import "components/value-change-indicator";
 
 // Browser-specific
-@import "global/browser-specific";
+// @import "global/browser-specific";
 
 // Print
-@media print {
-  @import "global/print";
-}
+// @media print {
+//   @import "global/print";
+// }

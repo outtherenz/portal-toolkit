@@ -1,0 +1,12 @@
+.page-footer {
+  padding: $gutter;
+  text-align: center;
+  background: shade($off-white, 5%);
+  color: $subdued;
+  border-top: 1px solid $border-color;
+  font-size: 90%;
+
+  p {
+    margin: 0;
+  }
+}

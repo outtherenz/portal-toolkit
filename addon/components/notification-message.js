@@ -15,7 +15,7 @@ export default Component.extend({
 
   notifications: service(),
 
-  classNames: [ 'notification' ],
+  classNames: [ 'notification-message' ],
   classNameBindings: [
     'notification.type',
     'notification.dismiss::in'

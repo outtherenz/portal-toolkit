@@ -6,7 +6,7 @@ import moment from 'moment';
 const { computed, Logger, isArray, get } = Ember;
 
 export default C3Chart.extend({
-  classNames: ['dashboard-module', 'line-chart'],
+  classNames: [ 'chart', 'chart--line' ],
 
   data: computed('metrics', 'series', 'period', function() {
     const periodType = get(this, 'period.type');

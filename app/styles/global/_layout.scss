@@ -1,28 +1,4 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-.wrapper {
-  padding: 0 $gutter;
-  @include clearfix;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  min-width: $gutter + $max-width + $gutter;
-  overflow-y: scroll;
-}
-
-// Application view
-body > .ember-view:not(.draggable-map) {
-  // Ensure the footer is always at the bottom of the window, even if the page is short
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-.page {
+.page-body {
   flex: 1; // Make the footer sticky
   display: flex;
   flex-direction: column;

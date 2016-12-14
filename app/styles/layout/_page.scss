@@ -1,0 +1,39 @@
+$gutter: calc(10px + 1.5vw);
+$negative-gutter: calc(-10px - 1.5vw);
+$desktop-gutter: 25px;
+
+body.page {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  // Application view
+  > .ember-view:not(.draggable-map) {
+    // Ensure the footer is always at the bottom of the window, even if the page is short
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: $breakpoint-desktop) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .page-body {
+    flex: 1;
+  }
+
+  .content-container,
+  .content-container > .liquid-child {
+    min-height: calc(100vh - 92px - 40px + 5px);
+    min-width: 100%;
+  }
+}

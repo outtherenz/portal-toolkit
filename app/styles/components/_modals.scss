@@ -10,15 +10,37 @@
 }
 
 .ember-modal-dialog {
-  @extend .module;
   flex: 0 0 auto;
   align-self: center;
   box-shadow: 0 2px 5px rgba(black, 0.3);
   min-width: 400px;
+  max-height: calc(100vh - 2 * #{$desktop-gutter});
   margin: 0 auto;
   position: static;
-  z-index: 1000;
+  z-index: 2000;
   @include animation(modal-appear 0.2s ease-in);
+}
+
+.ember-modal-dialog--scrollable {
+  height: calc(100vh - 2 * #{$desktop-gutter});
+  display: flex;
+  flex-direction: column;
+}
+
+.ember-modal-dialog__scrollable-window {
+  flex: 1 0;
+  margin: -$desktop-gutter;
+  position: relative;
+}
+
+.ember-modal-dialog__scrollable-content {
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: $desktop-gutter;
 }
 
 @include keyframes(modal-appear) {

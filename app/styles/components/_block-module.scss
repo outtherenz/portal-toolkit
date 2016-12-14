@@ -1,0 +1,58 @@
+.block-module {
+  margin: $gutter 0;
+  padding: $gutter;
+  background: $off-white;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+
+  @media (min-width: $breakpoint-desktop) {
+    margin: $desktop-gutter 0;
+    padding: $desktop-gutter;
+  }
+}
+
+.block-module--centered {
+  text-align: center;
+}
+
+.block-module__header,
+.block-module__footer {
+  border-width: 1px;
+  border-color: $border-color;
+  background-color: shade($off-white, 3%);
+  padding: $gutter;
+
+  @media (min-width: $breakpoint-desktop) {
+    padding: $desktop-gutter;
+  }
+
+  @include clearfix;
+}
+
+.block-module__header {
+  border-bottom-style: solid;
+  margin: $negative-gutter $negative-gutter $gutter;
+
+  @media (min-width: $breakpoint-desktop) {
+    margin: (-$desktop-gutter) (-$desktop-gutter) $desktop-gutter;
+  }
+}
+
+.block-module__footer {
+  border-top-style: solid;
+  margin: $gutter $negative-gutter $negative-gutter;
+
+  @media (min-width: $breakpoint-desktop) {
+    margin: $desktop-gutter (-$desktop-gutter) (-$desktop-gutter);
+  }
+}
+
+.block-module__footer--centered {
+  text-align: center;
+}
+
+.block-module__table.data-table {
+  margin: calc(-#{$desktop-gutter} - 1px);
+  width: 100%;
+  width: calc(100% + 2 * #{$desktop-gutter} + 2px);
+}
