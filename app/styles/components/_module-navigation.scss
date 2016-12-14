@@ -41,6 +41,7 @@
 
   @media (min-width: $breakpoint-desktop) {
     border: 0;
+    background-color: transparent;
 
     &:last-of-type {
       border-bottom: 0;
