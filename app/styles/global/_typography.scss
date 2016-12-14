@@ -2,7 +2,7 @@ $heading-font:      "proxima-nova", "Proxima Nova", sans-serif;
 $copy-font:         sans-serif;
 $secondary-font:    "proxima-nova", "Proxima Nova", sans-serif;
 
-$root-font-size: 13px;
+// $root-font-size: 13px;
 
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: $heading-font;
@@ -58,10 +58,14 @@ $root-font-size: 13px;
 
 .page {
   font-family: $copy-font;
-  font-size: $root-font-size;
+  font-size: 13px;
   line-height: 1.5;
   color: $copy-color;
   word-wrap: break-word;
+
+  @media (min-width: $breakpoint-desktop) {
+    font-size: 14px;
+  }
 }
 
 .link, .link:visited {

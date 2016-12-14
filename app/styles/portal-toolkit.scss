@@ -4,13 +4,12 @@
 @import "ember-modal-dialog/ember-modal-structure";
 
 // Setup
+@import "global/breakpoints";
 @import "global/colors";
 @import "global/typography";
 
-// General
-// @import "global/layout";
+// Global
 @import "global/animations";
-@import "global/breakpoints";
 
 // Layout
 @import "layout/page";
