@@ -11,6 +11,24 @@
   background-color: $primary;
 }
 
+.sidebar-page {
+  @extend .content-container;
+  display: flex;
+}
+
+.sidebar-page__sidebar {
+  padding: 23px $desktop-gutter;
+  border-right: 1px solid $border-color;
+  font-size: 95%;
+  background: shade($off-white, 1.5%);
+  flex: 0 0 220px;
+}
+
+.sidebar-page__content {
+  flex: 1;
+  max-width: calc(100vw - 220px);
+}
+
 .page-content {
   padding: $gutter;
   overflow-x: auto;
