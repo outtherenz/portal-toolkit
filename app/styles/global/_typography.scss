@@ -86,3 +86,12 @@ $desktop-font-size: 14px;
     outline: thin dotted;
   }
 }
+
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+.placeholder-text {
+  color: $subdued;
+  font-style: italic;
+}
