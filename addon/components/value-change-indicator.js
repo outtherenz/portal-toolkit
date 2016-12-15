@@ -44,11 +44,11 @@ export default Component.extend({
     }
 
     if ((increaseIsGood && diff > 0) || (!increaseIsGood && diff < 0)) {
-      return 'good';
+      return 'value-change-indicator--good';
     } else if ((increaseIsGood && diff < 0) || (!increaseIsGood && diff > 0)) {
-      return 'bad';
+      return 'value-change-indicator--bad';
     } else {
-      return 'no-change';
+      return 'value-change-indicator--no-change';
     }
   }),
 

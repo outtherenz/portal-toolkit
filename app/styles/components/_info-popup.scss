@@ -9,32 +9,31 @@
   cursor: help;
   color: tint($copy-color, 40%);
 
-  .info-popup-icon {
-    transform: scale(1.2);
-  }
-
-  .info-popup-text {
-    display: none;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    color: $copy-color;
-    margin-top: 0.2em;
-    margin-left: 0.2em;
-    background-color: white;
-    min-width: 180px;
-    max-width: 220px;
-    white-space: normal;
-    // border: 1px solid $border-color;
-    padding: 0.3em 0.6em;
-    z-index: 10;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-    border-radius: 2px;
-  }
-
-  &:hover {
-    .info-popup-text {
-      display: block;
-    }
+  &:hover .info-popup__text {
+    display: block;
   }
 }
+
+.info-popup__icon {
+  transform: scale(1.2);
+}
+
+.info-popup__text {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  color: $copy-color;
+  margin-top: 0.2em;
+  margin-left: 0.2em;
+  background-color: white;
+  min-width: 180px;
+  max-width: 220px;
+  white-space: normal;
+  // border: 1px solid $border-color;
+  padding: 0.3em 0.6em;
+  z-index: 10;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+}
+

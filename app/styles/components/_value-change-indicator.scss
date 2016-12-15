@@ -1,12 +1,12 @@
 .value-change-indicator {
   float: left;
   margin-right: 0.5em;
+}
 
-  &.good {
-    color: green;
-  }
+.value-change-indicator--good {
+  color: green;
+}
 
-  &.bad {
-    color: red;
-  }
+.value-change-indicator--bad {
+  color: red;
 }

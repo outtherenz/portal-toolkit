@@ -23,7 +23,7 @@
 // @import "components/charts";
 // @import "components/data-lists";
 @import "components/forms";
-// @import "components/info-popup";
+@import "components/info-popup";
 @import "components/loading-icon";
 @import "components/master-detail";
 @import "components/modals";
@@ -37,12 +37,12 @@
 // @import "components/sortable-list";
 @import "components/tables";
 @import "components/tabs";
-// @import "components/value-change-indicator";
+@import "components/value-change-indicator";
 
 // Browser-specific
 // @import "global/browser-specific";
 
 // Print
-// @media print {
-//   @import "global/print";
-// }
+@media print {
+  @import "global/print";
+}
