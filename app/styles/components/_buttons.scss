@@ -88,3 +88,34 @@
 .button--secondary {
   @include button-colors($button-secondary, white);
 }
+
+.text-button {
+  @extend .link;
+
+  background: transparent;
+  padding: 0;
+  display: inline;
+  border: 0;
+
+  .fa {
+    transform: scale(1.2);
+  }
+}
+
+.text-button--plain {
+  color: $copy-color;
+
+  &:hover,
+  &:active {
+    color: tint($copy-color, 30%);
+  }
+}
+
+.text-button--add {
+  color: $button-green;
+
+  &:hover,
+  &:active, {
+    color: shade($button-green, 20%);
+  }
+}
