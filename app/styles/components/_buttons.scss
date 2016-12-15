@@ -96,6 +96,7 @@
   padding: 0;
   display: inline;
   border: 0;
+  font-size: inherit;
 
   .fa {
     transform: scale(1.2);
@@ -117,5 +118,14 @@
   &:hover,
   &:active, {
     color: shade($button-green, 20%);
+  }
+}
+
+.text-button--delete {
+  color: $button-red;
+
+  &:hover,
+  &:active, {
+    color: shade($button-red, 20%);
   }
 }
