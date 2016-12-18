@@ -7,7 +7,7 @@ export default Component.extend({
   layout,
 
   tagName: 'button',
-  classNames: [ 'button' ],
+  classNames: [ 'loading-button' ],
   classNameBindings: [ 'isLoading:loading' ],
   attributeBindings: [ 'disabled' ],
 
