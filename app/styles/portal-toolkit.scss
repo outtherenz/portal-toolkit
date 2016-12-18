@@ -20,7 +20,7 @@
 // Components
 @import "components/block-module";
 @import "components/buttons";
-// @import "components/charts";
+@import "components/charts";
 @import "components/forms";
 @import "components/info-popup";
 @import "components/key-value-pairs";
@@ -40,7 +40,7 @@
 @import "components/value-change-indicator";
 
 // Browser-specific
-// @import "global/browser-specific";
+@import "global/browser-specific";
 
 // Print
 @media print {
