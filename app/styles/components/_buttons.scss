@@ -82,8 +82,10 @@
   }
 }
 
-.button--spaced:not(:last-of-type)  { margin-left:  0.2em; }
-.button--spaced:not(:first-of-type) { margin-right: 0.2em; }
+.button--spaced:not(.pull-right):not(:first-child) { margin-left:  0.2em; }
+.button--spaced:not(.pull-right):not(:last-child)  { margin-right: 0.2em; }
+.button--spaced.pull-right:not(:first-child) { margin-right: 0.2em; }
+.button--spaced.pull-right:not(:last-child)  { margin-left:  0.2em; }
 
 .button--secondary {
   @include button-colors($button-secondary, white);
