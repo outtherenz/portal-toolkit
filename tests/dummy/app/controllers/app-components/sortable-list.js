@@ -5,7 +5,7 @@ const {
 } = Ember;
 
 export default Controller.extend({
-  content: [
+  contents: [
     { name: 'john', value: '1' },
     { name: 'ben', value: '2' },
     { name: 'greg', value: '3' },
