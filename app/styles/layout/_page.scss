@@ -32,7 +32,8 @@ body.page {
   }
 
   .content-container,
-  .content-container > .liquid-child {
+  .content-container > .liquid-child,
+  .page-content {
     min-height: calc(100vh - 92px - 40px + 5px);
     min-width: 100%;
   }
