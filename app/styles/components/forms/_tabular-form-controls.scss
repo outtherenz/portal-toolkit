@@ -1,0 +1,25 @@
+.tabular-form-controls {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 1em 0.5em;
+  margin: -0.5em -1em;
+}
+
+.tabular-form-controls__row {
+  display: table-row;
+}
+
+.tabular-form-controls__cell {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.tabular-form-controls__cell--label {
+  font-weight: bold;
+
+  // To match text inputs
+  line-height: 1.4;
+  padding: 0.5em 0;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}

@@ -1,0 +1,22 @@
+.text-input {
+  width: 200px;
+  border: 1px solid #ccc;
+  color: $copy-color;
+  font-size: inherit;
+  font-family: $copy-font;
+  line-height: 1.4;
+  padding: 0.5em 0.7em;
+
+  &:focus {
+    outline: none;
+    border-color: shade($border-color, 25%);
+  }
+
+  &:hover {
+    background-color: $off-white;
+  }
+}
+
+.text-input--wide {
+  width: 300px;
+}

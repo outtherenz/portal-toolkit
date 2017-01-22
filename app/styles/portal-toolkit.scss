@@ -18,10 +18,16 @@
 @import "layout/page-footer";
 
 // Components
+@import "components/forms/checkbox";
+@import "components/forms/file-input-button";
+@import "components/forms/radio-button";
+@import "components/forms/select-box-replacement";
+@import "components/forms/select-box";
+@import "components/forms/tabular-form-controls";
+@import "components/forms/text-input";
 @import "components/block-module";
 @import "components/buttons";
 @import "components/charts";
-@import "components/forms";
 @import "components/info-popup";
 @import "components/key-value-pairs";
 @import "components/loading-icon";
