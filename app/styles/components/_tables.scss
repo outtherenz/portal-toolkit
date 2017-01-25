@@ -61,8 +61,17 @@
   }
 }
 
+.data-table__cell--centered,
+.data-table tfoot .data-table__cell--centered {
+  text-align: center;
+}
+
 .data-table--sortable th {
   @include user-select(none);
+}
+
+.data-table--streched {
+  width: 100%;
 }
 
 .data-table__sorted-column-header a::after {
@@ -81,6 +90,11 @@
   color: tint($copy-color, 50%);
   font-size: 85%;
   font-weight: normal;
+}
+
+.data-table__row--min-height {
+  // font size * data-table adjustment * line-height + padding top and bottom
+  height: calc(#{$font-size} * 0.9 * 1.4 + 2 * 0.5em);
 }
 
 .data-table__subdued-row {
