@@ -38,6 +38,16 @@
     padding: $desktop-gutter;
   }
 }
+.page-content__header {
+    @include clearfix();
+
+    margin-bottom: $gutter;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 
 .page-wrapper--large  { max-width: 1024px - 50px; }
 .page-wrapper--medium { max-width: 1024px - 250px; }
