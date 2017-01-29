@@ -118,6 +118,21 @@
   &:active, {
     color: shade($button-green, 20%);
   }
+
+  padding-left: 30px;
+  position: relative;
+
+  &::before {
+    content: '+';
+    position: absolute;
+    font-size: 17px;
+    top: 50%;
+    left: 0;
+    width: 45px;
+    text-align: center;
+    margin-top: -10px;
+    line-height: 1;
+  }
 }
 
 .text-button--delete {

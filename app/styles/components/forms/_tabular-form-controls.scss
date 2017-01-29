@@ -5,8 +5,15 @@
   margin: -0.5em -1em;
 }
 
+.tabular-form-controls--stretched {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .tabular-form-controls__row {
   display: table-row;
+  width: 100%;
 }
 
 .tabular-form-controls__cell {
@@ -22,4 +29,8 @@
   padding: 0.5em 0;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+}
+
+.tabular-form-controls__cell--grow {
+  width: 100%;
 }
