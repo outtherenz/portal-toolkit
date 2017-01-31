@@ -8,6 +8,7 @@
   padding: 0.5em 1em;
   cursor: help;
   color: tint($copy-color, 40%);
+  font-size: $font-size;
 
   &:hover .info-popup__text {
     display: block;
