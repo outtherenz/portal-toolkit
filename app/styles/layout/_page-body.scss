@@ -47,6 +47,10 @@
     &:last-child {
       border-bottom: none;
     }
+
+    @media (min-width: $breakpoint-desktop) {
+      margin-bottom: $desktop-gutter;
+    }
   }
 
 .page-wrapper--large  { max-width: 1024px - 50px; }
