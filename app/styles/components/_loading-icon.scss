@@ -1,5 +1,4 @@
 .loading-icon--ripple {
-  @include animation(fadeIn 0.5s ease-out both);
   text-align: center;
 
   svg {
@@ -12,9 +11,9 @@
     @include animation(loadingCircle 6s infinite cubic-bezier(0.215, 0.610, 0.355, 1));
   }
 
-  circle:nth-child(2) { @include animation-delay(1.5s); }
-  circle:nth-child(3) { @include animation-delay(3s); }
-  circle:nth-child(4) { @include animation-delay(4.5s); }
+  circle:nth-child(2) { @include animation-delay(-1.5s); }
+  circle:nth-child(3) { @include animation-delay(-3s); }
+  circle:nth-child(4) { @include animation-delay(-4.5s); }
 }
 
 .loading-icon--spinner {
