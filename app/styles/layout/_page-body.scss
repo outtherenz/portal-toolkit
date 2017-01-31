@@ -32,7 +32,6 @@
 
 .page-content {
   padding: $gutter;
-  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
   @media (min-width: $breakpoint-desktop) {

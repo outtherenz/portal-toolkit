@@ -41,5 +41,6 @@ body.page {
   .page-content {
     min-height: calc(100vh - 92px - 40px + 5px);
     min-width: 100%;
+    overflow: visible;
   }
 }
