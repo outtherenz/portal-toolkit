@@ -1,6 +1,8 @@
 .select-box {
   font-size: inherit;
   height: 33px; // To sometimes match the height of text inputs
+  border: 1px solid $border-color;
+  background-color: white;
 }
 
 .select-box--fixed-width {
