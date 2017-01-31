@@ -43,15 +43,9 @@
 .page-content__header {
     @include clearfix();
 
-    margin-bottom: $gutter;
-    border-bottom: 1px solid $border-color;
-
-    &:last-child {
-      border-bottom: none;
-    }
-
     @media (min-width: $breakpoint-desktop) {
       margin-bottom: $desktop-gutter;
+      border-bottom: 1px solid $border-color;
     }
   }
 
