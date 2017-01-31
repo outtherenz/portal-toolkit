@@ -1,4 +1,4 @@
-{{#if media.isDesktop}}
+{{#unless compact}}
   <button class='subdued' {{action 'prevYear'}}>«</button>
   <button class='subdued' {{action 'prevMonth'}}>‹</button>
 
@@ -35,5 +35,6 @@
     </span>
     {{fa-icon 'calendar'}}
   </label>
+
   {{input type="month" value=period class="month-picker__input" id="month-picker__input"}}
-{{/if}}
+{{/unless}}
