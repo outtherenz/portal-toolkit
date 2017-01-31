@@ -1,6 +1,7 @@
 .page-body {
   padding-top: 60px;
   background-color: white;
+  min-height: 100vh;
 
   @media (min-width: $breakpoint-desktop) {
     padding-top: 0;
@@ -38,6 +39,7 @@
     padding: $desktop-gutter;
   }
 }
+
 .page-content__header {
     @include clearfix();
 

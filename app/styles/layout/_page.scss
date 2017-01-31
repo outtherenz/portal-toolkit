@@ -21,6 +21,10 @@ body.page {
   }
 }
 
+.app-container {
+  min-height: 100vh;
+}
+
 @media (min-width: $breakpoint-desktop) {
   .app-container {
     display: flex;
