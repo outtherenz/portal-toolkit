@@ -66,6 +66,11 @@
   text-align: center;
 }
 
+.data-table__cell--right-aligned,
+.data-table tfoot .data-table__cell--right-aligned {
+  text-align: right;
+}
+
 .data-table--sortable th {
   @include user-select(none);
 }
