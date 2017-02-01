@@ -1,14 +1,13 @@
 .sortable-list.block li {
+  @include grab-cursor;
   background-color: $off-white;
   border: 1px solid $border-color;
   width: 300px;
   padding: 0.2em 0.4em;
   margin-bottom: 0.2em;
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  cursor: grab;
 
   &.sortable-ghost {
+    @include grab-cursor(true);
     background-color: shade($off-white, 3%);
     visibility: hidden;
   }
