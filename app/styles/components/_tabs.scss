@@ -87,19 +87,19 @@
     }
 
     &:hover::before {
-      z-index: 1;
+      z-index: 50;
     }
 
     &:hover::after {
-      z-index: 1;
+      z-index: 50;
     }
 
     &.active::before {
-      z-index: 2;
+      z-index: 51;
     }
 
     &.active::after {
-      z-index: 2;
+      z-index: 51;
     }
   }
 }

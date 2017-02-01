@@ -1,6 +1,6 @@
 .ember-modal-overlay {
   display: flex;
-  z-index: 1000;
+  z-index: 400;
 
   &.translucent {
     background-color: rgba($primary, 0.5);
@@ -16,7 +16,7 @@
   width: calc(100vw - 2 * #{$gutter-string});
   margin: 0 auto;
   position: static;
-  z-index: 2000;
+  z-index: 401;
   @include animation(modal-appear 0.2s ease-in);
 
   @media (min-width: $breakpoint-tablet) {
