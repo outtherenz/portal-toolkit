@@ -10,8 +10,8 @@ html.ie-7, html.ie-8, html.ie-9, html.ie-10 {
 }
 
 // display: flex causes crazy layout issues in IE11
-html.ie-11 body > .ember-view,
-html.ie-11 .page {
+html.ie-11 body.page > :not(.draggable-map).ember-view,
+html.ie-11 .app-container {
   display: block;
 }
 
