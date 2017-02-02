@@ -7,9 +7,8 @@
     color: shade($button-disabled, 40%);
   }
 
-  &:focus,
   &:hover {
-    background-color: tint($color, 10%);
+    background-color: tint($color, 20%);
     color: $text-color;
   }
 
