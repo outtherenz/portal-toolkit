@@ -3,7 +3,7 @@
   <button class='subdued' {{action 'prevMonth'}}>‹</button>
 
   <div class="inputs">
-    {{#x-select value=selectedMonth class="month select-box"}}
+    {{#x-select value=selectedMonth class=(if dark 'select-box select-box--dark month' 'select-box month')}}
       {{#x-option value="01"}}January{{/x-option}}
       {{#x-option value="02"}}February{{/x-option}}
       {{#x-option value="03"}}March{{/x-option}}
@@ -18,7 +18,7 @@
       {{#x-option value="12"}}December{{/x-option}}
     {{/x-select}}
 
-    {{#x-select value=selectedYear class="year select-box"}}
+    {{#x-select value=selectedYear class=(if dark 'select-box select-box--dark year' 'select-box year')}}
       {{#each yearList as |year|}}
         {{#x-option value=year}}{{year}}{{/x-option}}
       {{/each}}
