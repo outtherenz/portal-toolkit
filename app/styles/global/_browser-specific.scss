@@ -24,6 +24,10 @@ html.ie-11 .right-options {
   flex: none!important;
 }
 
+html.ie-11 .sidebar-page__sidebar > .sticky-top {
+  margin-top: -18px;
+}
+
 // Safari
 .safari {
   // Default webkit-appearance in Safari bloats the selects outside of their containers
