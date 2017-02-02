@@ -16,16 +16,15 @@ $nav-bar-height: 40px;
   height: $page-header-height;
   z-index: 200;
 
-  // Hack to continue the header background across the page even when scrolling horizontally
-  // There's a 5px overlap between the header and the nav bar
-  box-shadow: 1000px (-1000px + $nav-bar-height - 5px) 0 1000px $primary;
-
   @media (min-width: $breakpoint-desktop) {
     padding: $desktop-gutter;
     position: static;
     height: auto;
-  }
 
+    // Hack to continue the header background across the page even when scrolling horizontally
+    // There's a 5px overlap between the header and the nav bar
+    box-shadow: 1000px (-1000px + $nav-bar-height - 5px) 0 1000px $primary;
+  }
 
   ::selection {
     background-color: rgba(255, 255, 255, 0.4);
