@@ -29,14 +29,6 @@ html.ie-11 .sidebar-page__sidebar > .sticky-top {
 }
 
 // Safari
-.safari {
-  // Default webkit-appearance in Safari bloats the selects outside of their containers
-  select {
-    -webkit-appearance: none;
-    padding: 5px 10px 5px;
-  }
-
-  .nav-bar.sticky-top .tabs a {
-    padding: 0.45em 1em 0.75em;
-  }
+.safari .nav-bar.sticky-top .tabs a {
+  padding: 0.45em 1em 0.75em;
 }
