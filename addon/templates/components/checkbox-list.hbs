@@ -3,7 +3,7 @@
     {{yield checkbox.label checkbox.isSelected checkbox.value}}
   {{else}}
     <label>
-      {{input type="checkbox" checked=checkbox.isSelected disabled=disabled}}
+      {{input type="checkbox" class="checkbox" checked=checkbox.isSelected disabled=disabled}}
       {{checkbox.label}}
     </label>
   {{/if}}

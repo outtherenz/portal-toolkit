@@ -48,7 +48,7 @@ export default Model.extend({
       'rejected'
     ];
 
-    return validStatuses.contains(status) ? status.capitalize() : 'Invalid Status';
+    return validStatuses.includes(status) ? status.capitalize() : 'Invalid Status';
   }),
 
   /* Money matters */

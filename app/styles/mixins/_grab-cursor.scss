@@ -1,0 +1,13 @@
+@mixin grab-cursor($active: false) {
+  cursor: move; // IE fallback
+
+  @if $active {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+  } @else {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+  }
+}

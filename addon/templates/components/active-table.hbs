@@ -1,9 +1,12 @@
 <thead>
   <tr>
     {{#each headers as |header|}}
-      <th width={{header.width}} class="{{if header.sorted 'sorted'}} {{if header.ascending 'ascending'}}">
+      <th
+        width={{header.width}}
+        class="{{if header.sorted 'data-table__sorted-column-header'}} {{if header.ascending 'data-table__sorted-column-header--ascending'}}"
+      >
         {{#if header.key}}
-          <a {{action 'sortBy' header}}>
+          <a {{action 'sortBy' header}} class="link">
             <span>{{header.name}}</span>
           </a>
         {{else}}

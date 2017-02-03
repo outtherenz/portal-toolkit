@@ -7,7 +7,7 @@ export default Component.extend({
   layout,
 
   tagName: 'button',
-  classNames: [ 'subdued' ],
+  classNames: [ 'print-button' ],
   attributeBindings: [ 'title' ],
 
   title: 'Print',

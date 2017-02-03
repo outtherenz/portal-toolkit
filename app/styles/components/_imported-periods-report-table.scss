@@ -1,0 +1,26 @@
+.imported-periods-report-table {
+  width: auto;
+
+  th {
+    font-size: 90%;
+    padding: 0.5em 0.75em;
+  }
+
+  td {
+    padding: 0.4em 1em;
+  }
+
+  tfoot td {
+    font-size: 100%;
+    padding: 0.5em 1em;
+
+    &:not(:first-child) {
+      padding: 0.5em 0;
+      text-align: center;
+    }
+  }
+
+  td.present {
+    background-color: $alert-green;
+  }
+}

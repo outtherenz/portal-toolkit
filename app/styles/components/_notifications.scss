@@ -1,51 +1,28 @@
-.notifications {
+.notification-container {
   position: fixed;
   top: 1em;
-  left: 50%;
-  width: 450px;
-  margin-left: -225px;
-  z-index: 100;
+  left: 1em;
+  right: 1em;
+  z-index: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.notification {
+.notification-message {
   background: $alert-blue;
   color: white;
   margin-bottom: 0.5em;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   display: flex;
   position: relative;
+  width: 450px;
+  max-width: 100%;
   @include animation(
     notification-hide 250ms cubic-bezier(.33859, -.42, 1, -.22),
     notification-shrink 250ms 250ms cubic-bezier(.5, 0, 0, 1)
   );
-
-  .icon, .close {
-    flex: 0 0 35px;
-    background: rgba(0, 0, 0, 0.15);
-    text-align: center;
-    line-height: 35px;
-    font-size: 110%;
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .content {
-    flex: 1 0;
-    padding: 0.5em 1em;
-  }
-
-  a:hover {
-    color: white;
-  }
-
-  .countdown {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background-color: rgba(255, 255, 255, 0.3);
-    @include animation(notification-countdown linear 1);
-  }
 
   &.warning { background-color: $alert-amber; }
   &.success { background-color: $alert-green; }
@@ -54,6 +31,35 @@
   &.in {
     @include animation(notification-show 180ms cubic-bezier(.175, .885, .32, 1.27499));
   }
+}
+
+.notification-message__icon, .notification-message__close-button {
+  flex: 0 0 35px;
+  background: rgba(0, 0, 0, 0.15);
+  text-align: center;
+  line-height: 35px;
+  font-size: 110%;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.notification-message__content {
+  flex: 1 0;
+  padding: 0.5em 1em;
+}
+
+.notification-message__close-button:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.notification-message__countdown {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.3);
+  @include animation(notification-countdown linear 1);
 }
 
 // Animations

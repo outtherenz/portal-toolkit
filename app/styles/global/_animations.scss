@@ -33,7 +33,7 @@
 @include keyframes(loadingCircle) {
   0% {
     opacity: 1;
-    // r: 0;
+    r: 0;
   }
 
   25% {
@@ -42,7 +42,7 @@
 
   60% {
     opacity: 0;
-    // r: 44;
+    r: 44;
   }
 }
 

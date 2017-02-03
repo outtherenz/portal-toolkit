@@ -8,7 +8,7 @@ const { Component, computed, get } = Ember;
 export default Component.extend({
   layout,
 
-  classNames: [ 'dashboard-module', 'data-table' ],
+  classNames: [ 'chart', 'chart--data-table', 'data-table' ],
   tagName: 'table',
 
   data: computed('metrics', 'period', function() {

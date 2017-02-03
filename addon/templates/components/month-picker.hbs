@@ -1,28 +1,40 @@
-<button class='subdued' {{action 'prevYear'}}>«</button>
-<button class='subdued' {{action 'prevMonth'}}>‹</button>
+{{#unless compact}}
+  <button class='subdued' {{action 'prevYear'}}>«</button>
+  <button class='subdued' {{action 'prevMonth'}}>‹</button>
 
-<div class="inputs">
-  {{#x-select value=selectedMonth class="month"}}
-    {{#x-option value="01"}}January{{/x-option}}
-    {{#x-option value="02"}}February{{/x-option}}
-    {{#x-option value="03"}}March{{/x-option}}
-    {{#x-option value="04"}}April{{/x-option}}
-    {{#x-option value="05"}}May{{/x-option}}
-    {{#x-option value="06"}}June{{/x-option}}
-    {{#x-option value="07"}}July{{/x-option}}
-    {{#x-option value="08"}}August{{/x-option}}
-    {{#x-option value="09"}}September{{/x-option}}
-    {{#x-option value="10"}}October{{/x-option}}
-    {{#x-option value="11"}}November{{/x-option}}
-    {{#x-option value="12"}}December{{/x-option}}
-  {{/x-select}}
+  <div class="inputs">
+    {{#x-select value=selectedMonth class=(if dark 'select-box select-box--dark month' 'select-box month')}}
+      {{#x-option value="01"}}January{{/x-option}}
+      {{#x-option value="02"}}February{{/x-option}}
+      {{#x-option value="03"}}March{{/x-option}}
+      {{#x-option value="04"}}April{{/x-option}}
+      {{#x-option value="05"}}May{{/x-option}}
+      {{#x-option value="06"}}June{{/x-option}}
+      {{#x-option value="07"}}July{{/x-option}}
+      {{#x-option value="08"}}August{{/x-option}}
+      {{#x-option value="09"}}September{{/x-option}}
+      {{#x-option value="10"}}October{{/x-option}}
+      {{#x-option value="11"}}November{{/x-option}}
+      {{#x-option value="12"}}December{{/x-option}}
+    {{/x-select}}
 
-  {{#x-select value=selectedYear class="year"}}
-    {{#each yearList as |year|}}
-      {{#x-option value=year}}{{year}}{{/x-option}}
-    {{/each}}
-  {{/x-select}}
-</div>
+    {{#x-select value=selectedYear class=(if dark 'select-box select-box--dark year' 'select-box year')}}
+      {{#each yearList as |year|}}
+        {{#x-option value=year}}{{year}}{{/x-option}}
+      {{/each}}
+    {{/x-select}}
+  </div>
 
-<button class='subdued' {{action 'nextMonth'}}>›</button>
-<button class='subdued' {{action 'nextYear'}}>»</button>
+  <button class='subdued' {{action 'nextMonth'}}>›</button>
+  <button class='subdued' {{action 'nextYear'}}>»</button>
+{{else}}
+  <label class="month-picker__input-label" for="month-picker__input">
+    <span class="month-picker__display">
+      <span class="month-picker__month">{{moment-format period 'MMM' 'YYYY-MM'}}</span>
+      <span class="month-picker__year">{{moment-format period 'YYYY' 'YYYY-MM'}}</span>
+    </span>
+    {{fa-icon 'calendar'}}
+  </label>
+
+  {{input type="month" value=period class="month-picker__input" id="month-picker__input"}}
+{{/unless}}

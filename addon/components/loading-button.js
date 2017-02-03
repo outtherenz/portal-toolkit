@@ -6,9 +6,10 @@ const { Component, computed, get } = Ember;
 export default Component.extend({
   layout,
 
+  tagName: 'button',
+  classNames: [ 'loading-button' ],
   classNameBindings: [ 'isLoading:loading' ],
   attributeBindings: [ 'disabled' ],
-  tagName: 'button',
 
   buttonText: 'Submit',
   isLoading: false,

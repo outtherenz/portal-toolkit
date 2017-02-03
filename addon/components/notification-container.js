@@ -5,5 +5,5 @@ const { Component } = Ember;
 
 export default Component.extend({
   layout,
-  classNames: [ 'notifications' ]
+  classNames: [ 'notification-container' ]
 });

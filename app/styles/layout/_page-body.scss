@@ -1,0 +1,66 @@
+.page-body {
+  padding-top: 60px;
+  background-color: white;
+  min-height: 100vh;
+
+  @media (min-width: $breakpoint-desktop) {
+    padding-top: 0;
+    min-height: auto;
+  }
+}
+
+.page-body--dark {
+  background-color: $primary;
+  min-height: 100vh;
+}
+
+.sidebar-page {
+  @extend .content-container;
+  display: flex;
+}
+
+.sidebar-page__sidebar {
+  padding: 23px $desktop-gutter;
+  border-right: 1px solid $border-color;
+  background: shade($off-white, 1.5%);
+  flex: 0 0 auto;
+  width: 220px;
+}
+
+.sidebar-page__content {
+  flex: 1;
+  max-width: calc(100vw - 220px);
+}
+
+.page-content {
+  padding: $gutter;
+  -webkit-overflow-scrolling: touch;
+
+  @media (min-width: $breakpoint-desktop) {
+    padding: $desktop-gutter;
+  }
+}
+
+.page-content__header {
+    @include clearfix();
+
+    @media (min-width: $breakpoint-desktop) {
+      margin-bottom: $desktop-gutter;
+      border-bottom: 1px solid $border-color;
+    }
+  }
+
+.page-wrapper--large  { max-width: 1024px - 50px; }
+.page-wrapper--medium { max-width: 1024px - 250px; }
+.page-wrapper--small  { max-width: 1024px - 450px; }
+.page-wrapper--tiny   { max-width: 1024px - 650px; }
+
+@media (max-width: $breakpoint-desktop - 1px) {
+  .content-container {
+    min-height: calc(100vh - 60px);
+
+    > .liquid-child {
+      min-height: calc(100vh - 60px);
+    }
+  }
+}

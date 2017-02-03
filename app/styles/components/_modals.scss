@@ -1,7 +1,6 @@
 .ember-modal-overlay {
   display: flex;
-  justify-content: center;
-  z-index: 1000;
+  z-index: 400;
 
   &.translucent {
     background-color: rgba($primary, 0.5);
@@ -10,15 +9,56 @@
 }
 
 .ember-modal-dialog {
-  @extend .module;
   flex: 0 0 auto;
   align-self: center;
   box-shadow: 0 2px 5px rgba(black, 0.3);
-  min-width: 400px;
+  max-height: calc(100vh - 2 * #{$gutter-string});
+  width: calc(100vw - 2 * #{$gutter-string});
   margin: 0 auto;
   position: static;
-  z-index: 1000;
+  z-index: 401;
   @include animation(modal-appear 0.2s ease-in);
+
+  @media (min-width: $breakpoint-tablet) {
+    max-height: calc(100vh - 2 * #{$gutter-string});
+    min-width: 500px;
+    max-width: none;
+    width: auto;
+  }
+
+  @media (min-width: $breakpoint-desktop) {
+    max-height: calc(100vh - 2 * #{$desktop-gutter});
+  }
+}
+
+.ember-modal-dialog--scrollable {
+  height: calc(100vh - 2 * #{$gutter-string});
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: $breakpoint-desktop) {
+    height: calc(100vh - 2 * #{$desktop-gutter});
+  }
+}
+
+.ember-modal-dialog__scrollable-window {
+  flex: 1 0;
+  margin: $negative-gutter;
+  position: relative;
+
+  @media (min-width: $breakpoint-desktop) {
+    margin: -$desktop-gutter;
+  }
+}
+
+.ember-modal-dialog__scrollable-content {
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: $desktop-gutter;
 }
 
 @include keyframes(modal-appear) {

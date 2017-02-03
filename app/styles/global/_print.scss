@@ -1,21 +1,18 @@
 .page-header,
-.sidebar,
-.page-toolbar,
-.page-toolbar *,
-.nav-bar,
-.page-footer {
+.sidebar-page__sidebar,
+.nav-bar {
   display: none !important;
 }
 
-.header {
-  display: none !important;
+.sidebar-page__content {
+  max-width: none;
 }
 
-body, h1, h2, h3, h4, h5, h6 {
+.page, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: black;
 }
 
-a {
+.link {
   text-decoration: underline;
 }
 

@@ -1,118 +1,144 @@
-@mixin button($color: $button-primary, $text-color: white) {
-  font-family: $secondary-font;
+@mixin button-colors($color, $text-color) {
   background-color: $color;
   color: $text-color;
-  font-weight: normal;
-  padding: 0.4em 0.8em;
-  font-size: $root-font-size;
-  border-radius: 3px;
-  cursor: pointer;
-  border: 0;
-  width: auto;
-  overflow: hidden;
-  text-align: center;
 
   &[disabled] {
     background: $button-disabled;
     color: shade($button-disabled, 40%);
-    pointer-events: none;
   }
 
-  &:focus,
   &:hover {
-    background-color: tint($color, 10%);
+    background-color: tint($color, 20%);
     color: $text-color;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
   }
 
   &:active {
     background-color: shade($color, 30%);
     color: $text-color;
   }
-
-  &.pull-right {
-    text-align: center;
-    margin-left: 0.5em;
-  }
-
-  &.subdued {
-    background: transparent;
-    color: $color;
-    font-weight: normal;
-    font-family: $copy-font;
-    padding: 0;
-    text-shadow: none;
-
-    &:focus,
-    &:hover {
-      background-image: none;
-      text-decoration: underline;
-    }
-
-    &:active {
-      background-color: transparent;
-      color: shade($color, 30%);
-    }
-  }
 }
 
-%button-base {
-  @include button();
-}
+.button {
+  @include button-colors($button-primary, white);
 
-input[type=submit],
-input[type=reset],
-button,
-a.button {
-  @extend %button-base;
-
-  &.add {
-    @include button($button-green);
-  }
-
-  &.add:not(.subdued) {
-    position: relative;
-    padding-left: 30px;
-
-    &::before {
-      content: '+';
-      position: absolute;
-      font-size: 20px;
-      top: 50%;
-      left: 0;
-      width: 32px;
-      text-align: center;
-      margin-top: -10px;
-      line-height: 1;
-    }
-  }
-
-  &.delete { @include button($button-red); }
-  &.secondary { @include button($button-secondary); }
-  &.plain {
-    @include button($button-plain, tint($copy-color, 20%));
-    box-shadow: inset 0 0 1px rgba(black, 0.2),
-      inset 0 2px 0 rgba(white, 0.2),
-      inset 0 -1px 0 rgba(black, 0.05),
-      inset 0 1px 0 rgba(black, 0.05);
-
-    &:hover {
-      text-shadow: none;
-    }
-
-    &:active {
-      background-color: shade($button-plain, 10%);
-    }
-  }
-}
-
-// A button with a piece of status text
-.status-button {
+  font-family: $secondary-font;
+  font-weight: normal;
+  padding: 0.4em 0.8em;
+  font-size: $font-size;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 0;
+  width: auto;
+  overflow: hidden;
   text-align: center;
+  text-decoration: none;
 
-  .status {
-    @extend .placeholder;
-    font-size: 85%;
-    margin: 0.3em 0;
+  &[disabled] {
+    pointer-events: none;
+  }
+
+  &:focus,
+  &:hover {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+  }
+}
+
+.button--add {
+  @include button-colors($button-green, white);
+
+  padding-left: 30px;
+  position: relative;
+
+  &::before {
+    content: '+';
+    position: absolute;
+    font-size: 20px;
+    top: 50%;
+    left: 0;
+    width: 32px;
+    text-align: center;
+    margin-top: -10px;
+    line-height: 1;
+  }
+}
+
+.button--delete {
+  @include button-colors($button-red, white);
+}
+
+.button--plain {
+  @include button-colors($button-plain, tint($copy-color, 20%));
+  box-shadow: inset 0 0 0 1px $border-color;
+
+  &:hover {
+    text-shadow: none;
+    background-color: shade($button-plain, 3%);
+  }
+}
+
+.button--spaced:not(.pull-right):not(:first-child) { margin-left:  0.2em; }
+.button--spaced:not(.pull-right):not(:last-child)  { margin-right: 0.2em; }
+.button--spaced.pull-right:not(:first-child) { margin-right: 0.2em; }
+.button--spaced.pull-right:not(:last-child)  { margin-left:  0.2em; }
+
+.button--secondary {
+  @include button-colors($button-secondary, white);
+}
+
+.text-button {
+  @extend .link;
+
+  background: transparent;
+  padding: 0;
+  display: inline;
+  border: 0;
+  font-size: inherit;
+  font-family: $copy-font;
+
+  .fa {
+    transform: scale(1.2);
+  }
+}
+
+.text-button--plain {
+  color: $copy-color;
+
+  &:hover,
+  &:active {
+    color: tint($copy-color, 30%);
+  }
+}
+
+.text-button--add {
+  color: $button-green;
+
+  &:hover,
+  &:active, {
+    color: shade($button-green, 20%);
+  }
+
+  padding-left: 30px;
+  position: relative;
+
+  &::before {
+    content: '+';
+    position: absolute;
+    font-size: 17px;
+    top: 50%;
+    left: 0;
+    width: 45px;
+    text-align: center;
+    margin-top: -10px;
+    line-height: 1;
+  }
+}
+
+.text-button--delete {
+  color: $button-red;
+
+  &:hover,
+  &:active, {
+    color: shade($button-red, 20%);
   }
 }
