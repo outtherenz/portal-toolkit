@@ -32,3 +32,10 @@ html.ie-11 .sidebar-page__sidebar > .sticky-top {
 .safari .nav-bar.sticky-top .tabs a {
   padding: 0.45em 1em 0.75em;
 }
+
+@media (max-width: $breakpoint-desktop - 1px) {
+  .safari .ember-modal-dialog {
+    margin-bottom: 70px;
+    max-height: calc(100vh - #{$gutter-string} - 70px);
+  }
+}
