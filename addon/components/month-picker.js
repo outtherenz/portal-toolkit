@@ -16,7 +16,7 @@ export default Component.extend({
   period: moment().format('YYYY-MM'),
 
   classNames: [ 'month-picker' ],
-  classNameBindings: [ 'closedPeriod' ],
+  classNameBindings: [ 'closedPeriod', 'dark:month-picker--dark' ],
 
   selectedMonth: computed('period', {
     get() {
