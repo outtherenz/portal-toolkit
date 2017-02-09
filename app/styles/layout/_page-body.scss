@@ -1,10 +1,9 @@
 .page-body {
-  padding-top: 60px;
+  padding-top: $page-header-height;
   background-color: white;
   min-height: 100vh;
 
   @media (min-width: $breakpoint-desktop) {
-    padding-top: 0;
     min-height: auto;
   }
 }

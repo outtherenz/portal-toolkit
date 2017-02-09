@@ -1,5 +1,4 @@
 $page-header-height: 60px;
-$nav-bar-height: 40px;
 
 .page-header {
   background-color: $primary;
@@ -8,7 +7,6 @@ $nav-bar-height: 40px;
   padding: $gutter;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: -5px; // compensates for nav-bar padding on scroll
   position: fixed;
   top: 0;
   right: 0;
@@ -18,8 +16,6 @@ $nav-bar-height: 40px;
 
   @media (min-width: $breakpoint-desktop) {
     padding: 0 $desktop-gutter;
-    position: static;
-    height: auto;
 
     // Hack to continue the header background across the page even when scrolling horizontally
     // There's a 5px overlap between the header and the nav bar
