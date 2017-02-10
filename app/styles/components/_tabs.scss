@@ -2,7 +2,7 @@
   display: flex;
   justify-content: flex-start;
   margin: 0;
-  padding: 0 $desktop-gutter;
+  padding: 0 0 0 20px;
 }
 
 @mixin tab-color($tab-color, $tab-text-color: white) {
@@ -47,6 +47,13 @@
   }
 }
 
+.tabs__group {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 calc(20px + #{$desktop-gutter}) 0 0;
+  padding: 0;
+}
+
 .tabs__tab {
   @include tab-color($secondary);
 
@@ -55,18 +62,15 @@
 
   list-style-type: none;
   position: relative;
-  margin: 0 30px 0 -10px;
+  margin: 0 20px 0 0px;
   padding: 0;
-
-  &:first-of-type {
-    margin-left: -5px;
-  }
 
   > a {
     padding: $tab-top-padding 1em $tab-bottom-padding;
     height: 100%;
     display: block;
     text-decoration: none;
+    white-space: nowrap;
 
     &::after,
     &::before {
