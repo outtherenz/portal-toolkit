@@ -142,3 +142,12 @@
     color: shade($button-red, 20%);
   }
 }
+
+.text-button.text-button--white {
+  color: #ddd;
+
+  &:hover,
+  &:active {
+    color: white;
+  }
+}
