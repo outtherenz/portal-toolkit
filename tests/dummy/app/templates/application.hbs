@@ -1,4 +1,4 @@
-<header class='page-header'>
+<header class='toolkit-header'>
   <h1>Portal Toolkit</h1>
   <h2>Code to be shared across the Portal’s modules.</h2>
 </header>
@@ -10,6 +10,7 @@
         <li>{{#link-to 'app-components.active-table'}}Active table{{/link-to}}</li>
         <li>{{#link-to 'app-components.charts'}}Charts{{/link-to}}</li>
         <li>{{#link-to 'app-components.checkbox-list'}}Checkbox list{{/link-to}}</li>
+        <li>{{#link-to 'app-components.date-input'}}Date input{{/link-to}}</li>
         <li>{{#link-to 'app-components.date-picker'}}Date picker{{/link-to}}</li>
         <li>{{#link-to 'app-components.file-inputs'}}File inputs{{/link-to}}</li>
         <li>{{#link-to 'app-components.formatted-input'}}Formatted input{{/link-to}}</li>
@@ -36,55 +37,8 @@
       </ul>
     </nav>
   </aside>
-  <div class='page-toolkit'>
-    <div class='toolkit-header'>
-      <h5>Color</h5>
-      <div class='toolkit-container'>
-        <div class='toolkit-part-container'>
-          {{input type='text' min='0' max='255' value=colorR class='sliderText'}}
-          {{input type='text' min='0' max='255' value=colorG class='sliderText'}}
-          {{input type='text' min='0' max='255' value=colorB class='sliderText'}}
-          <h6>Set:</h6>{{input type='checkbox' checked=rgbColor class='checkbox'}}
-        </div>
-        <div class='toolkit-part-container'>
-          {{input type='range' min='0' max='255' value=colorR class='slider'}}
-          {{input type='range' min='0' max='255' value=colorG class='slider'}}
-          {{input type='range' min='0' max='255' value=colorB class='slider'}}
-          {{input type='range' min='0' max='255' value=colorLight
-          class='slider'}}
-        </div>
-        <div class='colorBox'>
-          {{input type='text' value=colorRGB class='rgbStatus' disabled=true}}
-          {{input type='text' value=colorInput class='hexStatus' disabled=true}}
-        </div>
-        <div class='toolkit-part-container'>
-          {{input type='text' value=colorInput class='hexInput'}}
-          <h6>Set:</h6>{{input type='checkbox' checked=hexColor class='checkbox'}}
-        </div>
-      </div>
-    </div>
-    <div class='divider'></div>
-    <div class='toolkit-header'>
-      <h5>Page</h5>
-      <div class='toolkit-container'>
-        <div class='toolkit-part-container'>
-          <h6>Width:</h6>{{input type='range' min='0.1' max='1' step="0.01" value="0.75" value=pageWidth class='slider'}}
-        </div>
-      </div>
-    </div>
-    <div class='divider'></div>
-    <div class='toolkit-header'>
-      <h5>View</h5>
-      <div class='toolkit-container'>
-        <div class='toolkit-part-container'>
-          <h6>Fullscreen:</h6>{{input type='checkbox' checked=mode class='checkbox'}}
-          {{print-button class='printButton'}}
-        </div>
-      </div>
-    </div>
-    {{input type='checkbox' checked=decafe class='decafe'}}
-  </div>
-  <article class='page'>
+
+  <article class='toolkit-page'>
     {{outlet}}
   </article>
 </main>
