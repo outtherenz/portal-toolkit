@@ -1,0 +1,36 @@
+<header class="date-picker__header">
+  <button class="text-button date-picker__month-switch-button" {{action 'changeMonth' -1}}>◀</button>
+
+  <div class="date-picker__selected-date" {{action showSelection}}>
+    {{moment-format (inc calendarState.month) 'MMMM' 'M'}}
+    {{calendarState.year}}
+  </div>
+
+  <button class="text-button date-picker__month-switch-button" {{action 'changeMonth' 1}}>▶</button>
+</header>
+
+{{! avoiding hardcoding in case it matters for localisation }}
+<header class="date-picker__days-of-the-week">
+  <div class="date-picker__day-of-the-week">{{moment-format 0 'ddd' 'd'}}</div>
+  <div class="date-picker__day-of-the-week">{{moment-format 1 'ddd' 'd'}}</div>
+  <div class="date-picker__day-of-the-week">{{moment-format 2 'ddd' 'd'}}</div>
+  <div class="date-picker__day-of-the-week">{{moment-format 3 'ddd' 'd'}}</div>
+  <div class="date-picker__day-of-the-week">{{moment-format 4 'ddd' 'd'}}</div>
+  <div class="date-picker__day-of-the-week">{{moment-format 5 'ddd' 'd'}}</div>
+  <div class="date-picker__day-of-the-week">{{moment-format 6 'ddd' 'd'}}</div>
+</header>
+
+<div class="date-picker__calendar">
+  {{#each calendar as |week|}}
+    <div class="date-picker__week">
+      {{#each week as |date|}}
+        {{date-picker-day
+          date=date
+          selection=selection
+          calendarState=calendarState
+          click=(action select date)
+        }}
+      {{/each}}
+    </div>
+  {{/each}}
+</div>

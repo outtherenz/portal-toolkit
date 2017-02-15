@@ -4,9 +4,11 @@ import moment from 'moment';
 
 const {
   Component,
+  on,
   get,
   set,
   computed,
+  observer,
   getProperties
 } = Ember;
 
@@ -15,24 +17,31 @@ export default Component.extend({
 
   layout,
 
-  day: new Date().getDate(),
-  month: new Date().getMonth(),
-  year: new Date().getFullYear(),
+  selection: {
+    day: new Date().getDate(),
+    month: new Date().getMonth(),
+    year: new Date().getFullYear()
+  },
 
-  date: computed('day', 'month', 'year', function() {
-    const { day, month, year } = getProperties(this, 'day', 'month', 'year');
-    const date = moment().date(day).month(month).year(year).toDate();
+  calendarState: {
+    month: null,
+    year: null
+  },
 
-    return date;
-  }),
+  showSelection: on('init', observer('selection.{month,year}', function() {
+    set(this, 'calendarState.month', get(this, 'selection.month'));
+    set(this, 'calendarState.year', get(this, 'selection.year'));
+  })),
 
-  calendar: computed('day', 'month', 'year', function() {
-    const startOfMonth = moment(get(this, 'date')).startOf('month');
+  calendar: computed('calendarState.{day,month,year}', function() {
+    const startOfMonth = moment()
+      .year(get(this, 'calendarState.year'))
+      .month(get(this, 'calendarState.month'))
+      .startOf('month');
+
     const calendar = [];
 
-    console.log(startOfMonth.format())
-
-    let offset = startOfMonth.day()
+    let offset = startOfMonth.day();
 
     for (let week = 0; week < 6; week++) {
       calendar[week] = [];
@@ -49,5 +58,18 @@ export default Component.extend({
     }
 
     return calendar;
-  })
+  }),
+
+  actions: {
+    changeMonth(diff) {
+      const calendarState = get(this, 'calendarState');
+      const { month, year } = getProperties(calendarState, 'month', 'year');
+      const newDate = moment().year(year).month(month).add(diff, 'months');
+
+      set(this, 'calendarState', {
+        month: newDate.month(),
+        year: newDate.year()
+      });
+    }
+  }
 });
