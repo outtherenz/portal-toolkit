@@ -13,7 +13,9 @@ module.exports = function(defaults) {
 
     'ember-composable-helpers': {
       only: [
-        'inc'
+        'inc',
+        'toggle',
+        'pipe'
       ]
     },
 
