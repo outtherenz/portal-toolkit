@@ -25,8 +25,9 @@ test('it renders all parts of the UI', function(assert) {
 test('can change month', function(assert) {
   assert.expect(5);
 
+  this.set('date', new Date('2017-02-01'));
   this.set('changeDate', () => assert.ok(false), 'change date action should not be called');
-  this.render(hbs`{{date-picker selection=(hash day=1 month=1 year=2017) select=changeDate}}`);
+  this.render(hbs`{{date-picker date=date select=changeDate}}`);
 
   const [ prevBtn, nextBtn ] = this.$('.date-picker__month-switch-button');
 
@@ -56,8 +57,9 @@ test('can change month', function(assert) {
 test('can show selection', function(assert) {
   assert.expect(2);
 
+  this.set('date', new Date('2017-02-01'));
   this.set('changeDate', () => assert.ok(false), 'change date action should not be called');
-  this.render(hbs`{{date-picker selection=(hash day=1 month=1 year=2017) select=changeDate}}`);
+  this.render(hbs`{{date-picker date=date select=changeDate}}`);
 
   const [ prevBtn ] = this.$('.date-picker__month-switch-button');
   const [ selectedDate ] = this.$('.date-picker__selected-date');
@@ -77,13 +79,13 @@ test('can show selection', function(assert) {
 test('can make selection', function(assert) {
   assert.expect(2);
 
-  this.set('selection', { day: 1, month: 1, year: 2017 });
+  this.set('date', new Date('2017-02-01'));
   this.set('changeDate', newDate => {
-    this.set('selection', newDate);
+    this.set('date', newDate);
     assert.ok(true);
   });
 
-  this.render(hbs`{{date-picker selection=selection select=changeDate}}`);
+  this.render(hbs`{{date-picker date=date select=changeDate}}`);
 
   const [ day ] = this.$('.date-picker__day');
 

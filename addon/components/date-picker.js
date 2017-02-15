@@ -17,11 +17,23 @@ export default Component.extend({
 
   layout,
 
-  selection: {
-    day: new Date().getDate(),
-    month: new Date().getMonth(),
-    year: new Date().getFullYear()
-  },
+  date: new Date(),
+
+  selection: computed('date', {
+    get() {
+      const date = get(this, 'date') || new Date();
+
+      return {
+        day: date.getDate(),
+        month: date.getMonth(),
+        year: date.getFullYear()
+      };
+    },
+
+    set(key, { day, month, year }) {
+      set(this, 'date', moment().year(year).month(month).date(day).toDate());
+    }
+  }),
 
   calendarState: {
     month: null,
@@ -34,6 +46,13 @@ export default Component.extend({
   })),
 
   calendar: computed('calendarState.{day,month,year}', function() {
+    const calendarState = get(this, 'calendarState');
+    const { month, year } = getProperties(calendarState || {}, 'month', 'year');
+
+    if (month == null || year == null) {
+      return [];
+    }
+
     const startOfMonth = moment()
       .year(get(this, 'calendarState.year'))
       .month(get(this, 'calendarState.month'))
@@ -63,13 +82,22 @@ export default Component.extend({
   actions: {
     changeMonth(diff) {
       const calendarState = get(this, 'calendarState');
-      const { month, year } = getProperties(calendarState, 'month', 'year');
+      const { month, year } = getProperties(calendarState || {}, 'month', 'year');
+
+      if (month == null || year == null) {
+        return;
+      }
+
       const newDate = moment().year(year).month(month).add(diff, 'months');
 
       set(this, 'calendarState', {
         month: newDate.month(),
         year: newDate.year()
       });
+    },
+
+    makeSelection({ day, month, year }) {
+      this.sendAction('select', moment().year(year).month(month).date(day).toDate());
     }
   }
 });

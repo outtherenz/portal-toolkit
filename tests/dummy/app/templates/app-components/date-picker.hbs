@@ -3,8 +3,7 @@
 </header>
 
 <p>
-  Usage: <code>\{{date-picker selection=selection select=(action 'changeDate')}}</code><br>
-  Selection: <code>{ day: 1, month: 0, year: 2017 }</code> (note the zero-based month index)
+  Usage: <code>\{{date-picker date=date select=(action (mut date))}}</code> where <code>date</code> is of type <code>Date</code>.
 </p>
 
-{{date-picker selection=selection select=(action 'changeDate')}}
+{{date-picker date=date select=(action (mut date))}}

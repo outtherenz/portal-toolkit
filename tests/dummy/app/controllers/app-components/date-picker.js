@@ -1,20 +1,9 @@
 import Ember from 'ember';
 
 const {
-  Controller,
-  set
+  Controller
 } = Ember;
 
 export default Controller.extend({
-  selection: {
-    day: new Date().getDate(),
-    month: new Date().getMonth(),
-    year: new Date().getFullYear()
-  },
-
-  actions: {
-    changeDate(newDate) {
-      set(this, 'selection', newDate);
-    }
-  }
+  date: new Date()
 });

@@ -4,28 +4,12 @@ moduleForComponent('date-picker', 'Unit | Component | date picker', {
   unit: true
 });
 
-test('date is correctly calculated', function(assert) {
-  const component = this.subject();
-
-  component.set('day', 1);
-  component.set('month', 0);
-  component.set('year', 2015);
-
-  const date = component.get('date');
-
-  assert.equal(date.getDate(), 1);
-  assert.equal(date.getMonth(), 0);
-  assert.equal(date.getFullYear(), 2015);
-});
-
 test('calendar is correctly calculated when the 1st is a Sunday', function(assert) {
   assert.expect(8);
 
   const component = this.subject();
 
-  component.set('day', 24);
-  component.set('month', 0);
-  component.set('year', 2017);
+  component.set('date', new Date('2017-01-24'));
 
   const calendar = component.get('calendar');
 
@@ -73,9 +57,7 @@ test('full calendar is provided', function(assert) {
 
   const component = this.subject();
 
-  component.set('day', 1);
-  component.set('month', 0);
-  component.set('year', 2017);
+  component.set('date', new Date('2017-01-01'));
 
   let nextDate = 1;
   const calendar = component.get('calendar');
@@ -93,9 +75,7 @@ test('number of days in February is correct', function(assert) {
 
   const component = this.subject();
 
-  component.set('day', 1);
-  component.set('month', 1);
-  component.set('year', 2016);
+  component.set('date', new Date('2016-02-01'));
 
   const leapYear = component.get('calendar');
 
@@ -103,7 +83,7 @@ test('number of days in February is correct', function(assert) {
   assert.equal(leapYear[4][1].day, 29);
   assert.equal(leapYear[4][2].day, 1);
 
-  component.set('year', 2017);
+  component.set('date', new Date('2017-02-01'));
 
   const nonLeapYear = component.get('calendar');
 
