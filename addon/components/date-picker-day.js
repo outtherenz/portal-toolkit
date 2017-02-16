@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/date-picker-day';
+import hbs from 'htmlbars-inline-precompile';
 
 const {
   Component,
@@ -8,7 +8,7 @@ const {
 } = Ember;
 
 export default Component.extend({
-  layout,
+  layout: hbs`{{date.day}}`,
 
   classNames: [ 'date-picker__day' ],
   classNameBindings: [
