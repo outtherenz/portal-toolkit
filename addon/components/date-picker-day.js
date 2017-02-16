@@ -13,8 +13,16 @@ export default Component.extend({
   classNames: [ 'date-picker__day' ],
   classNameBindings: [
     'isSelected:date-picker__day--selected',
-    'isActiveMonth::date-picker__day--inactive-month'
+    'isActiveMonth::date-picker__day--inactive-month',
+    'isCurrentDay:date-picker__day--current-day'
   ],
+
+  isCurrentDay: computed('date.{day,month,year}', function() {
+    const currentDate = new Date();
+    return get(this, 'date.day') === currentDate.getDate() &&
+      get(this, 'date.month') === currentDate.getMonth() &&
+      get(this, 'date.year') === currentDate.getFullYear();
+  }),
 
   isSelected: computed('date.{day,month,year}', 'selection.{day,month,year}', function() {
     return get(this, 'date.day') === get(this, 'selection.day') &&

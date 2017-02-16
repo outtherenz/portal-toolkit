@@ -79,7 +79,6 @@
   border-radius: 50%;
 
   &:hover:not(.date-picker__day--selected) {
-    // background-color: tint($secondary, 80%);
     color: black;
   }
 }
@@ -97,4 +96,10 @@
 
 .date-picker__day--inactive-month.date-picker__day--selected {
   background-color: $subdued;
+}
+
+.date-picker__day--current-day:not(.date-picker__day--selected) {
+  font-weight: 900;
+  color: black;
+  border: 1px solid $border-color;
 }
