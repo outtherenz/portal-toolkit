@@ -1,7 +1,7 @@
 .select-box-replacement {
   border: 1px solid $border-color;
   background-color: $off-white;
-  padding: 0.3em 0.8em;
+  padding: 0.5em 0.8em;
   color: tint($copy-color, 20%);
   display: block;
   position: relative;
@@ -27,6 +27,7 @@
     height: 100%;
     outline: 0;
     margin: 0;
+    cursor: pointer;
   }
 }
 

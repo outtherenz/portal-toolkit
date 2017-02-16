@@ -11,6 +11,8 @@ Router.map(function() {
     this.route('active-table');
     this.route('charts');
     this.route('checkbox-list');
+    this.route('date-input');
+    this.route('date-picker');
     this.route('file-inputs');
     this.route('formatted-input');
     this.route('loading-button');

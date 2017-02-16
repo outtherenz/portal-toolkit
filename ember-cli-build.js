@@ -11,6 +11,14 @@ module.exports = function(defaults) {
       useScss: true
     },
 
+    'ember-composable-helpers': {
+      only: [
+        'inc',
+        'toggle',
+        'pipe'
+      ]
+    },
+
     eslint: {
       // Prevents linting tests from being automatically generated
       testGenerator: () => null
@@ -23,7 +31,7 @@ module.exports = function(defaults) {
     This build file does *not* influence how the addon or the app using it
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
- 
+
   // Papaparse
   app.import('bower_components/papaparse/papaparse.js');
 
