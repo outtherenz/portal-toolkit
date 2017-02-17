@@ -123,14 +123,13 @@
 
   &::before {
     content: '+';
-    position: absolute;
     font-size: 17px;
-    top: 50%;
-    left: 0;
-    width: 45px;
     text-align: center;
     margin-top: -10px;
-    line-height: 1;
+    display: inline-block;
+    line-height: 0;
+    margin-right: 0.3em;
+    text-decoration: none;
   }
 }
 
