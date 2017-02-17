@@ -3,8 +3,9 @@
   background-color: $off-white;
   padding: 0.5em 0.8em;
   color: tint($copy-color, 20%);
-  display: block;
+  display: inline-block;
   position: relative;
+  min-width: 100px;
 
   &:hover {
     cursor: pointer;
@@ -29,6 +30,10 @@
     margin: 0;
     cursor: pointer;
   }
+}
+
+.select-box-replacement--stretched {
+  width: 100%;
 }
 
 .select-box-replacement--large {
