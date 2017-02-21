@@ -18,18 +18,18 @@
     content: '▾';
     float: right;
   }
+}
 
-  .select-box-replacement__select-box {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    outline: 0;
-    margin: 0;
-    cursor: pointer;
-  }
+.select-box-replacement__select-box {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: 0;
+  margin: 0;
+  cursor: pointer;
 }
 
 .select-box-replacement--stretched {
