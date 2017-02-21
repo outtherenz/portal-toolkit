@@ -7,12 +7,12 @@
     color: shade($button-disabled, 40%);
   }
 
-  &:hover {
+  &:hover:not([disabled]) {
     background-color: tint($color, 20%);
     color: $text-color;
   }
 
-  &:active {
+  &:active:not([disabled]) {
     background-color: shade($color, 30%);
     color: $text-color;
   }
