@@ -6,14 +6,15 @@ const {
   isEmpty,
   get,
   set,
-  run
+  run,
+  testing
 } = Ember;
 
 export default EmberUploader.FileField.extend({
   attributeBindings: [ 'accept' ],
 
   change(event) {
-    const files = event.target.files;
+    const files = get(event, testing ? 'originalEvent.testFiles' : 'target.files');
 
     if (isEmpty(files) || files[0] == null) {
       set(this, 'file', null);
