@@ -45,6 +45,7 @@
     "ember-radio-button": "^1.0.7",
     "ember-radio-buttons": "^4.0.1",
     "ember-resolver": "^2.0.3",
+    "ember-uploader": "1.2.3",
     "eslint": "^3.9.1",
     "eslint-config-otbs": "github:outtherenz/eslint-config-otbs",
     "loader.js": "^4.0.0",
