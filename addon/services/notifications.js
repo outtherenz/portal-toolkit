@@ -5,6 +5,7 @@ const {
   get,
   set,
   assert,
+  testing,
   Object: EObject,
   run: { later }
 } = Ember;
@@ -68,6 +69,8 @@ export default Service.extend({
   },
 
   setupAutoClear(notification) {
+    if (testing) return;
+
     later(() => {
       // Hasn't been closed manually
       if (get(this, 'list').indexOf(notification) !== -1 && !get(notification, 'dismiss')) {
