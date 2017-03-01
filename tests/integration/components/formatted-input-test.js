@@ -183,12 +183,17 @@ test('accepts custom formatters and parsers', function(assert) {
 });
 
 test('can deal with null values', function(assert) {
-  assert.expect(1);
+  assert.expect(2);
 
-  this.render(hbs`{{formatted-input}}`);
+  this.render(hbs`{{formatted-input number=number}}`);
+
+  wait().then(() => {
+    assert.equal(this.$('input').val(), '');
+    this.$('input').change().focusout();
+  });
 
   return wait().then(() => {
-    assert.equal(this.$('input').val(), '');
+    assert.equal(this.get('number'), null);
   });
 });
 

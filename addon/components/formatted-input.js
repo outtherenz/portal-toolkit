@@ -154,7 +154,8 @@ export default TextField.extend({
     const current = get(this, 'number');
     const parser = get(this, 'parser');
     const options = get(this, 'parserOptions');
-    const number = parser(value, options);
+    const parsed = parser(value, options);
+    const number = isNaN(parsed) ? null : parsed;
 
     if (number === current) {
       this.displayFormattedValue();
