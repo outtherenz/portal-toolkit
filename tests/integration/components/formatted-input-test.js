@@ -9,10 +9,10 @@ moduleForComponent('formatted-input', 'Integration | Component | formatted input
 test('formats the initial value', function(assert) {
   assert.expect(1);
 
-  this.render(hbs`{{formatted-input number=5000.666 isManual=false format='number'}}`);
+  this.render(hbs`{{formatted-input number=1000.009}}`);
 
   return wait().then(() => {
-    assert.equal(this.$('input').val(), '5,000.67');
+    assert.equal(this.$('input').val(), '1,000.01');
   });
 });
 
@@ -21,11 +21,7 @@ test('responds to source change', function(assert) {
 
   this.set('number', 1.5);
 
-  this.set('manualChange', value => {
-    throw new Error('The manual change action should not have been called');
-  });
-
-  this.render(hbs`{{formatted-input format='currency' number=number manualChange=(action manualChange)}}`);
+  this.render(hbs`{{formatted-input number=number}}`);
 
   wait().then(() => {
     assert.equal(this.$('input').val(), '1.50');
@@ -37,130 +33,177 @@ test('responds to source change', function(assert) {
   });
 });
 
-test('does not respond to source change if manual', function(assert) {
-  assert.expect(2);
-
-  this.set('number', 1.5);
-  this.render(hbs`{{formatted-input number=number isManual=true}}`);
-
-  wait().then(() => {
-    assert.equal(this.$('input').val(), '1.50');
-    this.set('number', 5.2);
-  });
-
-  return wait().then(() => {
-    assert.equal(this.$('input').val(), '1.50');
-  });
-});
-
-test('responds to user editing the field', function(assert) {
+test('calls the update action if provided', function(assert) {
   assert.expect(1);
 
   this.set('number', 1.5);
+  this.set('update', value => assert.equal(value, 5, 'update action called'));
 
-  this.set('manualChange', value => {
-    assert.equal(value, 21.5);
-  });
-
-  this.render(hbs`{{formatted-input number=number manualChange=(action manualChange)}}`);
+  this.render(hbs`{{formatted-input number=number update=update}}`);
 
   return wait().then(() => {
-    this.$('input').val('21.50').trigger('change');
+    this.$('input').val('5').change().blur();
   });
 });
 
-test('reformats on blur', function(assert) {
+test('reformats on blur when parsed value has changed', function(assert) {
   assert.expect(1);
 
-  this.set('number', 1.5);
-  this.set('manualChange', value => this.set('number', value));
-  this.render(hbs`{{formatted-input number=number isManual=false manualChange=(action manualChange)}}`);
-
-  wait().then(() => {
-    this.$('input').val('1000').trigger('change').trigger('focusOut');
-  });
+  this.set('number', 5);
+  this.render(hbs`{{formatted-input number=number}}`);
 
   return wait().then(() => {
+    this.$('input').val('1000').change().blur();
+
+    return wait();
+  }).then(() => {
     assert.equal(this.$('input').val(), '1,000.00');
   });
 });
 
-test('obeys the selectOnFocus option', function(assert) {
+test('reformats on blur when parsed value has not changed', function(assert) {
   assert.expect(1);
 
-  this.render(hbs`{{formatted-input number=125 selectOnFocus=true}}`);
+  this.set('number', 5);
+  this.render(hbs`{{formatted-input number=number}}`);
 
   wait().then(() => {
-    this.$('input').trigger('focusin').trigger('click');
+    this.$('input').val('5.00000').change().blur();
   });
 
   return wait().then(() => {
-    const selection = getSelection().toString();
-    const inputValue = this.$('input').val();
-    assert.equal(selection, inputValue);
+    assert.equal(this.$('input').val(), '5.00');
+  });
+});
+
+test('obeys the editRawValue option, or guesses if not provided', function(assert) {
+  assert.expect(5);
+
+  this.render(hbs`
+    {{formatted-input number=1 editRawValue=true}}
+    {{formatted-input number=2 editRawValue=false}}
+    {{formatted-input number=3 format='number'}}
+    {{formatted-input number=4 format='currency'}}
+    {{formatted-input number=5 format='xyz'}}
+  `);
+
+  wait().then(() => {
+    this.$('input:eq(0)').focusin();
+    this.$('input:eq(1)').focusin();
+    this.$('input:eq(2)').focusin();
+    this.$('input:eq(3)').focusin();
+    this.$('input:eq(4)').focusin();
+  });
+
+  return wait().then(() => {
+    assert.equal(this.$('input:eq(0)').val(), '1');
+    assert.equal(this.$('input:eq(1)').val(), '2.00');
+    assert.equal(this.$('input:eq(2)').val(), '3');
+    assert.equal(this.$('input:eq(3)').val(), '4');
+    assert.equal(this.$('input:eq(4)').val(), '5.00');
+  });
+});
+
+test('obeys the selectOnFocus option', function(assert) {
+  assert.expect(3);
+
+  this.render(hbs`
+    {{formatted-input number=1 editRawValue=false}}
+    {{formatted-input number=2 editRawValue=false selectOnFocus=true}}
+    {{formatted-input number=3 editRawValue=false selectOnFocus=false}}
+  `);
+
+  wait().then(() => {
+    this.$('input:eq(0)').focusin().click();
+  });
+
+  wait().then(() => {
+    assert.equal(getSelection().toString(), '1.00');
+
+    getSelection().empty();
+    this.$('input:eq(1)').focusin().click();
+  });
+
+  wait().then(() => {
+    assert.equal(getSelection().toString(), '2.00');
+
+    getSelection().empty();
+    this.$('input:eq(2)').focusin().click();
+  });
+
+  return wait().then(() => {
+    assert.equal(getSelection().toString(), '');
   });
 });
 
 test('handles other formats', function(assert) {
   assert.expect(3);
 
-  this.set('format', 'number');
-  this.render(hbs`{{formatted-input number=1299.5 format=format}}`);
-
-  wait().then(() => {
-    assert.equal(this.$('input').val(), '1,299.50');
-    this.set('format', 'percentage');
-  });
-
-  wait().then(() => {
-    assert.equal(this.$('input').val(), '129,950.00%');
-    this.set('format', 'integer');
-  });
+  this.render(hbs`
+    {{formatted-input number=100 format='currency'}}
+    {{formatted-input number=0.5 format='percentage'}}
+    {{formatted-input number=100 format='integer'}}
+  `);
 
   return wait().then(() => {
-    assert.equal(this.$('input').val(), '1,300');
+    assert.equal(this.$('input:eq(0)').val(), '$100.00');
+    assert.equal(this.$('input:eq(1)').val(), '50.00%');
+    assert.equal(this.$('input:eq(2)').val(), '100');
   });
 });
 
-test('properly converts percentages between percentage and decimal forms', function(assert) {
-  assert.expect(3);
+test('accepts custom formatters and parsers', function(assert) {
+  assert.expect(4);
 
-  this.set('number', 0.5);
-  this.set('manualChange', function(value) {
-    this.set('number', value);
-  });
+  this.set('number', 1);
+  this.set('formatter', (_, option) => option);
+  this.set('formatterOptions', '2');
+  this.set('parser', (_, option) => option);
+  this.set('parserOptions', 3);
 
-  this.render(hbs`
-    {{formatted-input
-      number=number
-      format='percentage'
-      manualChange=(action manualChange)
-      isManual=true}}
-  `);
-
-  const $input = this.$('input');
-
-  wait().then(() => {
-    assert.equal($input.val(), '50.00%');
-    $input.val('60').trigger('change');
-  });
+  this.render(hbs`{{formatted-input
+    number=number
+    formatter=formatter
+    formatterOptions=formatterOptions
+    parser=parser
+    parserOptions=parserOptions
+  }}`);
 
   wait().then(() => {
-    assert.equal($input.val(), '60'); // shouldn't reformat while user is typing
-    $input.trigger('focusout');
+    assert.equal(this.$('input').val(), '2');
+    assert.equal(this.get('number'), 1);
+
+    this.$('input').val('4').change().focusout();
   });
 
   return wait().then(() => {
-    assert.equal($input.val(), '60.00%');
+    assert.equal(this.$('input').val(), '2');
+    assert.equal(this.get('number'), 3);
   });
 });
 
 test('can deal with null values', function(assert) {
-  assert.expect(1);
+  assert.expect(2);
 
-  this.render(hbs`{{formatted-input}}`);
+  this.render(hbs`{{formatted-input number=number}}`);
+
+  wait().then(() => {
+    assert.equal(this.$('input').val(), '');
+    this.$('input').change().focusout();
+  });
 
   return wait().then(() => {
-    assert.equal(this.$('input').val(), '');
+    assert.equal(this.get('number'), null);
+  });
+});
+
+test('has the right class names', function(assert) {
+  assert.expect(2);
+
+  this.render(hbs`{{formatted-input format='xyz'}}`);
+
+  return wait().then(() => {
+    assert.ok(this.$('input').hasClass('formatted-input'));
+    assert.ok(this.$('input').hasClass('formatted-input--xyz'));
   });
 });
