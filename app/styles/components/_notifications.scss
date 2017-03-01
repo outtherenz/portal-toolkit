@@ -23,15 +23,16 @@
     notification-hide 250ms cubic-bezier(.33859, -.42, 1, -.22),
     notification-shrink 250ms 250ms cubic-bezier(.5, 0, 0, 1)
   );
-
-  &.warning { background-color: $alert-amber; }
-  &.success { background-color: $alert-green; }
-  &.error   { background-color: $alert-red; }
-
-  &.in {
-    @include animation(notification-show 180ms cubic-bezier(.175, .885, .32, 1.27499));
-  }
 }
+
+.notification-message--incoming {
+  @include animation(notification-show 180ms cubic-bezier(.175, .885, .32, 1.27499));
+}
+
+.notification-message--info    { background-color: $alert-blue; }
+.notification-message--warning { background-color: $alert-amber; }
+.notification-message--success { background-color: $alert-green; }
+.notification-message--error   { background-color: $alert-red; }
 
 .notification-message__icon, .notification-message__close-button {
   flex: 0 0 35px;
