@@ -10,7 +10,7 @@ test('it renders a ripple', function(assert) {
 
   this.render(hbs`{{loading-icon 'ripple'}}`);
 
-  const icon = this.$().children('.loading-icon.ripple');
+  const icon = this.$().children('.loading-icon.loading-icon--ripple');
   assert.equal(icon.length, 1);
 
   const svg = icon.children('svg');
@@ -25,7 +25,7 @@ test('it renders a spinner', function(assert) {
 
   this.render(hbs`{{loading-icon 'spinner'}}`);
 
-  const icon = this.$().children('.loading-icon.spinner');
+  const icon = this.$().children('.loading-icon.loading-icon--spinner');
   assert.equal(icon.length, 1);
 
   const svg = icon.children('svg');
