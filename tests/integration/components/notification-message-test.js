@@ -7,6 +7,16 @@ const {
   run
 } = Ember;
 
+const NOTIFICATION_SELECTOR = '.notification-message';
+const CONTENT_SELECTOR = '.notification-message__content';
+const ICON_SELECTOR = '.notification-message__icon .fa';
+const COUNTDOWN_SELECTOR = '.notification-message__countdown';
+
+const INFO_CLASS = 'notification-message--info';
+const ERROR_CLASS = 'notification-message--error';
+const WARNING_CLASS = 'notification-message--warning';
+const SUCCESS_CLASS = 'notification-message--success';
+
 moduleForComponent('notification-message', 'Integration | Component | notification message', {
   integration: true,
 
@@ -24,24 +34,24 @@ test('it renders error notification in inline form', function(assert) {
 
   this.render(hbs`{{notification-message notification=notification}}`);
 
-  assert.ok(this.$('.content').text().match(/content/), 'message is correct');
-  assert.ok(this.$('.icon i').attr('class').match(/fa-info-circle/), 'default icon is correct');
+  assert.ok(this.$(CONTENT_SELECTOR).text().match(/content/), 'message is correct');
+  assert.ok(this.$(ICON_SELECTOR).attr('class').match(/fa-info-circle/), 'default icon is correct');
 
   this.set('notification.type', 'info');
-  assert.ok(this.$('.notification').hasClass('info'), 'has info class');
-  assert.ok(this.$('.icon i').attr('class').match(/fa-info-circle/), 'info icon is correct');
+  assert.ok(this.$(NOTIFICATION_SELECTOR).hasClass(INFO_CLASS), 'has info class');
+  assert.ok(this.$(ICON_SELECTOR).hasClass('fa-info-circle'), 'info icon is correct');
 
   this.set('notification.type', 'error');
-  assert.ok(this.$('.notification').hasClass('error'), 'has error class');
-  assert.ok(this.$('.icon i').attr('class').match(/fa-exclamation-circle/), 'error icon is correct');
+  assert.ok(this.$(NOTIFICATION_SELECTOR).hasClass(ERROR_CLASS), 'has error class');
+  assert.ok(this.$(ICON_SELECTOR).hasClass('fa-exclamation-circle'), 'error icon is correct');
 
   this.set('notification.type', 'warning');
-  assert.ok(this.$('.notification').hasClass('warning'), 'has warning class');
-  assert.ok(this.$('.icon i').attr('class').match(/fa-warning/), 'warning icon is correct');
+  assert.ok(this.$(NOTIFICATION_SELECTOR).hasClass(WARNING_CLASS), 'has warning class');
+  assert.ok(this.$(ICON_SELECTOR).hasClass('fa-warning'), 'warning icon is correct');
 
   this.set('notification.type', 'success');
-  assert.ok(this.$('.notification').hasClass('success'), 'has success class');
-  assert.ok(this.$('.icon i').attr('class').match(/fa-check/), 'success icon is correct');
+  assert.ok(this.$(NOTIFICATION_SELECTOR).hasClass(SUCCESS_CLASS), 'has success class');
+  assert.ok(this.$(ICON_SELECTOR).hasClass('fa-check'), 'success icon is correct');
 });
 
 test('it shows a progress bar if autoClear is true', function(assert) {
@@ -51,13 +61,13 @@ test('it shows a progress bar if autoClear is true', function(assert) {
 
   this.render(hbs`{{notification-message notification=notification}}`);
 
-  assert.equal(this.$('.countdown').length, 1, 'progress bar exists');
-  assert.equal(this.$('.countdown').css('animation-duration'), '0.1s', 'progress bar has correct animation duration');
+  assert.equal(this.$(COUNTDOWN_SELECTOR).length, 1, 'progress bar exists');
+  assert.equal(this.$(COUNTDOWN_SELECTOR).css('animation-duration'), '0.1s', 'progress bar has correct animation duration');
 
-  const initialWidth = this.$('.countdown').width();
+  const initialWidth = this.$(COUNTDOWN_SELECTOR).width();
 
   run.later(() => {
-    assert.ok(this.$('.countdown').width() < initialWidth, 'progress bar shrunk');
+    assert.ok(this.$(COUNTDOWN_SELECTOR).width() < initialWidth, 'progress bar shrunk');
     done();
   }, 50);
 });
@@ -69,7 +79,7 @@ test('it does not show progress bar is autoClear is false', function(assert) {
 
   this.render(hbs`{{notification-message notification=notification}}`);
 
-  assert.equal(this.$('.countdown').length, 0);
+  assert.equal(this.$(COUNTDOWN_SELECTOR).length, 0);
 });
 
 test('it clicking on close runs close action', function(assert) {

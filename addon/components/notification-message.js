@@ -17,9 +17,14 @@ export default Component.extend({
 
   classNames: [ 'notification-message' ],
   classNameBindings: [
-    'notification.type',
-    'notification.dismiss::in'
+    'typeClassVariant',
+    'notification.dismiss::notification-message--incoming'
   ],
+
+  typeClassVariant: computed('notification.type', function() {
+    const type = get(this, 'notification.type');
+    return `notification-message--${type}`;
+  }),
 
   icon: computed('notification.type', function() {
     const type = get(this, 'notification.type');

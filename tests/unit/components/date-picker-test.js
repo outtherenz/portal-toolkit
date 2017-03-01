@@ -32,9 +32,7 @@ test('calendar is correctly calculated when the 1st is a Wednesday', function(as
 
   const component = this.subject();
 
-  component.set('day', 24);
-  component.set('month', 1);
-  component.set('year', 2017);
+  component.set('date', new Date('2017-02-24'));
 
   const calendar = component.get('calendar');
 

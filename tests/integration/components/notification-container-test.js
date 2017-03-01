@@ -10,7 +10,7 @@ test('it has correct class', function(assert) {
 
   this.render(hbs`{{notification-container}}`);
 
-  assert.equal(this.$('.notifications').length, 1);
+  assert.equal(this.$('.notification-container').length, 1);
 });
 
 test('it lists the notifications', function(assert) {
@@ -27,5 +27,5 @@ test('it lists the notifications', function(assert) {
 
   this.render(hbs`{{notification-container notifications=notifications}}`);
 
-  assert.equal(this.$('.notification').length, 4, 'lists all four notifications');
+  assert.equal(this.$('.notification-message').length, 4, 'lists all four notifications');
 });
