@@ -6,6 +6,8 @@ moduleForComponent('active-table', 'Integration | Component | active table', {
   integration: true
 });
 
+const SORTED_CLASS = 'data-table__sorted-column-header';
+
 test('sorts columns when their headers are clicked', function(assert) {
   assert.expect(4);
 
@@ -19,8 +21,8 @@ test('sorts columns when their headers are clicked', function(assert) {
 
   this.render(hbs`{{#active-table columns=tableColumns sortedBy=sort}}{{/active-table}}`);
 
-  assert.equal(this.$('.sorted').length, 1, 'only one heading should have the sorted class');
-  assert.equal(this.$('th:not(.sorted)').length, 2, 'two headings should not have the sorted class');
+  assert.equal(this.$(`.${SORTED_CLASS}`).length, 1, 'only one heading should have the sorted class');
+  assert.equal(this.$(`th:not(.${SORTED_CLASS})`).length, 2, 'two headings should not have the sorted class');
 
   const col1 = this.$('th:eq(0)');
   const col2 = this.$('th:eq(1)');
@@ -28,7 +30,7 @@ test('sorts columns when their headers are clicked', function(assert) {
   col2.find('a').click();
 
   return wait().then(() => {
-    assert.equal(col1.hasClass('sorted'), false, 'previously sorted column no longer has sorted class');
-    assert.equal(col2.hasClass('sorted'), true, 'clicked header gets sorted class');
+    assert.equal(col1.hasClass(SORTED_CLASS), false, 'previously sorted column no longer has sorted class');
+    assert.equal(col2.hasClass(SORTED_CLASS), true, 'clicked header gets sorted class');
   });
 });
