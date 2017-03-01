@@ -218,4 +218,21 @@ function addCurrencySymbol(string, symbol) {
   }
 }
 
+export function parseNumber(input) {
+  if (typeof input !== 'string') {
+    return input == null || typeof input === 'boolean' ? NaN : Number(input);
+  }
+
+  const string = input.trim();
+
+  if (string === '-' || string === DASH) {
+    return 0;
+  }
+
+  const isPercentage = string.match(/%$/) !== null;
+  const number = parseFloat(string.replace(MINUS_SIGN, '-').replace(/[^\d.-]*/g, ''));
+
+  return isPercentage && !isNaN(number) ? number / 100 : number;
+}
+
 export default Helper.helper(formatNumber);
