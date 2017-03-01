@@ -36,9 +36,9 @@ export default TextField.extend({
    * Select the contents of the input on focus. Ignored if `editRawValue` is true.
    *
    * @type {Boolean}
-   * @default false
+   * @default true
    */
-  selectOnFocus: false,
+  selectOnFocus: true,
 
   /**
    * If provided, this action will be called on blur after the user changes the parsed

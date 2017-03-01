@@ -105,11 +105,12 @@ test('obeys the editRawValue option, or guesses if not provided', function(asser
 });
 
 test('obeys the selectOnFocus option', function(assert) {
-  assert.expect(2);
+  assert.expect(3);
 
   this.render(hbs`
-    {{formatted-input number=1 editRawValue=false selectOnFocus=true}}
-    {{formatted-input number=2 editRawValue=false selectOnFocus=false}}
+    {{formatted-input number=1 editRawValue=false}}
+    {{formatted-input number=2 editRawValue=false selectOnFocus=true}}
+    {{formatted-input number=3 editRawValue=false selectOnFocus=false}}
   `);
 
   wait().then(() => {
@@ -121,6 +122,13 @@ test('obeys the selectOnFocus option', function(assert) {
 
     getSelection().empty();
     this.$('input:eq(1)').focusin().click();
+  });
+
+  wait().then(() => {
+    assert.equal(getSelection().toString(), '2.00');
+
+    getSelection().empty();
+    this.$('input:eq(2)').focusin().click();
   });
 
   return wait().then(() => {
