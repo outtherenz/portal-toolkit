@@ -26,9 +26,11 @@ export default TextField.extend({
    * swapped back on blur.
    *
    * @type {Boolean}
-   * @default true
+   * @default true if format is 'number' or 'currency'
    */
-  editRawValue: true,
+  editRawValue: computed('format', function() {
+    return [ 'number', 'currency' ].includes(get(this, 'format').toLowerCase());
+  }),
 
   /**
    * Select the contents of the input on focus. Ignored if `editRawValue` is true.

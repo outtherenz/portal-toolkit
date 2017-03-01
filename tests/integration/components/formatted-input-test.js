@@ -76,22 +76,31 @@ test('reformats on blur when parsed value has not changed', function(assert) {
   });
 });
 
-test('obeys the editRawValue option', function(assert) {
-  assert.expect(2);
+test('obeys the editRawValue option, or guesses if not provided', function(assert) {
+  assert.expect(5);
 
   this.render(hbs`
     {{formatted-input number=1 editRawValue=true}}
     {{formatted-input number=2 editRawValue=false}}
+    {{formatted-input number=3 format='number'}}
+    {{formatted-input number=4 format='currency'}}
+    {{formatted-input number=5 format='xyz'}}
   `);
 
   wait().then(() => {
     this.$('input:eq(0)').focusin();
     this.$('input:eq(1)').focusin();
+    this.$('input:eq(2)').focusin();
+    this.$('input:eq(3)').focusin();
+    this.$('input:eq(4)').focusin();
   });
 
   return wait().then(() => {
     assert.equal(this.$('input:eq(0)').val(), '1');
     assert.equal(this.$('input:eq(1)').val(), '2.00');
+    assert.equal(this.$('input:eq(2)').val(), '3');
+    assert.equal(this.$('input:eq(3)').val(), '4');
+    assert.equal(this.$('input:eq(4)').val(), '5.00');
   });
 });
 
