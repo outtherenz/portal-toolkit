@@ -19,6 +19,9 @@
   position: relative;
   width: 450px;
   max-width: 100%;
+}
+
+.notification-message--animated {
   @include animation(
     notification-hide 250ms cubic-bezier(.33859, -.42, 1, -.22),
     notification-shrink 250ms 250ms cubic-bezier(.5, 0, 0, 1)
