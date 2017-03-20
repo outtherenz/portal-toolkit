@@ -1,5 +1,14 @@
 <div class="select-box-replacement select-box-replacement--stretched date-input__display" {{action (toggle 'isActive' this)}}>
-  {{moment-format date format}}
+  {{#if date}}
+    {{moment-format date format}}
+  {{else}}
+    {{#if placeholder}}
+      {{placeholder}}
+    {{else}}
+    <!-- Default -->
+      Please select a Date
+    {{/if}}
+  {{/if}}
 </div>
 
 {{#if isActive}}
