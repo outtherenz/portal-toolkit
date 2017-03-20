@@ -28,6 +28,11 @@ html.ie-11 .sidebar-page__sidebar > .sticky-top {
   margin-top: -18px;
 }
 
+// Prevents clear buttons at the end of inputs in IE
+html.ie-11 input::-ms-clear {
+  display: none;
+}
+
 // Safari
 .safari .nav-bar.sticky-top .tabs a {
   padding: 0.45em 1em 0.75em;
