@@ -8,6 +8,8 @@ const {
 export default Component.extend({
   layout,
 
+  placeholder: 'Please select a Date',
+
   classNames: [ 'date-input' ],
 
   isActive: false,
