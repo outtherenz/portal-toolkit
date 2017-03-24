@@ -64,6 +64,25 @@
   }
 }
 
+.button--download {
+  @include button-colors($button-primary, white);
+
+  padding-left: 30px;
+  position: relative;
+
+  &::before {
+    content: '↓';
+    position: absolute;
+    font-size: 20px;
+    top: 50%;
+    left: 0;
+    width: 32px;
+    text-align: center;
+    margin-top: -10px;
+    line-height: 1;
+  }
+}
+
 .button--delete {
   @include button-colors($button-red, white);
 }
@@ -128,6 +147,26 @@
     text-decoration: none;
   }
 }
+.text-button--download {
+  color: $button-primary;
+
+  &:hover,
+  &:active, {
+    color: shade($button-primary, 20%);
+  }
+
+  &::before {
+    content: '↓';
+    font-size: 17px;
+    text-align: center;
+    margin-top: -10px;
+    display: inline-block;
+    line-height: 0;
+    margin-right: 0.3em;
+    text-decoration: none;
+  }
+}
+
 
 .text-button--delete {
   color: $button-red;
@@ -136,6 +175,11 @@
   &:active, {
     color: shade($button-red, 20%);
   }
+}
+
+.button--no-padding {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .text-button.text-button--white {
