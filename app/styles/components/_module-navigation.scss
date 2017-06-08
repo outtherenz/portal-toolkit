@@ -3,6 +3,10 @@
   font-family: $heading-font;
   font-size: 18px;
   color: $nav-link-color;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 1;
 
   @media (min-width: $breakpoint-desktop) {
     border-bottom: 1px solid $border-color;
@@ -34,6 +38,19 @@
   margin: 0;
   background-color: $off-white;
   border-top: 1px solid $border-color;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  .fa {
+    align-content: center;
+    vertical-align: middle;
+    height: auto;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+  }
 
   &:last-of-type {
     border-bottom: 1px solid $border-color;
@@ -81,10 +98,6 @@
         background-color: transparent;
       }
     }
-  }
-
-  .fa {
-    margin-right: 0.8em;
   }
 
   .fa-angle-right {
