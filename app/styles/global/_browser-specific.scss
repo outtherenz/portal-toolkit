@@ -24,7 +24,8 @@ html.ie-11 .right-options {
   flex: none!important;
 }
 
-html.ie-11 .sidebar-page__sidebar > .sticky-top {
+html.ie-11 .sidebar-page__sidebar > .sticky-top,
+html.ie-11 .sidebar-page__sidebar--collapsed > .sticky-top {
   margin-top: -18px;
 }
 

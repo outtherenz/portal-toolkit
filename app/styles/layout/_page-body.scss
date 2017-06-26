@@ -27,6 +27,16 @@
   width: 220px;
 }
 
+.sidebar-page__sidebar--collapsed {
+  transition: all 0.25s ease-in-out;
+  padding: 23px $desktop-gutter;
+  border-right: 1px solid $border-color;
+  background: shade($off-white, 1.5%);
+  flex: 0 0 auto;
+  width: 75px;
+  z-index: 1;
+}
+
 .sidebar-page__content {
   transition: all 0.25s ease-in-out;
   flex: 1;
