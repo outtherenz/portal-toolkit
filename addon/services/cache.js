@@ -1,5 +1,5 @@
 import Ember from 'ember';
-/* global _ */
+import _ from 'lodash';
 
 const { Service, get, set, assert, isArray, isEmpty } = Ember;
 
