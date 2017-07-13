@@ -1,0 +1,36 @@
+.overlaid-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.overlaid-dropdown__body {
+  position: absolute;
+  z-index: 1000;
+  margin-top: 0.5em;
+  background-color: white;
+  box-shadow: 3px 3px 5px $border-color;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  min-width: 100%;
+}
+
+.overlaid-dropdown__body--hidden {
+  visibility: hidden;
+}
+
+.overlaid-dropdown__option {
+  padding: 0.5em;
+  cursor: pointer;
+  &:hover {
+    background-color: $primary;
+    color: white;
+  }
+}
+
+.overlaid-dropdown__title {
+  border-bottom: 1px solid $border-color;
+  padding: 0.5em;
+  font-weight: bold;
+}

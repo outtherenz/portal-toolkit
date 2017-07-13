@@ -20,6 +20,7 @@ Router.map(function() {
     this.route('month-picker');
     this.route('notification-container');
     this.route('notification-message');
+    this.route('overlaid-dropdown');
     this.route('print-button');
     this.route('radio-slider');
     this.route('sortable-list');

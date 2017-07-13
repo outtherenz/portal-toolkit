@@ -1,0 +1,20 @@
+<button
+  class="overlaid-dropdown__button {{buttonClasses}}"
+  {{action toggleProperty 'focused'}}
+  onblur={{action set 'focused' false}}
+>
+  {{if buttonText buttonText 'Expand'}}
+</button>
+
+{{!-- Hide dropdown body instead of destroying it so that click actions can be carried out --}}
+<div class="overlaid-dropdown__body {{if (not showDropdown) 'overlaid-dropdown__body--hidden'}}"
+  onmousedown={{action 'holdFocus'}}
+  ontouchstart={{action 'holdFocus'}}
+>
+  {{!-- Title is bold, padded, and has a border on the bottom --}}
+  {{#if title}}
+    <div class="overlaid-dropdown__title">{{title}}</div>
+  {{/if}}
+
+  {{yield}}
+</div>

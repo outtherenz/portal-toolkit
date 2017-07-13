@@ -1,0 +1,39 @@
+<header class="article-header">
+  <h1><span class="title-category">Component:</span> Overlaid Dropdown</h1>
+</header>
+
+Usage:
+<br>
+<code>
+  \{{#overlaid-dropdown<br>
+  &nbsp;&nbsp;buttonClasses='button'<br>
+  &nbsp;&nbsp;buttonText='Click Me'<br>
+  &nbsp;&nbsp;title='Dropdown Options'<br>
+  }}<br>
+  &nbsp;&nbsp;&lt;div class="overlaid-dropdown__option" \{{action 'alertAction'}}>Dropdown Option&lt;/div><br>
+  &nbsp;&nbsp;&lt;div>Some Other Content&lt;/div><br>
+  \{{/overlaid-dropdown}}<br>
+</code>
+
+<br>
+<br>
+Example:
+<br>
+
+{{#overlaid-dropdown
+  buttonClasses='button'
+  buttonText='Click Me'
+  title='Dropdown Options'
+}}
+  <div class="overlaid-dropdown__option" {{action 'alertAction'}}>Dropdown Option</div>
+  <div>Some Other Content</div>
+{{/overlaid-dropdown}}
+
+<br>
+<br>
+Plain Component:
+<br>
+
+{{#overlaid-dropdown}}
+  Content
+{{/overlaid-dropdown}}
