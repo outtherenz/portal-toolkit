@@ -4,7 +4,8 @@ import layout from '../templates/components/overlaid-dropdown';
 const {
   Component,
   set,
-  computed: { or }
+  computed: { or },
+  run: { next }
 } = Ember;
 
 export default Component.extend({
@@ -28,7 +29,7 @@ export default Component.extend({
       // Keep dropdown visible
       set(this, 'holdFocus', true);
       // Wait for blur event to occur
-      Ember.run.next(() => {
+      next(() => {
         // Refocus the button (should be found inside this component)
         // The blur event can now be triggered again
         this.$('.overlaid-dropdown__button').focus();
