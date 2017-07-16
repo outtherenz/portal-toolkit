@@ -1,6 +1,6 @@
 <button
   class="overlaid-dropdown__button {{buttonClasses}}"
-  {{action toggleProperty 'focused'}}
+  {{action 'onButtonClick'}}
   onblur={{action set 'focused' false}}
 >
   {{if buttonText buttonText 'Expand'}}
