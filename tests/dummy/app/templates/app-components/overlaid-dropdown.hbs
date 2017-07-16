@@ -5,14 +5,16 @@
 Usage:
 <br>
 <code>
-  \{{#overlaid-dropdown<br>
-  &nbsp;&nbsp;buttonClasses='button'<br>
-  &nbsp;&nbsp;buttonText='Click Me'<br>
-  &nbsp;&nbsp;title='Dropdown Options'<br>
-  }}<br>
-  &nbsp;&nbsp;&lt;div class="overlaid-dropdown__option" \{{action 'alertAction'}}>Dropdown Option&lt;/div><br>
-  &nbsp;&nbsp;&lt;div>Some Other Content&lt;/div><br>
-  \{{/overlaid-dropdown}}<br>
+  <pre>
+    \{{#overlaid-dropdown
+      buttonClasses='button'
+      buttonText='Click Me'
+      title='Dropdown Options'
+    }}
+      &lt;div class="overlaid-dropdown__option" \{{action 'alertAction'}}>Dropdown Option&lt;/div>
+      &lt;div>Some Other Content&lt;/div>
+    \{{/overlaid-dropdown}}
+  </pre>
 </code>
 
 <br>
