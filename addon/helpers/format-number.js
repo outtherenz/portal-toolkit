@@ -19,11 +19,6 @@ export function formatNumber(params, options) {
     return finalize('', formatAs, number, rawNumber, options);
   }
 
-  // Dash zero
-  if (options.dashZero !== false && number === 0) {
-    return finalize(DASH, formatAs, number, rawNumber, options);
-  }
-
   // Too large or small
   if (number < MIN_SAFE_INTEGER || number > MAX_SAFE_INTEGER) {
     return finalize('#', formatAs, number, rawNumber, options);
@@ -34,6 +29,11 @@ export function formatNumber(params, options) {
 
   // First round the number
   const rounded = round(number, places);
+
+  // Dash zero (after rounding)
+  if (options.dashZero !== false && Number(rounded) === 0) {
+    return finalize(DASH, formatAs, rounded, rawNumber, options);
+  }
 
   // Add zeros to meet decimal places requirement
   const padded = pad(rounded, places);
