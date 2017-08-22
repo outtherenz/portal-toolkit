@@ -4,7 +4,9 @@ import { formatDuration, parseDuration } from 'portal-toolkit/helpers/format-dur
 const {
   TextField,
   get,
-  set
+  set,
+  on,
+  run
 } = Ember;
 
 export default TextField.extend({
@@ -23,5 +25,20 @@ export default TextField.extend({
     const duration = parseDuration(value);
 
     set(this, 'duration', duration);
-  }
+  },
+
+  /**
+   * Select all on focus, if selectOnFocus or editRawValue is true.
+   * Does not allow the user to make their own selection.
+   * http://stackoverflow.com/a/24589806/2833988
+   */
+  selectAll: on('focusIn', function() {
+    const selectOnFocus = get(this, 'selectOnFocus');
+
+    if (selectOnFocus) {
+      this.$().on('click keyup', () => {
+        run(() => this.$().off('click keyup').select());
+      });
+    }
+  }),
 });

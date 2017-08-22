@@ -23,6 +23,8 @@ export function parseDuration(duration) {
     return null;
   }
 
+  if (!isNaN(duration)) return Number(duration);
+
   const parts = duration
     .replace('.', ':')
     .replace(/[^0-9:-]+/g, '')

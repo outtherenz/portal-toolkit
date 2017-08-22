@@ -37,6 +37,13 @@ test('it parses shorthand values correctly', function(assert) {
   assert.equal(p(':90'), 1.5, 'high minutes');
 });
 
+test('it parses inputs that are already numbers', function(assert) {
+  assert.equal(p('1'), 1, 'int');
+  assert.equal(p('1.5'), 1.5, 'float');
+  assert.equal(p('-1'), -1, 'negative int');
+  assert.equal(p('-1.5'), -1.5, 'negative float');
+});
+
 test('it parses null and error values correctly', function(assert) {
   assert.equal(p(''), null, 'empty string');
   assert.equal(p(null), null, 'null');
