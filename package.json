@@ -61,7 +61,7 @@
     "ember-cli-bourbon": "~1.2.1",
     "ember-cli-htmlbars": "^1.0.10",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
-    "ember-font-awesome": "^2.2.0",
+    "ember-font-awesome": "^4.0.0-alpha.10",
     "ember-modal-dialog": "0.8.8",
     "ember-moment": "6.0.0",
     "ember-multiselect-checkboxes": "0.10.3",
