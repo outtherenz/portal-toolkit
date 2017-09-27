@@ -64,7 +64,7 @@
     "ember-font-awesome": "^2.2.0",
     "ember-modal-dialog": "0.8.8",
     "ember-moment": "6.0.0",
-    "ember-multiselect-checkboxes": "0.10.1",
+    "ember-multiselect-checkboxes": "0.10.3",
     "ember-truth-helpers": "^1.2.0",
     "emberx-select": "2.0.2"
   },
