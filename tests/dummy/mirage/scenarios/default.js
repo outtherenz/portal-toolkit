@@ -1,6 +1,6 @@
-/* global _ */
-
 /* eslint-disable no-unused-vars */
+
+import _ from 'lodash';
 
 export default function(server) {
   server.logging = false;
