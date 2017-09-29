@@ -3,24 +3,24 @@
   <button class='subdued' {{action 'prevMonth'}}>‹</button>
 
   <div class="inputs">
-    {{#x-select value=selectedMonth class=(if dark 'select-box select-box--dark month' 'select-box month')}}
-      {{#x-option value="01"}}January{{/x-option}}
-      {{#x-option value="02"}}February{{/x-option}}
-      {{#x-option value="03"}}March{{/x-option}}
-      {{#x-option value="04"}}April{{/x-option}}
-      {{#x-option value="05"}}May{{/x-option}}
-      {{#x-option value="06"}}June{{/x-option}}
-      {{#x-option value="07"}}July{{/x-option}}
-      {{#x-option value="08"}}August{{/x-option}}
-      {{#x-option value="09"}}September{{/x-option}}
-      {{#x-option value="10"}}October{{/x-option}}
-      {{#x-option value="11"}}November{{/x-option}}
-      {{#x-option value="12"}}December{{/x-option}}
+    {{#x-select value=selectedMonth class=(if dark 'select-box select-box--dark month' 'select-box month') as |xs|}}
+      {{#xs.option value="01"}}January{{/xs.option}}
+      {{#xs.option value="02"}}February{{/xs.option}}
+      {{#xs.option value="03"}}March{{/xs.option}}
+      {{#xs.option value="04"}}April{{/xs.option}}
+      {{#xs.option value="05"}}May{{/xs.option}}
+      {{#xs.option value="06"}}June{{/xs.option}}
+      {{#xs.option value="07"}}July{{/xs.option}}
+      {{#xs.option value="08"}}August{{/xs.option}}
+      {{#xs.option value="09"}}September{{/xs.option}}
+      {{#xs.option value="10"}}October{{/xs.option}}
+      {{#xs.option value="11"}}November{{/xs.option}}
+      {{#xs.option value="12"}}December{{/xs.option}}
     {{/x-select}}
 
-    {{#x-select value=selectedYear class=(if dark 'select-box select-box--dark year' 'select-box year')}}
+    {{#x-select value=selectedYear class=(if dark 'select-box select-box--dark year' 'select-box year') as |xs|}}
       {{#each yearList as |year|}}
-        {{#x-option value=year}}{{year}}{{/x-option}}
+        {{#xs.option value=year}}{{year}}{{/xs.option}}
       {{/each}}
     {{/x-select}}
   </div>
