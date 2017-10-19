@@ -47,7 +47,7 @@
     "ember-resolver": "^4.5.0",
     "ember-source": "^2.15.0",
     "ember-uploader": "1.2.3",
-    "eslint": "^3.9.1",
+    "eslint": "^4.9.0",
     "eslint-config-otbs": "github:outtherenz/eslint-config-otbs",
     "loader.js": "^4.0.0",
     "moment": "^2.11.2",

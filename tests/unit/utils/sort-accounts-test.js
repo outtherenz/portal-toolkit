@@ -66,7 +66,7 @@ test('uses custom sort and category keys', function(assert) {
   });
 
   const sortedNames = sortAccounts(accounts, 'custom.sort', 'custom.category')
-    .map(account => account.name);
+  .map(account => account.name);
 
   assert.deepEqual(sortedNames, [
     'Income',

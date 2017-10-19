@@ -54,9 +54,9 @@ export default Component.extend({
     }
 
     const startOfMonth = moment()
-      .year(get(this, 'calendarState.year'))
-      .month(get(this, 'calendarState.month'))
-      .startOf('month');
+    .year(get(this, 'calendarState.year'))
+    .month(get(this, 'calendarState.month'))
+    .startOf('month');
 
     const calendar = [];
 

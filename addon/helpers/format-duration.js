@@ -26,9 +26,9 @@ export function parseDuration(duration) {
   if (!isNaN(duration)) return Number(duration);
 
   const parts = duration
-    .replace('.', ':')
-    .replace(/[^0-9:-]+/g, '')
-    .split(':');
+  .replace('.', ':')
+  .replace(/[^0-9:-]+/g, '')
+  .split(':');
 
   // Invalid input
   if (!parts.find(p => p !== '') || parts.length === 0) {

@@ -60,19 +60,19 @@ test('it throws when not provided with a cache to clear', function(assert) {
 
 test('it can clear one item from the cache', function(assert) {
   this.subject().store('test', 'key', 'x');
-  
+
   const initial = get(this.subject(), '_cache.test.length');
   const success = this.subject().clear('test', 'key');
-  
+
   assert.ok(success);
   assert.equal(get(this.subject(), '_cache.test').length, initial - 1);
 });
 
 test('it can clear the cache', function(assert) {
   this.subject().store('test', 'key', 'x');
-  
+
   const success = this.subject().clear('test');
-  
+
   assert.ok(success);
   assert.equal(get(this.subject(), '_cache.test').length, 0);
 });

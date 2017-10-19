@@ -54,9 +54,9 @@ test('it fills in data-table properly', function(assert) {
   assert.expect(2);
 
   this.render(hbs`{{charts/data-table series=series metrics=metrics period=period}}`);
-  
+
   assert.equal(this.$('table tr td')[0].firstChild.data, 'Sales');
-  
+
   const metrics = this.get('metrics');
   const expected = formatNumber([ 'currency', metrics[0].series[0].periods[0].periodTypes['month'].value ]);
 
@@ -74,18 +74,18 @@ test('it fills in line-chart data properly', function(assert) {
   assert.expect(2);
 
   const metrics = this.get('metrics');
-  
+
   metrics[0].series[0].periods.forEach((period, index) => {
     period.periodTypes.month.value = index;
   });
-  
+
   this.set('metrics', metrics);
   this.render(hbs`{{charts/line-chart series=series metrics=metrics period=period}}`);
-  
+
   const portion1 = this.$('.c3-shape-1')[0].cy.animVal.value;
   const portion2 = this.$('.c3-shape-2')[0].cy.animVal.value;
   const portion3 = this.$('.c3-shape-3')[0].cy.animVal.value;
-  
+
   assert.ok(portion1 > portion2);
   assert.ok(portion2 > portion3);
 });
@@ -121,9 +121,9 @@ test('it fills in gauge-chart data properly', function(assert) {
   assert.expect(1);
 
   this.render(hbs`{{charts/gauge-chart series=series target=80 metrics=metrics period=period}}`);
-  
+
   const metrics = this.get('metrics');
   const temp = metrics[0].series[0].periods[0].periodTypes['month'].value;
-  
+
   assert.equal(this.$('.c3-arc-Sales')[0].__data__.value, temp / 80);
 });
