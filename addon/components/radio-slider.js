@@ -23,7 +23,7 @@ export default Component.extend({
 
     const maxWidth = widths.reduce((max, width) => width > max ? width : max, 0);
 
-    this.$('label').forEach(function() {
+    this.$('label').each(function() {
       $(this).width(maxWidth);
     });
   }
