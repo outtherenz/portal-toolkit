@@ -10,6 +10,6 @@ export default Factory.extend({
   status: 'ACTIVE',
   isHeading: false,
   sortIndex: i => i,
-  dateCreated: () => faker.date.past(),
-  dateModified: () => faker.date.between(this.dateCreated, new Date())
+  dateCreated: faker.date.past,
+  dateModified: function() { return faker.date.between(this.dateCreated, new Date()); }
 });

@@ -35,9 +35,6 @@ module.exports = function(defaults) {
   // Papaparse
   app.import('bower_components/papaparse/papaparse.js');
 
-  // Lodash
-  app.import('bower_components/lodash/lodash.js');
-
   // Another sortable plugin
   app.import('vendor/sortable/jquery.fn.nativeSortable.js');
   return app.toTree();

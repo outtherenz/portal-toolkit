@@ -56,9 +56,9 @@ export default Component.extend({
     const diff = get(this, '_diff');
 
     if (diff > 0) {
-      return 'fa-arrow-up';
+      return 'arrow-up';
     } else if (diff < 0) {
-      return 'fa-arrow-down';
+      return 'arrow-down';
     }
 
     return '';

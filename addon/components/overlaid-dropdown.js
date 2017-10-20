@@ -20,7 +20,7 @@ export default Component.extend({
       this.$('.overlaid-dropdown__button').focus();
     },
 
-    /**
+    /*
      * Makes sure that the dropdown doesn't disappear if user clicks inside the dropdown.
      * Holds the dropdown, waits for the blur event on the button, then focuses the button
      * again and releases the hold so that the blur event can happen again.

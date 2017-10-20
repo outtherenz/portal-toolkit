@@ -8,6 +8,6 @@ export default Factory.extend({
   agreesToCeo: true,
   mustResetPassword: false,
   role: 'user',
-  dateCreated: () => faker.date.past(),
-  dateModified: () => faker.date.between(this.dateCreated, new Date())
+  dateCreated: faker.date.past,
+  dateModified: function() { return faker.date.between(this.dateCreated, new Date()); }
 });

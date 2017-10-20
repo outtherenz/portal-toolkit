@@ -40,5 +40,5 @@ export default TextField.extend({
         run(() => this.$().off('click keyup').select());
       });
     }
-  }),
+  })
 });

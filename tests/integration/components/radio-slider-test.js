@@ -48,12 +48,12 @@ test('it loads the initial value correctly', function(assert) {
   assert.expect(3);
 
   const radioContent = [
-   { label: 'Minutes', value: 'min' },
-   { label: 'Hours', value: 'hour' },
-   { label: 'Days', value: 'day' },
-   { label: 'Weeks', value: 'week' },
-   { label: 'Month', value: 'month' },
-   { label: 'YTD', value: 'ytd' }
+    { label: 'Minutes', value: 'min' },
+    { label: 'Hours', value: 'hour' },
+    { label: 'Days', value: 'day' },
+    { label: 'Weeks', value: 'week' },
+    { label: 'Month', value: 'month' },
+    { label: 'YTD', value: 'ytd' }
   ];
 
   this.set('radioContent', radioContent);
@@ -70,12 +70,12 @@ test('it two sliders work on one page', function(assert) {
   assert.expect(6);
 
   const radioContent2 = [
-   { label: 'Minutes 2', value: 'min2' },
-   { label: 'Hours 2', value: 'hour2' },
-   { label: 'Days 2', value: 'day2' },
-   { label: 'Weeks 2', value: 'week2' },
-   { label: 'Month 2', value: 'month2' },
-   { label: 'YTD 2', value: 'ytd2' }
+    { label: 'Minutes 2', value: 'min2' },
+    { label: 'Hours 2', value: 'hour2' },
+    { label: 'Days 2', value: 'day2' },
+    { label: 'Weeks 2', value: 'week2' },
+    { label: 'Month 2', value: 'month2' },
+    { label: 'YTD 2', value: 'ytd2' }
   ];
 
   this.set('periodType1', 'day');

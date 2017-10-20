@@ -30,10 +30,10 @@ export default Component.extend({
     const type = get(this, 'notification.type');
 
     switch (type) {
-      case 'warning': return 'fa-warning';
-      case 'success': return 'fa-check';
-      case 'error':   return 'fa-exclamation-circle';
-      default:        return 'fa-info-circle';
+      case 'warning': return 'warning';
+      case 'success': return 'check';
+      case 'error':   return 'exclamation-circle';
+      default:        return 'info-circle';
     }
   }),
 

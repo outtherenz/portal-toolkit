@@ -10,8 +10,8 @@ module('Unit | Helper | format number');
 test('it formats strings correctly', function(assert) {
   assert.equal(formatNumber('1.2'), '1.20');
   assert.equal(formatNumber('3.009'), '3.01');
-  assert.equal(formatNumber('-0.005'), '0.00');
-  assert.equal(formatNumber('0.00001'), '0.00');
+  assert.equal(formatNumber('-0.005'), DASH);
+  assert.equal(formatNumber('0.00001'), DASH);
   assert.equal(formatNumber('100'), '100.00');
   assert.equal(formatNumber('$2'), '2.00');
   assert.equal(formatNumber('0'), DASH);
@@ -24,9 +24,9 @@ test('it formats strings correctly', function(assert) {
 test('it formats numbers correctly', function(assert) {
   assert.equal(formatNumber(2.2), '2.20');
   assert.equal(formatNumber(3.009), '3.01');
-  assert.equal(formatNumber(-0.005), '0.00');
+  assert.equal(formatNumber(-0.005), DASH);
   assert.equal(formatNumber(0.0000), DASH);
-  assert.equal(formatNumber(3e-50), '0.00');
+  assert.equal(formatNumber(3e-50), DASH);
   assert.equal(formatNumber(100), '100.00');
   assert.equal(formatNumber(-100), NEG + '100.00');
   assert.equal(formatNumber(2e21), '#');
@@ -35,7 +35,7 @@ test('it formats numbers correctly', function(assert) {
 
 test('it accepts places and sigfigs options', function(assert) {
   assert.equal(formatNumber(32.6, { places: 0 }), '33');
-  assert.equal(formatNumber(-0.02, { places: 0 }), '0');
+  assert.equal(formatNumber(-0.02, { places: 0 }), DASH);
   assert.equal(formatNumber(32456.623123, { places: 6 }), '32,456.623,123');
   assert.equal(formatNumber(12345, { sigfigs: 2 }), '12,000');
   assert.equal(formatNumber(-1234, { sigfigs: 2 }), NEG + '1,200');
@@ -102,7 +102,7 @@ test('it adds proper flags to -1', function(assert) {
 
 test('it adds proper flags to 0.1', function(assert) {
   const res = formatNumber(0.1, opt);
-  assert.notOk(res.isNaN);
+  assert.ok(res.isNaN);
   assert.notOk(res.isZero);
   assert.ok(res.roundsToZero);
   assert.notOk(res.isNegative);
@@ -110,7 +110,7 @@ test('it adds proper flags to 0.1', function(assert) {
 
 test('it adds proper flags to -0.1', function(assert) {
   const res = formatNumber(-0.1, opt);
-  assert.notOk(res.isNaN);
+  assert.ok(res.isNaN);
   assert.notOk(res.isZero);
   assert.ok(res.roundsToZero);
   assert.notOk(res.isNegative);
