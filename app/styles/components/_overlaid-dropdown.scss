@@ -17,6 +17,10 @@
   border: 1px solid $border-color;
 }
 
+.overlaid-dropdown__body--right {
+  right: 0;
+}
+
 .overlaid-dropdown__body--hidden {
   visibility: hidden;
 }
