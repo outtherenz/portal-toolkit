@@ -51,8 +51,8 @@
 
   @media (min-width: $breakpoint-desktop) {
     padding: $desktop-gutter;
+    padding-bottom: $desktop-gutter + 58px; // 58px is the height of the Zendesk support button
     overflow-x: visible;
-    min-height: none;
   }
 }
 
