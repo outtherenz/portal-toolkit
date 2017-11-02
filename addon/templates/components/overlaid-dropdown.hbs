@@ -7,7 +7,8 @@
 </button>
 
 {{!-- Hide dropdown body instead of destroying it so that click actions can be carried out --}}
-<div class="overlaid-dropdown__body {{if right 'overlaid-dropdown__body--right'}} {{if (not showDropdown) 'overlaid-dropdown__body--hidden'}}"
+{{!-- Defaults to align left, only other option is align='right' --}}
+<div class="overlaid-dropdown__body {{if (eq align 'right') 'overlaid-dropdown__body--right'}} {{if (not showDropdown) 'overlaid-dropdown__body--hidden'}}"
   onmousedown={{action 'holdFocus'}}
   ontouchstart={{action 'holdFocus'}}
 >
