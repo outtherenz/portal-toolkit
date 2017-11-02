@@ -33,6 +33,34 @@ Example:
 
 <br>
 <br>
+
+Align right:
+<br>
+<code>
+  <pre>
+    \{{#overlaid-dropdown
+      buttonClasses='button'
+      buttonText='Click Me'
+      align='right'
+      title='Dropdown Options'
+    }}
+      &lt;div class="overlaid-dropdown__option" \{{action 'alertAction'}}>Dropdown Option&lt;/div>
+    \{{/overlaid-dropdown}}
+  </pre>
+</code>
+<br>
+<br>
+{{#overlaid-dropdown
+  buttonClasses='button'
+  buttonText='Click Me'
+  align='right'
+  title='Dropdown Options'
+}}
+  <div class="overlaid-dropdown__option" {{action 'alertAction'}}>Dropdown Option</div>
+{{/overlaid-dropdown}}
+
+<br>
+<br>
 Plain Component:
 <br>
 
