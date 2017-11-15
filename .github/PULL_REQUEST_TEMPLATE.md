@@ -1,0 +1,5 @@
+- [ ] UX Review
+- [ ] Code Review
+- [ ] Regression checked
+- [ ] Requires feature flag
+- [ ] Approved by support
