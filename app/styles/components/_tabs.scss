@@ -66,6 +66,7 @@
   padding: 0;
 
   > a {
+    cursor: pointer;
     padding: $tab-top-padding 1em $tab-bottom-padding;
     height: 100%;
     display: block;
