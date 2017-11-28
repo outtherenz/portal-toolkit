@@ -1,0 +1,10 @@
+<script>
+  var query = location.search.substring(1);
+  var anchor = location.hash.substring(1);
+
+  if (window.opener && window.opener.Ember) {
+    window.opener.Ember.$(window.opener).trigger('popup.message', query || anchor);
+  }
+
+  window.close();
+</script>
