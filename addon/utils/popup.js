@@ -44,13 +44,17 @@ function pollPopupClosed(popup, onCloseCallback, attempts = 0) {
   // Close the popup and call the onCloseCallback.
   if (attempts > 240) {
     popup.close();
-    return onCloseCallback();
+    const err = new Error('Window closed due to timeout');
+    err.code = 'ERR_WINDOW_TIMEOUT';
+    return onCloseCallback(err);
   }
 
   // Wrap the whole thing in runLater so that the first one doesn't happen immediately
   run.later(() => {
     if (popup.closed) {
-      onCloseCallback();
+      const err = new Error('Window closed by user');
+      err.code = 'ERR_WINDOW_CLOSED';
+      onCloseCallback(err);
     } else {
       pollPopupClosed(popup, onCloseCallback, attempts + 1);
     }
