@@ -12,7 +12,7 @@
 }
 
 .notification-message {
-  pointer-events: all; 
+  pointer-events: all;
   background: $alert-blue;
   color: white;
   margin-bottom: 0.5em;
@@ -24,14 +24,14 @@
 }
 
 .notification-message--animated {
-  @include animation(
+  animation:
     notification-hide 250ms cubic-bezier(.33859, -.42, 1, -.22),
     notification-shrink 250ms 250ms cubic-bezier(.5, 0, 0, 1)
-  );
+  ;
 }
 
 .notification-message--incoming {
-  @include animation(notification-show 180ms cubic-bezier(.175, .885, .32, 1.27499));
+  animation: notification-show 180ms cubic-bezier(.175, .885, .32, 1.27499);
 }
 
 .notification-message--info    { background-color: $alert-blue; }
@@ -65,52 +65,52 @@
   width: 0;
   height: 3px;
   background-color: rgba(255, 255, 255, 0.3);
-  @include animation(notification-countdown linear 1);
+  animation: notification-countdown linear 1;
 }
 
 // Animations
 
-@include keyframes(notification-show) {
+@keyframes notification-show {
   0% {
     opacity: 0;
-    @include transform(perspective(450px) translate(0, -30px) rotateX(90deg));
+    transform: perspective(450px) translate(0, -30px) rotateX(90deg);
   }
 
   100% {
     opacity: 1;
-    @include transform(perspective(450px) translate(0, 0) rotateX(0deg));
+    transform: perspective(450px) translate(0, 0) rotateX(0deg);
   }
 }
 
-@include keyframes(notification-shrink) {
+@keyframes notification-shrink {
   0% {
     opacity: 0;
     max-height: 35px;
     margin-bottom: 0.5em;
-    @include transform(scale(.8));
+    transform: scale(.8);
   }
 
   100% {
     opacity: 0;
     max-height: 0;
     margin-bottom: 0;
-    @include transform(scale(.8));
+    transform: scale(.8);
   }
 }
 
-@include keyframes(notification-hide) {
+@keyframes notification-hide {
   0% {
     opacity: 1;
-    @include transform(scale(1));
+    transform: scale(1);
   }
 
   100% {
     opacity: 0;
-    @include transform(scale(.8));
+    transform: scale(.8);
   }
 }
 
-@include keyframes(notification-countdown) {
+@keyframes notification-countdown {
   0% {
     width: 100%;
   }

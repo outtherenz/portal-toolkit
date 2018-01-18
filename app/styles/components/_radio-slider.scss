@@ -10,7 +10,7 @@
   position: relative;
   padding: 3px;
 
-  @include user-select(none);
+  user-select: none;
 
   input {
     display: none;
@@ -24,18 +24,18 @@
     padding: 0 1em;
     border-radius: 3px;
     flex: 0 0 auto;
-    @include transition(all 0.05s ease-in-out);
+    transition: all 0.05s ease-in-out;
   }
 
   input:checked + label {
     color: white;
     background-color: #37a;
     cursor: default;
-    @include transition(all 0.1s ease-out);
+    transition: all 0.1s ease-out;
   }
 
   input:not(:checked) + label {
     color: $copy-color;
-    @include transition(all 0.1s ease-out);
+    transition: all 0.1s ease-out;
   }
 }

@@ -72,7 +72,7 @@
 }
 
 .data-table--sortable th {
-  @include user-select(none);
+  user-select: none;
 }
 
 .data-table--stretched {
@@ -83,11 +83,11 @@
   content: '\25be';
   display: inline-block;
   margin-left: 0.5em;
-  @include transition(all, 0.2s, linear);
+  transition: all, 0.2s, linear;
 }
 
 .data-table__sorted-column-header--ascending a::after {
-  @include transform(scaleY(-1));
+  transform: scaleY(-1);
 }
 
 .data-table__subheading-row th {
