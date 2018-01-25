@@ -12,14 +12,14 @@ test('it formats normal values correctly', function(assert) {
   assert.equal(f(1), '1:00', 'integer');
   assert.equal(f(1.5), '1:30', 'float');
   assert.equal(f(2.000001), '2:00', 'rounding');
-  assert.equal(f(0), '–', 'zero');
+  assert.equal(f(0), '', 'zero');
   assert.equal(f(-1.5), '-1:30', 'negative');
 });
 
 test('it formats null and error values correctly', function(assert) {
-  assert.equal(f(null), '–', 'null');
-  assert.equal(f(undefined), '–', 'undefined');
-  assert.equal(f('abc'), '–', 'abc');
+  assert.equal(f(null), '', 'null');
+  assert.equal(f(undefined), '', 'undefined');
+  assert.equal(f('abc'), '', 'abc');
 });
 
 test('it parses normal values correctly', function(assert) {
