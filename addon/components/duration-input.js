@@ -10,6 +10,8 @@ const {
 } = Ember;
 
 export default TextField.extend({
+  placeholder: '0:00',
+
   didReceiveAttrs() {
     this._super(...arguments);
 
