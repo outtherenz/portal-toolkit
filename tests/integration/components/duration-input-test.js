@@ -6,6 +6,16 @@ moduleForComponent('duration-input', 'Integration | Component | duration input',
   integration: true
 });
 
+test('inits with defualt placeholder', function(assert) {
+  this.render(hbs`{{duration-input duration=duration}}`);
+  assert.equal(this.$('input').attr('placeholder'), '0:00');
+});
+
+test('inits with dashPlaceholder placeholder', function(assert) {
+  this.render(hbs`{{duration-input duration=duration dashPlaceholder=true}}`);
+  assert.equal(this.$('input').attr('placeholder'), '–');
+});
+
 test('formats on init', function(assert) {
   this.render(hbs`{{duration-input duration='5.75'}}`);
   assert.equal(this.$('input').val(), '5:45');
