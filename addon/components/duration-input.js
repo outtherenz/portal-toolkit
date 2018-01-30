@@ -17,8 +17,6 @@ export default TextField.extend({
 
     const duration = get(this, 'duration');
 
-    if (get(this, 'dashPlaceholder')) set(this, 'placeholder', '–');
-
     set(this, 'value', formatDuration([ duration ]));
   },
 

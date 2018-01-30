@@ -12,7 +12,7 @@ test('inits with defualt placeholder', function(assert) {
 });
 
 test('inits with dashPlaceholder placeholder', function(assert) {
-  this.render(hbs`{{duration-input duration=duration dashPlaceholder=true}}`);
+  this.render(hbs`{{duration-input duration=duration placeholder='-'}}`);
   assert.equal(this.$('input').attr('placeholder'), '–');
 });
 
