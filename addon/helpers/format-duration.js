@@ -14,12 +14,12 @@ export function formatDuration([ duration ]) {
     minutes = minutes.substring(0, 2);
   }
 
-  return (hours || parseInt(minutes, 10)) ? `${Math.floor(hours)}:${minutes}` : '–';
+  return (hours || parseInt(minutes, 10)) ? `${Math.floor(hours)}:${minutes}` : '';
 }
 
 export function parseDuration(duration) {
   // Null input
-  if ([ null, undefined, '', '–', '-' ].includes(duration)) {
+  if ([ null, undefined, '' ].includes(duration)) {
     return null;
   }
 
