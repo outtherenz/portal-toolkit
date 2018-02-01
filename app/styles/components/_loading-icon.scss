@@ -8,12 +8,12 @@
 
   circle {
     opacity: 0;
-    @include animation(loadingCircle 6s infinite cubic-bezier(0.215, 0.610, 0.355, 1));
+    animation: loadingCircle 6s infinite cubic-bezier(0.215, 0.610, 0.355, 1);
   }
 
-  circle:nth-child(2) { @include animation-delay(-1.5s); }
-  circle:nth-child(3) { @include animation-delay(-3s); }
-  circle:nth-child(4) { @include animation-delay(-4.5s); }
+  circle:nth-child(2) { animation-delay: -1.5s; }
+  circle:nth-child(3) { animation-delay: -3s; }
+  circle:nth-child(4) { animation-delay: -4.5s; }
 }
 
 .loading-icon--spinner {
@@ -27,11 +27,8 @@
     stroke-width: 20px;
     stroke-dasharray: 80 100;
     fill: none;
-    @include transform-origin(50% 50%);
-    @include animation(
-      spin 1s linear infinite,
-      fadeIn 0.2s ease-in
-    );
+    transform-origin: 50% 50%;
+    animation: spin 1s linear infinite, fadeIn 0.2s ease-in;
   }
 }
 

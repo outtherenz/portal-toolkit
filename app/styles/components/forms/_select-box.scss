@@ -8,8 +8,6 @@
   padding: 0.5em calc(6px + 6px + 0.8em) 0.5em 0.8em; // arrows padding, arrows width, normal padding
   border-radius: 3px;
 
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   background-image: url(#{$arrows-svg-black});
   background-position: calc(100% - 6px);
