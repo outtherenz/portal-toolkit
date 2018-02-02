@@ -1,6 +1,6 @@
-import Ember from 'ember';
-
-const { Controller, computed } = Ember;
+import { sort } from '@ember/object/computed';
+import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
   sort: [ 'name:asc' ],
@@ -59,5 +59,5 @@ export default Controller.extend({
     numbersAsStrings: '02'
   }],
 
-  tableContent: Ember.computed.sort('data', 'sort')
+  tableContent: sort('data', 'sort')
 });

@@ -1,6 +1,5 @@
-import Ember from 'ember';
-
-const { Helper } = Ember;
+import { isArray } from '@ember/array';
+import Helper from '@ember/component/helper';
 
 const MINUS_SIGN = '\u2212\u2009';
 const DASH = '\u2013';
@@ -76,8 +75,8 @@ function finalize(formatted, formatAs, number, rawNumber, options) {
 function standardizeInput(input) {
   let formatAs, value;
 
-  if (!Ember.isArray(input) || input.length === 1) {
-    value = Ember.isArray(input) ? input[0] : input;
+  if (!isArray(input) || input.length === 1) {
+    value = isArray(input) ? input[0] : input;
     formatAs = 'number';
   } else {
     [ formatAs, value ] = input;

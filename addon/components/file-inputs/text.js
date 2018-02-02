@@ -1,11 +1,11 @@
+import { isEmpty } from '@ember/utils';
+import { set, get } from '@ember/object';
 import Ember from 'ember';
 import EmberUploader from 'ember-uploader';
 
+// TODO figure out a better way to check if we are in test mode
 const {
-  testing,
-  isEmpty,
-  get,
-  set
+  testing
 } = Ember;
 
 export default EmberUploader.FileField.extend({

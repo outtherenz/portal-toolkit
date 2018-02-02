@@ -1,7 +1,6 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import { run } from '@ember/runloop';
 import qs from 'npm:qs';
-
-const { $, run } = Ember;
 
 /**
  * This is a wrapper on window.open()

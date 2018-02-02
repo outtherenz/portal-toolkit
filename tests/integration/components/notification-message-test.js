@@ -1,11 +1,7 @@
+import Service from '@ember/service';
+import { run } from '@ember/runloop';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
-
-const {
-  Service,
-  run
-} = Ember;
 
 const NOTIFICATION_SELECTOR = '.notification-message';
 const CONTENT_SELECTOR = '.notification-message__content';

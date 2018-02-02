@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import Service from '@ember/service';
+import { set, get } from '@ember/object';
+import { assert } from '@ember/debug';
+import { isArray } from '@ember/array';
+import { isEmpty } from '@ember/utils';
 import _ from 'lodash';
-
-const { Service, get, set, assert, isArray, isEmpty } = Ember;
 
 export default Service.extend({
   _cache: {},

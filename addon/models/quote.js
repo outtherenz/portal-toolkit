@@ -1,5 +1,5 @@
+import { get, computed } from '@ember/object';
 import DS from 'ember-data';
-import Ember from 'ember';
 
 const {
   Model,
@@ -7,11 +7,6 @@ const {
   belongsTo,
   hasMany
 } = DS;
-
-const {
-  computed,
-  get
-} = Ember;
 
 export default Model.extend({
   quoter: belongsTo('user'),

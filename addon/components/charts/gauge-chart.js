@@ -1,13 +1,8 @@
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
+import { warn } from '@ember/debug';
+import { get, computed } from '@ember/object';
 import C3Chart from 'ember-c3/components/c3-chart';
 import { formatNumber } from 'portal-toolkit/helpers/format-number';
-
-const {
-  computed,
-  isEmpty,
-  warn,
-  get
-} = Ember;
 
 export default C3Chart.extend({
   classNames: [ 'chart', 'chart--gauge' ],

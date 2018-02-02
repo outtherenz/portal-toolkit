@@ -1,10 +1,6 @@
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
 import moment from 'moment';
 import _ from 'lodash';
-
-const {
-  isEmpty
-} = Ember;
 
 // Generate fake balance and KPI reports
 export default function fakeReporter(type) {

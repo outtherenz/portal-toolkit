@@ -1,6 +1,4 @@
-import Ember from 'ember';
-
-const { Helper } = Ember;
+import Helper from '@ember/component/helper';
 
 export function math([ operand1, operator, operand2 ]) {
   operand1 = parseOperand(operand1);

@@ -1,14 +1,8 @@
-import Ember from 'ember';
+import TextField from '@ember/component/text-field';
+import { set, get, computed } from '@ember/object';
+import { run } from '@ember/runloop';
+import { on } from '@ember/object/evented';
 import { formatNumber, parseNumber } from '../helpers/format-number';
-
-const {
-  TextField,
-  computed,
-  get,
-  set,
-  run,
-  on
-} = Ember;
 
 export default TextField.extend({
   classNames: [ 'formatted-input' ],

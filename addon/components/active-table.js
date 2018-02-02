@@ -1,13 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import EObject, { set, get, computed } from '@ember/object';
 import layout from '../templates/components/active-table';
-
-const {
-  Component,
-  computed,
-  Object: EObject,
-  get,
-  set
-} = Ember;
 
 export default Component.extend({
   layout,

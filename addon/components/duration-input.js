@@ -1,13 +1,8 @@
-import Ember from 'ember';
+import TextField from '@ember/component/text-field';
+import { set, get } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { run } from '@ember/runloop';
 import { formatDuration, parseDuration } from 'portal-toolkit/helpers/format-duration';
-
-const {
-  TextField,
-  get,
-  set,
-  on,
-  run
-} = Ember;
 
 export default TextField.extend({
   placeholder: '0:00',

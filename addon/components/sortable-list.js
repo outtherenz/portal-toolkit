@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { sort } from '@ember/object/computed';
+import Component from '@ember/component';
+import $ from 'jquery';
+import { set, get, computed } from '@ember/object';
 import layout from '../templates/components/sortable-list';
-
-const { Component, computed, $, get, set } = Ember;
 
 export default Component.extend({
   layout,
@@ -16,7 +17,7 @@ export default Component.extend({
     return [ get(this, 'index') ];
   }),
 
-  sortedContent: computed.sort('content', 'sortBy'),
+  sortedContent: sort('content', 'sortBy'),
 
   sort() {
     this.$('li').each((index, li) => {

@@ -1,13 +1,12 @@
-import Ember from 'ember';
+import Service from '@ember/service';
+import { assert } from '@ember/debug';
+import EObject, { set, get } from '@ember/object';
+import { later } from '@ember/runloop';
+import Ember from '@ember/application';
 
+// TODO figure out a better way to check if we are in test mode
 const {
-  Service,
-  get,
-  set,
-  assert,
-  testing,
-  Object: EObject,
-  run: { later }
+  testing
 } = Ember;
 
 export default Service.extend({

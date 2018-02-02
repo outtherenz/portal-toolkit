@@ -1,12 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { set } from '@ember/object';
+import { or } from '@ember/object/computed';
+import { next } from '@ember/runloop';
 import layout from '../templates/components/overlaid-dropdown';
-
-const {
-  Component,
-  set,
-  computed: { or },
-  run: { next }
-} = Ember;
 
 export default Component.extend({
   layout,

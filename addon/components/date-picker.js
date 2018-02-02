@@ -1,16 +1,14 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { on } from '@ember/object/evented';
+import {
+  getProperties,
+  observer,
+  computed,
+  set,
+  get
+} from '@ember/object';
 import layout from '../templates/components/date-picker';
 import moment from 'moment';
-
-const {
-  Component,
-  on,
-  get,
-  set,
-  computed,
-  observer,
-  getProperties
-} = Ember;
 
 export default Component.extend({
   classNames: [ 'date-picker' ],

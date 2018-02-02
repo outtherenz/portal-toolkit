@@ -1,12 +1,12 @@
+import { isEmpty } from '@ember/utils';
+import { set, get } from '@ember/object';
+import { run } from '@ember/runloop';
 import Ember from 'ember';
 import EmberUploader from 'ember-uploader';
 /* global Papa */
 
+// TODO figure out a better way to check if we are in test mode
 const {
-  isEmpty,
-  get,
-  set,
-  run,
   testing
 } = Ember;
 
