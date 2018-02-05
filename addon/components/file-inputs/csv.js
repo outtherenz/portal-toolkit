@@ -5,16 +5,16 @@ import Ember from 'ember';
 import EmberUploader from 'ember-uploader';
 /* global Papa */
 
-// TODO figure out a better way to check if we are in test mode
-const {
-  testing
-} = Ember;
-
 export default EmberUploader.FileField.extend({
   attributeBindings: [ 'accept' ],
 
   change(event) {
-    const files = get(event, testing ? 'originalEvent.testFiles' : 'target.files');
+    /*
+    TODO There is currently no modules friendly approach to this.
+    Apparently its being worked on but I can't find where.
+    It should be reviseted at a later date.
+    */
+    const files = get(event, Ember.testing ? 'originalEvent.testFiles' : 'target.files');
 
     if (isEmpty(files) || files[0] == null) {
       set(this, 'file', null);
