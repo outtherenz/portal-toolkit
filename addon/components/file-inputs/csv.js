@@ -1,20 +1,20 @@
+import { isEmpty } from '@ember/utils';
+import { set, get } from '@ember/object';
+import { run } from '@ember/runloop';
 import Ember from 'ember';
 import EmberUploader from 'ember-uploader';
 /* global Papa */
-
-const {
-  isEmpty,
-  get,
-  set,
-  run,
-  testing
-} = Ember;
 
 export default EmberUploader.FileField.extend({
   attributeBindings: [ 'accept' ],
 
   change(event) {
-    const files = get(event, testing ? 'originalEvent.testFiles' : 'target.files');
+    /*
+    TODO There is currently no modules friendly approach to this.
+    Apparently its being worked on but I can't find where.
+    It should be reviseted at a later date.
+    */
+    const files = get(event, Ember.testing ? 'originalEvent.testFiles' : 'target.files');
 
     if (isEmpty(files) || files[0] == null) {
       set(this, 'file', null);

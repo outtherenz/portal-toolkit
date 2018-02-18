@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
+import { get, computed } from '@ember/object';
+import { warn } from '@ember/debug';
 import C3Chart from 'ember-c3/components/c3-chart';
-
-const { computed, isEmpty, Logger: { warn }, get } = Ember;
 
 export default C3Chart.extend({
   classNames: [ 'chart', 'chart--pie' ],

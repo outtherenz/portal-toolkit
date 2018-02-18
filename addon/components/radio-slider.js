@@ -1,10 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import $ from 'jquery';
 import layout from '../templates/components/radio-slider';
-
-const {
-  Component,
-  $
-} = Ember;
 
 export default Component.extend({
   layout,

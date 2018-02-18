@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import $ from 'jquery';
+import { run } from '@ember/runloop';
 import layout from '../templates/components/print-button';
-
-const { Component, $, run } = Ember;
 
 export default Component.extend({
   layout,

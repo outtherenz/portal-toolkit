@@ -1,14 +1,8 @@
+import Service from '@ember/service';
+import { assert } from '@ember/debug';
+import EObject, { set, get } from '@ember/object';
+import { later } from '@ember/runloop';
 import Ember from 'ember';
-
-const {
-  Service,
-  get,
-  set,
-  assert,
-  testing,
-  Object: EObject,
-  run: { later }
-} = Ember;
 
 export default Service.extend({
   list: [],
@@ -69,7 +63,12 @@ export default Service.extend({
   },
 
   setupAutoClear(notification) {
-    if (testing) return;
+    /*
+    TODO There is currently no modules friendly approach to this.
+    Apparently its being worked on but I can't find where.
+    It should be reviseted at a later date.
+    */
+    if (Ember.testing) return;
 
     later(() => {
       // Hasn't been closed manually

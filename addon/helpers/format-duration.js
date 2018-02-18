@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 
 export function formatDuration([ duration ]) {
   const total = isNaN(duration) ? 0 : Number(duration);
@@ -40,4 +40,4 @@ export function parseDuration(duration) {
   return hours + (hours >= 0 ? 1 : -1) * minutes / 60;
 }
 
-export default Ember.Helper.helper(formatDuration);
+export default helper(formatDuration);

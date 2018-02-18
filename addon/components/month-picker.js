@@ -1,13 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { set, get, computed } from '@ember/object';
 import layout from '../templates/components/month-picker';
 import moment from 'moment';
-
-const {
-  Component,
-  computed,
-  get,
-  set
-} = Ember;
 
 export default Component.extend({
   layout,

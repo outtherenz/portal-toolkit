@@ -1,12 +1,11 @@
-import Ember from 'ember';
-
-const { Controller } = Ember;
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 
 export default Controller.extend({
   operand1: 1,
   operand2: 1,
   operatorunselect: 1,
-  operator: Ember.computed('operatorunselect', function() {
+  operator: computed('operatorunselect', function() {
     switch (this.get('operatorunselect')) {
       case '1':
         return '+';

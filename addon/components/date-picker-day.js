@@ -1,11 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { get, computed } from '@ember/object';
 import hbs from 'htmlbars-inline-precompile';
-
-const {
-  Component,
-  computed,
-  get
-} = Ember;
 
 export default Component.extend({
   layout: hbs`{{date.day}}`,

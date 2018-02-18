@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import { or } from '@ember/object/computed';
+import Component from '@ember/component';
+import { get } from '@ember/object';
 import layout from '../templates/components/loading-button';
-
-const { Component, computed, get } = Ember;
 
 export default Component.extend({
   layout,
@@ -15,7 +15,7 @@ export default Component.extend({
   isLoading: false,
   isDisabled: false,
 
-  disabled: computed.or('isLoading', 'isDisabled'),
+  disabled: or('isLoading', 'isDisabled'),
 
   click(event) {
     event.preventDefault();

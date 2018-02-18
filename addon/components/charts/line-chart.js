@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import { isArray } from '@ember/array';
+import { get, computed } from '@ember/object';
+import { warn } from '@ember/debug';
 import C3Chart from 'ember-c3/components/c3-chart';
 import { formatNumber } from 'portal-toolkit/helpers/format-number';
 import moment from 'moment';
-
-const { computed, Logger, isArray, get } = Ember;
 
 export default C3Chart.extend({
   classNames: [ 'chart', 'chart--line' ],
@@ -17,7 +17,7 @@ export default C3Chart.extend({
     const columns = [];
 
     if (!series) {
-      Logger.warn('No series provided to line chart component.');
+      warn('No series provided to line chart component.');
       return;
     }
 

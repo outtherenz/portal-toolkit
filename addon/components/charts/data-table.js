@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { get, computed } from '@ember/object';
 import { formatNumber } from 'portal-toolkit/helpers/format-number';
 import layout from '../../templates/components/charts/data-table';
 import moment from 'moment';
-
-const { Component, computed, get } = Ember;
 
 export default Component.extend({
   layout,

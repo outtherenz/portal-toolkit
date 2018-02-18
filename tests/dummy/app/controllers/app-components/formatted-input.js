@@ -1,10 +1,6 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { set } from '@ember/object';
 import { formatDuration, parseDuration } from 'portal-toolkit/helpers/format-duration';
-
-const {
-  Controller,
-  set
-} = Ember;
 
 export default Controller.extend({
   value1: 5.125,
