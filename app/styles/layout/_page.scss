@@ -39,7 +39,7 @@ body.page {
   .content-container,
   .content-container > .liquid-child,
   .page-content {
-    min-height: calc(100vh - 92px - 40px + 5px);
+    min-height: calc(100vh - 60px);
     min-width: 100%;
     overflow: visible;
   }
