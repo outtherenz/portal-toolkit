@@ -2,6 +2,7 @@ $gutter: calc(10px + 1.5vw);
 $gutter-string: '(10px + 1.5vw)';
 $negative-gutter: calc(-10px - 1.5vw);
 $desktop-gutter: 25px;
+@import "_page-header";
 
 body.page {
   margin: 0;
@@ -40,7 +41,7 @@ body.page {
   .content-container > .liquid-child,
   .page-content {
     // view height minus 60px header height
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - #{$page-header-height});
     min-width: 100%;
     overflow: visible;
   }
