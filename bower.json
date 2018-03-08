@@ -3,10 +3,8 @@
   "dependencies": {
     "ember-qunit-notifications": "0.1.0",
     "ember-uploader": "~0.3.9",
-    "bourbon": "4.2.6",
     "chai": "~2.3.0",
     "c3": "~0.4.10",
-    "neat": "^1.8.0",
     "papaparse": "~4.1.1",
     "sortable": "RubaXa/Sortable",
     "pretender": "~1.1.0",
