@@ -39,6 +39,7 @@ body.page {
   .content-container,
   .content-container > .liquid-child,
   .page-content {
+    // view height minus 60px header height
     min-height: calc(100vh - 60px);
     min-width: 100%;
     overflow: visible;
