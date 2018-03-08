@@ -1,0 +1,53 @@
+version: 2
+jobs:
+  install:
+    docker:
+      - image: circleci/node:8.9.4
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "package-lock.json" }}-{{ checksum "bower.json" }}
+      - run:
+          name: Npm Install
+          command: npm install
+      - run:
+          name: Bower Install
+          command: ./node_modules/.bin/bower install
+      - save_cache:
+          paths:
+            - ./node_modules
+            - ./bower_components
+          key: dependencies-{{ checksum "package-lock.json" }}-{{ checksum "bower.json" }}
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test:
+    docker:
+      - image: circleci/node:8.9.4-browsers
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: npm test
+  lint:
+    docker:
+      - image: circleci/node:8.9.4
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Lint
+          command: npm run lint
+workflows:
+  version: 2
+  install-and-test:
+    jobs:
+      - install
+      - test:
+          requires:
+            - install
+      - lint:
+          requires:
+            - install
