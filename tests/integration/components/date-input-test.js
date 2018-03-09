@@ -6,22 +6,33 @@ moduleForComponent('date-input', 'Integration | Component | date input', {
   integration: true
 });
 
-test('clicking the input toggles the picker', function(assert) {
+test('clicking the input toggles the picker', async function(assert) {
+  assert.expect(3);
+
   this.set('date', new Date());
   this.render(hbs`{{date-input date=date select=(action (mut date))}}`);
 
-  assert.equal(this.$('.date-input__picker').length, 0);
+  assert.equal(
+    this.$('.date-input__picker').length,
+    0,
+    'There is no date picker to start with'
+  );
 
   const display = this.$('.date-input__display');
 
-  display.click();
+  await display.click();
+  assert.equal(
+    this.$('.date-input__picker').length,
+    1,
+    'A date picker appears after clicking'
+  );
 
-  return wait().then(() => {
-    assert.equal(this.$('.date-input__picker').length, 1);
-    display.click();
-  }).then(() => {
-    assert.equal(this.$('.date-input__picker').length, 0);
-  });
+  await display.click();
+  assert.equal(
+    this.$('.date-input__picker').length,
+    0,
+    'The date picker dissapears after clicking again'
+  );
 });
 
 test('clicking the overlay hides the picker', function(assert) {
