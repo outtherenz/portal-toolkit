@@ -1,0 +1,11 @@
+<div id="input-auto-complete__wrapper">
+  {{input class="text-input" value=value}}
+  {{log open matched.length}}
+  {{#if (and open matched.length)}}
+    <ul class="input-auto-complete__drop-down">
+      {{#each matched as |item|}}
+      <li {{action 'setItem' item}}>{{item}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</div>

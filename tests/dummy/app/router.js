@@ -27,6 +27,7 @@ Router.map(function() {
     this.route('sortable-list');
     this.route('untethered-modal-dialog');
     this.route('value-change-indicator');
+    this.route('input-auto-complete');
   });
 
   this.route('helpers', function() {

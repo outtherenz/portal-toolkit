@@ -1,0 +1,20 @@
+#input-auto-complete__wrapper {
+  position: absolute;
+  .input-auto-complete__drop-down {
+    background-color: white;
+    list-style: none;
+    margin: 0;
+    margin-top: -1px;
+    padding: 0;
+    border: 1px solid $whisp;
+    li {
+      cursor: pointer;
+      padding: 0.25em 0.5em;
+      &:hover {
+        background-color: $off-white;
+        border: 1px solid $whisp;
+        margin: -1px;
+      }
+    }
+  }
+}
