@@ -79,7 +79,7 @@ export default C3Chart.extend({
       reduction = Math.pow(10, setsOfThree * 3);
       let reductionText;
 
-      yAxisPlaces = longestLength % 3 === 1 ? 1 : 0;
+      yAxisPlaces = longestLength % 3 === 1 ? 3 - longestLength : 0;
 
       switch (setsOfThree) {
         case 1:
@@ -156,7 +156,10 @@ export default C3Chart.extend({
           if (meta.format === 'PERCENTAGE') {
             return formatNumber([ 'percentage', value ], { sigfigs: 4, dashZero: false });
           } else if (meta.format === 'CURRENCY') {
-            return formatNumber([ 'currency', value ], { places: 0, dashZero: false });
+            return formatNumber([ 'currency', value ], { places: value >= 100 ? 0 : 2, dashZero: false });
+          } else {
+            const numberLength = Math.floor(value).toString().length;
+            return formatNumber(value, { places: numberLength > 3 ? 0 : 3 - numberLength, dashZero: false });
           }
         }
       }
