@@ -1,0 +1,55 @@
+{{#if (and searchOnly finderVisible)}}
+  <span class="combo-box__search-icon">
+    {{fa-icon 'search'}}
+  </span>
+{{/if}}
+{{input
+  class=(or class (if searchOnly 'select-box' 'text-input'))
+  name=(if (and searchOnly finderVisible) 'combo-box__search-input')
+  type='text'
+  value=searchTerm
+  placeholder=(if (and searchOnly finderVisible) (or searchPlaceholder 'Type to search…') placeholder)
+  keyDown=(action 'keyDown' bubbles=false)
+  click=(action 'setFinderVisible' true bubbles=false)
+  autocomplete="off"
+}}
+
+{{#if (and finderVisible (or isLoading searchOnly filteredOptions.length))}}
+  <div class="combo-box__drop-down">
+    {{#unless isLoading}}
+      {{#if (and searchOnly activeDisplayName filteredOptions.length)}}
+        <div
+          {{action 'clearValue' bubbles=false}}
+          class="combo-box__drop-down__row combo-box__drop-down__row--clear"
+        >
+          <b>Clear value ({{activeDisplayName}})</b> {{fa-icon 'times'}}
+        </div>
+      {{/if}}
+      {{#each filteredOptions as |option index|}}
+        {{combo-box-item
+          index=index
+          selectedRow=selectedRow
+          setHighlight=(action 'setHighlight' bubbles=false)
+          unSetHighlight=(action 'unSetHighlight' bubbles=false)
+          setItem=(action 'setItem' bubbles=false)
+          name=option.displayName
+        }}
+      {{else if searchOnly}}
+        <div class="combo-box__drop-down__row combo-box__drop-down__row--empty">
+          <span class="text-button--spaced">
+            {{or emptyText 'No items found'}}
+          </span>
+          {{#if emptyButtonAction}}
+            <button class="text-button text-button--spaced" {{action emptyButtonAction bubbles=false}}>
+              {{or emptyButtonText 'Click to update'}}
+            </button>
+          {{/if}}
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="combo-box__drop-down__row combo-box__drop-down__row--loading">
+        {{loading-icon 'spinner'}}
+      </div>
+    {{/unless}}
+  </div>
+{{/if}}
