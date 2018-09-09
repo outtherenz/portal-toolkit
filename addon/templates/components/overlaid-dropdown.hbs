@@ -3,6 +3,9 @@
   {{action 'onButtonClick'}}
   onblur={{action set 'focused' false}}
 >
+  {{#if buttonIcon}}
+    {{fa-icon buttonIcon}}&nbsp;
+  {{/if}}
   {{if buttonText buttonText 'Expand'}}
 </button>
 
