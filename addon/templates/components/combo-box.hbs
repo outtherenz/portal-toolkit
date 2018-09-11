@@ -26,7 +26,7 @@
         </div>
       {{/if}}
       {{#each filteredOptions as |option index|}}
-        {{combo-box-item
+        {{combo-box/item
           index=index
           selectedRow=selectedRow
           setHighlight=(action 'setHighlight' bubbles=false)

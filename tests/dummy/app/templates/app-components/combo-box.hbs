@@ -1,0 +1,111 @@
+<header class="article-header">
+  <h1><span class="title-category">Components:</span>Combo Box</h1>
+</header>
+
+<section style="width: 300px;">
+  Standard combo box setting an attribute<br>
+  {{combo-box
+    key='code'
+    searchKeys='code'
+    value=model.value.option
+    options=model.options
+    emptyText='No options found'
+  }}
+  Search only combo box setting a relationship<br>
+  {{combo-box
+    searchOnly=true
+    searchKeys='name,code'
+    placeholder='Select an option…'
+    value=model.relationship
+    options=model.options
+  }}
+  Search only combo box setting a relationship with updater<br>
+  {{combo-box
+    searchOnly=true
+    searchKeys='name,code'
+    placeholder='Select an option…'
+    value=model.relationship
+    options=newOptions
+    emptyButtonText='Click to update options'
+    emptyButtonAction=(action 'updateOptions')
+    isLoading=isUpdating
+  }}
+</section>
+
+<br><br>
+
+{{#page-description title='Combo Box'}}
+  Standard combo box setting an attribute
+  <pre><code>
+    \{{combo-box
+      key='code'
+      searchKeys='code'
+      value=model.value.option
+      options=model.options
+      emptyText='No options found'
+    }}
+  </code></pre>
+  Search only combo box setting a relationship
+  <pre><code>
+    \{{combo-box
+      searchOnly=true
+      searchKeys='name,code'
+      placeholder='Select an option…'
+      value=model.relationship
+      options=model.options
+    }}
+  </code></pre>
+  Search only combo box setting a relationship with updater
+  <pre><code>
+    \{{combo-box
+      searchOnly=true
+      searchKeys='name,code'
+      placeholder='Select an option…'
+      value=model.relationship
+      options=newOptions
+      emptyButtonText='Click to update options'
+      emptyButtonAction=(action 'updateOptions')
+      isLoading=isUpdating
+    }}
+  </code></pre>
+
+  <p>
+    Props:
+    <ul>
+      <li><b>key</b>: string (optional)</li>
+      <li><b>options</b>: Array (required)</li>
+      <li><b>searchKeys</b>: String (required)</li>
+      <li><b>value</b>: Object or attribute (required)</li>
+      <li><b>placeholder:</b> String (optional)</li>
+      <li><b>separator:</b> String (optional)</li>
+      <li><b>emptyButtonText</b>: String (required for emptyButtonAction)</li>
+      <li><b>emptyButtonAction</b>: Action (required for emptyButtonText)</li>
+      <li><b>emptyText</b>: String (optional)</li>
+      <li><b>isLoading</b>: Boolean (optional)</li>
+      <li><b>searchOnly</b>: Boolean (optional)</li>
+    </ul>
+    <p>
+      key:<br>
+        The key you want to use from your options array. Defaults to name. Not used if you provide a plain object value to the component.<br><br>
+      options:<br>
+        The options array for selecting from.<br><br>
+      searchKeys:<br>
+        The keys you want to search with from your options array. The order the keys are supplied determines the display string.<br><br>
+      separator:<br>
+        When using multiple search keys, this defines the visual key separator. Defaults to " - ".<br><br>
+      value:<br>
+        The value you are setting. This can be either ember object (for relationships) or an ember object attribute.<br><br>
+      emptyButtonText:<br>
+        The optional button text which appears when there are no found options.<br><br>
+      emptyButtonAction:<br>
+        The optional button action which appears when there are no found options.<br><br>
+      emptyText:<br>
+        The optional empty text which appears when there are no found options.<br><br>
+      isLoading:<br>
+        The optional boolean that toggles the loading state.<br><br>
+      searchOnly:<br>
+        The optional boolean that prevents the component from being able to create its own values.<br><br>
+    </p>
+  </p>
+
+{{/page-description}}

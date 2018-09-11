@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { get, computed } from '@ember/object';
-import layout from '../templates/components/combo-box-item';
+import layout from '../../templates/components/combo-box/item';
 
 export default Component.extend({
   layout,
