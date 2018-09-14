@@ -60,7 +60,7 @@ export default Component.extend({
   }),
 
   _searchKeys: computed('searchKeys', function() {
-    const searchKeys = get(this, 'searchKeys').split(',');
+    const searchKeys = get(this, 'searchKeys').split(',').map(item => item.trim());
     return searchKeys;
   }),
 
