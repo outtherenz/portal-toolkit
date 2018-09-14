@@ -261,8 +261,7 @@ test('it sets an object when an option is selected and search only is true', fun
 
   assert.equal(JSON.stringify(get(this, 'relationship')), JSON.stringify({
     name: 'Apple',
-    code: '0',
-    displayName: '0 - Apple'
+    code: '0'
   }));
 });
 
