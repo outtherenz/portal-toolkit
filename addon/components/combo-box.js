@@ -64,23 +64,10 @@ export default Component.extend({
     return searchKeys;
   }),
 
-  computedOptions: computed('_searchKeys', 'options', function() {
-    const searchKeys = get(this, '_searchKeys');
-    const options = get(this, 'options');
-
-    // set a computed display name for reference in the template
-    options.forEach(option => {
-      const displayName = this.getDisplayName(searchKeys, option);
-      set(option, 'displayName', displayName);
-    });
-
-    return options;
-  }),
-
-  filteredOptions: computed('_searchKeys', 'computedOptions', 'searchTerm', function() {
+  filteredOptions: computed('_searchKeys', 'options', 'searchTerm', function() {
     const searchKeys = get(this, '_searchKeys');
     const searchTerm = get(this, 'searchTerm');
-    const options = get(this, 'computedOptions');
+    const options = get(this, 'options');
 
     if (searchTerm) {
       const filteredOptions = options.filter(option =>
@@ -93,7 +80,7 @@ export default Component.extend({
     return options;
   }),
 
-  activeDisplayName: computed('value', 'options', function() {
+  activeDisplayName: computed('value', 'options', 'separator', function() {
     const value = get(this, 'value');
     if (!value) return '';
     const searchKeys = get(this, '_searchKeys');
@@ -113,7 +100,9 @@ export default Component.extend({
       return value;
     } else if (!selected) return '';
 
-    return this.getDisplayName(searchKeys, selected);
+    const separator = get(this, 'separator');
+
+    return this.getDisplayName(searchKeys, selected, separator);
   }),
 
   actions: {
@@ -178,16 +167,15 @@ export default Component.extend({
       set(this, 'finderVisible', false);
     }
   },
-  getDisplayName(keys, option) {
+  isObject(value) {
+    return typeof value === 'object';
+  },
+  getDisplayName(keys, option, separator) {
     // separator defaults to ' - '
-    const separator = get(this, 'separator');
     // go through each key and build the display name by getting the values at the key
     return keys.reduce((name, key, i) =>
       i > 0 ? name += `${separator ? separator : ' - '}${get(option, key)}` :
         name = get(option, key)
       , '');
-  },
-  isObject(value) {
-    return typeof value === 'object';
   }
 });

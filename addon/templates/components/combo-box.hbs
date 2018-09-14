@@ -32,7 +32,10 @@
           setHighlight=(action 'setHighlight' bubbles=false)
           unSetHighlight=(action 'unSetHighlight' bubbles=false)
           setItem=(action 'setItem' bubbles=false)
-          name=option.displayName
+          option=option
+          searchKeys=_searchKeys
+          separator=separator
+          getDisplayName=getDisplayName
         }}
       {{else if searchOnly}}
         <div class="combo-box__drop-down__row combo-box__drop-down__row--empty">
