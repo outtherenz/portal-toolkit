@@ -1,21 +1,24 @@
 import Component from '@ember/component';
 import { get, computed } from '@ember/object';
-import layout from '../../templates/components/combo-box/item';
+import layout from '../../templates/components/search-select/item';
 
 export default Component.extend({
   layout,
-
-  classNames: ['combo-box__drop-down__row'],
-  classNameBindings: ['isSelected:combo-box__drop-down__row--selected'],
+  classNames: ['search-select__drop-down__row'],
+  classNameBindings: ['isSelected:search-select__drop-down__row--selected'],
   isSelected: computed('selectedRow', 'index', function() {
     return get(this, 'selectedRow') === get(this, 'index');
   }),
-  displayName: computed('option', 'key', function() {
+  displayName: computed('option', 'keys', 'separator', function() {
     const option = get(this, 'option');
     if (typeof option === 'string') return option;
-    const key = get(this, 'key');
+    const keys = get(this, 'keys');
+    const separator = get(this, 'separator');
 
-    return get(option, key);
+    const getDisplayName = get(this, 'getDisplayName');
+    const displayName = getDisplayName(keys, option, separator);
+
+    return displayName;
   }),
 
   click: function() {

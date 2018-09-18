@@ -3,29 +3,26 @@
 </header>
 
 <section style="width: 300px;">
-  Standard combo box setting an attribute<br>
+  Combo box with an options array of strings<br>
   {{combo-box
+    value=model.date
+    options=model.dates
+    onSet=(action 'setDate')
+  }}
+  Combo box with an options array of objects<br>
+  {{combo-box
+    value=model.code
+    options=model.options
     key='code'
-    searchKeys='code'
-    value=model.value.option
-    options=model.options
-    emptyText='No options found'
+    onSet=(action 'setCode')
   }}
-  Search only combo box setting a relationship<br>
+  Combo box with an updater and and options array of objects<br>
   {{combo-box
-    searchOnly=true
-    searchKeys='name,code'
-    placeholder='Select an option…'
-    value=model.relationship
-    options=model.options
-  }}
-  Search only combo box setting a relationship with updater<br>
-  {{combo-box
-    searchOnly=true
-    searchKeys='name,code'
-    placeholder='Select an option…'
-    value=model.relationship
+    value=model.name
     options=newOptions
+    key='name'
+    onSet=(action 'setName')
+    emptyText='No options found'
     emptyButtonText='Click to update options'
     emptyButtonAction=(action 'updateOptions')
     isLoading=isUpdating
@@ -35,34 +32,31 @@
 <br><br>
 
 {{#page-description title='Combo Box'}}
-  Standard combo box setting an attribute
+  Combo box with an options array of strings
   <pre><code>
     \{{combo-box
+      value=model.date
+      options=model.dates
+      onSet=(action 'setDate')
+    }}
+  </code></pre>
+  Combo box with an options array of objects
+  <pre><code>
+    \{{combo-box
+      value=model.code
+      options=model.options
       key='code'
-      searchKeys='code'
-      value=model.value.option
-      options=model.options
-      emptyText='No options found'
+      onSet=(action 'setCode')
     }}
   </code></pre>
-  Search only combo box setting a relationship
+  Combo box with an updater and and options array of objects
   <pre><code>
     \{{combo-box
-      searchOnly=true
-      searchKeys='name,code'
-      placeholder='Select an option…'
-      value=model.relationship
-      options=model.options
-    }}
-  </code></pre>
-  Search only combo box setting a relationship with updater
-  <pre><code>
-    \{{combo-box
-      searchOnly=true
-      searchKeys='name,code'
-      placeholder='Select an option…'
-      value=model.relationship
+      value=model.name
       options=newOptions
+      key='name'
+      onSet=(action 'setName')
+      emptyText='No options found'
       emptyButtonText='Click to update options'
       emptyButtonAction=(action 'updateOptions')
       isLoading=isUpdating
@@ -72,29 +66,31 @@
   <p>
     Props:
     <ul>
-      <li><b>key</b>: string (optional)</li>
       <li><b>options</b>: Array (required)</li>
-      <li><b>searchKeys</b>: String (required)</li>
-      <li><b>value</b>: Object or attribute (required)</li>
-      <li><b>placeholder:</b> String (optional)</li>
-      <li><b>separator:</b> String (optional)</li>
-      <li><b>emptyButtonText</b>: String (required for emptyButtonAction)</li>
-      <li><b>emptyButtonAction</b>: Action (required for emptyButtonText)</li>
-      <li><b>emptyText</b>: String (optional)</li>
-      <li><b>isLoading</b>: Boolean (optional)</li>
-      <li><b>searchOnly</b>: Boolean (optional)</li>
+      <li><b>key</b>: String (required if you provide an array of objects to options)</li>
+      <li><b>value</b>: String (required)</li>
+      <li><b>onSet</b>: Action (required)</li>
+      <li><b>placeholder</b>: String</li>
+      <li><b>emptyButtonText</b>: String</li>
+      <li><b>emptyButtonAction</b>: Action</li>
+      <li><b>emptyText</b>: String</li>
+      <li><b>isLoading</b>: Boolean</li>
     </ul>
     <p>
-      key:<br>
-        The key you want to use from your options array. Defaults to name. Not used if you provide a plain object value to the component.<br><br>
       options:<br>
-        The options array for selecting from.<br><br>
-      searchKeys:<br>
-        The keys you want to search with from your options array. The order the keys are supplied determines the display string.<br><br>
-      separator:<br>
-        When using multiple search keys, this defines the visual key separator. Defaults to " - ".<br><br>
+        The options array for selecting from. Can be an array of strings or an array of objects.<br><br>
+      key:<br>
+        The key for the attribute in your options array. Required if you provide an array of objects to options.<br><br>
       value:<br>
-        The value you are setting. This can be either ember object (for relationships) or an ember object attribute.<br><br>
+        The value you are setting. Must be a string.<br><br>
+      onSet:<br>
+        The set action. Will pass out:
+        <ul>
+          <li>the plain input string</li>
+          <li>the plain value of the selected option (if options is an array of strings)</li>
+          <li>the value of the <b>get(option, key)</b> (if options is an array of objects)</li>
+        </ul>
+      <br><br>
       emptyButtonText:<br>
         The optional button text which appears when there are no found options.<br><br>
       emptyButtonAction:<br>
@@ -103,9 +99,6 @@
         The optional empty text which appears when there are no found options.<br><br>
       isLoading:<br>
         The optional boolean that toggles the loading state.<br><br>
-      searchOnly:<br>
-        The optional boolean that prevents the component from being able to create its own values.<br><br>
     </p>
   </p>
-
 {{/page-description}}

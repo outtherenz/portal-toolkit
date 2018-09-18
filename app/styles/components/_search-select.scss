@@ -1,8 +1,8 @@
-.combo-box {
+.search-select {
   border: 0 none;
   padding: 0;
   margin: 0;
-  .text-input {
+  .select-box {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -10,7 +10,7 @@
   }
 }
 
-.combo-box__drop-down {
+.search-select__drop-down {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -24,26 +24,35 @@
   box-shadow: 2.5px 2.5px 5px rgba(0,0,0,0.5);
 }
 
-.combo-box__drop-down__row {
+.search-select__search-icon {
+  position: absolute;
+  padding: 0.5em 0.75em;
+}
+
+input[name=search-select__search-input] {
+  padding-left: 2.2em;
+}
+
+.search-select__drop-down__row {
   flex: 1;
   padding: 0.2em 0.4em;
   cursor: pointer;
-  &.combo-box__drop-down__row--selected {
+  &.search-select__drop-down__row--selected {
     background-color: rgba(0,0,0,0.075);
   }
-  &.combo-box__drop-down__row--clear {
+  &.search-select__drop-down__row--clear {
     @extend .link;
     border-bottom: 1px solid $whisp;
     &:hover {
       background-color: rgba(0,0,0,0.075);
     }
   }
-  &.combo-box__drop-down__row--empty {
+  &.search-select__drop-down__row--empty {
     display: flex;
     flex-direction: column;
     text-align: center;
   }
-  &.combo-box__drop-down__row--loading {
+  &.search-select__drop-down__row--loading {
     padding: 1em;
     text-align: center;
     cursor: auto;

@@ -1,58 +1,50 @@
-{{#if (and searchOnly finderVisible)}}
-  <span class="combo-box__search-icon">
-    {{fa-icon 'search'}}
-  </span>
-{{/if}}
 {{input
-  class=(or class (if searchOnly 'select-box' 'text-input'))
-  name=(if (and searchOnly finderVisible) 'combo-box__search-input')
+  class=(or class 'text-input')
   type='text'
   value=searchTerm
-  placeholder=(if (and searchOnly finderVisible) (or searchPlaceholder 'Type to search…') placeholder)
+  placeholder=(if finderVisible (or searchPlaceholder 'Type to search…') placeholder)
   keyDown=(action 'keyDown' bubbles=false)
   click=(action 'setFinderVisible' true bubbles=false)
   autocomplete="off"
 }}
 
-{{#if (and finderVisible (or isLoading searchOnly filteredOptions.length))}}
-  <div class="combo-box__drop-down">
-    {{#unless isLoading}}
-      {{#if (and searchOnly activeDisplayName filteredOptions.length)}}
-        <div
-          {{action 'clearValue' bubbles=false}}
-          class="combo-box__drop-down__row combo-box__drop-down__row--clear"
-        >
-          <b>Clear value ({{activeDisplayName}})</b> {{fa-icon 'times'}}
-        </div>
-      {{/if}}
-      {{#each filteredOptions as |option index|}}
-        {{combo-box/item
-          index=index
-          selectedRow=selectedRow
-          setHighlight=(action 'setHighlight' bubbles=false)
-          unSetHighlight=(action 'unSetHighlight' bubbles=false)
-          setItem=(action 'setItem' bubbles=false)
-          option=option
-          searchKeys=_searchKeys
-          separator=separator
-          getDisplayName=getDisplayName
-        }}
-      {{else if searchOnly}}
+{{#if finderVisible}}
+  {{#unless isLoading}}
+    {{#if filteredOptions.length}}
+      <div class="combo-box__drop-down">
+        {{#each filteredOptions as |option index|}}
+          {{combo-box/item
+            index=index
+            selectedRow=selectedRow
+            setHighlight=(action 'setHighlight' bubbles=false)
+            unSetHighlight=(action 'unSetHighlight' bubbles=false)
+            setItem=(action 'setItem' bubbles=false)
+            option=option
+            key=key
+          }}
+        {{/each}}
+      </div>
+    {{else if (or emptyText emptyButtonAction)}}
+      <div class="combo-box__drop-down">
         <div class="combo-box__drop-down__row combo-box__drop-down__row--empty">
-          <span class="text-button--spaced">
-            {{or emptyText 'No items found'}}
-          </span>
+          {{#if emptyText}}
+            <span class="text-button--spaced">
+              {{emptyText}}
+            </span>
+          {{/if}}
           {{#if emptyButtonAction}}
             <button class="text-button text-button--spaced" {{action emptyButtonAction bubbles=false}}>
               {{or emptyButtonText 'Click to update'}}
             </button>
           {{/if}}
         </div>
-      {{/each}}
-    {{else}}
+      </div>
+    {{/if}}
+  {{else}}
+    <div class="combo-box__drop-down">
       <div class="combo-box__drop-down__row combo-box__drop-down__row--loading">
         {{loading-icon 'spinner'}}
       </div>
-    {{/unless}}
-  </div>
+    </div>
+  {{/unless}}
 {{/if}}

@@ -1,19 +1,19 @@
 import Controller from '@ember/controller';
-import { set } from '@ember/object';
+import { set, get } from '@ember/object';
 
 export default Controller.extend({
   isUpdating: false,
   newOptions: [],
 
   actions: {
-    setCode(code) {
-      set(this, 'model.code', code);
+    onSelectName(option) {
+      set(this, 'model.name', get(option, 'name'));
     },
-    setName(item) {
-      set(this, 'model.name', item);
-    },
-    setDate(date) {
+    onSelectDate(date) {
       set(this, 'model.date', date);
+    },
+    onSelectRelationship(option) {
+      set(this, 'model.relationship', option);
     },
     updateOptions(value) {
       set(this, 'isUpdating', true);

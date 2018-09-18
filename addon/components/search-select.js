@@ -1,8 +1,8 @@
 import Component from '@ember/component';
-import { set, get, computed } from '@ember/object';
+import { set, get, computed, observer } from '@ember/object';
 import { on } from '@ember/object/evented';
 import $ from 'jquery';
-import layout from '../templates/components/combo-box';
+import layout from '../templates/components/search-select';
 
 // to lower case
 function tlc(string) {
@@ -12,7 +12,7 @@ function tlc(string) {
 export default Component.extend({
   layout,
 
-  classNames: ['combo-box'],
+  classNames: ['search-select'],
   finderVisible: false,
   selectedRow: 0,
   searchTerm: '',
@@ -26,7 +26,6 @@ export default Component.extend({
         $(`#${element}`).has(event.target).length === 0 &&
         !$(`#${element}`).is(event.target)
       ) {
-        if (get(this, 'searchTerm.length')) this.send('setItem');
         set(this, 'finderVisible', false);
       }
     });
@@ -51,35 +50,54 @@ export default Component.extend({
     if (activeValue !== get(this, 'searchTerm')) set(this, 'searchTerm', activeValue);
   },
 
-  filteredOptions: computed('key', 'options', 'searchTerm', function() {
-    const key = get(this, 'key');
+  // we want to automatically clear the input when the input is search only
+  // ie when the input cannot create its own values
+  clearInputOnFocus: observer('finderVisible', function() {
+    if (get(this, 'finderVisible')) set(this, 'searchTerm', '');
+  }),
+
+  _keys: computed('keys', function() {
+    return get(this, 'keys') && get(this, 'keys').split(',').map(item => item.trim());
+  }),
+
+  filteredOptions: computed('_keys', 'options', 'searchTerm', function() {
+    const keys = get(this, '_keys');
     const searchTerm = get(this, 'searchTerm');
     const options = get(this, 'options');
 
     if (searchTerm) {
-      return options.filter(option =>
-        tlc(this.isObject(option) ? get(option, key) : option).indexOf(tlc(searchTerm)) !== -1
-      );
+      return options.filter(option => {
+        if (this.isObject(option)) {
+          return keys.find(key =>
+            tlc(get(option, key)).indexOf(tlc(searchTerm)) !== -1
+          );
+        } else {
+          return tlc(option).indexOf(tlc(searchTerm)) !== -1;
+        }
+      });
     }
     return options;
   }),
 
-  activeDisplayName: computed('value', 'options', function() {
+  activeDisplayName: computed('value', 'options', 'separator', function() {
     const value = get(this, 'value');
-
     if (!value) return '';
     if (!this.isObject(value)) return value;
 
-    const key = get(this, 'key');
+    const keys = get(this, '_keys');
 
     // find the currently selected value from the options
     const selected = get(this, 'options').find(option =>
-      tlc(this.isObject(option) ? get(option, key) : option) === tlc(this.isObject(value) ? get(value, key) : value)
+      keys.every(key =>
+        tlc(get(option, key)) === tlc(this.isObject(value) ? get(value, key) : value)
+      )
     );
 
     if (!selected) return '';
 
-    return get(selected, key);
+    const separator = get(this, 'separator');
+
+    return this.getDisplayName(keys, selected, separator);
   }),
 
   actions: {
@@ -119,20 +137,25 @@ export default Component.extend({
       if (get(this, 'selectedRow') === index) set(this, 'selectedRow', null);
     },
     setItem(index) {
-      // when the index is negative, the new item value is in the searchTerm
-      const item = index >= 0 ? get(this, 'filteredOptions').objectAt(index) : get(this, 'searchTerm');
-      const optionKey = get(this, 'optionKey');
+      const item = get(this, 'filteredOptions').objectAt(index);
 
-      if (this.isObject(item)) {
-        this.sendAction('onSet', optionKey ? get(item, optionKey) : item);
-      } else {
-        this.sendAction('onSet', item);
-      }
-
+      this.sendAction('onSelect', item);
       this.send('setFinderVisible', false);
+    },
+    clearValue() {
+      set(this, 'value', null);
+      set(this, 'finderVisible', false);
     }
   },
   isObject(value) {
     return typeof value === 'object';
+  },
+  getDisplayName(keys, option, separator) {
+    // separator defaults to ' - '
+    // go through each key and build the display name by getting the values at the key
+    return keys.reduce((name, key, i) =>
+      i > 0 ? name += `${separator ? separator : ' - '}${get(option, key)}` :
+        name = get(option, key)
+      , '');
   }
 });

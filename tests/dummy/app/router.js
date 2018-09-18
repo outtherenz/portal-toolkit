@@ -28,6 +28,7 @@ Router.map(function() {
     this.route('untethered-modal-dialog');
     this.route('value-change-indicator');
     this.route('combo-box');
+    this.route('search-select');
   });
 
   this.route('helpers', function() {

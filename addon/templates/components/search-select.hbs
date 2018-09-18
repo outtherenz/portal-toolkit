@@ -1,0 +1,57 @@
+{{#if finderVisible}}
+  <span class="search-select__search-icon">
+    {{fa-icon 'search'}}
+  </span>
+{{/if}}
+{{input
+  class=(or class 'select-box')
+  name=(if finderVisible 'search-select__search-input')
+  type='text'
+  value=searchTerm
+  placeholder=(if finderVisible (or searchPlaceholder 'Type to search…') placeholder)
+  keyDown=(action 'keyDown' bubbles=false)
+  click=(action 'setFinderVisible' true bubbles=false)
+  autocomplete="off"
+}}
+{{#if finderVisible}}
+  <div class="search-select__drop-down">
+    {{#unless isLoading}}
+      {{#if (and activeDisplayName filteredOptions.length)}}
+        <div
+          {{action 'clearValue' bubbles=false}}
+          class="search-select__drop-down__row search-select__drop-down__row--clear"
+        >
+          <b>Clear ({{activeDisplayName}})</b> {{fa-icon 'times'}}
+        </div>
+      {{/if}}
+      {{#each filteredOptions as |option index|}}
+        {{search-select/item
+          index=index
+          selectedRow=selectedRow
+          setHighlight=(action 'setHighlight' bubbles=false)
+          unSetHighlight=(action 'unSetHighlight' bubbles=false)
+          setItem=(action 'setItem' bubbles=false)
+          option=option
+          keys=_keys
+          separator=separator
+          getDisplayName=getDisplayName
+        }}
+      {{else}}
+        <div class="search-select__drop-down__row search-select__drop-down__row--empty">
+          <span class="text-button--spaced">
+            {{or emptyText 'No items found'}}
+          </span>
+          {{#if emptyButtonAction}}
+            <button class="text-button text-button--spaced" {{action emptyButtonAction bubbles=false}}>
+              {{or emptyButtonText 'Click to update'}}
+            </button>
+          {{/if}}
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="search-select__drop-down__row search-select__drop-down__row--loading">
+        {{loading-icon 'spinner'}}
+      </div>
+    {{/unless}}
+  </div>
+{{/if}}
