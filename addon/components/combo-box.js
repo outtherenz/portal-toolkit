@@ -26,7 +26,7 @@ export default Component.extend({
         $(`#${element}`).has(event.target).length === 0 &&
         !$(`#${element}`).is(event.target)
       ) {
-        if (get(this, 'searchTerm.length')) this.send('setItem');
+        this.send('setItem');
         set(this, 'finderVisible', false);
       }
     });
@@ -100,6 +100,11 @@ export default Component.extend({
         // enter
         case 13:
           if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
+          break;
+        // tab
+        case 9:
+          this.send('setItem');
+          this.send('setFinderVisible', false);
           break;
         // escape
         case 27:

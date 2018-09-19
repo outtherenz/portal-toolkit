@@ -119,6 +119,10 @@ export default Component.extend({
         case 13:
           if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
           break;
+        // tab
+        case 9:
+          this.send('setFinderVisible', false);
+          break;
         // escape
         case 27:
           this.send('setFinderVisible', false);
