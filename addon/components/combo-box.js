@@ -126,10 +126,10 @@ export default Component.extend({
     setItem(index) {
       // when the index is negative, the new item value is in the searchTerm
       const item = index >= 0 ? get(this, 'filteredOptions').objectAt(index) : get(this, 'searchTerm');
-      const optionKey = get(this, 'optionKey');
+      const key = get(this, 'key');
 
       if (this.isObject(item)) {
-        this.sendAction('onSet', optionKey ? get(item, optionKey) : item);
+        this.sendAction('onSet', key ? get(item, key) : item);
       } else {
         this.sendAction('onSet', item);
       }
