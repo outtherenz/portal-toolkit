@@ -3,6 +3,7 @@ import { set, get, computed } from '@ember/object';
 import { on } from '@ember/object/evented';
 import $ from 'jquery';
 import layout from '../templates/components/combo-box';
+import { next } from '@ember/runloop';
 
 // to lower case
 function tlc(string) {
@@ -23,10 +24,10 @@ export default Component.extend({
     const element = get(this, 'elementId');
     $(window).on('click', event => {
       if (
+        get(this, 'finderVisible') &&
         $(`#${element}`).has(event.target).length === 0 &&
         !$(`#${element}`).is(event.target)
       ) {
-        this.send('setItem');
         set(this, 'finderVisible', false);
       }
     });
@@ -84,38 +85,41 @@ export default Component.extend({
 
   actions: {
     setFinderVisible(visible) {
-      set(this, 'finderVisible', visible);
+      if (get(this, 'finderVisible') !== visible) set(this, 'finderVisible', visible);
     },
     keyDown(event) {
-      const selectedRow = get(this, 'selectedRow');
-      switch (event.keyCode) {
-        // down arrow
-        case 38:
-          if (selectedRow > 0) set(this, 'selectedRow', selectedRow - 1);
-          break;
-        // up arrow
-        case 40:
-          if (selectedRow + 1 < get(this, 'filteredOptions.length')) set(this, 'selectedRow', selectedRow + 1);
-          break;
-        // enter
-        case 13:
-          if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
-          break;
-        // tab
-        case 9:
-          this.send('setItem');
-          this.send('setFinderVisible', false);
-          break;
-        // escape
-        case 27:
-          this.send('setFinderVisible', false);
-          break;
-        // any other key
-        default:
-          set(this, 'selectedRow', -1);
-          this.send('setFinderVisible', true);
-          break;
-      }
+      next(() => {
+        const selectedRow = get(this, 'selectedRow');
+        switch (event.keyCode) {
+          // down arrow
+          case 38:
+            if (selectedRow > 0) set(this, 'selectedRow', selectedRow - 1);
+            break;
+          // up arrow
+          case 40:
+            if (selectedRow + 1 < get(this, 'filteredOptions.length')) set(this, 'selectedRow', selectedRow + 1);
+            break;
+          // enter
+          case 13:
+            if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
+            break;
+          // tab
+          case 9:
+            this.send('setItem');
+            this.send('setFinderVisible', false);
+            break;
+          // escape
+          case 27:
+            this.send('setFinderVisible', false);
+            break;
+          // any other key
+          default:
+            set(this, 'selectedRow', -1);
+            this.send('setItem', -1);
+            this.send('setFinderVisible', true);
+            break;
+        }
+      });
     },
     setHighlight(index) {
       set(this, 'selectedRow', index);
@@ -130,11 +134,10 @@ export default Component.extend({
 
       if (this.isObject(item)) {
         this.sendAction('onSet', key ? get(item, key) : item);
+        this.send('setFinderVisible', false);
       } else {
         this.sendAction('onSet', item);
       }
-
-      this.send('setFinderVisible', false);
     }
   },
   isObject(value) {

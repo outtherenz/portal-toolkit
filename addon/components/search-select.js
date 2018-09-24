@@ -23,6 +23,7 @@ export default Component.extend({
     const element = get(this, 'elementId');
     $(window).on('click', event => {
       if (
+        get(this, 'finderVisible') &&
         $(`#${element}`).has(event.target).length === 0 &&
         !$(`#${element}`).is(event.target)
       ) {
@@ -102,7 +103,7 @@ export default Component.extend({
 
   actions: {
     setFinderVisible(visible) {
-      set(this, 'finderVisible', visible);
+      if (get(this, 'finderVisible') !== visible) set(this, 'finderVisible', visible);
     },
     keyDown(event) {
       const selectedRow = get(this, 'selectedRow');
