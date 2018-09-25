@@ -1,0 +1,99 @@
+<header class="article-header">
+  <h1><span class="title-category">Components:</span>Search Select</h1>
+</header>
+<section style="width: 300px;">
+  Search select with options array of objects setting a string<br>
+  {{search-select
+    keys='name'
+    options=model.options
+    value=model.name
+    onSelect=(action 'onSelectName')
+  }}
+  Search select with options array of strings setting a string<br>
+  {{search-select
+    options=model.dates
+    value=model.date
+    onSelect=(action 'onSelectDate')
+  }}
+  Search select with an updater and an options array of objects, setting an object<br>
+  {{search-select
+    keys='name,code'
+    options=newOptions
+    value=model.relationship
+    onSelect=(action 'onSelectRelationship')
+    placeholder='Select an option…'
+    emptyButtonText='Click to update options'
+    emptyButtonAction=(action 'updateOptions')
+    isLoading=isUpdating
+  }}
+</section>
+
+<br><br>
+
+{{#page-description title='Search Select'}}
+  Search select with options array of objects setting a string<br>
+  <pre><code>
+    \{{search-select
+      keys='name'
+      options=model.options
+      value=model.name
+      onSelect=(action 'onSelectName')
+    }}
+  </code></pre>
+  Search select with options array of strings setting a string<br>
+  <pre><code>
+    \{{search-select
+      options=model.dates
+      value=model.date
+      onSelect=(action 'onSelectDate')
+    }}
+  </code></pre>
+  Search select with an updater and an options array of objects, setting an object<br>
+  <pre><code>
+    \{{search-select
+      keys='name,code'
+      options=newOptions
+      value=model.relationship
+      onSelect=(action 'onSelectRelationship')
+      placeholder='Select an option…'
+      emptyButtonText='Click to update options'
+      emptyButtonAction=(action 'updateOptions')
+      isLoading=isUpdating
+    }}
+  </code></pre>
+  <p>
+    Props:
+    <ul>
+      <li><b>options</b>: Array (required)</li>
+      <li><b>keys</b>: String (required if you provide an array of objects to options)</li>
+      <li><b>value</b>: Object or attribute (required)</li>
+      <li><b>onSelect</b>: Action (required)</li>
+      <li><b>placeholder</b>: String</li>
+      <li><b>separator</b>: String</li>
+      <li><b>emptyButtonText</b>: String</li>
+      <li><b>emptyButtonAction</b>: Action</li>
+      <li><b>emptyText</b>: String</li>
+      <li><b>isLoading</b>: Boolean</li>
+    </ul>
+    <p>
+      options:<br>
+        The options array for selecting from. Can be an array of strings or an array of objects.<br><br>
+      keys:<br>
+        The searchable keys for the objects in your options array. Required if you provide an array of objects to options.<br><br>
+      separator:<br>
+        When using multiple keys, this defines the visual key separator. Defaults to " - ".<br><br>
+      value:<br>
+        The value you are setting.<br><br>
+      onSelect:<br>
+        The selection action. Passes out the selected option.
+      emptyButtonText:<br>
+        The optional button text which appears when there are no found options.<br><br>
+      emptyButtonAction:<br>
+        The optional button action which appears when there are no found options.<br><br>
+      emptyText:<br>
+        The optional empty text which appears when there are no found options.<br><br>
+      isLoading:<br>
+        The optional boolean that toggles the loading state.<br><br>
+    </p>
+  </p>
+{{/page-description}}
