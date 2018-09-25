@@ -1,9 +1,7 @@
 import Component from '@ember/component';
 import { set, get, computed } from '@ember/object';
-import { on } from '@ember/object/evented';
 import $ from 'jquery';
 import layout from '../templates/components/combo-box';
-import { next } from '@ember/runloop';
 
 // to lower case
 function tlc(string) {
@@ -18,9 +16,10 @@ export default Component.extend({
   selectedRow: 0,
   searchTerm: '',
 
-  // capture click events and check if they are for our component
-  // if they are not, we can close the drop down
-  initOutsideClickEventObserver: on('didInsertElement', function() {
+  // Things that need to happen once, when the element is created
+  didInsertElement() {
+    // capture click events and check if they are for our component
+    // if they are not, we can close the drop down
     const element = get(this, 'elementId');
     $(window).on('click', event => {
       if (
@@ -31,25 +30,27 @@ export default Component.extend({
         set(this, 'finderVisible', false);
       }
     });
-  }),
 
-  // remove our listener
-  willDestroyElement() {
-    $(window).off('click');
-  },
-
-  didInsertElement() {
     // we need to set the value on the initial render
     const activeValue = get(this, 'activeDisplayName');
     set(this, 'searchTerm', activeValue);
   },
-  didRender() {
-    // for following renders we only want to set the value when the search is not being used and the value has changed
-    const finderVisible = get(this, 'finderVisible');
-    if (finderVisible) return;
 
+  // Things that need to happen once, when the element is destroyed
+  willDestroyElement() {
+    // remove our listener
+    $(window).off('click');
+  },
+
+  // Things that need to happen every time the element is re-rendered
+  willRender() {
+    // We only want to set the value when the search is not being used and the value has changed
+    const finderNotVisible = !get(this, 'finderVisible');
     const activeValue = get(this, 'activeDisplayName');
-    if (activeValue !== get(this, 'searchTerm')) set(this, 'searchTerm', activeValue);
+    const searchTerm = get(this, 'searchTerm');
+    if (finderNotVisible && activeValue !== searchTerm) {
+      set(this, 'searchTerm', activeValue);
+    }
   },
 
   filteredOptions: computed('key', 'options', 'searchTerm', function() {
@@ -58,89 +59,86 @@ export default Component.extend({
     const options = get(this, 'options');
 
     if (searchTerm) {
-      return options.filter(option =>
-        tlc(this.isObject(option) ? get(option, key) : option).indexOf(tlc(searchTerm)) !== -1
-      );
+      return options.filter(option => {
+        const searchableValue = typeof option === 'object' ? get(option, key) : option;
+        return tlc(searchableValue).includes(tlc(searchTerm));
+      });
+    } else {
+      return options;
     }
-    return options;
   }),
 
   activeDisplayName: computed('value', 'options', function() {
     const value = get(this, 'value');
-
-    if (!value) return '';
-    if (!this.isObject(value)) return value;
-
     const key = get(this, 'key');
 
-    // find the currently selected value from the options
-    const selected = get(this, 'options').find(option =>
-      tlc(this.isObject(option) ? get(option, key) : option) === tlc(this.isObject(value) ? get(value, key) : value)
-    );
-
-    if (!selected) return '';
-
-    return get(selected, key);
+    if (typeof value !== 'object') {
+      // Verbatim if value is not an object
+      return value;
+    } else if (key && value) {
+      // value[key] if both key and value are truthy
+      return get(value, key);
+    } else {
+      // Empty string if nothing else matches
+      return '';
+    }
   }),
 
   actions: {
     setFinderVisible(visible) {
       if (get(this, 'finderVisible') !== visible) set(this, 'finderVisible', visible);
     },
+
     keyDown(event) {
-      next(() => {
-        const selectedRow = get(this, 'selectedRow');
-        switch (event.keyCode) {
-          // down arrow
-          case 38:
-            if (selectedRow > 0) set(this, 'selectedRow', selectedRow - 1);
-            break;
-          // up arrow
-          case 40:
-            if (selectedRow + 1 < get(this, 'filteredOptions.length')) set(this, 'selectedRow', selectedRow + 1);
-            break;
-          // enter
-          case 13:
-            if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
-            break;
-          // tab
-          case 9:
-            this.send('setItem');
-            this.send('setFinderVisible', false);
-            break;
-          // escape
-          case 27:
-            this.send('setFinderVisible', false);
-            break;
-          // any other key
-          default:
-            set(this, 'selectedRow', -1);
-            this.send('setItem', -1);
-            this.send('setFinderVisible', true);
-            break;
-        }
-      });
+      const selectedRow = get(this, 'selectedRow');
+      switch (event.keyCode) {
+        // down arrow
+        case 38:
+          this.send('setFinderVisible', true);
+          if (selectedRow > 0) set(this, 'selectedRow', selectedRow - 1);
+          break;
+        // up arrow
+        case 40:
+          this.send('setFinderVisible', true);
+          if (selectedRow + 1 < get(this, 'filteredOptions.length')) set(this, 'selectedRow', selectedRow + 1);
+          break;
+        // enter
+        case 13:
+          if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
+          break;
+        // tab
+        case 9:
+          this.send('setItem');
+          this.send('setFinderVisible', false);
+          break;
+        // escape
+        case 27:
+          this.send('setFinderVisible', false);
+          break;
+        // any other key
+        default:
+          set(this, 'selectedRow', -1);
+          this.send('setItem', -1);
+          this.send('setFinderVisible', true);
+          break;
+      }
     },
-    setHighlight(index) {
-      set(this, 'selectedRow', index);
-    },
+
     unSetHighlight(index) {
       if (get(this, 'selectedRow') === index) set(this, 'selectedRow', null);
     },
+
     setItem(index) {
       // when the index is negative, the new item value is in the searchTerm
       const item = index >= 0 ? get(this, 'filteredOptions').objectAt(index) : get(this, 'searchTerm');
       const key = get(this, 'key');
 
-      if (this.isObject(item)) {
+      if (typeof item === 'object') {
         this.sendAction('onSet', key ? get(item, key) : item);
-        this.send('setFinderVisible', false);
       } else {
         this.sendAction('onSet', item);
       }
+      this.send('setFinderVisible', false);
     }
-  },
-  isObject(value) {
-    return typeof value === 'object';
   }
 });
