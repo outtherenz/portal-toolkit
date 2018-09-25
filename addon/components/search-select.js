@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { set, get, computed, observer } from '@ember/object';
-import { on } from '@ember/object/evented';
 import $ from 'jquery';
 import layout from '../templates/components/search-select';
 
@@ -16,10 +15,12 @@ export default Component.extend({
   finderVisible: false,
   selectedRow: 0,
   searchTerm: '',
+  separator: ' - ',
 
-  // capture click events and check if they are for our component
-  // if they are not, we can close the drop down
-  initOutsideClickEventObserver: on('didInsertElement', function() {
+  // Things that need to happen once, when the element is created
+  didInsertElement() {
+    // capture click events and check if they are for our component
+    // if they are not, we can close the drop down
     const element = get(this, 'elementId');
     $(window).on('click', event => {
       if (
@@ -30,25 +31,27 @@ export default Component.extend({
         set(this, 'finderVisible', false);
       }
     });
-  }),
 
-  // remove our listener
-  willDestroyElement() {
-    $(window).off('click');
-  },
-
-  didInsertElement() {
     // we need to set the value on the initial render
     const activeValue = get(this, 'activeDisplayName');
     set(this, 'searchTerm', activeValue);
   },
+
+  // Things that need to happen once, when the element is destroyed
+  willDestroyElement() {
+    // remove our listener
+    $(window).off('click');
+  },
+
+  // Things that need to happen every time the element is re-rendered
   didRender() {
     // for following renders we only want to set the value when the search is not being used and the value has changed
-    const finderVisible = get(this, 'finderVisible');
-    if (finderVisible) return;
-
+    const finderNotVisible = !get(this, 'finderVisible');
     const activeValue = get(this, 'activeDisplayName');
-    if (activeValue !== get(this, 'searchTerm')) set(this, 'searchTerm', activeValue);
+    const searchTerm = get(this, 'searchTerm');
+    if (finderNotVisible && activeValue !== searchTerm) {
+      set(this, 'searchTerm', activeValue);
+    }
   },
 
   // we want to automatically clear the input when the input is search only
@@ -68,12 +71,12 @@ export default Component.extend({
 
     if (searchTerm) {
       return options.filter(option => {
-        if (this.isObject(option)) {
+        if (typeof option === 'object') {
           return keys.find(key =>
-            tlc(get(option, key)).indexOf(tlc(searchTerm)) !== -1
+            tlc(get(option, key)).includes(tlc(searchTerm))
           );
         } else {
-          return tlc(option).indexOf(tlc(searchTerm)) !== -1;
+          return tlc(option).includes(tlc(searchTerm));
         }
       });
     }
@@ -82,38 +85,34 @@ export default Component.extend({
 
   activeDisplayName: computed('value', 'options', 'separator', function() {
     const value = get(this, 'value');
-    if (!value) return '';
-    if (!this.isObject(value)) return value;
-
     const keys = get(this, '_keys');
 
-    // find the currently selected value from the options
-    const selected = get(this, 'options').find(option =>
-      keys.every(key =>
-        tlc(get(option, key)) === tlc(this.isObject(value) ? get(value, key) : value)
-      )
-    );
-
-    if (!selected) return '';
-
-    const separator = get(this, 'separator');
-
-    return this.getDisplayName(keys, selected, separator);
+    if (typeof value !== 'object') {
+      return value;
+    } else if (keys && get(keys, 'length') && value) {
+      const separator = get(this, 'separator');
+      return this.getDisplayName(keys, value, separator);
+    } else {
+      return '';
+    }
   }),
 
   actions: {
     setFinderVisible(visible) {
       if (get(this, 'finderVisible') !== visible) set(this, 'finderVisible', visible);
     },
+
     keyDown(event) {
       const selectedRow = get(this, 'selectedRow');
       switch (event.keyCode) {
         // down arrow
         case 38:
+          this.send('setFinderVisible', false);
           if (selectedRow > 0) set(this, 'selectedRow', selectedRow - 1);
           break;
         // up arrow
         case 40:
+          this.send('setFinderVisible', false);
           if (selectedRow + 1 < get(this, 'filteredOptions.length')) set(this, 'selectedRow', selectedRow + 1);
           break;
         // enter
@@ -135,32 +134,27 @@ export default Component.extend({
           break;
       }
     },
-    setHighlight(index) {
-      set(this, 'selectedRow', index);
-    },
+
     unSetHighlight(index) {
       if (get(this, 'selectedRow') === index) set(this, 'selectedRow', null);
     },
+
     setItem(index) {
       const item = get(this, 'filteredOptions').objectAt(index);
 
       this.sendAction('onSelect', item);
       this.send('setFinderVisible', false);
     },
+
     clearValue() {
       set(this, 'value', null);
       set(this, 'finderVisible', false);
     }
   },
-  isObject(value) {
-    return typeof value === 'object';
-  },
+
   getDisplayName(keys, option, separator) {
     // separator defaults to ' - '
     // go through each key and build the display name by getting the values at the key
-    return keys.reduce((name, key, i) =>
-      i > 0 ? name += `${separator ? separator : ' - '}${get(option, key)}` :
-        name = get(option, key)
-      , '');
+    return keys.map(key => get(option, key)).join(separator);
   }
 });
