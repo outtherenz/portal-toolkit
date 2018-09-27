@@ -91,40 +91,38 @@ export default Component.extend({
     },
 
     keyDown(event) {
-      next(() => {
-        const selectedRow = get(this, 'selectedRow');
-        switch (event.keyCode) {
-          // down arrow
-          case 38:
-            this.send('setFinderVisible', true);
-            if (selectedRow > 0) set(this, 'selectedRow', selectedRow - 1);
-            break;
-          // up arrow
-          case 40:
-            this.send('setFinderVisible', true);
-            if (selectedRow + 1 < get(this, 'filteredOptions.length')) set(this, 'selectedRow', selectedRow + 1);
-            break;
-          // enter
-          case 13:
-            if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
-            break;
-          // tab
-          case 9:
-            this.send('setItem');
-            this.send('setFinderVisible', false);
-            break;
-          // escape
-          case 27:
-            this.send('setFinderVisible', false);
-            break;
-          // any other key
-          default:
-            set(this, 'selectedRow', -1);
-            this.send('setItem', -1);
-            this.send('setFinderVisible', true);
-            break;
-        }
-      });
+      const selectedRow = get(this, 'selectedRow');
+      switch (event.keyCode) {
+        // down arrow
+        case 38:
+          this.send('setFinderVisible', true);
+          if (selectedRow > 0) set(this, 'selectedRow', selectedRow - 1);
+          break;
+        // up arrow
+        case 40:
+          this.send('setFinderVisible', true);
+          if (selectedRow + 1 < get(this, 'filteredOptions.length')) set(this, 'selectedRow', selectedRow + 1);
+          break;
+        // enter
+        case 13:
+          if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
+          break;
+        // tab
+        case 9:
+          this.send('setItem');
+          this.send('setFinderVisible', false);
+          break;
+        // escape
+        case 27:
+          this.send('setFinderVisible', false);
+          break;
+        // any other key
+        default:
+          set(this, 'selectedRow', -1);
+          this.send('setItem', -1);
+          this.send('setFinderVisible', true);
+          break;
+      }
     },
 
     unSetHighlight(index) {
@@ -132,16 +130,18 @@ export default Component.extend({
     },
 
     setItem(index) {
-      // when the index is negative, the new item value is in the searchTerm
-      const item = index >= 0 ? get(this, 'filteredOptions').objectAt(index) : get(this, 'searchTerm');
-      const key = get(this, 'key');
+      next(() => {
+        // when the index is negative, the new item value is in the searchTerm
+        const item = index >= 0 ? get(this, 'filteredOptions').objectAt(index) : get(this, 'searchTerm');
+        const key = get(this, 'key');
 
-      if (typeof item === 'object') {
-        this.sendAction('onSet', key ? get(item, key) : item);
-      } else {
-        this.sendAction('onSet', item);
-      }
-      this.send('setFinderVisible', false);
+        if (typeof item === 'object') {
+          this.sendAction('onSet', key ? get(item, key) : item);
+        } else {
+          this.sendAction('onSet', item);
+        }
+        this.send('setFinderVisible', false);
+      });
     }
   }
 });

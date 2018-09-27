@@ -1,6 +1,7 @@
 import { moduleForComponent, test, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { get, set } from '@ember/object';
+import { next } from '@ember/runloop';
 
 moduleForComponent('combo-box', 'Integration | Component | combo box', {
   integration: true,
@@ -259,11 +260,13 @@ test('it sets a value when an option is selected', function(assert) {
   this.$('.combo-box input').trigger('keydown');
   this.$('[data-test-combo-box-option="0"]').click();
 
-  assert.equal(
-    get(this, 'option'),
-    'Apple',
-    'Selection has been set'
-  );
+  next(() => {
+    assert.equal(
+      get(this, 'option'),
+      'Apple',
+      'Selection has been set'
+    );
+  });
 });
 
 skip('it sets a value when a input is entered', function(assert) {
