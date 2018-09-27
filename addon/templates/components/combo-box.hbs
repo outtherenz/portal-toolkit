@@ -10,9 +10,9 @@
 }}
 
 {{#if finderVisible}}
-  <div class="combo-box__drop-down">
-    {{#unless isLoading}}
-      {{#if filteredOptions.length}}
+  {{#unless isLoading}}
+    {{#if filteredOptions.length}}
+      <div class="combo-box__drop-down">
         {{#each filteredOptions as |option index|}}
           <div
             class="combo-box__drop-down__row {{if (eq index selectedRow) "combo-box__drop-down__row--selected"}}"
@@ -24,7 +24,9 @@
             {{or (get option key) option}}
           </div>
         {{/each}}
-      {{else if (or emptyText emptyButtonAction)}}
+      </div>
+    {{else if (or emptyText emptyButtonAction)}}
+      <div class="combo-box__drop-down">
         <div class="combo-box__drop-down__row combo-box__drop-down__row--empty">
           {{#if emptyText}}
             <span class="text-button--spaced">
@@ -38,11 +40,13 @@
             </button>
           {{/if}}
         </div>
-      {{/if}}
-    {{else}}
+      </div>
+    {{/if}}
+  {{else}}
+    <div class="combo-box__drop-down">
       <div class="combo-box__drop-down__row combo-box__drop-down__row--loading">
         {{loading-icon 'spinner'}}
       </div>
-    {{/unless}}
-  </div>
+    </div>
+  {{/unless}}
 {{/if}}
