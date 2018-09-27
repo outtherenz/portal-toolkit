@@ -107,12 +107,12 @@ export default Component.extend({
       switch (event.keyCode) {
         // down arrow
         case 38:
-          this.send('setFinderVisible', false);
+          this.send('setFinderVisible', true);
           if (selectedRow > 0) set(this, 'selectedRow', selectedRow - 1);
           break;
         // up arrow
         case 40:
-          this.send('setFinderVisible', false);
+          this.send('setFinderVisible', true);
           if (selectedRow + 1 < get(this, 'filteredOptions.length')) set(this, 'selectedRow', selectedRow + 1);
           break;
         // enter
