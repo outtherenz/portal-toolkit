@@ -155,6 +155,7 @@ export default Component.extend({
   getDisplayName(keys, option, separator) {
     // separator defaults to ' - '
     // go through each key and build the display name by getting the values at the key
-    return keys.map(key => get(option, key)).join(separator);
+    const names = keys.map(key => get(option, key)).filter(Boolean);
+    return names.join(separator);
   }
 });
