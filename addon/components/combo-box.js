@@ -140,7 +140,7 @@ export default Component.extend({
         } else {
           this.sendAction('onSet', item);
         }
-        this.send('setFinderVisible', false);
+        if (index >= 0) this.send('setFinderVisible', false);
       });
     }
   }
