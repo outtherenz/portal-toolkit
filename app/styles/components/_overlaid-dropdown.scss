@@ -33,6 +33,9 @@
   &:hover {
     background-color: $secondary;
     color: white;
+
+    // This seems to work to get the loading spinner to be white on hover
+    * { stroke: white; }
   }
 }
 

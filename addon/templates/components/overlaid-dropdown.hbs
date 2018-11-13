@@ -1,10 +1,12 @@
-<button
-  class="overlaid-dropdown__button {{buttonClasses}}"
-  {{action 'onButtonClick'}}
-  onblur={{action set 'focused' false}}
->
+{{!-- The loading button component is being used so that it can pass through the disabled property --}}
+{{#loading-button
+  class=(concat 'overlaid-dropdown__button ' buttonClasses)
+  action=(action 'onButtonClick')
+  focusOut=(action set 'focused' false)
+  disabled=disabled
+}}
   {{if buttonText buttonText 'Expand'}}
-</button>
+{{/loading-button}}
 
 {{!-- Hide dropdown body instead of destroying it so that click actions can be carried out --}}
 {{!-- Defaults to align left, only other option is align='right' --}}
