@@ -46,3 +46,13 @@ body.page {
     overflow: visible;
   }
 }
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.no-wrap--ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
