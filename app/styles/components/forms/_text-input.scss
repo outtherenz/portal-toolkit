@@ -15,6 +15,11 @@
   &:hover {
     background-color: $off-white;
   }
+
+  &:disabled {
+    background-color: tint(black, 95%);
+    color: tint(black, 45%);
+  }
 }
 
 .text-input--fix-right-margin-bug {
