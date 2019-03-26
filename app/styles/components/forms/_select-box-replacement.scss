@@ -20,6 +20,17 @@
   }
 }
 
+.select-box-replacement--date-input {
+  color: $copy-color;
+  font-size: inherit;
+  font-family: $copy-font;
+  &::-webkit-clear-button,
+  &::-webkit-inner-spin-button,
+  &::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+}
+
 .select-box-replacement__select-box {
   opacity: 0;
   position: absolute;
