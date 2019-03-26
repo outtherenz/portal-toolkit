@@ -106,6 +106,7 @@ export default Component.extend({
         // enter
         case 13:
           if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
+          event.preventDefault();
           break;
         // tab
         case 9:
