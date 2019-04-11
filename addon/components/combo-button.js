@@ -16,6 +16,7 @@ export default Component.extend({
   actions: {
     onButtonClick() {
       set(this, 'focused', false);
+      this.sendAction('action');
     },
     /*
      * Makes sure that the dropdown doesn't disappear if user clicks inside the dropdown.
