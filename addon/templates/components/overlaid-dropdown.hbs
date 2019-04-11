@@ -5,7 +5,10 @@
   focusOut=(action set 'focused' false)
   disabled=disabled
 }}
-  {{if buttonText buttonText 'Expand'}}
+  {{if buttonText buttonText}}
+  {{#if buttonIcon}}
+    {{fa-icon icon=buttonIcon}}
+  {{/if}}
 {{/loading-button}}
 
 {{!-- Hide dropdown body instead of destroying it so that click actions can be carried out --}}
