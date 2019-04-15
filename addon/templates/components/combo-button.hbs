@@ -1,18 +1,19 @@
-<div class="combo-button__inside-container" tabindex="0">
+<div class="combo-button__container" tabindex="0">
   <div class="combo-button__button-container">
     {{loading-button
       isLoading=isLoading
-      class='combo-button__button-main'
+      class=(concat 'combo-button__button-main ' (if buttonClass buttonClass ''))
       action=(action 'onButtonClick')
       buttonText=buttonText
     }}
 
-    <div
-      class="combo-button__button-side"
+    <button
+      class="combo-button__button-side {{if buttonClass buttonClass ''}}"
+      disabled={{isLoading}}
       {{action toggleProperty 'focused'}}
     >
       {{fa-icon (if showDropdown 'caret-down' 'caret-right') fixedWidth=true}}
-    </div>
+    </button>
   </div>
 
   {{#if hasBlock}}

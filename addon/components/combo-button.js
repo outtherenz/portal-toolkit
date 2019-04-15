@@ -6,7 +6,6 @@ import { next } from '@ember/runloop';
 
 export default Component.extend({
   layout,
-  classNames: ['combo-button__outside-container'],
   showDropdown: or('holdFocus', 'focused'),
 
   focusOut() {
