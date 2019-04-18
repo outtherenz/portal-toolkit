@@ -1,13 +1,23 @@
-<div class="select-box-replacement select-box-replacement--stretched date-input__display" {{action (toggle 'isActive' this)}}>
-  {{if date (moment-format date format) placeholder}}
-</div>
-
 {{#if isActive}}
-  <div class="date-input__overlay" {{action (toggle 'isActive' this)}}></div>
+  {{input
+    value=(moment-format date 'YYYY-MM-DD')
+    class='select-box-replacement select-box-replacement--stretched date-input__display select-box-replacement--date-input'
+    key-up=(action 'handleDateInput')
+    type='date'
+  }}
 
   {{date-picker
     date=date
     select=(action 'selectAndDeactivate')
     class="date-input__picker date-picker--stretched"
   }}
+{{else}}
+  <div
+    class="select-box-replacement select-box-replacement--stretched date-input__display"
+    onfocus={{action (toggle 'isActive' this)}}
+    tabindex="0"
+    {{action (toggle 'isActive' this)}}
+  >
+    {{if date (moment-format date format) placeholder}}
+  </div>
 {{/if}}

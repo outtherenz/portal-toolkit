@@ -1,12 +1,12 @@
 <header class="date-picker__header">
-  <button class="text-button date-picker__month-switch-button" {{action 'changeMonth' -1}}>◀</button>
+  <button class="text-button date-picker__month-switch-button" {{action 'changeMonth' -1}} tabindex="-1">◀</button>
 
   <div class="date-picker__selected-date" {{action showSelection}}>
     {{moment-format (inc calendarState.month) 'MMMM' 'M'}}
     {{calendarState.year}}
   </div>
 
-  <button class="text-button date-picker__month-switch-button" {{action 'changeMonth' 1}}>▶</button>
+  <button class="text-button date-picker__month-switch-button" {{action 'changeMonth' 1}} tabindex="-1">▶</button>
 </header>
 
 {{! avoiding hardcoding in case it matters for localisation }}
