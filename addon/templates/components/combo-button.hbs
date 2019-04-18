@@ -2,17 +2,17 @@
   <div class="combo-button__button-container">
     {{loading-button
       isLoading=isLoading
-      class=(concat 'combo-button__button-main ' (if buttonClass buttonClass ''))
+      class=(concat 'combo-button__button-main ' (if buttonClass buttonClass))
       action=(action 'onButtonClick')
       buttonText=buttonText
     }}
 
     <button
-      class="combo-button__button-side {{if buttonClass buttonClass ''}}"
+      class="combo-button__button-side {{if buttonClass buttonClass}}"
       disabled={{isLoading}}
       {{action toggleProperty 'focused'}}
     >
-      {{fa-icon (if showDropdown 'caret-down' 'caret-right') fixedWidth=true}}
+      {{fa-icon 'caret-down'}}
     </button>
   </div>
 

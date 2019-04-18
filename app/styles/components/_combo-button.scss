@@ -14,6 +14,7 @@ $combo-button-height: 26px;
 
 .combo-button__button-main {
   @extend .button;
+  padding-right: 0.4em;
   height: $combo-button-height;
   outline: 0;
   border-top-right-radius: 0;
@@ -24,7 +25,8 @@ $combo-button-height: 26px;
   @extend .button;
   height: $combo-button-height;
   outline: 0;
-  padding: 0.4em 0.4em;
+  padding: 0.4em;
+  padding-right: 0.8em;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
