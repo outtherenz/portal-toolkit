@@ -1,0 +1,36 @@
+<div class="combo-button__container" tabindex="0">
+  <div class="combo-button__button-container">
+    {{loading-button
+      isLoading=isLoading
+      class=(concat 'combo-button__button-main ' (if buttonClass buttonClass))
+      action=(action 'onButtonClick')
+      buttonText=buttonText
+    }}
+
+    <button
+      class="combo-button__button-side {{if buttonClass buttonClass}}"
+      disabled={{isLoading}}
+      {{action toggleProperty 'focused'}}
+    >
+      {{fa-icon 'caret-down'}}
+    </button>
+  </div>
+
+  {{#if hasBlock}}
+    {{#if showDropdown}}
+      <div
+        class="combo-button__overlaid-dropdown-container"
+        onmousedown={{action 'holdFocus'}}
+        ontouchstart={{action 'holdFocus'}}
+      >
+        {{#if title}}
+          <div class="combo-button__overlaid-dropdown-title">{{title}}</div>
+        {{/if}}
+
+        {{yield}}
+      </div>
+    {{/if}}
+  {{else}}
+    You provided no options! Use a regular button.
+  {{/if}}
+</div>

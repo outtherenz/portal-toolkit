@@ -1,0 +1,57 @@
+$combo-button-height: 26px;
+
+.combo-button__container {
+  display: inline-flex;
+  flex-direction: column;
+  outline: 0;
+  height: $combo-button-height;
+  position: relative;
+}
+
+.combo-button__button-container {
+  display: flex;
+}
+
+.combo-button__button-main {
+  @extend .button;
+  padding-right: 0.4em;
+  height: $combo-button-height;
+  outline: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.combo-button__button-side {
+  @extend .button;
+  height: $combo-button-height;
+  outline: 0;
+  padding: 0.4em;
+  padding-right: 0.8em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.combo-button__overlaid-dropdown-container {
+  position: absolute;
+  top: $combo-button-height + 5px;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(black, 0.1);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  border: 1px solid $border-color;
+}
+
+.combo-button__overlaid-dropdown-title {
+  border-bottom: 1px solid $border-color;
+  padding: 0.5em 12px;
+  font-weight: bold;
+  font-size: 85%;
+  text-transform: uppercase;
+  color: tint($copy-color, 20%);
+  background-color: $off-white;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}

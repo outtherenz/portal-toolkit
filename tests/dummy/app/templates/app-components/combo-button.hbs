@@ -1,0 +1,31 @@
+<header class="article-header">
+  <h1><span class="title-category">Components:</span> Combo Button</h1>
+</header>
+
+<p>
+  Usage:
+  <pre><code>
+    \{{#combo-button
+      buttonText='Combo Button'
+      title='Section Title'
+      action=(action 'primaryAction')
+    }}
+      &lt;div class="overlaid-dropdown__option" \{{action 'secondaryAction'}}>Click me and I'll alert&lt;/div>
+      &lt;button>I'm a plain button element&lt;/button>
+      &lt;div>I'm a div element&lt;/div>
+    \{{/combo-button}}
+  </code></pre>
+</p>
+
+<p>
+  Example:
+  {{#combo-button
+    buttonText='Combo Button'
+    title='Section Title'
+    action=(action 'primaryAction')
+  }}
+    <div class="overlaid-dropdown__option" {{action 'secondaryAction'}}>Click me and I'll alert</div>
+    <button>I'm a plain button element</button>
+    <div>I'm a div element</div>
+  {{/combo-button}}
+</p>
