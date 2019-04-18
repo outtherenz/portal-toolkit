@@ -1,6 +1,8 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
+import moment from 'moment';
+import pickDate from '../../helpers/pick-date';
 
 moduleForComponent('date-input', 'Integration | Component | date input', {
   integration: true
@@ -20,6 +22,17 @@ test('clicking the input toggles the picker', function(assert) {
   assert.equal(this.$('.date-input__picker').length, 1, 'Picker has been rendered');
 
   this.$('.outside-div').click();
+  return wait().then(() => assert.equal(this.$('.date-input__picker').length, 0, 'Picker has been hidden'));
+});
+
+test('pickDate helper works', function(assert) {
+  this.set('date', new Date('2019-01-01'));
+  this.render(hbs`{{date-input date=date select=(action (mut date))}}`);
+
+  pickDate(this.$, new Date('2020-02-02'));
+
+  assert.equal(moment(this.get('date')).format('YYYY-MM-DD'), '2020-02-02', 'Date has been set');
+
   return wait().then(() => assert.equal(this.$('.date-input__picker').length, 0, 'Picker has been hidden'));
 });
 
