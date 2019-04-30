@@ -13,8 +13,6 @@ moduleForComponent('charts', 'Integration | Component | charts', {
   },
 
   beforeEach() {
-    startMirage();
-
     const metrics = fakeReporter('balances')(server.schema, {
       queryParams: {
         branches: [ '1' ],

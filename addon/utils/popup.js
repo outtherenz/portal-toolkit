@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { run } from '@ember/runloop';
-import qs from 'npm:qs';
+import qs from 'qs';
 
 /**
  * This is a wrapper on window.open()

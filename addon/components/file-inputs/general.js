@@ -1,3 +1,3 @@
-import EmberUploader from 'ember-uploader';
+import FileField from 'ember-uploader/components/file-field';
 
-export default EmberUploader.FileField.extend();
+export default FileField.extend();

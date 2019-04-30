@@ -1,9 +1,9 @@
 import { isEmpty } from '@ember/utils';
 import { set, get } from '@ember/object';
 import Ember from 'ember';
-import EmberUploader from 'ember-uploader';
+import FileField from 'ember-uploader/components/file-field';
 
-export default EmberUploader.FileField.extend({
+export default FileField.extend({
   attributeBindings: [ 'accept' ],
 
   change(event) {

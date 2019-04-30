@@ -2,10 +2,10 @@ import { isEmpty } from '@ember/utils';
 import { set, get } from '@ember/object';
 import { run } from '@ember/runloop';
 import Ember from 'ember';
-import EmberUploader from 'ember-uploader';
+import FileField from 'ember-uploader/components/file-field';
 /* global Papa */
 
-export default EmberUploader.FileField.extend({
+export default FileField.extend({
   attributeBindings: [ 'accept' ],
 
   change(event) {
