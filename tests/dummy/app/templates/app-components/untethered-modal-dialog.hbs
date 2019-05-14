@@ -1,18 +1,151 @@
 <header class="article-header">
-  <h1><span class="title-category">Component:</span> Untethered Modal Dialog</h1>
+  <h1><span class="title-category">Component:</span> Modal Dialog</h1>
 </header>
-{{#if testing}}
-  <div class="example">
-    {{#untethered-modal-dialog translucentOverlay=true close='toggleIsConfirmingDelete'}}
-    <br>
-      <p>Are you sure you want to test untethered-modal-dialog? This action cannot be undone.</p>
-      <button class="pull-right delete" {{action 'test'}}>Test</button>
-      <button class="pull-right plain" {{action 'toggleIsConfirmingTest'}}>Cancel</button>
-    {{/untethered-modal-dialog}}
-  </div>
-{{else}}
-  <button class="plain" {{action 'toggleIsConfirmingTest'}}>Test</button>
+
+<code>
+  <pre>
+    \{{#if isTestingRegularModal}}
+      \{{#modal-dialog
+        translucentOverlay=true
+        containerClass='block-module'
+        onClose=(action toggleProperty 'isTestingRegularModal')
+      }}
+        &lt;header class="block-module__header">
+          &lt;h1 class='h1'>Regular Modal&lt;/h1>
+        &lt;/header>
+        &lt;p>
+          Are you sure you want to test modal-dialog? This action cannot be undone.
+        &lt;/p>
+        &lt;footer class="block-module__footer">
+          &lt;button
+            class="button button--spaced pull-right"
+            \{{action toggleProperty 'isTestingRegularModal'}}
+          >
+            Okay
+          &lt;/button>
+          &lt;button
+            class="button button--plain button--spaced pull-right"
+            \{{action toggleProperty 'isTestingRegularModal'}}
+          >
+            Cancel
+          &lt;/button>
+        &lt;/footer>
+      \{{/modal-dialog}}
+    \{{/if}}
+  </pre>
+</code>
+<br />
+<br />
+<button
+  class="button button--spaced"
+  {{action toggleProperty 'isTestingRegularModal'}}
+>
+  Test Regular Modal
+</button>
+<br />
+<br />
+<br />
+<code>
+  <pre>
+    \{{#if isTestingScrollableModal}}
+      \{{#modal-dialog
+        translucentOverlay=true
+        containerClass='block-module ember-modal-dialog__scrollable'
+        onClose=(action toggleProperty 'isTestingScrollableModal')
+      }}
+        &lt;header class="block-module__header">
+          &lt;h1 class='h1'>Scrolling Modal&lt;/h1>
+        &lt;/header>
+        &lt;section class="ember-modal-dialog__scrollable-window">
+          &lt;div class="ember-modal-dialog__scrollable-content">
+            &lt;div style='height: 1000px; background-color: pink;'>Are you sure you want to test modal-dialog?&lt;/div>
+            &lt;div style='height: 1000px; background-color: aqua;'>This action cannot be undone.&lt;/div>
+          &lt;/div>
+        &lt;/section>
+        &lt;footer class="block-module__footer">
+          &lt;button
+            class="button button--spaced pull-right"
+            \{{action toggleProperty 'isTestingScrollableModal'}}
+          >
+            Okay
+          &lt;/button>
+          &lt;button
+            class="button button--plain button--spaced pull-right"
+            \{{action toggleProperty 'isTestingScrollableModal'}}
+          >
+            Cancel
+          &lt;/button>
+        &lt;/footer>
+      \{{/modal-dialog}}
+    \{{/if}}
+  </pre>
+</code>
+<br />
+<br />
+<button
+  class="button button--spaced"
+  {{action toggleProperty 'isTestingScrollableModal'}}
+>
+  Test Scrolling Modal
+</button>
+
+{{#if isTestingRegularModal}}
+  {{#modal-dialog
+    translucentOverlay=true
+    containerClass='block-module'
+    onClose=(action toggleProperty 'isTestingRegularModal')
+  }}
+    <header class="block-module__header">
+      <h1 class='h1'>Regular Modal</h1>
+    </header>
+    <p>
+      Are you sure you want to test modal-dialog? This action cannot be undone.
+    </p>
+    <footer class="block-module__footer">
+      <button
+        class="button button--spaced pull-right"
+        {{action toggleProperty 'isTestingRegularModal'}}
+      >
+        Okay
+      </button>
+      <button
+        class="button button--plain button--spaced pull-right"
+        {{action toggleProperty 'isTestingRegularModal'}}
+      >
+        Cancel
+      </button>
+    </footer>
+  {{/modal-dialog}}
 {{/if}}
-{{#if works}}
-  <h1>IT WORKS!!</h1>
+
+{{#if isTestingScrollableModal}}
+  {{#modal-dialog
+    translucentOverlay=true
+    containerClass='block-module ember-modal-dialog__scrollable'
+    onClose=(action toggleProperty 'isTestingScrollableModal')
+  }}
+    <header class="block-module__header">
+      <h1 class='h1'>Scrolling Modal</h1>
+    </header>
+    <section class="ember-modal-dialog__scrollable-window">
+      <div class="ember-modal-dialog__scrollable-content">
+        <div style='height: 1000px; background-color: pink;'>Are you sure you want to test modal-dialog?</div>
+        <div style='height: 1000px; background-color: aqua;'>This action cannot be undone.</div>
+      </div>
+    </section>
+    <footer class="block-module__footer">
+      <button
+        class="button button--spaced pull-right"
+        {{action toggleProperty 'isTestingScrollableModal'}}
+      >
+        Okay
+      </button>
+      <button
+        class="button button--plain button--spaced pull-right"
+        {{action toggleProperty 'isTestingScrollableModal'}}
+      >
+        Cancel
+      </button>
+    </footer>
+  {{/modal-dialog}}
 {{/if}}

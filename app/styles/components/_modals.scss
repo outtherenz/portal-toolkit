@@ -1,5 +1,7 @@
 .ember-modal-overlay {
   display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 400;
 
   &.translucent {
@@ -9,15 +11,17 @@
 }
 
 .ember-modal-dialog {
-  flex: 0 0 auto;
-  align-self: center;
+  // Prevent transform layout because https://github.com/yapplabs/ember-modal-dialog/issues/238
+  transform: none!important;
+  top: auto!important;
+  left: auto!important;
+
   box-shadow: 0 2px 5px rgba(black, 0.3);
   max-height: calc(100vh - 2 * #{$gutter-string});
   width: calc(100vw - 2 * #{$gutter-string});
   margin: 0 auto;
-  position: static;
   z-index: 401;
-  animation: modal-appear 0.2s ease-in;
+  animation: modalAppear 0.2s ease-in;
 
   @media (min-width: $breakpoint-tablet) {
     max-height: calc(100vh - 2 * #{$gutter-string});
@@ -31,7 +35,7 @@
   }
 }
 
-.ember-modal-dialog--scrollable {
+.ember-modal-dialog__scrollable {
   height: calc(100vh - 2 * #{$gutter-string});
   display: flex;
   flex-direction: column;
@@ -43,7 +47,6 @@
 
 .ember-modal-dialog__scrollable-window {
   flex: 1 0;
-  margin: $negative-gutter;
   position: relative;
 
   @media (min-width: $breakpoint-desktop) {
@@ -61,14 +64,14 @@
   padding: $desktop-gutter;
 }
 
-@keyframes modal-appear {
+@keyframes modalAppear {
   0% {
     opacity: 0;
-    transform: perspective(450px) scale(0.8);
+    transform: scale(0.8);
   }
 
   100% {
     opacity: 1;
-    transform: perspective(450px) scale(1);
+    transform: scale(1);
   }
 }
