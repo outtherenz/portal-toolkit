@@ -25,7 +25,7 @@ Router.map(function() {
     this.route('print-button');
     this.route('radio-slider');
     this.route('sortable-list');
-    this.route('untethered-modal-dialog');
+    this.route('modal-dialog');
     this.route('value-change-indicator');
     this.route('combo-box');
     this.route('combo-button');
