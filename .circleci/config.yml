@@ -2,17 +2,20 @@ version: 2
 jobs:
   install:
     docker:
-      - image: circleci/node:8.9.4
+      - image: circleci/node:10
     steps:
       - checkout
       - restore_cache:
           key: dependencies-{{ checksum "package-lock.json" }}-{{ checksum "bower.json" }}
       - run:
           name: Npm Install
-          command: npm install
+          command: npm install --no-audit
       - run:
           name: Bower Install
           command: ./node_modules/.bin/bower install
+      - run:
+          name: Drop Package Lock Changes
+          command: git checkout -- package-lock.json
       - save_cache:
           paths:
             - ./node_modules
@@ -24,7 +27,9 @@ jobs:
             - .
   test:
     docker:
-      - image: circleci/node:8.9.4-browsers
+      - image: circleci/node:10-browsers
+        environment:
+          JOBS: 2
     steps:
       - attach_workspace:
           at: .
@@ -33,7 +38,7 @@ jobs:
           command: npm test
   lint:
     docker:
-      - image: circleci/node:8.9.4
+      - image: circleci/node:10
     steps:
       - attach_workspace:
           at: .
