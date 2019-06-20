@@ -1,37 +1,37 @@
 // Generic
-$primary:           #494949;
-$primary-shade:     shade($primary, 40%);
-$primary-tint:      tint($primary, 40%);
+$primary:           #494949 !default;
+$primary-shade:     shade($primary, 40%) !default;
+$primary-tint:      tint($primary, 40%) !default;
 
-$secondary:         #37a;
+$secondary:         #37a !default;
 
-$subdued:           #999;
-$whisp:             #ddd;
+$subdued:           #999 !default;
+$whisp:             #ddd !default;
 
-$off-black:         #333;
-$off-white:         #f7f7f7;
+$off-black:         #333 !default;
+$off-white:         #f7f7f7 !default;
 
-$border-color:      shade($off-white, 15%);
+$border-color:      shade($off-white, 15%) !default;
 
 // Typography
-$heading-color:     #444;
-$copy-color:        #333;
+$heading-color:     #444 !default;
+$copy-color:        #333 !default;
 
-$link-color:        #37a;
-$link-hover-color:  shade($link-color, 20%);
-$link-active-color: $primary;
-$nav-link-color:    tint($copy-color, 40%);
+$link-color:        #37a !default;
+$link-hover-color:  shade($link-color, 20%) !default;
+$link-active-color: $primary !default;
+$nav-link-color:    tint($copy-color, 40%) !default;
 
 // Buttons
-$button-primary:    #37a;
-$button-secondary:  #555;
-$button-disabled:   #ddd;
-$button-plain:      #ddd;
-$button-green:      #494;
-$button-red:        #c43;
+$button-primary:    #37a !default;
+$button-secondary:  #555 !default;
+$button-disabled:   #ddd !default;
+$button-plain:      #ddd !default;
+$button-green:      #494 !default;
+$button-red:        #c43 !default;
 
 // Alerts
-$alert-amber:       #f73;
-$alert-red:         #c44;
-$alert-green:       #5a5;
-$alert-blue:        #39e;
+$alert-amber:       #f73 !default;
+$alert-red:         #c44 !default;
+$alert-green:       #5a5 !default;
+$alert-blue:        #39e !default;
