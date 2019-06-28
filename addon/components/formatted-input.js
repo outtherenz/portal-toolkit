@@ -1,12 +1,22 @@
-import TextField from '@ember/component/text-field';
-import { set, get, computed } from '@ember/object';
-import { run } from '@ember/runloop';
-import { on } from '@ember/object/evented';
+import Ember from 'ember';
 import { formatNumber, parseNumber } from '../helpers/format-number';
+
+const {
+  TextField,
+  computed,
+  get,
+  set,
+  run,
+  on
+} = Ember;
 
 export default TextField.extend({
   classNames: [ 'formatted-input' ],
-  classNameBindings: [ 'formatClassName' ],
+  classNameBindings: [
+    'formatClassName',
+    'doWarnForZero:formatted-input--zero',
+    'wasUpdated:formatted-input--updated'
+  ],
 
   /**
    * The value to be formatted and displayed in the input.
@@ -14,6 +24,13 @@ export default TextField.extend({
    * @type {Number}
    */
   number: null,
+
+  /**
+   * The value that will be used if the input is left blank or invalid.
+   *
+   * @type {Number}
+  */
+  defaultValue: null,
 
   /**
    * When true, the formatted value will be swapped for the raw value on focus, and
@@ -94,12 +111,32 @@ export default TextField.extend({
   parserOptions: null,
 
   /**
+   * If true, the class `formatted-input--zero` is added when `number` is zero.
+   *
+   * @type {Boolean}
+   * @default false
+   */
+  warnOnZero: false,
+
+  /**
    * @type {String}
    */
   formatClassName: computed('format', function() {
     const format = get(this, 'format').toLowerCase();
     return `formatted-input--${format}`;
   }),
+
+  /**
+   * @type {Boolean}
+   */
+  isZero: computed.equal('number', 0),
+
+  /**
+   * Triggers the class name to be added
+   *
+   * @type {Boolean}
+   */
+  doWarnForZero: computed.and('isZero', 'warnOnZero'),
 
   /**
    * Select all on focus, if selectOnFocus or editRawValue is true.
@@ -129,7 +166,11 @@ export default TextField.extend({
     const formatter = get(this, 'formatter');
     const options = get(this, 'formatterOptions');
 
-    run.next(() => set(this, 'value', formatter(number, options)));
+    run.next(() => {
+      if (!this.get('isDestroying')) {
+        set(this, 'value', formatter(number, { ...options, rawPercentage: true }));
+      }
+    });
   }),
 
   /**
@@ -148,8 +189,8 @@ export default TextField.extend({
     const current = get(this, 'number');
     const parser = get(this, 'parser');
     const options = get(this, 'parserOptions');
-    const parsed = parser(value, options);
-    const number = isNaN(parsed) ? null : parsed;
+    const parsed = parser(value, { ...options, rawPercentage: true });
+    const number = isNaN(parsed) ? get(this, 'defaultValue') : parsed;
 
     if (number === current) {
       this.displayFormattedValue();
