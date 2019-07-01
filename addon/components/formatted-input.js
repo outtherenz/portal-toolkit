@@ -168,7 +168,7 @@ export default TextField.extend({
 
     run.next(() => {
       if (!this.get('isDestroying')) {
-        set(this, 'value', formatter(number, { ...options, rawPercentage: true }));
+        set(this, 'value', formatter(number, options));
       }
     });
   }),
@@ -185,11 +185,17 @@ export default TextField.extend({
    *    `didReceiveAttrs` event.
    */
   handleUpdate: on('focusOut', function() {
-    const value = get(this, 'value');
+    let value = get(this, 'value');
+
+    // If the input is a percentage and user input (not a parsed value) convert to decimal percentage
+    if (get(this, 'format') === 'percentage' && value.indexOf('%') === -1) {
+      value = value / 100;
+    }
+
     const current = get(this, 'number');
     const parser = get(this, 'parser');
     const options = get(this, 'parserOptions');
-    const parsed = parser(value, { ...options, rawPercentage: true });
+    const parsed = parser(value, options);
     const number = isNaN(parsed) ? get(this, 'defaultValue') : parsed;
 
     if (number === current) {
