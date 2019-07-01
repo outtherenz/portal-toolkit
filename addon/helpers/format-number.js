@@ -1,6 +1,5 @@
-import Ember from 'ember';
-
-const { Helper } = Ember;
+import { isArray } from '@ember/array';
+import Helper from '@ember/component/helper';
 
 const MINUS_SIGN = '\u2212\u2009';
 const DASH = '\u2013';
@@ -10,18 +9,13 @@ const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 9007199254740991;
 export function formatNumber(params, options) {
   options = options || {};
 
-  const [formatAs, number, rawNumber] = standardizeInput(params, options);
+  const [formatAs, number, rawNumber] = standardizeInput(params);
 
   // Defaults
 
   // NaN
   if (isNaN(number)) {
     return finalize('', formatAs, number, rawNumber, options);
-  }
-
-  // Dash zero
-  if (options.dashZero === true && number === 0) {
-    return finalize(DASH, formatAs, number, rawNumber, options);
   }
 
   // Too large or small
@@ -34,6 +28,11 @@ export function formatNumber(params, options) {
 
   // First round the number
   const rounded = round(number, places);
+
+  // Dash zero (after rounding)
+  if (options.dashZero !== false && Number(rounded) === 0) {
+    return finalize(DASH, formatAs, rounded, rawNumber, options);
+  }
 
   // Add zeros to meet decimal places requirement
   const padded = pad(rounded, places);
@@ -56,8 +55,7 @@ function finalize(formatted, formatAs, number, rawNumber, options) {
     return formatted;
   }
 
-  // if rawPercentage do not assume the number is decimal
-  if (formatAs === 'percentage' && !options.rawPercentage) {
+  if (formatAs === 'percentage') {
     number /= 100;
   }
 
@@ -74,11 +72,11 @@ function finalize(formatted, formatAs, number, rawNumber, options) {
   return res;
 }
 
-function standardizeInput(input, options) {
+function standardizeInput(input) {
   let formatAs, value;
 
-  if (!Ember.isArray(input) || input.length === 1) {
-    value = Ember.isArray(input) ? input[0] : input;
+  if (!isArray(input) || input.length === 1) {
+    value = isArray(input) ? input[0] : input;
     formatAs = 'number';
   } else {
     [formatAs, value] = input;
@@ -95,8 +93,7 @@ function standardizeInput(input, options) {
     value = parseFloat(value.replace(MINUS_SIGN, '-').replace(/[^\d.-]*/g, ''));
   }
 
-  // if rawPercentage do not assume the number is decimal
-  if (!options.rawPercentage && formatAs === 'percentage' && !isNaN(value)) {
+  if (formatAs === 'percentage' && !isNaN(value)) {
     value *= 100;
   }
 
@@ -220,7 +217,7 @@ function addCurrencySymbol(string, symbol) {
   }
 }
 
-export function parseNumber(input, options) {
+export function parseNumber(input) {
   if (typeof input !== 'string') {
     return input == null || typeof input === 'boolean' ? NaN : Number(input);
   }
@@ -234,8 +231,7 @@ export function parseNumber(input, options) {
   const isPercentage = string.match(/%$/) !== null;
   const number = parseFloat(string.replace(MINUS_SIGN, '-').replace(/[^\d.-]*/g, ''));
 
-  // if rawPercentage do not assume the number is decimal
-  return isPercentage && !isNaN(number) && !options.rawPercentage ? number / 100 : number;
+  return isPercentage && !isNaN(number) ? number / 100 : number;
 }
 
 export default Helper.helper(formatNumber);
