@@ -9,7 +9,7 @@ const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 9007199254740991;
 export function formatNumber(params, options) {
   options = options || {};
 
-  const [ formatAs, number, rawNumber ] = standardizeInput(params);
+  const [formatAs, number, rawNumber] = standardizeInput(params);
 
   // Defaults
 
@@ -79,7 +79,7 @@ function standardizeInput(input) {
     value = isArray(input) ? input[0] : input;
     formatAs = 'number';
   } else {
-    [ formatAs, value ] = input;
+    [formatAs, value] = input;
   }
 
   formatAs = typeof formatAs === 'string' ? formatAs.toLowerCase() : 'number';
@@ -97,7 +97,7 @@ function standardizeInput(input) {
     value *= 100;
   }
 
-  return [ formatAs, value, rawValue ];
+  return [formatAs, value, rawValue];
 }
 
 function calcPlaces(number, formatAs, options) {
