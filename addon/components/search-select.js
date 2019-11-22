@@ -17,6 +17,9 @@ export default Component.extend({
   searchTerm: '',
   separator: ' - ',
 
+  // This will eventually be a computed property that will be generated in the didInsertElement hook.
+  activeDisplayName: null,
+
   // Things that need to happen once, when the element is created
   didInsertElement() {
     // capture click events and check if they are for our component
@@ -35,6 +38,22 @@ export default Component.extend({
     // we need to set the value on the initial render
     const activeValue = get(this, 'activeDisplayName');
     set(this, 'searchTerm', activeValue);
+
+    // Generate the activeDisplayName, with dependent paths that are calculated from the passed in `keys` and `value` properties.
+    const updateKeys = get(this, '_keys').map(k => 'value.' + k);
+    set(this, 'activeDisplayName', computed('value', 'options[]', 'separator', ...updateKeys, function() {
+      const value = get(this, 'value');
+      const keys = get(this, '_keys');
+
+      if (typeof value !== 'object') {
+        return value;
+      } else if (keys && get(keys, 'length') && value) {
+        const separator = get(this, 'separator');
+        return this.getDisplayName(keys, value, separator);
+      } else {
+        return '';
+      }
+    }));
   },
 
   // Things that need to happen once, when the element is destroyed
@@ -81,20 +100,6 @@ export default Component.extend({
       });
     }
     return options;
-  }),
-
-  activeDisplayName: computed('value', 'options', 'separator', function() {
-    const value = get(this, 'value');
-    const keys = get(this, '_keys');
-
-    if (typeof value !== 'object') {
-      return value;
-    } else if (keys && get(keys, 'length') && value) {
-      const separator = get(this, 'separator');
-      return this.getDisplayName(keys, value, separator);
-    } else {
-      return '';
-    }
   }),
 
   actions: {
@@ -155,7 +160,12 @@ export default Component.extend({
   getDisplayName(keys, option, separator) {
     // separator defaults to ' - '
     // go through each key and build the display name by getting the values at the key
-    const names = keys.map(key => get(option, key)).filter(Boolean);
+    // If `option` is a Proxy Object, then the `get` function won't
+    const names = keys.map(key => {
+      // console.log('key', key, option, option.get(key), get(option, key), option[key]);
+      return get(option, key);
+    }).filter(Boolean);
+    // console.log('keys', keys, option, separator, names, names.join(separator))
     return names.join(separator);
   }
 });
