@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { set, get, computed, observer } from '@ember/object';
+import { set, get, computed, observer, defineProperty } from '@ember/object';
 import $ from 'jquery';
 import layout from '../templates/components/search-select';
 
@@ -41,7 +41,7 @@ export default Component.extend({
 
     // Generate the activeDisplayName, with dependent paths that are calculated from the passed in `keys` and `value` properties.
     const updateKeys = get(this, '_keys').map(k => 'value.' + k);
-    set(this, 'activeDisplayName', computed('value', 'options[]', 'separator', ...updateKeys, function() {
+    defineProperty(this, 'activeDisplayName', computed('value', 'options[]', 'separator', ...updateKeys, function() {
       const value = get(this, 'value');
       const keys = get(this, '_keys');
 
