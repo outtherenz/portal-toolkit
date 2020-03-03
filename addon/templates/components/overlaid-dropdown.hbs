@@ -5,7 +5,9 @@
   focusOut=(action set 'focused' false)
   disabled=disabled
 }}
-  {{if buttonText buttonText}}
+  {{#if buttonText}}
+    {{{buttonText}}}
+  {{/if}}
   {{#if buttonIcon}}
     {{fa-icon icon=buttonIcon}}
   {{/if}}
