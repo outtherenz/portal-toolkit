@@ -21,7 +21,11 @@ export default TextField.extend({
     const value = get(this, 'value');
     const duration = parseDuration(value);
 
-    set(this, 'duration', duration);
+    if (this.onDurationChange) {
+      this.onDurationChange(duration);
+    } else {
+      set(this, 'duration', duration);
+    }
   },
 
   /**
