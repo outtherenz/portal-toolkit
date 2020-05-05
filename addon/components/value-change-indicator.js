@@ -13,6 +13,8 @@ export default Component.extend({
   from: null,
   to: null,
   difference: null,
+  positiveIcon: 'arrow-up',
+  negativeIcon: 'arrow-down',
 
   useColor: true,
   increaseIsGood: true,
@@ -47,13 +49,13 @@ export default Component.extend({
     }
   }),
 
-  icon: computed('_diff', function() {
+  icon: computed('_diff', 'positiveIcon', 'negativeIcon', function() {
     const diff = get(this, '_diff');
 
     if (diff > 0) {
-      return 'arrow-up';
+      return get(this, 'positiveIcon');
     } else if (diff < 0) {
-      return 'arrow-down';
+      return get(this, 'negativeIcon');
     }
 
     return '';
