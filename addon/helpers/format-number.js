@@ -9,7 +9,7 @@ const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 9007199254740991;
 export function formatNumber(params, options) {
   options = options || {};
 
-  const [formatAs, number, rawNumber] = standardizeInput(params);
+  var [formatAs, number, rawNumber] = standardizeInput(params);
 
   // Defaults
 
@@ -21,6 +21,10 @@ export function formatNumber(params, options) {
   // Too large or small
   if (number < MIN_SAFE_INTEGER || number > MAX_SAFE_INTEGER) {
     return finalize('#', formatAs, number, rawNumber, options);
+  }
+
+  if (options.abs) {
+    number = Math.abs(number);
   }
 
   // Convert sigfigs option to a places option

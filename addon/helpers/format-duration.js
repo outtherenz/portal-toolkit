@@ -3,7 +3,7 @@ import { helper } from '@ember/component/helper';
 export function formatDuration([ duration ]) {
   const total = isNaN(duration) ? 0 : Number(duration);
   let minutes = String(Math.abs(Math.round(total % 1 * 60)));
-  const hours = Math[total > 0 ? 'floor' : 'ceil'](total);
+  let hours = Math[total > 0 ? 'floor' : 'ceil'](total);
 
   if (minutes.length < 2) {
     minutes = '0' + minutes;
@@ -12,6 +12,11 @@ export function formatDuration([ duration ]) {
   // Floating point errors
   if (minutes.length > 2) {
     minutes = minutes.substring(0, 2);
+  }
+
+  if (minutes === '60') {
+    hours = String(hours + 1);
+    minutes = '00';
   }
 
   return (hours || parseInt(minutes, 10)) ? `${Math.floor(hours)}:${minutes}` : '';
