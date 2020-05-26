@@ -1,7 +1,11 @@
 import { helper } from '@ember/component/helper';
 
-export function formatDuration([ duration ]) {
-  const total = isNaN(duration) ? 0 : Number(duration);
+export function formatDuration([ duration ], options = {}) {
+  const { abs, emptyPlaceholder = '' } = options;
+
+  const total = isNaN(duration)
+    ? 0
+    : (abs ? Math.abs(Number(duration)) : Number(duration));
   let minutes = String(Math.abs(Math.round(total % 1 * 60)));
   let hours = Math[total > 0 ? 'floor' : 'ceil'](total);
 
@@ -19,7 +23,7 @@ export function formatDuration([ duration ]) {
     minutes = '00';
   }
 
-  return (hours || parseInt(minutes, 10)) ? `${Math.floor(hours)}:${minutes}` : '';
+  return (hours || parseInt(minutes, 10)) ? `${Math.floor(hours)}:${minutes}` : emptyPlaceholder;
 }
 
 export function parseDuration(duration) {

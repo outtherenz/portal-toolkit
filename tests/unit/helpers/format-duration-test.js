@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 module('Unit | Helper | format duration');
 
 // Shorthands
-const f = value => formatDuration([ value ]);
+const f = (value, options) => formatDuration([ value ], options);
 const p = value => parseDuration(value);
 
 // Replace this with your real tests.
@@ -14,6 +14,8 @@ test('it formats normal values correctly', function(assert) {
   assert.equal(f(2.000001), '2:00', 'rounding');
   assert.equal(f(0), '', 'zero');
   assert.equal(f(-1.5), '-1:30', 'negative');
+  assert.equal(f(-13.326699999999988, { abs: true }), '13:20', 'negative with abs option');
+  assert.equal(f(0, { emptyPlaceholder: '–' }), '–', 'zero with emptyPlaceholder option');
 });
 
 test('it formats null and error values correctly', function(assert) {
