@@ -40,7 +40,7 @@ $page-wrapper-width--tiny: 1024px - 650px;
   background: shade($off-white, 1.5%);
   flex: 0 0 auto;
   width: 75px;
-  z-index: 1;
+  z-index: 300;
 }
 
 .sidebar-page__content {
