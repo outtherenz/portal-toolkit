@@ -35,6 +35,8 @@ export default FileField.extend({
     });
 
     reader.readAsText(files[0]);
-    event.target.value = '';
+    if (!Ember.testing) {
+      event.target.value = '';
+    }
   }
 });
