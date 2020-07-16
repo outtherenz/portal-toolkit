@@ -28,7 +28,9 @@ export default Component.extend({
       next(() => {
         // Refocus the button (should be found inside this component)
         // The blur event can now be triggered again
-        this.$('.overlaid-dropdown__button').focus();
+        const buttonElem = this.$('.overlaid-dropdown__button');
+        if (this.isDestroyed || !buttonElem) return;
+        buttonElem.focus();
         // Set focused back to true
         set(this, 'focused', true);
         // Release the hold on the dropdown being open
