@@ -1,7 +1,7 @@
 <div class="info-popup">
   {{fa-icon (or iconName 'info-circle') class="info-popup__icon"}}
 
-  <div class="info-popup__text">
+  <div class="info-popup__text {{if (eq align 'right') 'info-popup__text--right' 'info-popup__text--left'}}">
     {{text}}
   </div>
 </div>

@@ -19,7 +19,6 @@
   position: absolute;
   color: $copy-color;
   margin-top: 0.2em;
-  margin-left: 0.2em;
   background-color: white;
   min-width: 180px;
   max-width: 220px;
@@ -28,4 +27,14 @@
   z-index: 100;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   border-radius: 2px;
+}
+
+.info-popup__text--right {
+  margin-right: 0.2em;
+  right: 0;
+}
+
+.info-popup__text--left {
+  margin-left: 0.2em;
+  left: 0;
 }
