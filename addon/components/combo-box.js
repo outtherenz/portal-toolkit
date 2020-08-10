@@ -28,7 +28,7 @@ export default Component.extend({
         $(`#${element}`).has(event.target).length === 0 &&
         !$(`#${element}`).is(event.target)
       ) {
-        set(this, 'finderVisible', false);
+        this.send('setFinderVisible', false);
       }
     });
 
@@ -87,7 +87,7 @@ export default Component.extend({
 
   actions: {
     setFinderVisible(visible) {
-      if (get(this, 'finderVisible') !== visible) set(this, 'finderVisible', visible);
+      if (get(this, 'finderVisible') !== visible && !this.isDestroyed && !this.isDestroying) set(this, 'finderVisible', visible);
     },
 
     keyDown(event) {
@@ -143,8 +143,8 @@ export default Component.extend({
     },
 
     keepSelectedRowVisible(selectedRowIndex) {
-      const $row = $('#combo-box__drop-down-row--' + selectedRowIndex);
-      const $container = $('.combo-box__drop-down');
+      const $row = this.$('.combo-box__drop-down-row--' + selectedRowIndex);
+      const $container = this.$('.combo-box__drop-down');
 
       if ($row.position().top > $container.height()) {
         $container.scrollTop($container.scrollTop() + $row.outerHeight());

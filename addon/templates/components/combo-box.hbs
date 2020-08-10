@@ -13,14 +13,13 @@
 {{#if finderVisible}}
   {{#unless isLoading}}
     {{#if filteredOptions.length}}
-      <div id="combo-box__drop-down">
+      <div class="combo-box__drop-down">
         {{#each filteredOptions as |option index|}}
           <div
-            class="combo-box__drop-down-row {{if (eq index selectedRow) "combo-box__drop-down-row--selected"}}"
+            class="combo-box__drop-down-row {{if (eq index selectedRow) "combo-box__drop-down-row--selected"}} {{concat "combo-box__drop-down-row--" index}}"
             onclick={{action 'setItem' index bubbles=false}}
             onmouseover={{action set 'selectedRow' index bubbles=false}}
             onmouseout={{action 'unSetHighlight' index bubbles=false}}
-            id={{concat "combo-box__drop-down-row--" index}}
             data-test-combo-box-option={{index}}
           >
             {{or (get option key) option}}
@@ -28,7 +27,7 @@
         {{/each}}
       </div>
     {{else if (or emptyText emptyButtonAction)}}
-      <div id="combo-box__drop-down">
+      <div class="combo-box__drop-down">
         <div class="combo-box__drop-down-row combo-box__drop-down-row--empty">
           {{#if emptyText}}
             <span class="text-button--spaced">
@@ -45,7 +44,7 @@
       </div>
     {{/if}}
   {{else}}
-    <div id="combo-box__drop-down">
+    <div class="combo-box__drop-down">
       <div class="combo-box__drop-down-row combo-box__drop-down-row--loading">
         {{loading-icon 'spinner'}}
       </div>
