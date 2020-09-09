@@ -96,7 +96,7 @@ test('it renders a custom message when no options are found', function(assert) {
   this.$('.combo-box input').change();
 
   assert.equal(
-    this.$('.combo-box__drop-down__row--empty').text().trim(),
+    this.$('.combo-box__drop-down-row--empty').text().trim(),
     'Nothing was found',
     'Custom message is found'
   );
@@ -118,7 +118,7 @@ test('it does not render a custom button when you do not provide an action for t
   this.$('.combo-box input').change();
 
   assert.equal(
-    this.$('.combo-box__drop-down__row--empty button').length,
+    this.$('.combo-box__drop-down-row--empty button').length,
     0,
     'Has not rendered a custom button'
   );
@@ -141,12 +141,12 @@ test('it renders a custom button when no options are found', function(assert) {
   this.$('.combo-box input').change();
 
   assert.equal(
-    this.$('.combo-box__drop-down__row--empty button').length,
+    this.$('.combo-box__drop-down-row--empty button').length,
     1,
     'Custom button was found'
   );
   assert.equal(
-    this.$('.combo-box__drop-down__row--empty button').text().trim(),
+    this.$('.combo-box__drop-down-row--empty button').text().trim(),
     'Click me',
     'Button text is correct'
   );
@@ -168,10 +168,10 @@ test('it enters loading state correctly', function(assert) {
   this.$('.combo-box input').val('Next');
   this.$('.combo-box input').trigger('keydown');
   this.$('.combo-box input').change();
-  this.$('.combo-box__drop-down__row--empty button').click();
+  this.$('.combo-box__drop-down-row--empty button').click();
 
   assert.equal(
-    this.$('.combo-box__drop-down__row--loading').length,
+    this.$('.combo-box__drop-down-row--loading').length,
     1,
     'Loading icon was found'
   );
@@ -193,7 +193,7 @@ skip('it loads new options correctly', function(assert) {
   this.$('.combo-box input').val('Next');
   this.$('.combo-box input').trigger('keydown');
   this.$('.combo-box input').change();
-  this.$('.combo-box__drop-down__row--empty button').click();
+  this.$('.combo-box__drop-down-row--empty button').click();
 
   assert.equal(
     this.$('[data-test-combo-box-option]').length,

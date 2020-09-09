@@ -4,6 +4,7 @@
   value=searchTerm
   placeholder=(if finderVisible (or searchPlaceholder 'Type to search…') placeholder)
   keyDown=(action 'keyDown' bubbles=false)
+  keyUp=(action 'keyUp' bubbles=false)
   click=(action 'setFinderVisible' true bubbles=false)
   focusIn=(action 'setFinderVisible' true bubbles=false)
   autocomplete="off"
@@ -15,7 +16,7 @@
       <div class="combo-box__drop-down">
         {{#each filteredOptions as |option index|}}
           <div
-            class="combo-box__drop-down__row {{if (eq index selectedRow) "combo-box__drop-down__row--selected"}}"
+            class="combo-box__drop-down-row {{if (eq index selectedRow) "combo-box__drop-down-row--selected"}} {{concat "combo-box__drop-down-row--" index}}"
             onclick={{action 'setItem' index bubbles=false}}
             onmouseover={{action set 'selectedRow' index bubbles=false}}
             onmouseout={{action 'unSetHighlight' index bubbles=false}}
@@ -27,7 +28,7 @@
       </div>
     {{else if (or emptyText emptyButtonAction)}}
       <div class="combo-box__drop-down">
-        <div class="combo-box__drop-down__row combo-box__drop-down__row--empty">
+        <div class="combo-box__drop-down-row combo-box__drop-down-row--empty">
           {{#if emptyText}}
             <span class="text-button--spaced">
               {{emptyText}}
@@ -44,7 +45,7 @@
     {{/if}}
   {{else}}
     <div class="combo-box__drop-down">
-      <div class="combo-box__drop-down__row combo-box__drop-down__row--loading">
+      <div class="combo-box__drop-down-row combo-box__drop-down-row--loading">
         {{loading-icon 'spinner'}}
       </div>
     </div>

@@ -28,7 +28,7 @@ export default Component.extend({
         $(`#${element}`).has(event.target).length === 0 &&
         !$(`#${element}`).is(event.target)
       ) {
-        set(this, 'finderVisible', false);
+        this.send('setFinderVisible', false);
       }
     });
 
@@ -87,7 +87,7 @@ export default Component.extend({
 
   actions: {
     setFinderVisible(visible) {
-      if (get(this, 'finderVisible') !== visible) set(this, 'finderVisible', visible);
+      if (get(this, 'finderVisible') !== visible && !this.isDestroyed && !this.isDestroying) set(this, 'finderVisible', visible);
     },
 
     keyDown(event) {
@@ -96,12 +96,20 @@ export default Component.extend({
         // down arrow
         case 38:
           this.send('setFinderVisible', true);
-          if (selectedRow > 0) set(this, 'selectedRow', selectedRow - 1);
+          if (selectedRow > 0) {
+            const newSelectedRow = selectedRow - 1;
+            set(this, 'selectedRow', newSelectedRow);
+            this.send('keepSelectedRowVisible', newSelectedRow);
+          }
           break;
         // up arrow
         case 40:
           this.send('setFinderVisible', true);
-          if (selectedRow + 1 < get(this, 'filteredOptions.length')) set(this, 'selectedRow', selectedRow + 1);
+          if (selectedRow + 1 < get(this, 'filteredOptions.length')) {
+            const newSelectedRow = selectedRow + 1;
+            set(this, 'selectedRow', newSelectedRow);
+            this.send('keepSelectedRowVisible', newSelectedRow);
+          }
           break;
         // enter
         case 13:
@@ -123,6 +131,25 @@ export default Component.extend({
           this.send('setItem', -1);
           this.send('setFinderVisible', true);
           break;
+      }
+    },
+
+    keyUp(event) {
+      if ([38, 40, 13, 9, 27].includes(event.keyCode)) return; // event has been handled
+
+      set(this, 'selectedRow', -1);
+      this.send('setItem', -1);
+      this.send('setFinderVisible', true);
+    },
+
+    keepSelectedRowVisible(selectedRowIndex) {
+      const $row = this.$('.combo-box__drop-down-row--' + selectedRowIndex);
+      const $container = this.$('.combo-box__drop-down');
+
+      if ($row.position().top > $container.height()) {
+        $container.scrollTop($container.scrollTop() + $row.outerHeight());
+      } else if ($row.position().top < 0) {
+        $container.scrollTop($container.scrollTop() - $row.outerHeight());
       }
     },
 
