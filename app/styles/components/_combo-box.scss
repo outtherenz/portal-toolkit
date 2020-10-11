@@ -25,6 +25,9 @@
 .combo-box__drop-down-row {
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  max-width: 33vw;
+  overflow: hidden;
   height: 25px;
   padding: 0 0.4em;
   cursor: pointer;
