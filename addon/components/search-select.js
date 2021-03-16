@@ -153,6 +153,8 @@ export default Component.extend({
 
     clearValue() {
       set(this, 'value', null);
+
+      this.sendAction('onSelect', null);
       set(this, 'finderVisible', false);
     }
   },
