@@ -15,7 +15,7 @@ $page-wrapper-width--tiny: 1024px - 650px;
 }
 
 .page-body--dark {
-  background-color: $primary;
+  background-color: $ptl-primary;
   min-height: 100vh;
 }
 
@@ -27,7 +27,7 @@ $page-wrapper-width--tiny: 1024px - 650px;
 .sidebar-page__sidebar {
   transition: all 0.35s ease;
   padding: 23px $desktop-gutter;
-  border-right: 1px solid $border-color;
+  border-right: 1px solid $ptl-border-color;
   background: shade($off-white, 1.5%);
   flex: 0 0 auto;
   width: $sidebar-width;
@@ -36,7 +36,7 @@ $page-wrapper-width--tiny: 1024px - 650px;
 .sidebar-page__sidebar--collapsed {
   transition: all 0.35s ease;
   padding: 23px $desktop-gutter;
-  border-right: 1px solid $border-color;
+  border-right: 1px solid $ptl-border-color;
   background: shade($off-white, 1.5%);
   flex: 0 0 auto;
   width: 75px;
@@ -67,7 +67,7 @@ $page-wrapper-width--tiny: 1024px - 650px;
 
     @media (min-width: $breakpoint-desktop) {
       margin-bottom: $desktop-gutter;
-      border-bottom: 1px solid $border-color;
+      border-bottom: 1px solid $ptl-border-color;
     }
   }
 

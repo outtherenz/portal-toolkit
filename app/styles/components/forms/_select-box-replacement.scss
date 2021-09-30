@@ -1,5 +1,5 @@
 .select-box-replacement {
-  border: 1px solid $border-color;
+  border: 1px solid $ptl-border-color;
   background-color: $off-white;
   padding: 0.5em 0.8em;
   color: tint($copy-color, 20%);
@@ -10,7 +10,7 @@
   &:hover {
     cursor: pointer;
     background-color: shade($off-white, 2%);
-    border-color: shade($border-color, 5%);
+    border-color: shade($ptl-border-color, 5%);
     color: $copy-color;
   }
 

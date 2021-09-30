@@ -1,9 +1,19 @@
-// Generic
-$primary:           #494949 !default;
-$primary-shade:     shade($primary, 40%) !default;
-$primary-tint:      tint($primary, 40%) !default;
+// Change below variables to ptl-"" for preventing conflict with bootstrap.
+// All bootstrap variables at
+// https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss
+//  $primary:           
+//  $secondary:         
+//  $border-color:      
+//  $link-color:       
+//  $link-hover-color: 
+//  $nav-link-color
 
-$secondary:         #37a !default;
+// Generic
+$ptl-primary:           #494949 !default;
+$primary-shade:     shade($ptl-primary, 40%) !default;
+$primary-tint:      tint($ptl-primary, 40%) !default;
+
+$ptl-secondary:         #37a !default;
 
 $subdued:           #999 !default;
 $whisp:             #ddd !default;
@@ -11,16 +21,16 @@ $whisp:             #ddd !default;
 $off-black:         #333 !default;
 $off-white:         #f7f7f7 !default;
 
-$border-color:      shade($off-white, 15%) !default;
+$ptl-border-color:      shade($off-white, 15%) !default;
 
 // Typography
 $heading-color:     #444 !default;
 $copy-color:        #333 !default;
 
-$link-color:        #37a !default;
-$link-hover-color:  shade($link-color, 20%) !default;
-$link-active-color: $primary !default;
-$nav-link-color:    tint($copy-color, 40%) !default;
+$ptl-link-color:        #37a !default;
+$ptl-link-hover-color:  shade($ptl-link-color, 20%) !default;
+$ptl-link-active-color: $ptl-primary !default;
+$ptl-nav-link-color:    tint($copy-color, 40%) !default;
 
 // Buttons
 $button-primary:    #37a !default;

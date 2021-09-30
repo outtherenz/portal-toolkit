@@ -112,8 +112,8 @@
 
 .data-table__total-row,
 .data-table__total-row td {
-  border-top:    2px solid shade($border-color, 15%);
-  border-bottom: 2px solid shade($border-color, 15%);
+  border-top:    2px solid shade($ptl-border-color, 15%);
+  border-bottom: 2px solid shade($ptl-border-color, 15%);
   font-weight: bold;
   background-color: $off-white;
 }

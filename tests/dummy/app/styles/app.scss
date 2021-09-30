@@ -34,7 +34,7 @@ body {
 }
 
 a {
-  color: $secondary;
+  color: $ptl-secondary;
 }
 
 h1 {
@@ -54,14 +54,14 @@ h4 {
 }
 
 .toolkit-header {
-  background-color: $secondary;
-  background-image: linear-gradient(to right, $secondary, #6287a2);
+  background-color: $ptl-secondary;
+  background-image: linear-gradient(to right, $ptl-secondary, #6287a2);
   padding: 1.5em $desktop-gutter;
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-shadow: -3px 3px 0 rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid shade($secondary, 20%);
+  border-bottom: 1px solid shade($ptl-secondary, 20%);
 
   h1 {
     font-family: 'Helvetica Neue', sans-serif;
@@ -84,7 +84,7 @@ h4 {
 }
 
 .article-header {
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $ptl-border-color;
   margin-bottom: 2em;
   padding: 1em 0 0.5em;
   h1 {
@@ -95,7 +95,7 @@ h4 {
 main {
   display: flex;
   background-color: $off-white;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $ptl-border-color;
 }
 
 code {
@@ -119,7 +119,7 @@ pre {
   flex: 0 0 280px;
   padding: $gutter;
   background-color: $off-white;
-  border-right: 1px solid $border-color;
+  border-right: 1px solid $ptl-border-color;
 
   ul {
     padding: 0;
@@ -167,8 +167,8 @@ pre {
 
 .page-toolkit {
   background-color: $off-white;
-  border-bottom: 1px solid $border-color;
-  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $ptl-border-color;
+  border-right: 1px solid $ptl-border-color;
   position: absolute;
   font-size: 12px;
   padding: 15px;
@@ -206,7 +206,7 @@ pre {
     margin-right: 20px;
   }
   .divider {
-    background-color: $border-color;
+    background-color: $ptl-border-color;
     margin-left: 10px;
     margin-right: 10px;
     width: 1px;
@@ -274,7 +274,7 @@ pre {
 }
 
 .page-description {
-  border: 1px solid $border-color;
+  border: 1px solid $ptl-border-color;
   background-color: $off-white;
   width: $page-description-width;
   padding: 15px;
@@ -310,9 +310,9 @@ pre {
     font-size: 16px;
     line-height: 30px;
     border-radius: 3px 0px 0px 3px;
-    border-bottom: 1px solid $border-color;
-    border-top: 1px solid $border-color;
-    border-left: 1px solid $border-color;
+    border-bottom: 1px solid $ptl-border-color;
+    border-top: 1px solid $ptl-border-color;
+    border-left: 1px solid $ptl-border-color;
     background-color: $off-white;
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     background: repeating-linear-gradient( -55deg, #FF8F65, #FF8F65 5px, #FFD865 5px, #FFD865 10px);

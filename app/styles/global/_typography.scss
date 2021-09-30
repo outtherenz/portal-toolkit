@@ -65,13 +65,13 @@ $font-size: 13px;
 }
 
 .link, .link:visited {
-  color: $link-color;
+  color: $ptl-link-color;
   text-decoration: none;
   cursor: pointer;
 
   &:hover,
   &:active {
-    color: $link-hover-color;
+    color: $ptl-link-hover-color;
     outline: none;
     text-decoration: underline;
   }

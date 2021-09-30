@@ -55,7 +55,7 @@
 }
 
 .tabs__tab {
-  @include tab-color($secondary);
+  @include tab-color($ptl-secondary);
 
   $tab-top-padding: 0.55em;
   $tab-bottom-padding: 0.5em;

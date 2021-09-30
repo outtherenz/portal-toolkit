@@ -2,14 +2,14 @@
   font-weight: normal;
   font-family: $heading-font;
   font-size: 18px;
-  color: $nav-link-color;
+  color: $ptl-nav-link-color;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   opacity: 1;
 
   @media (min-width: $breakpoint-desktop) {
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $ptl-border-color;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -37,7 +37,7 @@
 .module-navigation__list-item {
   margin: 0;
   background-color: $off-white;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid $ptl-border-color;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -50,7 +50,7 @@
   }
 
   &:last-of-type {
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $ptl-border-color;
   }
 
   @media (min-width: $breakpoint-desktop) {
@@ -63,7 +63,7 @@
   }
 
   .link {
-    color: $nav-link-color;
+    color: $ptl-nav-link-color;
     padding: 0.8em $gutter;
     display: block;
 
@@ -71,7 +71,7 @@
     &:active,
     &:visited {
       text-decoration: none;
-      color: $nav-link-color;
+      color: $ptl-nav-link-color;
       background-color: rgba(black, 0.04);
     }
 
