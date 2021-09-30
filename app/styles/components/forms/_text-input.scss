@@ -10,7 +10,7 @@
 
   &:focus {
     outline: none;
-    border-color: shade($border-color, 25%);
+    border-color: shade($ptl-border-color, 25%);
   }
 
   &:hover {

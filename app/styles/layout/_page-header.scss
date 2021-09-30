@@ -1,7 +1,7 @@
 $page-header-height: 60px;
 
 .page-header {
-  background-color: $primary;
+  background-color: $ptl-primary;
   color: tint($copy-color, 70);
   display: flex;
   padding: $gutter;
@@ -19,7 +19,7 @@ $page-header-height: 60px;
 
     // Hack to continue the header background across the page even when scrolling horizontally
     // There's a 5px overlap between the header and the nav bar
-    box-shadow: 1000px (-1000px /* + $nav-bar-height - 5px */) 0 1000px $primary;
+    box-shadow: 1000px (-1000px /* + $nav-bar-height - 5px */) 0 1000px $ptl-primary;
   }
 
   ::selection {

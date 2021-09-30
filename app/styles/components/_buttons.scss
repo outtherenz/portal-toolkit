@@ -89,7 +89,7 @@
 
 .button--plain {
   @include button-colors($button-plain, tint($copy-color, 20%));
-  box-shadow: inset 0 0 0 1px $border-color;
+  box-shadow: inset 0 0 0 1px $ptl-border-color;
 
   &:hover {
     text-shadow: none;

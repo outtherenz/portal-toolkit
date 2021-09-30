@@ -18,7 +18,7 @@
   flex-direction: column;
   white-space: nowrap;
   min-width: 100%;
-  border: 1px solid $border-color;
+  border: 1px solid $ptl-border-color;
 }
 
 .overlaid-dropdown__body--right {
@@ -35,7 +35,7 @@
   font-size: 95%;
 
   &:hover {
-    background-color: $secondary;
+    background-color: $ptl-secondary;
     color: white;
 
     // This seems to work to get the loading spinner to be white on hover
@@ -44,7 +44,7 @@
 }
 
 .overlaid-dropdown__title {
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $ptl-border-color;
   padding: 0.5em 12px;
   font-weight: bold;
   font-size: 85%;

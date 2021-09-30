@@ -1,7 +1,7 @@
 .sortable-list.block li {
   @include grab-cursor;
   background-color: $off-white;
-  border: 1px solid $border-color;
+  border: 1px solid $ptl-border-color;
   width: 300px;
   padding: 0.2em 0.4em;
   margin-bottom: 0.2em;
