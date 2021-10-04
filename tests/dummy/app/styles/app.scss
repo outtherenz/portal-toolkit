@@ -26,7 +26,7 @@ $page-description-width: 430px;
 }
 
 body {
-  font: #{$font-size}/1.5 sans-serif;
+  font: #{$font-size}/1.5 'Roboto', sans-serif;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
@@ -64,7 +64,6 @@ h4 {
   border-bottom: 1px solid shade($ptl-secondary, 20%);
 
   h1 {
-    font-family: 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: white;
@@ -73,7 +72,6 @@ h4 {
     line-height: 1.1;
   }
   h2 {
-    font-family: 'Helvetica Neue', sans-serif;
     font-weight: normal;
     font-size: 14px;
     font-style: italic;

@@ -6,6 +6,7 @@
 }
 
 @mixin tab-color($tab-color, $tab-text-color: white) {
+  color: $tab-text-color;
   $tab-hover-color: tint($tab-color, 15%);
   $tab-active-color: tint($tab-color, 25%);
 
