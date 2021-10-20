@@ -9,12 +9,7 @@ export default FileField.extend({
   attributeBindings: [ 'accept' ],
 
   change(event) {
-    /*
-    TODO There is currently no modules friendly approach to this.
-    Apparently its being worked on but I can't find where.
-    It should be revisited at a later date.
-    */
-    const files = get(event, Ember.testing ? 'originalEvent.testFiles' : 'target.files');
+    const files = get(event, 'target.files');
 
     if (isEmpty(files) || files[0] == null) {
       set(this, 'file', null);
