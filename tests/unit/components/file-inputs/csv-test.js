@@ -19,7 +19,7 @@ test('it can handle mixed line endings', function(assert) {
   const file = new File([ fileContent ], 'file-name.csv');
   const nativeEvent = new Event('change');
 
-  nativeEvent.testFiles = [ file ];
+  nativeEvent.files = [ file ];
 
   const event = $.Event(nativeEvent);
 
