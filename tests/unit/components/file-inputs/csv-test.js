@@ -1,6 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import wait from 'ember-test-helpers/wait';
-import $ from 'jquery';
 
 const fileContent = `Company,ReportTitle,Period,Account,Name,MonthBal,YTDBal
 GISB,BALANCE SHEET,201702,TM7701,Manufacturing Stock on Hand,"-4,176.84","17,230.60"
@@ -17,11 +16,7 @@ test('it can handle mixed line endings', function(assert) {
 
   const component = this.subject();
   const file = new File([ fileContent ], 'file-name.csv');
-  const nativeEvent = new Event('change');
-
-  nativeEvent.files = [ file ];
-
-  const event = $.Event(nativeEvent);
+  const event = { target: { files: [ file ] } };
 
   component.change(event);
 
