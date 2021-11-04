@@ -21,7 +21,7 @@ export default Component.extend({
      * Holds the dropdown, waits for the blur event on the button, then focuses the button
      * again and releases the hold so that the blur event can happen again.
      */
-    holdFocus() {
+    holdFocus(e) {
       // Keep dropdown visible
       set(this, 'holdFocus', true);
       // Wait for blur event to occur
@@ -30,7 +30,7 @@ export default Component.extend({
         // The blur event can now be triggered again
         const buttonElem = this.$('.overlaid-dropdown__button');
         if (this.isDestroyed || !buttonElem) return;
-        buttonElem.focus();
+        if (e.target.tagName === 'BUTTON') buttonElem.focus();
         // Set focused back to true
         set(this, 'focused', true);
         // Release the hold on the dropdown being open
