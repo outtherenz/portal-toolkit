@@ -25,12 +25,12 @@ export default Controller.extend({
   colorB: 255,
 
   colorChange: function() {
-    var rVal = this.get('colorR');
-    var gVal = this.get('colorG');
-    var bVal = this.get('colorB');
-    var hexVal = this.get('colorInput');
-    var rgbSwitch = this.get('rgbColor');
-    var hexSwitch = this.get('hexColor');
+    var rVal = this.colorR;
+    var gVal = this.colorG;
+    var bVal = this.colorB;
+    var hexVal = this.colorInput;
+    var rgbSwitch = this.rgbColor;
+    var hexSwitch = this.hexColor;
     var rgbVal = 'rgb(' + rVal + ',' + gVal + ',' + bVal + ')';
     $('.colorBox').css({
       'background-color': rgbVal
@@ -67,8 +67,8 @@ export default Controller.extend({
 
   // white & black values //
   brightnessChange: function() {
-    var lightVal = this.get('colorLight');
-    var rgbSwitch = this.get('rgbColor');
+    var lightVal = this.colorLight;
+    var rgbSwitch = this.rgbColor;
     var rgbVal = 'rgb(' + lightVal + ',' + lightVal + ',' + lightVal + ')';
     $('.colorBox').css({
       'background-color': rgbVal
@@ -98,7 +98,7 @@ export default Controller.extend({
   // page width modifier //
   pageWidth: '0.75',
   changePageWidth: function() {
-    var pageWidth = this.get('pageWidth');
+    var pageWidth = this.pageWidth;
     $('.page').css({
       flex: pageWidth
     });

@@ -10,10 +10,10 @@ export default C3Chart.extend({
   markNegativeSeries: true,
 
   data: computed('metrics', 'period', function() {
-    const metrics = get(this, 'metrics');
+    const metrics = this.metrics;
     const periodType = get(this, 'period.type');
-    const markEmpty = get(this, 'markEmptySeries');
-    const markNegative = get(this, 'markNegativeSeries');
+    const markEmpty = this.markEmptySeries;
+    const markNegative = this.markNegativeSeries;
     const columns = [];
 
     if (!metrics || isEmpty(metrics)) {

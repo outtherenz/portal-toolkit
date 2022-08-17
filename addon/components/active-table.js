@@ -15,7 +15,7 @@ export default Component.extend({
 
   headers: computed('columns', function() {
     const [ sortedBy, sortDir ] = get(this, 'sortedBy.0').split(':');
-    const columns = get(this, 'columns');
+    const columns = this.columns;
     const columnCount = get(columns, 'length');
     const headers = [];
     let totalUnits = 0;
@@ -73,7 +73,7 @@ export default Component.extend({
         set(this, 'sortedBy', [ toSortBy + ':asc' ]);
 
         // set column meta
-        get(this, 'headers').forEach(column => set(column, 'sorted', false));
+        this.headers.forEach(column => set(column, 'sorted', false));
         set(columnToSort, 'sorted', true);
         set(columnToSort, 'ascending', true);
       }

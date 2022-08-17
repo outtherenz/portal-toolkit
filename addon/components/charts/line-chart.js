@@ -11,8 +11,8 @@ export default C3Chart.extend({
   data: computed('metrics', 'series', 'period', function() {
     const periodType = get(this, 'period.type');
     const dates = [];
-    const seriesMeta = get(this, 'series');
-    const metrics = get(this, 'metrics');
+    const seriesMeta = this.series;
+    const metrics = this.metrics;
     const series = isArray(metrics) ? metrics[0].series : metrics.series;
     const columns = [];
 
@@ -52,7 +52,7 @@ export default C3Chart.extend({
   }),
 
   axis: computed('metrics', function() {
-    const metrics = get(this, 'metrics');
+    const metrics = this.metrics;
     const meta = isArray(metrics) ? metrics[0].meta : metrics.meta;
     let label;
     let reduction;
@@ -145,7 +145,7 @@ export default C3Chart.extend({
   },
 
   tooltip: computed('metrics', function() {
-    const metrics = get(this, 'metrics');
+    const metrics = this.metrics;
     const meta = isArray(metrics) ? metrics[0].meta : metrics.meta;
 
     return {

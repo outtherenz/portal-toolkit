@@ -25,14 +25,14 @@ export default Model.extend({
   entity: belongsTo('entity'),
 
   finalCost: computed('setupCost', 'serviceCost', 'recurrence', 'quantity', function() {
-    return get(this, 'quantity') * (get(this, 'setupCost') + (get(this, 'serviceCost') * get(this, 'recurrence')));
+    return this.quantity * (this.setupCost + (this.serviceCost * this.recurrence));
   }),
 
   finalPrice: computed('setupPrice', 'servicePrice', 'recurrence', 'quantity', function() {
-    return get(this, 'quantity') * (get(this, 'setupPrice') + (get(this, 'servicePrice') * get(this, 'recurrence')));
+    return this.quantity * (this.setupPrice + (this.servicePrice * this.recurrence));
   }),
 
   itemProfit: computed('finalPrice', 'finalCost', function() {
-    return get(this, 'finalPrice') - get(this, 'finalCost');
+    return this.finalPrice - this.finalCost;
   })
 });

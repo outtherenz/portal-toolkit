@@ -19,7 +19,7 @@ export default Component.extend({
 
   selection: computed('date', {
     get() {
-      const date = get(this, 'date') || new Date();
+      const date = this.date || new Date();
 
       return {
         day: date.getDate(),
@@ -44,7 +44,7 @@ export default Component.extend({
   })),
 
   calendar: computed('calendarState.{day,month,year}', function() {
-    const calendarState = get(this, 'calendarState');
+    const calendarState = this.calendarState;
     const { month, year } = getProperties(calendarState || {}, 'month', 'year');
 
     if (month == null || year == null) {
@@ -79,7 +79,7 @@ export default Component.extend({
 
   actions: {
     changeMonth(diff) {
-      const calendarState = get(this, 'calendarState');
+      const calendarState = this.calendarState;
       const { month, year } = getProperties(calendarState || {}, 'month', 'year');
 
       if (month == null || year == null) {

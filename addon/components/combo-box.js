@@ -21,10 +21,10 @@ export default Component.extend({
   didInsertElement() {
     // capture click events and check if they are for our component
     // if they are not, we can close the drop down
-    const element = get(this, 'elementId');
+    const element = this.elementId;
     $(window).on('click', event => {
       if (
-        get(this, 'finderVisible') &&
+        this.finderVisible &&
         $(`#${element}`).has(event.target).length === 0 &&
         !$(`#${element}`).is(event.target)
       ) {
@@ -33,7 +33,7 @@ export default Component.extend({
     });
 
     // we need to set the value on the initial render
-    const activeValue = get(this, 'activeDisplayName');
+    const activeValue = this.activeDisplayName;
     set(this, 'searchTerm', activeValue);
   },
 
@@ -46,18 +46,18 @@ export default Component.extend({
   // Things that need to happen every time the element is re-rendered
   willRender() {
     // We only want to set the value when the search is not being used and the value has changed
-    const finderNotVisible = !get(this, 'finderVisible');
-    const activeValue = get(this, 'activeDisplayName');
-    const searchTerm = get(this, 'searchTerm');
+    const finderNotVisible = !this.finderVisible;
+    const activeValue = this.activeDisplayName;
+    const searchTerm = this.searchTerm;
     if (finderNotVisible && activeValue !== searchTerm) {
       set(this, 'searchTerm', activeValue);
     }
   },
 
   filteredOptions: computed('key', 'options', 'searchTerm', function() {
-    const key = get(this, 'key');
-    const searchTerm = get(this, 'searchTerm');
-    const options = get(this, 'options');
+    const key = this.key;
+    const searchTerm = this.searchTerm;
+    const options = this.options;
 
     if (searchTerm) {
       return options.filter(option => {
@@ -70,8 +70,8 @@ export default Component.extend({
   }),
 
   activeDisplayName: computed('value', 'options', function() {
-    const value = get(this, 'value');
-    const key = get(this, 'key');
+    const value = this.value;
+    const key = this.key;
 
     if (typeof value !== 'object') {
       // Verbatim if value is not an object
@@ -87,11 +87,11 @@ export default Component.extend({
 
   actions: {
     setFinderVisible(visible) {
-      if (get(this, 'finderVisible') !== visible && !this.isDestroyed && !this.isDestroying) set(this, 'finderVisible', visible);
+      if (this.finderVisible !== visible && !this.isDestroyed && !this.isDestroying) set(this, 'finderVisible', visible);
     },
 
     keyDown(event) {
-      const selectedRow = get(this, 'selectedRow');
+      const selectedRow = this.selectedRow;
       switch (event.keyCode) {
         // down arrow
         case 38:
@@ -113,7 +113,7 @@ export default Component.extend({
           break;
         // enter
         case 13:
-          if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
+          if (this.finderVisible) this.send('setItem', selectedRow);
           event.preventDefault();
           break;
         // tab
@@ -154,14 +154,14 @@ export default Component.extend({
     },
 
     unSetHighlight(index) {
-      if (get(this, 'selectedRow') === index) set(this, 'selectedRow', null);
+      if (this.selectedRow === index) set(this, 'selectedRow', null);
     },
 
     setItem(index) {
       next(() => {
         // when the index is negative, the new item value is in the searchTerm
-        const item = index >= 0 ? get(this, 'filteredOptions').objectAt(index) : get(this, 'searchTerm');
-        const key = get(this, 'key');
+        const item = index >= 0 ? this.filteredOptions.objectAt(index) : this.searchTerm;
+        const key = this.key;
 
         if (typeof item === 'object') {
           this.sendAction('onSet', key ? get(item, key) : item);

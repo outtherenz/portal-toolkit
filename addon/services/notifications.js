@@ -28,7 +28,7 @@ export default Service.extend({
     return this.show(options, duration);
   },
 
-  show(options, duration = get(this, 'defaultClearDuration')) {
+  show(options, duration = this.defaultClearDuration) {
     options = options || {};
 
     // Support show('Message')
@@ -53,7 +53,7 @@ export default Service.extend({
       clearDuration
     });
 
-    get(this, 'list').pushObject(notification);
+    this.list.pushObject(notification);
 
     if (get(notification, 'autoClear')) {
       this.setupAutoClear(notification);
@@ -72,7 +72,7 @@ export default Service.extend({
 
     later(() => {
       // Hasn't been closed manually
-      if (get(this, 'list').indexOf(notification) !== -1 && !get(notification, 'dismiss')) {
+      if (this.list.indexOf(notification) !== -1 && !get(notification, 'dismiss')) {
         this.clear(notification);
       }
     }, get(notification, 'clearDuration'));
@@ -84,10 +84,10 @@ export default Service.extend({
     set(notification, 'dismiss', true);
 
     // Delay removal from DOM for dismissal animation
-    later(() => get(this, 'list').removeObject(notification), 500);
+    later(() => this.list.removeObject(notification), 500);
   },
 
   clearAll() {
-    get(this, 'list').forEach(notification => this.clear(notification));
+    this.list.forEach(notification => this.clear(notification));
   }
 });

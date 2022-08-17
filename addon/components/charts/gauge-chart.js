@@ -13,8 +13,8 @@ export default C3Chart.extend({
   label: '% of target',
 
   data: computed('metrics', 'period', 'target', function() {
-    const metrics = get(this, 'metrics');
-    const target = get(this, 'target');
+    const metrics = this.metrics;
+    const target = this.target;
     const periodType = get(this, 'period.type');
     const columns = [];
 
@@ -44,17 +44,17 @@ export default C3Chart.extend({
         format: (value, ratio) => formatNumber([ 'percentage', value ], { places: 2, dashZero: false }),
         show: true // to turn off the min/max labels
       },
-      min: get(this, 'min'),
-      max: get(this, 'max'), // 100 is default
-      units: get(this, 'label'),
+      min: this.min,
+      max: this.max, // 100 is default
+      units: this.label,
       width: 60 // for adjusting arc thickness
     };
   }),
 
   color: computed('min', 'max', function() {
-    const min = get(this, 'min');
-    const max = get(this, 'max');
-    const reverseColors = get(this, 'reverseColors');
+    const min = this.min;
+    const max = this.max;
+    const reverseColors = this.reverseColors;
     const values = [];
 
     let colors = [
@@ -84,7 +84,7 @@ export default C3Chart.extend({
       pattern: colors,
       threshold: {
         unit: 'value', // percentage is default
-        max: get(this, 'max'), // 100 is default
+        max: this.max, // 100 is default
         values
       }
     };

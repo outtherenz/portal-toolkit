@@ -1,27 +1,26 @@
-import { moduleForComponent, test } from 'ember-qunit';
-import wait from 'ember-test-helpers/wait';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
+import { settled } from '@ember/test-helpers';
 
 const fileContent = `Company,ReportTitle,Period,Account,Name,MonthBal,YTDBal
 GISB,BALANCE SHEET,201702,TM7701,Manufacturing Stock on Hand,"-4,176.84","17,230.60"
 \r`;
 
-moduleForComponent('file-inputs/csv', 'Unit | Component | file inputs/csv', {
-  // Specify the other units that are required for this test
-  // needs: ['component:foo', 'helper:bar'],
-  unit: true
-});
+module('Unit | Component | file inputs/csv', function(hooks) {
+  setupTest(hooks);
 
-test('it can handle mixed line endings', function(assert) {
-  assert.expect(1);
+  test('it can handle mixed line endings', function(assert) {
+    assert.expect(1);
 
-  const component = this.subject();
-  const file = new File([ fileContent ], 'file-name.csv');
-  const event = { target: { files: [ file ] } };
+    const component = this.owner.factoryFor('component:file-inputs/csv').create();
+    const file = new File([ fileContent ], 'file-name.csv');
+    const event = { target: { files: [ file ] } };
 
-  component.change(event);
+    component.change(event);
 
-  return wait().then(() => {
-    const result = component.get('file');
-    assert.equal(result.data.length, 2);
+    return settled().then(() => {
+      const result = component.get('file');
+      assert.equal(result.data.length, 2);
+    });
   });
 });

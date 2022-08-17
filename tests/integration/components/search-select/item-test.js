@@ -1,10 +1,13 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { set, get } from '@ember/object';
 
-moduleForComponent('search-select/item', 'Integration | Component | search select/item', {
-  integration: true,
-  beforeEach() {
+module('Integration | Component | search select/item', function(hooks) {
+  setupRenderingTest(hooks);
+
+  hooks.beforeEach(function() {
     set(this, 'option', {
       name: 'Apple',
       code: '001',
@@ -17,19 +20,19 @@ moduleForComponent('search-select/item', 'Integration | Component | search selec
           name = get(option, key)
         , '');
     });
-  }
-});
+  });
 
-test('it renders with the correct text', function(assert) {
-  this.render(hbs`
-    {{search-select/item
-      index=0
-      selectedRow=0
-      option=option
-      keys=keys
-      getDisplayName=getDisplayName
-    }}
-  `);
+  test('it renders with the correct text', async function(assert) {
+    await render(hbs`
+      {{search-select/item
+        index=0
+        selectedRow=0
+        option=option
+        keys=keys
+        getDisplayName=getDisplayName
+      }}
+    `);
 
-  assert.equal(this.$().text().trim(), 'Apple');
+    assert.dom(this.element).hasText('Apple');
+  });
 });

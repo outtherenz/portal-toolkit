@@ -9,7 +9,6 @@
     "neat": "^1.8.0",
     "papaparse": "~4.1.1",
     "sortable": "RubaXa/Sortable",
-    "pretender": "~1.1.0",
-    "Faker": "~3.1.0"
+    "pretender": "~1.1.0"
   }
 }

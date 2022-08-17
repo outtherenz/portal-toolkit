@@ -20,9 +20,9 @@ export default Component.extend({
   increaseIsGood: true,
 
   _diff: computed('from', 'to', 'difference', function() {
-    const from = get(this, 'from');
-    const to = get(this, 'to');
-    const difference = get(this, 'difference');
+    const from = this.from;
+    const to = this.to;
+    const difference = this.difference;
 
     if (difference != null) {
       return difference;
@@ -32,9 +32,9 @@ export default Component.extend({
   }),
 
   color: computed('_diff', function() {
-    const diff = get(this, '_diff');
-    const increaseIsGood = get(this, 'increaseIsGood');
-    const useColor = get(this, 'useColor');
+    const diff = this._diff;
+    const increaseIsGood = this.increaseIsGood;
+    const useColor = this.useColor;
 
     if (!useColor) {
       return;
@@ -50,12 +50,12 @@ export default Component.extend({
   }),
 
   icon: computed('_diff', 'positiveIcon', 'negativeIcon', function() {
-    const diff = get(this, '_diff');
+    const diff = this._diff;
 
     if (diff > 0) {
-      return get(this, 'positiveIcon');
+      return this.positiveIcon;
     } else if (diff < 0) {
-      return get(this, 'negativeIcon');
+      return this.negativeIcon;
     }
 
     return '';
