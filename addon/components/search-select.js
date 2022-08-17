@@ -46,7 +46,7 @@ export default Component.extend({
     set(this, 'searchTerm', activeValue);
 
     // Generate the activeDisplayName, with dependent paths that are calculated from the passed in `keys` and `value` properties.
-    const updateKeys = this._keys.map(k => 'value.' + k);
+    const updateKeys =  this._keys? this._keys.map(k => 'value.' + k):[];
     defineProperty(this, 'activeDisplayName', computed('value', 'options[]', 'separator', ...updateKeys, function() {
       const value = this.value;
       const keys = this._keys;
@@ -151,7 +151,7 @@ export default Component.extend({
     },
 
     setItem(index) {
-      const item = this.filteredOptions.objectAt(index);
+      const item = this.filteredOptions[index];
 
       this.sendAction('onSelect', item);
       this.send('setFinderVisible', false);

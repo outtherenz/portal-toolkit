@@ -22,7 +22,7 @@ export default Component.extend({
   sort() {
     this.$('li').each((index, li) => {
       const id = $(li).attr('data-id');
-      const item = this.content.findBy('id', id);
+      const item = this.content.find((i)=>i.id == id);
 
       if (item) {
         set(item, 'sortIndex', index);

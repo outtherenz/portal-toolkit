@@ -53,7 +53,7 @@ export default Service.extend({
       clearDuration
     });
 
-    this.list.pushObject(notification);
+    this.list.push(notification);
 
     if (get(notification, 'autoClear')) {
       this.setupAutoClear(notification);

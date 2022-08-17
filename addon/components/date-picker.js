@@ -66,7 +66,7 @@ export default Component.extend({
       for (; calendar[week].length < 7; offset--) {
         const date = moment(startOfMonth).subtract(offset, 'days');
 
-        calendar[week].pushObject({
+        calendar[week].push({
           day: date.date(),
           month: date.month(),
           year: date.year()

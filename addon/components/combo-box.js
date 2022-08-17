@@ -160,7 +160,7 @@ export default Component.extend({
     setItem(index) {
       next(() => {
         // when the index is negative, the new item value is in the searchTerm
-        const item = index >= 0 ? this.filteredOptions.objectAt(index) : this.searchTerm;
+        const item = index >= 0 ? this.filteredOptions[index] : this.searchTerm;
         const key = this.key;
 
         if (typeof item === 'object') {

@@ -47,7 +47,7 @@ module('Unit | Service | notifications', function(hooks) {
 
   test('it can clear a single notification', function(assert) {
     const list = get(this.owner.lookup('service:notifications'), 'list');
-    const toRemove = list.findBy('autoClear', false);
+    const toRemove = list.find((i) => i.autoClear == false);
     this.owner.lookup('service:notifications').clear(toRemove);
     assert.ok(get(toRemove, 'dismiss'));
   });

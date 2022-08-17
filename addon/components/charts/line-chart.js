@@ -33,7 +33,7 @@ export default C3Chart.extend({
     seriesMeta.forEach((meta, seriesIndex) => {
       const thisSeries = series.find(s => s.entity === get(meta, 'id') || s.group === get(meta, 'id')) || {};
       const periods = thisSeries.periods || [];
-      columns.pushObject([ get(meta, 'name') ]);
+      columns.push([ get(meta, 'name') ]);
 
       dates.forEach((date, periodIndex) => {
         const period = periods.find(p => p.date === date.toISOString());

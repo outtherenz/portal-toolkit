@@ -19,7 +19,7 @@ export default Component.extend({
     metrics.forEach(metric => {
       const format = get(metric, 'meta.format');
       const series = get(metric, 'series') || [];
-      const periods = get(series.objectAt(0) || [], 'periods') || [];
+      const periods = get(series[0] || [], 'periods') || [];
       const period = periods.find(p => p.date === date.toISOString());
       let value = period ? get(period, `periodTypes.${periodType}.value`) : null;
 
