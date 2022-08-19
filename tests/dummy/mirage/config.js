@@ -1,6 +1,16 @@
 import fakeReporter from './fake-reporter';
 
+// import { discoverEmberDataModels } from "ember-cli-mirage";
+// import { createServer } from 'miragejs';
 export default function() {
+
+  // let finalConfig = {
+  //   ...config,
+  //   models: { ...discoverEmberDataModels(), ...config.models },
+  //   routes,
+  // };
+
+  // return createServer(finalConfig);
   // Add a 400 ms delay to all requests during development
   this.timing = 400;
 
@@ -28,4 +38,11 @@ export default function() {
 
   // Allow requests to undefined routes to continue as normal
   this.passthrough();
+}
+
+
+function routes() {
+  this.namespace = '/api'
+
+ // this.resource('user')
 }

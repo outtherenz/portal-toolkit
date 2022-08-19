@@ -4,26 +4,26 @@
 
 <div class='component-box'>
   <h2><span class="title-category">Component:</span> Data Table</h2>
-  {{charts/data-table metrics=model.kpis period=period}}
-  <code><pre>\{{charts/data-table metrics=model.kpis period=period}}</pre></code>
+  {{charts/data-table metrics=this.model.kpis period=this.period}}
+  <code><pre>\{{charts/data-table metrics=this.model.kpis period=this.period}}</pre></code>
 </div>
 
 <div class='component-box'>
   <h2><span class="title-category">Component:</span> Line Chart</h2>
-  {{charts/line-chart series=model.series metrics=model.kpis period=period}}
-  <code><pre>\{{charts/line-chart series=model.series metrics=model.kpis period=period}}</pre></code>
+  {{charts/line-chart series=this.model.series metrics=this.model.kpis period=this.period}}
+  <code><pre>\{{charts/line-chart series=this.model.series metrics=this.model.kpis period=this.period}}</pre></code>
 </div>
 
 <div class='component-box'>
   <h2><span class="title-category">Component:</span> Pie Chart</h2>
-  {{charts/pie-chart series=model.series metrics=model.kpis period=period}}
-  <code><pre>\{{charts/pie-chart series=model.series metrics=model.kpis period=period}}</pre></code>
+  {{charts/pie-chart series=this.model.series metrics=this.model.kpis period=this.period}}
+  <code><pre>\{{charts/pie-chart series=this.model.series metrics=this.model.kpis period=this.period}}</pre></code>
 </div>
 
 <div class='component-box'>
   <h2><span class="title-category">Component:</span> gauge Chart</h2>
-  {{charts/gauge-chart series=model.series target=1 metrics=model.kpis period=period}}
-  <code><pre>\{{charts/gauge-chart series=model.series target=1 metrics=model.kpis period=period}}</pre></code>
+  {{charts/gauge-chart series=this.model.series target=1 metrics=this.model.kpis period=this.period}}
+  <code><pre>\{{charts/gauge-chart series=this.model.series target=1 metrics=this.model.kpis period=this.period}}</pre></code>
 </div>
 
 {{#page-description title='Charts'}}
