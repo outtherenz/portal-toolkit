@@ -88,6 +88,7 @@ function buildSeries(schema, qp, periods) {
  * Builds a collection of metrics, the top level of the report heirarchy.
  */
 function buildMetrics(type, schema, qp, series) {
+
   let metrics = qp.metrics || qp.accounts;
 
   if (isEmpty(metrics)) {

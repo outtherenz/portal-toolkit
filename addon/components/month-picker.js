@@ -14,10 +14,10 @@ export default Component.extend({
 
   selectedMonth: computed('period', {
     get() {
-      return get(this, 'period').substr(5);
+      return this.period.substr(5);
     },
     set(key, value) {
-      const current = get(this, 'period');
+      const current = this.period;
       set(this, 'period', current.substr(0, 5) + value);
       return value;
     }
@@ -25,11 +25,11 @@ export default Component.extend({
 
   selectedYear: computed('period', {
     get() {
-      const period = get(this, 'period');
+      const period = this.period;
       return typeof period === 'string' ? period.substr(0, 4) : String(moment().year());
     },
     set(key, year) {
-      const current = moment(get(this, 'period'), 'YYYY-MM');
+      const current = moment(this.period, 'YYYY-MM');
       const month = current.isValid() ? current.format('MM') : moment().format('MM');
       year = moment(year, 'YYYY').isValid() ? String(year) : moment().format('YYYY');
       set(this, 'period', `${year}-${month}`);
@@ -38,7 +38,7 @@ export default Component.extend({
   }),
 
   yearList: computed('period', function() {
-    const selected = moment(get(this, 'period').substr(0, 4), 'YYYY');
+    const selected = moment(this.period.substr(0, 4), 'YYYY');
     let start = moment([moment().year() - 8]);
     let end = moment([moment().year() + 2]);
 
@@ -60,7 +60,7 @@ export default Component.extend({
   }),
 
   changePeriod(diff, type) {
-    const current = get(this, 'period');
+    const current = this.period;
     const updated = moment(current, 'YYYY-MM').add(diff, type).format('YYYY-MM');
     set(this, 'period', updated);
   },

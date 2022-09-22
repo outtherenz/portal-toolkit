@@ -26,7 +26,7 @@ export default Service.extend({
     if (existing) {
       set(existing, 'value', value);
     } else {
-      cache.pushObject({ key, value });
+      cache.push({ key, value });
     }
   },
 

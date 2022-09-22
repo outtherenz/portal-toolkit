@@ -38,18 +38,18 @@ export default Model.extend({
 
   // Amount of profit made per item setup
   pPI: computed('setupPrice', 'setupCost', function() {
-    return (get(this, 'setupPrice') -  get(this, 'setupCost'));
+    return this.setupPrice -  this.setupCost;
   }),
 
   // Amount of profit made per reccurence
   pPR: computed('servicePrice', 'serviceCost', function() {
-    return get(this, 'servicePrice') - get(this, 'serviceCost');
+    return this.servicePrice - this.serviceCost;
   }),
 
   // Minimum number of returns before a profit is made
   mRQ: computed('pPI', 'pPR', function() {
-    const profitPerItem = get(this, 'pPI');
-    const profitPerRecurrence = get(this, 'pPR');
+    const profitPerItem = this.pPI;
+    const profitPerRecurrence = this.pPR;
 
     if (profitPerItem < 0 && profitPerRecurrence <= 0) {
       return '∞';

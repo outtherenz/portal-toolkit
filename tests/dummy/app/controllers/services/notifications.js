@@ -6,25 +6,25 @@ export default Controller.extend({
   notifications: service(),
   actions: {
     notifyAll() {
-      get(this, 'notifications').error('Error');
-      get(this, 'notifications').success('success');
-      get(this, 'notifications').info('info');
-      get(this, 'notifications').warning('warning');
+      this.notifications.error('Error');
+      this.notifications.success('success');
+      this.notifications.info('info');
+      this.notifications.warning('warning');
     },
     notifyError() {
-      get(this, 'notifications').error('Error');
+      this.notifications.error('Error');
     },
     notifysuccess() {
-      get(this, 'notifications').success('Success');
+      this.notifications.success('Success');
     },
     notifyInfo() {
-      get(this, 'notifications').info('Info');
+      this.notifications.info('Info');
     },
     notifyWarning() {
-      get(this, 'notifications').warning('Warning');
+      this.notifications.warning('Warning');
     },
     clearAll() {
-      get(this, 'notifications').clearAll();
+      this.notifications.clearAll();
     }
   }
 });

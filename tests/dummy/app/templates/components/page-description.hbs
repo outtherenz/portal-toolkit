@@ -1,5 +1,5 @@
-<div class={{if description 'page-description out' 'page-description'}}>
-  <h1>{{title}}</h1>
+<div class={{if this.description 'page-description out' 'page-description'}}>
+  <h1>{{this.title}}</h1>
   <div class='content'>
     {{yield}}
   </div>

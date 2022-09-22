@@ -16,7 +16,7 @@ export default Component.extend({
   format: 'dddd, D MMMM YYYY',
 
   didInsertElement() {
-    const element = get(this, 'elementId');
+    const element = this.elementId;
     $(window).on('keydown keyup click blur', event => {
       const { target, key } = event;
       const isTarget = $(`#${element}`).is(target);
@@ -27,7 +27,7 @@ export default Component.extend({
           set(this, 'isActive', false);
           event.preventDefault();
         }
-      } else if (get(this, 'isActive')) {
+      } else if (this.isActive) {
         set(this, 'isActive', false);
       }
     });
@@ -39,7 +39,7 @@ export default Component.extend({
   },
 
   focusDateInput: observer('isActive', function() {
-    if (get(this, 'isActive')) next(() => this.$('input').focus());
+    if (this.isActive) next(() => this.$('input').focus());
   }),
 
   actions: {

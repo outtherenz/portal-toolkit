@@ -1,4 +1,31 @@
 import fakeReporter from './fake-reporter';
+import { discoverEmberDataModels } from "ember-cli-mirage";
+import { createServer } from 'miragejs';
+// export default function(config) {
+//   let finalConfig = {
+//     ...config,
+//     models: { ...discoverEmberDataModels(), ...config.models },
+//     routes() {
+//       this.resource('accounts');
+//       this.resource('accounts/:id');
+//       this.resource('branches');
+//       this.resource('branches/:id');
+//       this.resource('dashboard-modules');
+//       this.resource('dashboard-modules/:id');
+//       this.resource('groups');
+//       this.resource('groups/:id');
+//       this.resource('kpis');
+//       this.resource('kpis/:id');
+//       this.resource('organisations');
+//       this.resource('organisations/:id');
+//       this.resource('users');
+//       this.resource('users/:id');
+//     },
+//   };
+
+//   return createServer(finalConfig);
+// }
+
 
 export default function() {
   // Add a 400 ms delay to all requests during development
@@ -29,3 +56,4 @@ export default function() {
   // Allow requests to undefined routes to continue as normal
   this.passthrough();
 }
+

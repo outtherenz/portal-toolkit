@@ -6,12 +6,12 @@ export default Component.extend({
   layout,
 
   displayName: computed('option', 'keys', 'separator', function() {
-    const option = get(this, 'option');
+    const option = this.option;
 
     if (typeof option === 'string') return option;
 
-    const keys = get(this, 'keys');
-    const separator = get(this, 'separator');
+    const keys = this.keys;
+    const separator = this.separator;
 
     return keys.map(key => get(option, key)).join(separator);
   })

@@ -39,8 +39,8 @@ export default Component.extend({
 
   actions: {
     clear() {
-      const notifications = get(this, 'notifications');
-      const notification = get(this, 'notification');
+      const notifications = this.notifications;
+      const notification = this.notification;
       notifications.clear(notification);
     }
   }

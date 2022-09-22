@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import {computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import $ from 'jquery';
 export default Controller.extend({
@@ -10,9 +11,10 @@ export default Controller.extend({
 
   // full screen mode //
   mode: undefined,
-  watchMode: function() {
+
+  watchMode: computed('mode', function() {
     $('.sidebar, .page-header').toggleClass('none');
-  }.observes('mode'),
+  }),
 
   // background-color modifying //
   colorRGB: 'rgb(255,255,255)',
@@ -24,13 +26,16 @@ export default Controller.extend({
   colorG: 255,
   colorB: 255,
 
-  colorChange: function() {
-    var rVal = this.get('colorR');
-    var gVal = this.get('colorG');
-    var bVal = this.get('colorB');
-    var hexVal = this.get('colorInput');
-    var rgbSwitch = this.get('rgbColor');
-    var hexSwitch = this.get('hexColor');
+
+
+  colorChange: computed('colorR', 'colorG', 'colorB', 'rgbColor', 'colorInput', 'hexColor', function() {
+
+    var rVal = this.colorR;
+    var gVal = this.colorG;
+    var bVal = this.colorB;
+    var hexVal = this.colorInput;
+    var rgbSwitch = this.rgbColor;
+    var hexSwitch = this.hexColor;
     var rgbVal = 'rgb(' + rVal + ',' + gVal + ',' + bVal + ')';
     $('.colorBox').css({
       'background-color': rgbVal
@@ -63,12 +68,12 @@ export default Controller.extend({
         'background-color': hexVal
       });
     }
-  }.observes('colorR', 'colorG', 'colorB', 'rgbColor', 'colorInput', 'hexColor'),
+  }),
 
   // white & black values //
-  brightnessChange: function() {
-    var lightVal = this.get('colorLight');
-    var rgbSwitch = this.get('rgbColor');
+  brightnessChange: computed('colorLight', function() {
+    var lightVal = this.colorLight;
+    var rgbSwitch = this.rgbColor;
     var rgbVal = 'rgb(' + lightVal + ',' + lightVal + ',' + lightVal + ')';
     $('.colorBox').css({
       'background-color': rgbVal
@@ -93,20 +98,21 @@ export default Controller.extend({
         ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
     }
     $('.hexStatus').val(rgb2hex());
-  }.observes('colorLight'),
+  }),
 
   // page width modifier //
   pageWidth: '0.75',
-  changePageWidth: function() {
-    var pageWidth = this.get('pageWidth');
+
+  changePageWidth: computed('pageWidth', function() {
+    var pageWidth = this.pageWidth;
     $('.page').css({
       flex: pageWidth
     });
-  }.observes('pageWidth'),
+  }),
 
   // #decafe //
   decafe: undefined,
-  watchDecafe: function() {
+  watchDecafe: computed('decafe', function() {
     setInterval(function() {
       var r = Math.floor(Math.random() * 254) + 1;
       var g = Math.floor(Math.random() * 254) + 1;
@@ -116,5 +122,5 @@ export default Controller.extend({
         'background-color': de
       });
     }, 30);
-  }.observes('decafe')
+  })
 });

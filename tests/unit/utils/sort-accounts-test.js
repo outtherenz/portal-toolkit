@@ -30,49 +30,49 @@ accounts.forEach(account => {
   };
 });
 
-module('Unit | Utility | sort accounts');
+module('Unit | Utility | sort accounts', function() {
+  test('groups and sorts by category, then sort index', function(assert) {
+    const sortedNames = sortAccounts(accounts).map(account => account.name);
 
-test('groups and sorts by category, then sort index', function(assert) {
-  const sortedNames = sortAccounts(accounts).map(account => account.name);
-
-  assert.deepEqual(sortedNames, [
-    'Income',
-    'Expenses',
-    'Assets',
-    'Liabilities',
-    'Number of Employees'
-  ]);
-});
-
-test('uses custom sort keys', function(assert) {
-  accounts.forEach(account => {
-    delete account.sortIndex;
+    assert.deepEqual(sortedNames, [
+      'Income',
+      'Expenses',
+      'Assets',
+      'Liabilities',
+      'Number of Employees'
+    ]);
   });
 
-  const sortedNames = sortAccounts(accounts, 'custom.sort').map(account => account.name);
+  test('uses custom sort keys', function(assert) {
+    accounts.forEach(account => {
+      delete account.sortIndex;
+    });
 
-  assert.deepEqual(sortedNames, [
-    'Income',
-    'Expenses',
-    'Assets',
-    'Liabilities',
-    'Number of Employees'
-  ]);
-});
+    const sortedNames = sortAccounts(accounts, 'custom.sort').map(account => account.name);
 
-test('uses custom sort and category keys', function(assert) {
-  accounts.forEach(account => {
-    delete account.category;
+    assert.deepEqual(sortedNames, [
+      'Income',
+      'Expenses',
+      'Assets',
+      'Liabilities',
+      'Number of Employees'
+    ]);
   });
 
-  const sortedNames = sortAccounts(accounts, 'custom.sort', 'custom.category')
-  .map(account => account.name);
+  test('uses custom sort and category keys', function(assert) {
+    accounts.forEach(account => {
+      delete account.category;
+    });
 
-  assert.deepEqual(sortedNames, [
-    'Income',
-    'Expenses',
-    'Assets',
-    'Liabilities',
-    'Number of Employees'
-  ]);
+    const sortedNames = sortAccounts(accounts, 'custom.sort', 'custom.category')
+    .map(account => account.name);
+
+    assert.deepEqual(sortedNames, [
+      'Income',
+      'Expenses',
+      'Assets',
+      'Liabilities',
+      'Number of Employees'
+    ]);
+  });
 });
