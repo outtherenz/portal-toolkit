@@ -1,5 +1,4 @@
 // Libraries and dependencies
-@import "bourbon";
 @import "ember-modal-dialog/ember-modal-structure";
 
 // Setup
@@ -9,6 +8,7 @@
 
 // Mixins
 @import "mixins/grab-cursor";
+@import "mixins/clearfix";
 
 // Global
 @import "global/animations";
