@@ -1,42 +1,43 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, settled, find, fillIn } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import wait from 'ember-test-helpers/wait';
 
-moduleForComponent('duration-input', 'Integration | Component | duration input', {
-  integration: true
-});
+module('Integration | Component | duration input', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('inits with defualt placeholder', function(assert) {
-  this.render(hbs`{{duration-input duration=duration}}`);
-  assert.equal(this.$('input').attr('placeholder'), '0:00');
-});
-
-test('inits with dash placeholder', function(assert) {
-  this.render(hbs`{{duration-input duration=duration placeholder='–'}}`);
-  assert.equal(this.$('input').attr('placeholder'), '–');
-});
-
-test('formats on init', function(assert) {
-  this.render(hbs`{{duration-input duration='5.75'}}`);
-  assert.equal(this.$('input').val(), '5:45');
-});
-
-test('formats on blur', function(assert) {
-  this.render(hbs`{{duration-input duration=duration}}`);
-  this.$('input').val('3:30').blur();
-
-  return wait().then(() => {
-    assert.equal(this.$('input').val(), '3:30');
-    assert.equal(this.get('duration'), 3.5);
+  test('inits with defualt placeholder', async function(assert) {
+    await render(hbs`{{duration-input duration=duration}}`);
+    assert.dom('input').hasAttribute('placeholder', '0:00');
   });
-});
 
-test('reformats when value is updated', function(assert) {
-  this.render(hbs`{{duration-input duration=duration}}`);
+  test('inits with dash placeholder', async function(assert) {
+    await render(hbs`{{duration-input duration=duration placeholder='–'}}`);
+    assert.dom('input').hasAttribute('placeholder', '–');
+  });
 
-  return wait().then(() => {
-    this.set('duration', 6.75);
-  }).then(() => {
-    assert.equal(this.$('input').val(), '6:45');
+  test('formats on init', async function(assert) {
+    await render(hbs`{{duration-input duration='5.75'}}`);
+    assert.dom('input').hasValue('5:45');
+  });
+
+  test('formats on blur', async function(assert) {
+    await render(hbs`{{duration-input duration=duration}}`);
+    await fillIn('input', '3:30').blur();
+
+    return settled().then(() => {
+      assert.dom('input').hasValue('3:30');
+      assert.equal(this.duration, 3.5);
+    });
+  });
+
+  test('reformats when value is updated', async function(assert) {
+    await render(hbs`{{duration-input duration=duration}}`);
+
+    return settled().then(() => {
+      this.set('duration', 6.75);
+    }).then(() => {
+      assert.dom('input').hasValue('6:45');
+    });
   });
 });

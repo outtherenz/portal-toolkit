@@ -33,7 +33,8 @@
       <span class="month-picker__month">{{moment-format period 'MMM' 'YYYY-MM'}}</span>
       <span class="month-picker__year">{{moment-format period 'YYYY' 'YYYY-MM'}}</span>
     </span>
-    {{fa-icon 'calendar'}}
+
+      <FaIcon @icon='calendar' />
   </label>
 
   {{input type="month" value=period class="month-picker__input" id="month-picker__input"}}

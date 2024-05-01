@@ -35,7 +35,7 @@ export default Model.extend({
 
   // Statuses get capitalized and sometimes changed entirely
   displayedStatus: computed('status', function() {
-    const status = get(this, 'status');
+    const status = this.status;
     const validStatuses = [
       'pending',
       'accepted',
@@ -74,21 +74,21 @@ export default Model.extend({
   /* Calculations */
   // Profit before discount is subtracted
   rawProfit: computed('servicePrice', 'setupPrice', function() {
-    return (get(this, 'servicePrice') - get(this, 'setupPrice'));
+    return this.servicePrice - this.setupPrice;
   }),
 
   // Profit after discount is subtracted
   netProfit: computed('servicePriceWithDiscount', 'setupPrice', function() {
-    return (get(this, 'servicePriceWithDiscount') - get(this, 'setupPrice'));
+    return this.servicePriceWithDiscount - this.setupPrice;
   }),
 
   // Amount discounted as a percentage
   discountPercentage: computed('servicePrice', 'servicePriceWithDiscount', function() {
-    return (get(this, 'servicePrice') - get(this, 'servicePriceWithDiscount')) / get(this, 'servicePrice');
+    return (this.servicePrice - this.servicePriceWithDiscount) / this.servicePrice;
   }),
 
   // Return on investment as percentage
   roi: computed('servicePriceWithDiscount', 'setupPrice', function() {
-    return (get(this, 'servicePriceWithDiscount') - get(this, 'setupPrice')) / get(this, 'servicePriceWithDiscount');
+    return (this.servicePriceWithDiscount - this.setupPrice) / this.servicePriceWithDiscount;
   })
 });

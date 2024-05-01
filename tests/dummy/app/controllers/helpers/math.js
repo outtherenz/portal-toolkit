@@ -6,7 +6,7 @@ export default Controller.extend({
   operand2: 1,
   operatorunselect: 1,
   operator: computed('operatorunselect', function() {
-    switch (this.get('operatorunselect')) {
+    switch (this.operatorunselect) {
       case '1':
         return '+';
       case '2':

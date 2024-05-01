@@ -9,12 +9,10 @@ const LoadingIconComponent = Component.extend({
   classNameBindings: [ 'typeClassName' ],
 
   typeClassName: computed('type', function() {
-    return 'loading-icon--' + get(this, 'type');
+    return 'loading-icon--' + this.type;
   })
 });
 
-LoadingIconComponent.reopenClass({
-  positionalParams: [ 'type' ]
-});
+LoadingIconComponent.positionalParams = 'type';
 
 export default LoadingIconComponent;

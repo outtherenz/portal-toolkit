@@ -1,57 +1,59 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, click, findAll, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('loading-button', 'Integration | Component | loading button', {
-  integration: true
-});
+module('Integration | Component | loading button', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('renders in inline form', function(assert) {
-  assert.expect(1);
+  test('renders in inline form', async function(assert) {
+    assert.expect(1);
 
-  this.render(hbs`{{loading-button buttonText='Test'}}`);
+    await render(hbs`{{loading-button buttonText='Test'}}`);
 
-  assert.equal(this.$('button').text(), 'Test');
-});
+    assert.dom('button').hasText('Test');
+  });
 
-test('renders in block form', function(assert) {
-  assert.expect(1);
+  test('renders in block form', async function(assert) {
+    assert.expect(1);
 
-  this.render(hbs`{{#loading-button}}Test{{/loading-button}}`);
+    await render(hbs`{{#loading-button}}Test{{/loading-button}}`);
 
-  assert.equal(this.$('button').text(), 'Test');
-});
+    assert.dom('button').hasText('Test');
+  });
 
-test('shows a loading icon when loading', function(assert) {
-  assert.expect(5);
+  test('shows a loading icon when loading', async function(assert) {
+    assert.expect(5);
 
-  this.render(hbs`{{loading-button isLoading=isLoading}}`);
+    await render(hbs`{{loading-button isLoading=isLoading}}`);
 
-  // Record the inital style attributes for comparison later
-  const styleBefore = getComputedStyle(this.$('button')[0]);
+    // Record the inital style attributes for comparison later
+    const styleBefore = getComputedStyle(this.$('button')[0]);
 
-  // Start loading
-  this.set('isLoading', true);
+    // Start loading
+    this.set('isLoading', true);
 
-  // Check the button is disabled and the icon is shown
-  assert.ok(this.$('button')[0].disabled);
-  assert.equal(this.$('button i.fa').length, 1);
+    // Check the button is disabled and the icon is shown
+    assert.ok(this.$('button')[0].disabled);
+    assert.dom('button i.fa').exists({ count: 1 });
 
-  // Check the dimensions of the button didn't change
-  const styleAfter = getComputedStyle(this.$('button')[0]);
-  assert.equal(styleBefore.width, styleAfter.width);
-  assert.equal(styleBefore.height, styleAfter.height);
+    // Check the dimensions of the button didn't change
+    const styleAfter = getComputedStyle(this.$('button')[0]);
+    assert.equal(styleBefore.width, styleAfter.width);
+    assert.equal(styleBefore.height, styleAfter.height);
 
-  // Check everything returns to normal once loading finishes
-  this.set('isLoading', false);
-  assert.equal(this.$('button').text(), 'Submit');
-});
+    // Check everything returns to normal once loading finishes
+    this.set('isLoading', false);
+    assert.dom('button').hasText('Submit');
+  });
 
-test('triggers action when clicked', function(assert) {
-  assert.expect(0);
+  test('triggers action when clicked', async function(assert) {
+    assert.expect(0);
 
-  const done = assert.async();
+    const done = assert.async();
 
-  this.set('test', done);
-  this.render(hbs`{{loading-button action=(action test)}}`);
-  this.$('button').click();
+    this.set('test', done);
+    await render(hbs`{{loading-button action=(action test)}}`);
+    await click('button');
+  });
 });

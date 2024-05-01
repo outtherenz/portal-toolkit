@@ -1,5 +1,11 @@
 import Component from '@ember/component';
-import { set, get, computed, observer, defineProperty } from '@ember/object';
+import {
+  set,
+  get,
+  computed,
+  observer,
+  defineProperty
+} from '@ember/object';
 import $ from 'jquery';
 import layout from '../templates/components/search-select';
 
@@ -24,10 +30,10 @@ export default Component.extend({
   didInsertElement() {
     // capture click events and check if they are for our component
     // if they are not, we can close the drop down
-    const element = get(this, 'elementId');
+    const element = this.elementId;
     $(window).on('click', event => {
       if (
-        get(this, 'finderVisible') &&
+        this.finderVisible &&
         $(`#${element}`).has(event.target).length === 0 &&
         !$(`#${element}`).is(event.target)
       ) {
@@ -36,19 +42,19 @@ export default Component.extend({
     });
 
     // we need to set the value on the initial render
-    const activeValue = get(this, 'activeDisplayName');
+    const activeValue = this.activeDisplayName;
     set(this, 'searchTerm', activeValue);
 
     // Generate the activeDisplayName, with dependent paths that are calculated from the passed in `keys` and `value` properties.
-    const updateKeys = get(this, '_keys').map(k => 'value.' + k);
+    const updateKeys =  this._keys? this._keys.map(k => 'value.' + k):[];
     defineProperty(this, 'activeDisplayName', computed('value', 'options[]', 'separator', ...updateKeys, function() {
-      const value = get(this, 'value');
-      const keys = get(this, '_keys');
+      const value = this.value;
+      const keys = this._keys;
 
       if (typeof value !== 'object') {
         return value;
       } else if (keys && get(keys, 'length') && value) {
-        const separator = get(this, 'separator');
+        const separator = this.separator;
         return this.getDisplayName(keys, value, separator);
       } else {
         return '';
@@ -65,9 +71,9 @@ export default Component.extend({
   // Things that need to happen every time the element is re-rendered
   didRender() {
     // for following renders we only want to set the value when the search is not being used and the value has changed
-    const finderNotVisible = !get(this, 'finderVisible');
-    const activeValue = get(this, 'activeDisplayName');
-    const searchTerm = get(this, 'searchTerm');
+    const finderNotVisible = !this.finderVisible;
+    const activeValue = this.activeDisplayName;
+    const searchTerm = this.searchTerm;
     if (finderNotVisible && activeValue !== searchTerm) {
       set(this, 'searchTerm', activeValue);
     }
@@ -76,17 +82,17 @@ export default Component.extend({
   // we want to automatically clear the input when the input is search only
   // ie when the input cannot create its own values
   clearInputOnFocus: observer('finderVisible', function() {
-    if (get(this, 'finderVisible')) set(this, 'searchTerm', '');
+    if (this.finderVisible) set(this, 'searchTerm', '');
   }),
 
   _keys: computed('keys', function() {
-    return get(this, 'keys') && get(this, 'keys').split(',').map(item => item.trim());
+    return this.keys && this.keys.split(',').map(item => item.trim());
   }),
 
   filteredOptions: computed('_keys', 'options', 'searchTerm', function() {
-    const keys = get(this, '_keys');
-    const searchTerm = get(this, 'searchTerm');
-    const options = get(this, 'options');
+    const keys = this._keys;
+    const searchTerm = this.searchTerm;
+    const options = this.options;
 
     if (searchTerm) {
       return options.filter(option => {
@@ -104,11 +110,11 @@ export default Component.extend({
 
   actions: {
     setFinderVisible(visible) {
-      if (get(this, 'finderVisible') !== visible) set(this, 'finderVisible', visible);
+      if (this.finderVisible !== visible) set(this, 'finderVisible', visible);
     },
 
     keyDown(event) {
-      const selectedRow = get(this, 'selectedRow');
+      const selectedRow = this.selectedRow;
       switch (event.keyCode) {
         // down arrow
         case 38:
@@ -122,7 +128,7 @@ export default Component.extend({
           break;
         // enter
         case 13:
-          if (get(this, 'finderVisible')) this.send('setItem', selectedRow);
+          if (this.finderVisible) this.send('setItem', selectedRow);
           break;
         // tab
         case 9:
@@ -141,11 +147,11 @@ export default Component.extend({
     },
 
     unSetHighlight(index) {
-      if (get(this, 'selectedRow') === index) set(this, 'selectedRow', null);
+      if (this.selectedRow === index) set(this, 'selectedRow', null);
     },
 
     setItem(index) {
-      const item = get(this, 'filteredOptions').objectAt(index);
+      const item = this.filteredOptions[index];
 
       this.sendAction('onSelect', item);
       this.send('setFinderVisible', false);

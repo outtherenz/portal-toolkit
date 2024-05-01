@@ -1,214 +1,221 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import {
+  render,
+  settled,
+  find,
+  findAll,
+  triggerEvent
+} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import wait from 'ember-test-helpers/wait';
 
-moduleForComponent('formatted-input', 'Integration | Component | formatted input', {
-  integration: true
-});
+module('Integration | Component | formatted input', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('formats the initial value', function(assert) {
-  assert.expect(1);
+  test('formats the initial value', async function(assert) {
+    assert.expect(1);
 
-  this.render(hbs`{{formatted-input number=1000.009}}`);
+    await render(hbs`{{formatted-input number=1000.009}}`);
 
-  return wait().then(() => {
-    assert.equal(this.$('input').val(), '1,000.01');
-  });
-});
-
-test('responds to source change', function(assert) {
-  assert.expect(2);
-
-  this.set('number', 1.5);
-
-  this.render(hbs`{{formatted-input number=number}}`);
-
-  wait().then(() => {
-    assert.equal(this.$('input').val(), '1.50');
-    this.set('number', 5.2);
+    return settled().then(() => {
+      assert.dom('input').hasValue('1,000.01');
+    });
   });
 
-  return wait().then(() => {
-    assert.equal(this.$('input').val(), '5.20');
-  });
-});
+  test('responds to source change', async function(assert) {
+    assert.expect(2);
 
-test('calls the update action if provided', function(assert) {
-  assert.expect(1);
+    this.set('number', 1.5);
 
-  this.set('number', 1.5);
-  this.set('update', value => assert.equal(value, 5, 'update action called'));
+    await render(hbs`{{formatted-input number=number}}`);
 
-  this.render(hbs`{{formatted-input number=number update=update}}`);
+    settled().then(() => {
+      assert.dom('input').hasValue('1.50');
+      this.set('number', 5.2);
+    });
 
-  return wait().then(() => {
-    this.$('input').val('5').change().blur();
-  });
-});
-
-test('reformats on blur when parsed value has changed', function(assert) {
-  assert.expect(1);
-
-  this.set('number', 5);
-  this.render(hbs`{{formatted-input number=number}}`);
-
-  return wait().then(() => {
-    this.$('input').val('1000').change().blur();
-
-    return wait();
-  }).then(() => {
-    assert.equal(this.$('input').val(), '1,000.00');
-  });
-});
-
-test('reformats on blur when parsed value has not changed', function(assert) {
-  assert.expect(1);
-
-  this.set('number', 5);
-  this.render(hbs`{{formatted-input number=number}}`);
-
-  wait().then(() => {
-    this.$('input').val('5.00000').change().blur();
+    return settled().then(() => {
+      assert.dom('input').hasValue('5.20');
+    });
   });
 
-  return wait().then(() => {
-    assert.equal(this.$('input').val(), '5.00');
-  });
-});
+  test('calls the update action if provided', async function(assert) {
+    assert.expect(1);
 
-test('obeys the editRawValue option, or guesses if not provided', function(assert) {
-  assert.expect(5);
+    this.set('number', 1.5);
+    this.set('update', value => assert.equal(value, 5, 'update action called'));
 
-  this.render(hbs`
-    {{formatted-input number=1 editRawValue=true}}
-    {{formatted-input number=2 editRawValue=false}}
-    {{formatted-input number=3 format='number'}}
-    {{formatted-input number=4 format='currency'}}
-    {{formatted-input number=5 format='xyz'}}
-  `);
+    await render(hbs`{{formatted-input number=number update=update}}`);
 
-  wait().then(() => {
-    this.$('input:eq(0)').focusin();
-    this.$('input:eq(1)').focusin();
-    this.$('input:eq(2)').focusin();
-    this.$('input:eq(3)').focusin();
-    this.$('input:eq(4)').focusin();
+    return settled().then(() => {
+      this.$('input').val('5').change().blur();
+    });
   });
 
-  return wait().then(() => {
-    assert.equal(this.$('input:eq(0)').val(), '1');
-    assert.equal(this.$('input:eq(1)').val(), '2.00');
-    assert.equal(this.$('input:eq(2)').val(), '3');
-    assert.equal(this.$('input:eq(3)').val(), '4');
-    assert.equal(this.$('input:eq(4)').val(), '5.00');
-  });
-});
+  test('reformats on blur when parsed value has changed', async function(assert) {
+    assert.expect(1);
 
-test('obeys the selectOnFocus option', function(assert) {
-  if (navigator.userAgent.includes('Firefox')) {
-    assert.expect(0);
-    return;
-  }
+    this.set('number', 5);
+    await render(hbs`{{formatted-input number=number}}`);
 
-  assert.expect(3);
+    return settled().then(() => {
+      this.$('input').val('1000').change().blur();
 
-  this.render(hbs`
-    {{formatted-input number=1 editRawValue=false}}
-    {{formatted-input number=2 editRawValue=false selectOnFocus=true}}
-    {{formatted-input number=3 editRawValue=false selectOnFocus=false}}
-  `);
-
-  wait().then(() => {
-    this.$('input:eq(0)').focusin().click();
+      return settled();
+    }).then(() => {
+      assert.dom('input').hasValue('1,000.00');
+    });
   });
 
-  wait().then(() => {
-    assert.equal(getSelection().toString(), '1.00');
+  test('reformats on blur when parsed value has not changed', async function(assert) {
+    assert.expect(1);
 
-    getSelection().empty();
-    this.$('input:eq(1)').focusin().click();
+    this.set('number', 5);
+    await render(hbs`{{formatted-input number=number}}`);
+
+    settled().then(() => {
+      this.$('input').val('5.00000').change().blur();
+    });
+
+    return settled().then(() => {
+      assert.dom('input').hasValue('5.00');
+    });
   });
 
-  wait().then(() => {
-    assert.equal(getSelection().toString(), '2.00');
+  test('obeys the editRawValue option, or guesses if not provided', async function(assert) {
+    assert.expect(5);
 
-    getSelection().empty();
-    this.$('input:eq(2)').focusin().click();
+    await render(hbs`
+      {{formatted-input number=1 editRawValue=true}}
+      {{formatted-input number=2 editRawValue=false}}
+      {{formatted-input number=3 format='number'}}
+      {{formatted-input number=4 format='currency'}}
+      {{formatted-input number=5 format='xyz'}}
+    `);
+
+    settled().then(async () => {
+      await triggerEvent(find('input'), 'focusin');
+      await triggerEvent(findAll('input')[1], 'focusin');
+      await triggerEvent(findAll('input')[2], 'focusin');
+      await triggerEvent(findAll('input')[3], 'focusin');
+      await triggerEvent(findAll('input')[4], 'focusin');
+    });
+
+    return settled().then(() => {
+      assert.dom('input').hasValue('1');
+      assert.dom(findAll('input')[1]).hasValue('2.00');
+      assert.dom(findAll('input')[2]).hasValue('3');
+      assert.dom(findAll('input')[3]).hasValue('4');
+      assert.dom(findAll('input')[4]).hasValue('5.00');
+    });
   });
 
-  return wait().then(() => {
-    assert.equal(getSelection().toString(), '');
-  });
-});
+  test('obeys the selectOnFocus option', async function(assert) {
+    if (navigator.userAgent.includes('Firefox')) {
+      assert.expect(0);
+      return;
+    }
 
-test('handles other formats', function(assert) {
-  assert.expect(3);
+    assert.expect(3);
 
-  this.render(hbs`
-    {{formatted-input number=100 format='currency'}}
-    {{formatted-input number=0.5 format='percentage'}}
-    {{formatted-input number=100 format='integer'}}
-  `);
+    await render(hbs`
+      {{formatted-input number=1 editRawValue=false}}
+      {{formatted-input number=2 editRawValue=false selectOnFocus=true}}
+      {{formatted-input number=3 editRawValue=false selectOnFocus=false}}
+    `);
 
-  return wait().then(() => {
-    assert.equal(this.$('input:eq(0)').val(), '$100.00');
-    assert.equal(this.$('input:eq(1)').val(), '50.00%');
-    assert.equal(this.$('input:eq(2)').val(), '100');
-  });
-});
+    settled().then(async () => {
+      await triggerEvent(find('input'), 'focusin').click();
+    });
 
-test('accepts custom formatters and parsers', function(assert) {
-  assert.expect(4);
+    settled().then(async () => {
+      assert.equal(getSelection().toString(), '1.00');
 
-  this.set('number', 1);
-  this.set('formatter', (_, option) => option);
-  this.set('formatterOptions', '2');
-  this.set('parser', (_, option) => option);
-  this.set('parserOptions', 3);
+      getSelection().empty();
+      await triggerEvent(findAll('input')[1], 'focusin').click();
+    });
 
-  this.render(hbs`{{formatted-input
-    number=number
-    formatter=formatter
-    formatterOptions=formatterOptions
-    parser=parser
-    parserOptions=parserOptions
-  }}`);
+    settled().then(async () => {
+      assert.equal(getSelection().toString(), '2.00');
 
-  wait().then(() => {
-    assert.equal(this.$('input').val(), '2');
-    assert.equal(this.get('number'), 1);
+      getSelection().empty();
+      await triggerEvent(findAll('input')[2], 'focusin').click();
+    });
 
-    this.$('input').val('4').change().focusout();
+    return settled().then(() => {
+      assert.equal(getSelection().toString(), '');
+    });
   });
 
-  return wait().then(() => {
-    assert.equal(this.$('input').val(), '2');
-    assert.equal(this.get('number'), 3);
+  test('handles other formats', async function(assert) {
+    assert.expect(3);
+
+    await render(hbs`
+      {{formatted-input number=100 format='currency'}}
+      {{formatted-input number=0.5 format='percentage'}}
+      {{formatted-input number=100 format='integer'}}
+    `);
+
+    return settled().then(() => {
+      assert.dom('input').hasValue('$100.00');
+      assert.dom(findAll('input')[1]).hasValue('50.00%');
+      assert.dom(findAll('input')[2]).hasValue('100');
+    });
   });
-});
 
-test('can deal with null values', function(assert) {
-  assert.expect(2);
+  test('accepts custom formatters and parsers', async function(assert) {
+    assert.expect(4);
 
-  this.render(hbs`{{formatted-input number=number}}`);
+    this.set('number', 1);
+    this.set('formatter', (_, option) => option);
+    this.set('formatterOptions', '2');
+    this.set('parser', (_, option) => option);
+    this.set('parserOptions', 3);
 
-  wait().then(() => {
-    assert.equal(this.$('input').val(), '');
-    this.$('input').change().focusout();
+    await render(hbs`{{formatted-input
+      number=number
+      formatter=formatter
+      formatterOptions=formatterOptions
+      parser=parser
+      parserOptions=parserOptions
+    }}`);
+
+    settled().then(() => {
+      assert.dom('input').hasValue('2');
+      assert.equal(this.number, 1);
+
+      this.$('input').val('4').change().focusout();
+    });
+
+    return settled().then(() => {
+      assert.dom('input').hasValue('2');
+      assert.equal(this.number, 3);
+    });
   });
 
-  return wait().then(() => {
-    assert.equal(this.get('number'), null);
+  test('can deal with null values', async function(assert) {
+    assert.expect(2);
+
+    await render(hbs`{{formatted-input number=number}}`);
+
+    settled().then(async () => {
+      assert.dom('input').hasValue('');
+      await triggerEvent('input', 'change').focusout();
+    });
+
+    return settled().then(() => {
+      assert.equal(this.number, null);
+    });
   });
-});
 
-test('has the right class names', function(assert) {
-  assert.expect(2);
+  test('has the right class names', async function(assert) {
+    assert.expect(2);
 
-  this.render(hbs`{{formatted-input format='xyz'}}`);
+    await render(hbs`{{formatted-input format='xyz'}}`);
 
-  return wait().then(() => {
-    assert.ok(this.$('input').hasClass('formatted-input'));
-    assert.ok(this.$('input').hasClass('formatted-input--xyz'));
+    return settled().then(() => {
+      assert.dom('input').hasClass('formatted-input');
+      assert.dom('input').hasClass('formatted-input--xyz');
+    });
   });
 });

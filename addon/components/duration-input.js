@@ -10,7 +10,7 @@ export default TextField.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    const duration = get(this, 'duration');
+    const duration = this.duration;
 
     set(this, 'value', formatDuration([ duration ]));
   },
@@ -18,7 +18,7 @@ export default TextField.extend({
   focusOut() {
     this._super(...arguments);
 
-    const value = get(this, 'value');
+    const value = this.value;
     const duration = parseDuration(value);
 
     if (this.onDurationChange) {
@@ -34,7 +34,7 @@ export default TextField.extend({
    * http://stackoverflow.com/a/24589806/2833988
    */
   selectAll: on('focusIn', function() {
-    const selectOnFocus = get(this, 'selectOnFocus');
+    const selectOnFocus = this.selectOnFocus;
 
     if (selectOnFocus) {
       this.$().on('click keyup', () => {

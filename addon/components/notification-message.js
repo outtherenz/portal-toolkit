@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { get, computed } from '@ember/object';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 import layout from '../templates/components/notification-message';
 
 export default Component.extend({
@@ -39,8 +39,8 @@ export default Component.extend({
 
   actions: {
     clear() {
-      const notifications = get(this, 'notifications');
-      const notification = get(this, 'notification');
+      const notifications = this.notifications;
+      const notification = this.notification;
       notifications.clear(notification);
     }
   }

@@ -1,14 +1,9 @@
-import Ember from 'ember';
+import { equal, and } from '@ember/object/computed';
+import TextField from '@ember/component/text-field';
+import { set, get, computed } from '@ember/object';
+import { run } from '@ember/runloop';
+import { on } from '@ember/object/evented';
 import { formatNumber, parseNumber } from '../helpers/format-number';
-
-const {
-  TextField,
-  computed,
-  get,
-  set,
-  run,
-  on
-} = Ember;
 
 export default TextField.extend({
   classNames: [ 'formatted-input' ],
@@ -40,7 +35,7 @@ export default TextField.extend({
    * @default true if format is 'number' or 'currency'
    */
   editRawValue: computed('format', function() {
-    return [ 'number', 'currency' ].includes(get(this, 'format').toLowerCase());
+    return [ 'number', 'currency' ].includes(this.format.toLowerCase());
   }),
 
   /**
@@ -80,7 +75,7 @@ export default TextField.extend({
    * @default `formatNumber` helper
    */
   formatter: computed('format', function() {
-    const format = get(this, 'format');
+    const format = this.format;
 
     return function(value, options) {
       return formatNumber([ format, value ], options);
@@ -122,21 +117,21 @@ export default TextField.extend({
    * @type {String}
    */
   formatClassName: computed('format', function() {
-    const format = get(this, 'format').toLowerCase();
+    const format = this.format.toLowerCase();
     return `formatted-input--${format}`;
   }),
 
   /**
    * @type {Boolean}
    */
-  isZero: computed.equal('number', 0),
+  isZero: equal('number', 0),
 
   /**
    * Triggers the class name to be added
    *
    * @type {Boolean}
    */
-  doWarnForZero: computed.and('isZero', 'warnOnZero'),
+  doWarnForZero: and('isZero', 'warnOnZero'),
 
   /**
    * Select all on focus, if selectOnFocus or editRawValue is true.
@@ -144,11 +139,11 @@ export default TextField.extend({
    * http://stackoverflow.com/a/24589806/2833988
    */
   selectAll: on('focusIn', function() {
-    const editRawValue = get(this, 'editRawValue');
-    const selectOnFocus = get(this, 'selectOnFocus');
+    const editRawValue = this.editRawValue;
+    const selectOnFocus = this.selectOnFocus;
 
     if (editRawValue) {
-      set(this, 'value', get(this, 'number'));
+      set(this, 'value', this.number);
     }
 
     if (editRawValue || selectOnFocus) {
@@ -162,12 +157,12 @@ export default TextField.extend({
    * Set the value of the input to the formatted `number`.
    */
   displayFormattedValue: on('didReceiveAttrs', function() {
-    const number = get(this, 'number');
-    const formatter = get(this, 'formatter');
-    const options = get(this, 'formatterOptions');
+    const number = this.number;
+    const formatter = this.formatter;
+    const options = this.formatterOptions;
 
     run.next(() => {
-      if (!this.get('isDestroying')) {
+      if (!this.isDestroying) {
         set(this, 'value', formatter(number, options));
       }
     });
@@ -185,22 +180,22 @@ export default TextField.extend({
    *    `didReceiveAttrs` event.
    */
   handleUpdate: on('focusOut', function() {
-    let value = get(this, 'value');
+    let value = this.value;
 
     // If the input is a percentage and user input (not a parsed value) convert to decimal percentage
-    if (get(this, 'format') === 'percentage' && value.indexOf('%') === -1) {
+    if (this.format === 'percentage' && value.indexOf('%') === -1) {
       value = value / 100;
     }
 
-    const current = get(this, 'number');
-    const parser = get(this, 'parser');
-    const options = get(this, 'parserOptions');
+    const current = this.number;
+    const parser = this.parser;
+    const options = this.parserOptions;
     const parsed = parser(value, options);
-    const number = isNaN(parsed) ? get(this, 'defaultValue') : parsed;
+    const number = isNaN(parsed) ? this.defaultValue : parsed;
 
     if (number === current) {
       this.displayFormattedValue();
-    } else if (typeof get(this, 'update') === 'function') {
+    } else if (typeof this.update === 'function') {
       this.sendAction('update', number);
     } else {
       set(this, 'number', number);

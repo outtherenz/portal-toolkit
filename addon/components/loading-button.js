@@ -20,13 +20,13 @@ export default Component.extend({
   click(event) {
     event.preventDefault();
 
-    if (!get(this, 'isLoading')) {
+    if (!this.isLoading) {
       // Maintain current width
       var el = this.$()[0];
       el.style.minWidth = getComputedStyle(el).width;
       el.style.minHeight = getComputedStyle(el).height;
 
-      if (get(this, 'action')) {
+      if (this.action) {
         this.sendAction();
       }
     }

@@ -1,11 +1,20 @@
-import { moduleForComponent, test, skip } from 'ember-qunit';
+import { module, skip, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import {
+  render,
+  find,
+  click,
+  findAll,
+  fillIn,
+  triggerEvent
+} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { get, set } from '@ember/object';
 
-moduleForComponent('search-select', 'Integration | Component | search select', {
-  integration: true,
+module('Integration | Component | search select', function(hooks) {
+  setupRenderingTest(hooks);
 
-  beforeEach() {
+  hooks.beforeEach(function() {
     set(this, 'options', [{
       name: 'Apple',
       code: '0'
@@ -30,311 +39,275 @@ moduleForComponent('search-select', 'Integration | Component | search select', {
     set(this, 'setOption', option => {
       set(this, 'option', option);
     });
-  }
-});
+  });
 
-test('it renders options', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=value
-      options=options
-    }}
-  `);
+  test('it renders options', async function(assert) {
+    await render(hbs`
+      {{search-select
+        keys='name'
+        value=value
+        options=options
+      }}
+    `);
 
-  this.$('.search-select input').trigger('keydown');
-  assert.equal(
-    this.$('.search-select__drop-down__row').length,
-    3,
-    'Correct number of options were found'
-  );
-});
+    await triggerEvent('.search-select input', 'keydown');
+    assert.dom('.search-select__drop-down__row').exists({ count: 3 }, 'Correct number of options were found');
+  });
 
-test('it renders placeholder', function(assert) {
-  this.render(hbs`
-    {{search-select
-      placeholder='Example Placeholder'
-      keys='name'
-      value=value
-      options=options
-    }}
-  `);
+  test('it renders placeholder', async function(assert) {
+    await render(hbs`
+      {{search-select
+        placeholder='Example Placeholder'
+        keys='name'
+        value=value
+        options=options
+      }}
+    `);
 
-  assert.equal(
-    this.$('.search-select input').attr('placeholder'),
-    'Example Placeholder',
-    'Correct placeholder was found'
-  );
-});
+    assert.dom('.search-select input').hasAttribute('placeholder', 'Example Placeholder', 'Correct placeholder was found');
+  });
 
-test('it renders the multiple keys', function(assert) {
-  this.render(hbs`
-    {{search-select
-      placeholder='Example Placeholder'
-      keys='code,name'
-      value=value
-      options=options
-    }}
-  `);
+  test('it renders the multiple keys', async function(assert) {
+    await render(hbs`
+      {{search-select
+        placeholder='Example Placeholder'
+        keys='code,name'
+        value=value
+        options=options
+      }}
+    `);
 
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select__drop-down__row').each((i, row) => {
-    const option = get(this, `options.${i}`);
-    const matchString = `${get(option, 'code')} - ${get(option, 'name')}`;
+    await triggerEvent('.search-select input', 'keydown');
+    findAll('.search-select__drop-down__row').forEach((row, i) => {
+      const option = get(this, `options.${i}`);
+      const matchString = `${get(option, 'code')} - ${get(option, 'name')}`;
+      assert.equal(
+        this.$(row).text().trim(),
+        matchString,
+        `Option ${i} has the displays the correct string`
+      );
+    });
+  });
+
+  test('it renders a custom separator', async function(assert) {
+    await render(hbs`
+      {{search-select
+        separator='_'
+        placeholder='Example Placeholder'
+        keys='name,code'
+        value=value
+        options=options
+      }}
+    `);
+
+    await triggerEvent('.search-select input', 'keydown');
+    findAll('.search-select__drop-down__row').forEach((row, i) => {
+      const option = get(this, `options.${i}`);
+      const matchString = `${get(option, 'name')}_${get(option, 'code')}`;
+      assert.equal(
+        this.$(row).text().trim(),
+        matchString,
+        `Option ${i} has the correct string`
+      );
+    });
+  });
+
+  test('it renders a message when no options are found', async function(assert) {
+    await render(hbs`
+      {{search-select
+        keys='name,code'
+        value=value
+        options=options
+      }}
+    `);
+
+    await fillIn('.search-select input', 'Next');
+    await triggerEvent('.search-select input', 'keydown');
+    await triggerEvent('.search-select input', 'change');
+
+    assert.dom('.search-select__drop-down__row--empty').hasText('No items found', 'Not items message found');
+  });
+
+  test('it renders a custom message when no options are found', async function(assert) {
+    await render(hbs`
+      {{search-select
+        keys='name'
+        value=value
+        options=options
+        emptyText='Nothing was found'
+      }}
+    `);
+
+    await fillIn('.search-select input', 'Next');
+    await triggerEvent('.search-select input', 'keydown');
+    await triggerEvent('.search-select input', 'change');
+
+    assert.dom('.search-select__drop-down__row--empty').hasText('Nothing was found', 'Custom no items message found');
+  });
+
+  test('it does not render a custom button when you do not provide an action for the button', async function(assert) {
+    await render(hbs`
+      {{search-select
+        keys='name'
+        value=value
+        options=options
+        emptyText='Nothing was found'
+        emptyButtonText='Click me'
+      }}
+    `);
+
+    await fillIn('.search-select input', 'Next');
+    await triggerEvent('.search-select input', 'keydown');
+    await triggerEvent('.search-select input', 'change');
+
+    assert.dom('.search-select__drop-down__row--empty button').doesNotExist('No items button found');
+  });
+
+  test('it renders a custom button when no options are found', async function(assert) {
+    await render(hbs`
+      {{search-select
+        keys='name'
+        value=value
+        options=options
+        emptyText='Nothing was found'
+        emptyButtonText='Click me'
+        emptyButtonAction=getItems
+      }}
+    `);
+
+    await fillIn('.search-select input', 'Next');
+    await triggerEvent('.search-select input', 'keydown');
+    await triggerEvent('.search-select input', 'change');
+
+    assert.dom('.search-select__drop-down__row--empty button').hasText('Click me', 'Custom no items button text found');
+  });
+
+  test('it enters loading state correctly', async function(assert) {
+    await render(hbs`
+      {{search-select
+        keys='name'
+        value=value
+        options=options
+        emptyText='Nothing was found'
+        emptyButtonText='Click me'
+        emptyButtonAction=getItems
+        isLoading=isLoading
+      }}
+    `);
+
+    await fillIn('.search-select input', 'Next');
+    await triggerEvent('.search-select input', 'keydown');
+    await triggerEvent('.search-select input', 'change');
+    await click('.search-select__drop-down__row--empty button');
+
+    assert.dom('.search-select__drop-down__row--loading').exists({ count: 1 }, 'Loading icon found');
+  });
+
+  skip('it loads new options correctly', async function(assert) {
+    this.render(hbs`
+      {{search-select
+        keys='name'
+        value=value
+        options=options
+        emptyText='Nothing was found'
+        emptyButtonText='Click me'
+        emptyButtonAction=getItems
+        isLoading=isLoading
+      }}
+    `);
+
+    await fillIn('.search-select input', 'Next');
+    await triggerEvent('.search-select input', 'keydown');
+    await triggerEvent('.search-select input', 'change');
+    await click('.search-select__drop-down__row--empty button');
+
+    assert.timeout(300);
+    const done = assert.async();
+
+    setTimeout(() => {
+      // this component does not update even though get(this, 'newOptions') returns correctly
+      assert.dom('.search-select__drop-down__row').exists({ count: 2 });
+      done();
+    }, 200);
+  });
+
+  test('it filters options', async function(assert) {
+    await render(hbs`
+      {{search-select
+        keys='name'
+        value=value
+        options=options
+      }}
+    `);
+
+    await fillIn('.search-select input', 'App');
+    await triggerEvent('.search-select input', 'keydown');
+    await triggerEvent('.search-select input', 'change');
+
+    assert.dom('.search-select__drop-down__row').exists({ count: 1 }, 'Correct number of options remain');
+    assert.dom('.search-select__drop-down__row').hasText('Apple', 'Remaining option has correct text');
+  });
+
+  skip('it sets a value when an option is selected', async function(assert) {
+    this.render(hbs`
+      {{search-select
+        keys='name'
+        value=option
+        options=options
+        onSet=setOption
+      }}
+    `);
+
+    await triggerEvent('.search-select input', 'keydown');
+    await click('.search-select__drop-down__row');
+
     assert.equal(
-      this.$(row).text().trim(),
-      matchString,
-      `Option ${i} has the displays the correct string`
+      this.value,
+      'Apple',
+      'Correct value has been set'
     );
   });
-});
 
-test('it renders a custom separator', function(assert) {
-  this.render(hbs`
-    {{search-select
-      separator='_'
-      placeholder='Example Placeholder'
-      keys='name,code'
-      value=value
-      options=options
-    }}
-  `);
+  skip('it sets a value when a input is entered', async function(assert) {
+    this.render(hbs`
+      {{search-select
+        keys='name'
+        value=option
+        options=options
+        onSet=setOption
+      }}
+    `);
 
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select__drop-down__row').each((i, row) => {
-    const option = get(this, `options.${i}`);
-    const matchString = `${get(option, 'name')}_${get(option, 'code')}`;
+    await fillIn('.search-select input', 'Silicon Graphics');
+    await triggerEvent('.search-select input', 'keydown');
+    await triggerEvent('.search-select input', 'change');
+
+    await click();
     assert.equal(
-      this.$(row).text().trim(),
-      matchString,
-      `Option ${i} has the correct string`
+      this.value,
+      'Silicon Graphics',
+      'Correct value has been set'
     );
   });
-});
 
-test('it renders a message when no options are found', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name,code'
-      value=value
-      options=options
-    }}
-  `);
+  test('it does not set input value when search only', async function(assert) {
+    await render(hbs`
+      {{search-select
+        keys='name'
+        value=option
+        options=options
+        onSet=setOption
+      }}
+    `);
 
-  this.$('.search-select input').val('Next');
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select input').change();
+    await fillIn('.search-select input', 'Silicon Graphics');
+    await triggerEvent('.search-select input', 'keydown');
+    await triggerEvent('.search-select input', 'change');
 
-  assert.equal(
-    this.$('.search-select__drop-down__row--empty').text().trim(),
-    'No items found',
-    'Not items message found'
-  );
-});
-
-test('it renders a custom message when no options are found', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=value
-      options=options
-      emptyText='Nothing was found'
-    }}
-  `);
-
-  this.$('.search-select input').val('Next');
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select input').change();
-
-  assert.equal(
-    this.$('.search-select__drop-down__row--empty').text().trim(),
-    'Nothing was found',
-    'Custom no items message found'
-  );
-});
-
-test('it does not render a custom button when you do not provide an action for the button', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=value
-      options=options
-      emptyText='Nothing was found'
-      emptyButtonText='Click me'
-    }}
-  `);
-
-  this.$('.search-select input').val('Next');
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select input').change();
-
-  assert.equal(
-    this.$('.search-select__drop-down__row--empty button').length,
-    0,
-    'No items button found'
-  );
-});
-
-test('it renders a custom button when no options are found', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=value
-      options=options
-      emptyText='Nothing was found'
-      emptyButtonText='Click me'
-      emptyButtonAction=getItems
-    }}
-  `);
-
-  this.$('.search-select input').val('Next');
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select input').change();
-
-  assert.equal(
-    this.$('.search-select__drop-down__row--empty button').text().trim(),
-    'Click me',
-    'Custom no items button text found'
-  );
-});
-
-test('it enters loading state correctly', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=value
-      options=options
-      emptyText='Nothing was found'
-      emptyButtonText='Click me'
-      emptyButtonAction=getItems
-      isLoading=isLoading
-    }}
-  `);
-
-  this.$('.search-select input').val('Next');
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select input').change();
-  this.$('.search-select__drop-down__row--empty button').click();
-
-  assert.equal(
-    this.$('.search-select__drop-down__row--loading').length,
-    1,
-    'Loading icon found'
-  );
-});
-
-skip('it loads new options correctly', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=value
-      options=options
-      emptyText='Nothing was found'
-      emptyButtonText='Click me'
-      emptyButtonAction=getItems
-      isLoading=isLoading
-    }}
-  `);
-
-  this.$('.search-select input').val('Next');
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select input').change();
-  this.$('.search-select__drop-down__row--empty button').click();
-
-  assert.timeout(300);
-  const done = assert.async();
-
-  setTimeout(() => {
-    // this component does not update even though get(this, 'newOptions') returns correctly
-    assert.equal(this.$('.search-select__drop-down__row').length, 2);
-    done();
-  }, 200);
-});
-
-test('it filters options', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=value
-      options=options
-    }}
-  `);
-
-  this.$('.search-select input').val('App');
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select input').change();
-
-  assert.equal(
-    this.$('.search-select__drop-down__row').length,
-    1,
-    'Correct number of options remain'
-  );
-  assert.equal(
-    this.$('.search-select__drop-down__row').text().trim(),
-    'Apple',
-    'Remaining option has correct text'
-  );
-});
-
-skip('it sets a value when an option is selected', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=option
-      options=options
-      onSet=setOption
-    }}
-  `);
-
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select__drop-down__row').click();
-
-  assert.equal(
-    get(this, 'value'),
-    'Apple',
-    'Correct value has been set'
-  );
-});
-
-skip('it sets a value when a input is entered', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=option
-      options=options
-      onSet=setOption
-    }}
-  `);
-
-  this.$('.search-select input').val('Silicon Graphics');
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select input').change();
-
-  this.$().click();
-  assert.equal(
-    get(this, 'value'),
-    'Silicon Graphics',
-    'Correct value has been set'
-  );
-});
-
-test('it does not set input value when search only', function(assert) {
-  this.render(hbs`
-    {{search-select
-      keys='name'
-      value=option
-      options=options
-      onSet=setOption
-    }}
-  `);
-
-  this.$('.search-select input').val('Silicon Graphics');
-  this.$('.search-select input').trigger('keydown');
-  this.$('.search-select input').change();
-
-  assert.equal(
-    get(this, 'value'),
-    '',
-    'No input value was set'
-  );
+    assert.equal(
+      this.value,
+      '',
+      'No input value was set'
+    );
+  });
 });

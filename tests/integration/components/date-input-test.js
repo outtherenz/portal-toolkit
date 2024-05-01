@@ -1,55 +1,62 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import {
+  render,
+  settled,
+  click,
+  findAll,
+  find
+} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import wait from 'ember-test-helpers/wait';
 import moment from 'moment';
 import pickDate from '../../helpers/pick-date';
 
-moduleForComponent('date-input', 'Integration | Component | date input', {
-  integration: true
-});
+module('Integration | Component | date input', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('clicking the input toggles the picker', function(assert) {
-  this.set('date', new Date());
-  this.render(hbs`
-    <div class="outside-div">Hello</div>
-    {{date-input date=date select=(action (mut date))}}
-  `);
+  test('clicking the input toggles the picker', async function(assert) {
+    this.set('date', new Date());
+    await render(hbs`
+      <div class="outside-div">Hello</div>
+      {{date-input date=date select=(action (mut date))}}
+    `);
 
-  assert.equal(this.$('.date-input__picker').length, 0, 'Picker has not yet been rendered');
+    assert.dom('.date-input__picker').doesNotExist('Picker has not yet been rendered');
 
-  this.$('.date-input__display').click();
+    await click('.date-input__display');
 
-  assert.equal(this.$('.date-input__picker').length, 1, 'Picker has been rendered');
+    assert.dom('.date-input__picker').exists({ count: 1 }, 'Picker has been rendered');
 
-  this.$('.outside-div').click();
-  return wait().then(() => assert.equal(this.$('.date-input__picker').length, 0, 'Picker has been hidden'));
-});
+    await click('.outside-div');
+    return settled().then(() => assert.dom('.date-input__picker').doesNotExist('Picker has been hidden'));
+  });
 
-test('pickDate helper works', function(assert) {
-  this.set('date', new Date('2019-01-01'));
-  this.render(hbs`{{date-input date=date select=(action (mut date))}}`);
+  test('pickDate helper works', async function(assert) {
+    this.set('date', new Date('2019-01-01'));
+    await render(hbs`{{date-input date=date select=(action (mut date))}}`);
 
-  pickDate(this.$, new Date('2020-02-02'));
+    pickDate(this.$, new Date('2020-02-02'));
 
-  assert.equal(moment(this.get('date')).format('YYYY-MM-DD'), '2020-02-02', 'Date has been set');
+    assert.equal(moment(this.date).format('YYYY-MM-DD'), '2020-02-02', 'Date has been set');
 
-  return wait().then(() => assert.equal(this.$('.date-input__picker').length, 0, 'Picker has been hidden'));
-});
+    return settled().then(() => assert.dom('.date-input__picker').doesNotExist('Picker has been hidden'));
+  });
 
-test('if provided, a format string is used', function(assert) {
-  this.set('date', new Date('2017-01-01'));
-  this.set('format', 'ddd');
-  this.render(hbs`{{date-input date=date format=format select=(action (mut date))}}`);
+  test('if provided, a format string is used', async function(assert) {
+    this.set('date', new Date('2017-01-01'));
+    this.set('format', 'ddd');
+    await render(hbs`{{date-input date=date format=format select=(action (mut date))}}`);
 
-  assert.equal(this.$('.date-input__display').text().trim(), 'Sun');
-});
+    assert.dom('.date-input__display').hasText('Sun');
+  });
 
-test('the select action is fired when a date is selected', function(assert) {
-  assert.expect(1);
+  test('the select action is fired when a date is selected', async function(assert) {
+    assert.expect(1);
 
-  this.set('date', new Date('2017-01-01'));
-  this.set('select', () => assert.ok(1));
-  this.render(hbs`{{date-input date=date isActive=true select=select}}`);
+    this.set('date', new Date('2017-01-01'));
+    this.set('select', () => assert.ok(1));
+    await render(hbs`{{date-input date=date isActive=true select=select}}`);
 
-  this.$('.date-picker__day').click();
+    await click('.date-picker__day');
+  });
 });

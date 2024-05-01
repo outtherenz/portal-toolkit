@@ -1,12 +1,14 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 let print;
 
-moduleForComponent('print-button', 'Integration | Component | print button', {
-  integration: true,
+module('Integration | Component | print button', function(hooks) {
+  setupRenderingTest(hooks);
 
-  beforeEach() {
+  hooks.beforeEach(function() {
     // Store the original window.print
     print = window.print;
 
@@ -15,35 +17,35 @@ moduleForComponent('print-button', 'Integration | Component | print button', {
       const event = new Event('print-stub');
       window.dispatchEvent(event);
     };
-  },
+  });
 
-  afterEach() {
+  hooks.afterEach(function() {
     window.print = print;
-  }
-});
+  });
 
-test('it triggers window.print() when clicked', function(assert) {
-  assert.expect(0);
+  test('it triggers window.print() when clicked', async function(assert) {
+    assert.expect(0);
 
-  const done = assert.async();
+    const done = assert.async();
 
-  this.render(hbs`{{print-button}}`);
+    await render(hbs`{{print-button}}`);
 
-  // Listen for the event from the window.print stub
-  window.addEventListener('print-stub', () => done());
+    // Listen for the event from the window.print stub
+    window.addEventListener('print-stub', () => done());
 
-  // Print
-  this.$('button').click();
-});
+    // Print
+    await click('button');
+  });
 
-test('it has the correct title attribute', function(assert) {
-  assert.expect(2);
+  test('it has the correct title attribute', async function(assert) {
+    assert.expect(2);
 
-  // Default
-  this.render(hbs`{{print-button}}`);
-  assert.equal(this.$('button').attr('title'), 'Print');
+    // Default
+    await render(hbs`{{print-button}}`);
+    assert.dom('button').hasAttribute('title', 'Print');
 
-  // Custom
-  this.render(hbs`{{print-button title='Send to printer'}}`);
-  assert.equal(this.$('button').attr('title'), 'Send to printer');
+    // Custom
+    await render(hbs`{{print-button title='Send to printer'}}`);
+    assert.dom('button').hasAttribute('title', 'Send to printer');
+  });
 });

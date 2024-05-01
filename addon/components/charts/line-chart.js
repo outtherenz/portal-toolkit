@@ -11,8 +11,8 @@ export default C3Chart.extend({
   data: computed('metrics', 'series', 'period', function() {
     const periodType = get(this, 'period.type');
     const dates = [];
-    const seriesMeta = get(this, 'series');
-    const metrics = get(this, 'metrics');
+    const seriesMeta = this.series;
+    const metrics = this.metrics;
     const series = isArray(metrics) ? metrics[0].series : metrics.series;
     const columns = [];
 
@@ -33,7 +33,7 @@ export default C3Chart.extend({
     seriesMeta.forEach((meta, seriesIndex) => {
       const thisSeries = series.find(s => s.entity === get(meta, 'id') || s.group === get(meta, 'id')) || {};
       const periods = thisSeries.periods || [];
-      columns.pushObject([ get(meta, 'name') ]);
+      columns.push([ get(meta, 'name') ]);
 
       dates.forEach((date, periodIndex) => {
         const period = periods.find(p => p.date === date.toISOString());
@@ -52,7 +52,7 @@ export default C3Chart.extend({
   }),
 
   axis: computed('metrics', function() {
-    const metrics = get(this, 'metrics');
+    const metrics = this.metrics;
     const meta = isArray(metrics) ? metrics[0].meta : metrics.meta;
     let label;
     let reduction;
@@ -145,7 +145,7 @@ export default C3Chart.extend({
   },
 
   tooltip: computed('metrics', function() {
-    const metrics = get(this, 'metrics');
+    const metrics = this.metrics;
     const meta = isArray(metrics) ? metrics[0].meta : metrics.meta;
 
     return {
