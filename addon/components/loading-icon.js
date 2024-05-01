@@ -13,8 +13,6 @@ const LoadingIconComponent = Component.extend({
   })
 });
 
-LoadingIconComponent.reopenClass({
-  positionalParams: [ 'type' ]
-});
+LoadingIconComponent.positionalParams = 'type';
 
 export default LoadingIconComponent;
