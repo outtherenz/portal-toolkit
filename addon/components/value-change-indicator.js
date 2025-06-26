@@ -6,8 +6,8 @@ export default Component.extend({
   layout,
 
   tagName: 'span',
-  classNames: [ 'value-change-indicator' ],
-  classNameBindings: [ 'color' ],
+  classNames: ['value-change-indicator'],
+  classNameBindings: ['color'],
 
   // You can provide either from and to, or just difference
   from: null,
@@ -19,10 +19,10 @@ export default Component.extend({
   useColor: true,
   increaseIsGood: true,
 
-  _diff: computed('from', 'to', 'difference', function() {
-    const from = get(this, 'from');
-    const to = get(this, 'to');
-    const difference = get(this, 'difference');
+  _diff: computed('from', 'to', 'difference', function () {
+    const from = this.from;
+    const to = this.to;
+    const difference = this.difference;
 
     if (difference != null) {
       return difference;
@@ -31,10 +31,10 @@ export default Component.extend({
     return to - from;
   }),
 
-  color: computed('_diff', function() {
-    const diff = get(this, '_diff');
-    const increaseIsGood = get(this, 'increaseIsGood');
-    const useColor = get(this, 'useColor');
+  color: computed('_diff', 'increaseIsGood', 'useColor', function () {
+    const diff = this._diff;
+    const increaseIsGood = this.increaseIsGood;
+    const useColor = this.useColor;
 
     if (!useColor) {
       return;
@@ -49,8 +49,8 @@ export default Component.extend({
     }
   }),
 
-  icon: computed('_diff', 'positiveIcon', 'negativeIcon', function() {
-    const diff = get(this, '_diff');
+  icon: computed('_diff', 'positiveIcon', 'negativeIcon', function () {
+    const diff = this._diff;
 
     if (diff > 0) {
       return get(this, 'positiveIcon');
@@ -59,5 +59,5 @@ export default Component.extend({
     }
 
     return '';
-  })
+  }),
 });

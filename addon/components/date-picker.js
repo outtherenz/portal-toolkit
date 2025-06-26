@@ -1,17 +1,11 @@
 import Component from '@ember/component';
 import { on } from '@ember/object/evented';
-import {
-  getProperties,
-  observer,
-  computed,
-  set,
-  get
-} from '@ember/object';
+import { getProperties, observer, computed, set, get } from '@ember/object';
 import layout from '../templates/components/date-picker';
 import moment from 'moment';
 
 export default Component.extend({
-  classNames: [ 'date-picker' ],
+  classNames: ['date-picker'],
 
   layout,
 
@@ -24,37 +18,40 @@ export default Component.extend({
       return {
         day: date.getDate(),
         month: date.getMonth(),
-        year: date.getFullYear()
+        year: date.getFullYear(),
       };
     },
 
     set(key, { day, month, year }) {
       set(this, 'date', moment().year(year).month(month).date(day).toDate());
-    }
+    },
   }),
 
   calendarState: {
     month: null,
-    year: null
+    year: null,
   },
 
-  showSelection: on('init', observer('selection.{month,year}', function() {
-    set(this, 'calendarState.month', get(this, 'selection.month'));
-    set(this, 'calendarState.year', get(this, 'selection.year'));
-  })),
+  showSelection: on(
+    'init',
+    observer('selection.{month,year}', function () {
+      set(this, 'calendarState.month', get(this, 'selection.month'));
+      set(this, 'calendarState.year', get(this, 'selection.year'));
+    })
+  ),
 
-  calendar: computed('calendarState.{day,month,year}', function() {
-    const calendarState = get(this, 'calendarState');
-    const { month, year } = getProperties(calendarState || {}, 'month', 'year');
+  calendar: computed('calendarState.{day,month,year}', function () {
+    const calendarState = this.calendarState;
+    const { month, year } = calendarState || {};
 
     if (month == null || year == null) {
       return [];
     }
 
     const startOfMonth = moment()
-    .year(get(this, 'calendarState.year'))
-    .month(get(this, 'calendarState.month'))
-    .startOf('month');
+      .year(get(this, 'calendarState.year'))
+      .month(get(this, 'calendarState.month'))
+      .startOf('month');
 
     const calendar = [];
 
@@ -69,7 +66,7 @@ export default Component.extend({
         calendar[week].pushObject({
           day: date.date(),
           month: date.month(),
-          year: date.year()
+          year: date.year(),
         });
       }
     }
@@ -79,8 +76,8 @@ export default Component.extend({
 
   actions: {
     changeMonth(diff) {
-      const calendarState = get(this, 'calendarState');
-      const { month, year } = getProperties(calendarState || {}, 'month', 'year');
+      const calendarState = this.calendarState;
+      const { month, year } = calendarState || {};
 
       if (month == null || year == null) {
         return;
@@ -90,12 +87,12 @@ export default Component.extend({
 
       set(this, 'calendarState', {
         month: newDate.month(),
-        year: newDate.year()
+        year: newDate.year(),
       });
     },
 
     makeSelection({ day, month, year }) {
-      this.sendAction('select', moment().year(year).month(month).date(day).toDate());
-    }
-  }
+      this.select(moment().year(year).month(month).date(day).toDate());
+    },
+  },
 });

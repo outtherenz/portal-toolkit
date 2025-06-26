@@ -6,14 +6,14 @@ import layout from '../templates/components/overlaid-dropdown';
 
 export default Component.extend({
   layout,
-  classNames: [ 'overlaid-dropdown' ],
+  classNames: ['overlaid-dropdown'],
 
   showDropdown: or('holdFocus', 'focused'),
 
   actions: {
     onButtonClick() {
       this.toggleProperty('focused');
-      this.$('.overlaid-dropdown__button').focus();
+      $(this.element).find(`.overlaid-dropdown__button`)[0].focus();
     },
 
     /*
@@ -28,7 +28,9 @@ export default Component.extend({
       next(() => {
         // Refocus the button (should be found inside this component)
         // The blur event can now be triggered again
-        const buttonElem = this.$('.overlaid-dropdown__button');
+        const buttonElem = $(this.element).find(
+          `.overlaid-dropdown__button`
+        )[0];
         if (this.isDestroyed || !buttonElem) return;
         buttonElem.focus();
         // Set focused back to true
@@ -36,6 +38,6 @@ export default Component.extend({
         // Release the hold on the dropdown being open
         set(this, 'holdFocus', false);
       });
-    }
-  }
+    },
+  },
 });

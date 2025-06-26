@@ -1,30 +1,37 @@
-<div class="combo-button__container" tabindex="0">
-  <div class="combo-button__button-container">
-    {{loading-button
-      isLoading=isLoading
-      class=(concat 'combo-button__button-main ' (if buttonClass buttonClass))
-      action=(action 'onButtonClick')
-      buttonText=buttonText
-    }}
+<div class='combo-button__container' tabindex='0'>
+  <div class='combo-button__button-container'>
+    <LoadingButton
+      @isLoading={{@isLoading}}
+      class={{concat
+        'combo-button__button-main '
+        (if @buttonClass @buttonClass)
+      }}
+      @action={{action 'onButtonClick'}}
+      @buttonText={{@buttonText}}
+      disabled={{true}}
+    />
 
     <button
-      class="combo-button__button-side {{if buttonClass buttonClass}}"
-      disabled={{isLoading}}
-      {{action toggleProperty 'focused'}}
+      class='combo-button__button-side {{if @buttonClass @buttonClass}}'
+      disabled={{@isLoading}}
+      type='button'
+      {{action this.toggleProperty 'focused'}}
     >
       {{fa-icon 'caret-down'}}
     </button>
   </div>
 
-  {{#if hasBlock}}
-    {{#if showDropdown}}
+  {{#if (has-block)}}
+    {{#if this.showDropdown}}
       <div
-        class="combo-button__overlaid-dropdown-container"
+        class='combo-button__overlaid-dropdown-container'
         onmousedown={{action 'holdFocus'}}
         ontouchstart={{action 'holdFocus'}}
       >
-        {{#if title}}
-          <div class="combo-button__overlaid-dropdown-title">{{title}}</div>
+        {{#if this.title}}
+          <div
+            class='combo-button__overlaid-dropdown-title'
+          >{{this.title}}</div>
         {{/if}}
 
         {{yield}}

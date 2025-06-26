@@ -21,7 +21,7 @@ export default Service.extend({
       cache = get(this, cachePath);
     }
 
-    const existing = cache.find(obj => _.isEqual(get(obj, 'key'), key));
+    const existing = cache.find((obj) => _.isEqual(get(obj, 'key'), key));
 
     if (existing) {
       set(existing, 'value', value);
@@ -40,7 +40,7 @@ export default Service.extend({
       return undefined;
     }
 
-    const record = cache.find(obj => _.isEqual(get(obj, 'key'), key));
+    const record = cache.find((obj) => _.isEqual(get(obj, 'key'), key));
 
     return record ? get(record, 'value') : undefined;
   },
@@ -59,12 +59,12 @@ export default Service.extend({
       return true;
     }
 
-    const record = cache.find(obj => _.isEqual(get(obj, 'key'), key));
+    const record = cache.find((obj) => _.isEqual(get(obj, 'key'), key));
 
     if (record) {
       cache.removeObject(record);
     }
 
     return Boolean(record);
-  }
+  },
 });

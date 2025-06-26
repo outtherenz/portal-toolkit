@@ -9,17 +9,25 @@ export default Service.extend({
 
   defaultClearDuration: 3500,
 
-  info()    { return this.showProxy('info',    ...arguments); },
-  warning() { return this.showProxy('warning', ...arguments); },
-  success() { return this.showProxy('success', ...arguments); },
-  error()   { return this.showProxy('error',   ...arguments); },
+  info() {
+    return this.showProxy('info', ...arguments);
+  },
+  warning() {
+    return this.showProxy('warning', ...arguments);
+  },
+  success() {
+    return this.showProxy('success', ...arguments);
+  },
+  error() {
+    return this.showProxy('error', ...arguments);
+  },
 
   showProxy(type, options, duration) {
     options = options || {};
 
     if (typeof options === 'string') {
       options = {
-        message: options
+        message: options,
       };
     }
 
@@ -40,7 +48,7 @@ export default Service.extend({
       message,
       type = 'info',
       autoClear = arguments.length > 1 || options.type === 'success',
-      clearDuration = duration
+      clearDuration = duration,
     } = options;
 
     // Check that a message has been set
@@ -50,7 +58,7 @@ export default Service.extend({
       message,
       type,
       autoClear,
-      clearDuration
+      clearDuration,
     });
 
     get(this, 'list').pushObject(notification);
@@ -72,7 +80,10 @@ export default Service.extend({
 
     later(() => {
       // Hasn't been closed manually
-      if (get(this, 'list').indexOf(notification) !== -1 && !get(notification, 'dismiss')) {
+      if (
+        get(this, 'list').indexOf(notification) !== -1 &&
+        !get(notification, 'dismiss')
+      ) {
         this.clear(notification);
       }
     }, get(notification, 'clearDuration'));
@@ -88,6 +99,6 @@ export default Service.extend({
   },
 
   clearAll() {
-    get(this, 'list').forEach(notification => this.clear(notification));
-  }
+    get(this, 'list').forEach((notification) => this.clear(notification));
+  },
 });

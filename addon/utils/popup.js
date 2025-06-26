@@ -34,7 +34,7 @@ export default function createPopup() {
 
   return {
     popup,
-    promise
+    promise,
   };
 }
 

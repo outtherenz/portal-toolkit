@@ -7,33 +7,36 @@ import layout from '../templates/components/sortable-list';
 export default Component.extend({
   layout,
   tagName: 'ol',
-  classNames: [ 'sortable-list' ],
+  classNames: ['sortable-list'],
 
   content: null,
   property: 'value',
 
   index: 'sortIndex',
-  sortBy: computed('index', function() {
-    return [ get(this, 'index') ];
+  sortBy: computed('index', function () {
+    return [this.index];
   }),
 
   sortedContent: sort('content', 'sortBy'),
 
   sort() {
-    this.$('li').each((index, li) => {
-      const id = $(li).attr('data-id');
-      const item = get(this, 'content').findBy('id', id);
+    $(this.element)
+      .find('li')
+      .each((index, li) => {
+        const id = $(li).attr('data-id');
+        const item = this.content.find((i) => i.id === id);
 
-      if (item) {
-        set(item, 'sortIndex', index);
-      }
-    });
+        if (item) {
+          set(item, 'sortIndex', index);
+        }
+      });
   },
 
   didInsertElement() {
-    $(this.$()).nativeSortable({
+    this._super(...arguments);
+    $(this.element).nativeSortable({
       animation: 250,
-      onSort: () => this.sort()
+      onSort: () => this.sort(),
     });
-  }
+  },
 });

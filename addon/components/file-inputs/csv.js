@@ -6,7 +6,7 @@ import FileField from 'ember-uploader/components/file-field';
 /* global Papa */
 
 export default FileField.extend({
-  attributeBindings: [ 'accept' ],
+  attributeBindings: ['accept'],
 
   change(event) {
     const files = get(event, 'target.files');
@@ -25,7 +25,7 @@ export default FileField.extend({
       Papa.parse(sanitizedText, {
         skipEmptyLines: true,
         newline: '\n',
-        complete: results => run(() => set(this, 'file', results))
+        complete: (results) => run(() => set(this, 'file', results)),
       });
     });
 
@@ -33,5 +33,5 @@ export default FileField.extend({
     if (!Ember.testing) {
       event.target.value = '';
     }
-  }
+  },
 });

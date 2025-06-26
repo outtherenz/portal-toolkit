@@ -1,64 +1,64 @@
-// Libraries and dependencies
-@import "bourbon";
-@import "font-awesome";
-@import "ember-modal-dialog/ember-modal-structure";
+// // Libraries and dependencies
+// @use 'bourbon';
+// @use 'font-awesome';
+@use 'ember-modal-dialog/ember-modal-structure';
 
 // Setup
-@import "global/breakpoints";
-@import "global/colors";
-@import "global/typography";
+// @use 'global/breakpoints';
+// @use 'global/colors';
+// @use 'global/typography';
 
-// Mixins
-@import "mixins/grab-cursor";
+// // Mixins
+@use 'mixins/grab-cursor';
+@use 'mixins/clearfix';
 
-// Global
-@import "global/animations";
+// // Global
+// @use 'global/animations';
 
-// Layout
-@import "layout/page";
-@import "layout/page-header";
-@import "layout/page-body";
-@import "layout/page-footer";
+// // Layout
+// @use 'layout/page';
+// @use 'layout/page-header';
+// @use 'layout/page-body';
+// @use 'layout/page-footer';
 
 // Components
-@import "components/forms/checkbox";
-@import "components/forms/file-input-button";
-@import "components/forms/date-input";
-@import "components/forms/radio-button";
-@import "components/forms/select-box-replacement";
-@import "components/forms/select-box";
-@import "components/forms/tabular-form-controls";
-@import "components/forms/text-input";
-@import "components/block-module";
-@import "components/buttons";
-@import "components/charts";
-@import "components/combo-box";
-@import "components/combo-button";
-@import "components/date-picker";
-@import "components/error-page";
-@import "components/footnote";
-@import "components/info-popup";
-@import "components/key-value-pairs";
-@import "components/loading-icon";
-@import "components/master-detail";
-@import "components/modals";
-@import "components/module-navigation";
-@import "components/month-picker";
-@import "components/notifications";
-@import "components/overlaid-dropdown";
-@import "components/print-button";
-@import "components/radio-slider";
-@import "components/search-select";
-@import "components/selector";
-@import "components/sortable-list";
-@import "components/tables";
-@import "components/tabs";
-@import "components/value-change-indicator";
+// @use 'components/forms/file-input-button';
+// @use 'components/forms/date-input';
+// @use 'components/forms/radio-button';
+// @use 'components/forms/select-box-replacement';
+// @use 'components/forms/select-box';
+// @use 'components/forms/tabular-form-controls';
+// @use 'components/forms/text-input';
+// @use 'components/block-module';
+// @use 'components/buttons';
+// @use 'components/charts';
+// @use 'components/combo-box';
+// @use 'components/combo-button';
+// @use 'components/date-picker';
+// @use 'components/error-page';
+// @use 'components/footnote';
+// @use 'components/info-popup';
+// @use 'components/key-value-pairs';
+// @use 'components/loading-icon';
+// @use 'components/master-detail';
+// @use 'components/modals';
+// @use 'components/module-navigation';
+// @use 'components/month-picker';
+// @use 'components/notifications';
+// @use 'components/overlaid-dropdown';
+// @use 'components/print-button';
+// @use 'components/radio-slider';
+// @use 'components/search-select';
+// @use 'components/selector';
+// @use 'components/sortable-list';
+// @use 'components/tables';
+// @use 'components/tabs';
+// @use 'components/value-change-indicator';
 
-// Browser-specific
-@import "global/browser-specific";
+// // Browser-specific
+// @use 'global/browser-specific';
 
-// Print
-@media print {
-  @import "global/print";
-}
+// // Print
+// @media print {
+//   @use 'global/print';
+// }

@@ -1,15 +1,14 @@
 import { or } from '@ember/object/computed';
 import Component from '@ember/component';
-import { get } from '@ember/object';
 import layout from '../templates/components/loading-button';
 
 export default Component.extend({
   layout,
 
   tagName: 'button',
-  classNames: [ 'loading-button' ],
-  classNameBindings: [ 'isLoading:loading' ],
-  attributeBindings: [ 'disabled' ],
+  classNames: ['loading-button'],
+  classNameBindings: ['isLoading:loading'],
+  attributeBindings: ['disabled'],
 
   buttonText: 'Submit',
   isLoading: false,
@@ -22,13 +21,13 @@ export default Component.extend({
 
     if (!get(this, 'isLoading')) {
       // Maintain current width
-      var el = this.$()[0];
+      var el = $(this.element)[0];
       el.style.minWidth = getComputedStyle(el).width;
       el.style.minHeight = getComputedStyle(el).height;
 
-      if (get(this, 'action')) {
-        this.sendAction();
+      if (this.action) {
+        this.action();
       }
     }
-  }
+  },
 });

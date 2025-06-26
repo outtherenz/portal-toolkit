@@ -1,9 +1,12 @@
-{{#each options as |option i|}}
-  {{radio-button
-    name=(concat 'radio-slider-option-' elementId '-' i)
-    checked=selected
-    value=option.value
+{{#each @options as |option i|}}
+  <RadioButton
+    @name={{(concat 'radio-slider-option-' this.elementId '-' i)}}
+    @checked={{@selected}}
+    @value={{option.value}}
     class='field'
-    id=(concat 'radio-slider-option-' elementId '-' i)}}
-  <label for="{{concat 'radio-slider-option-' elementId '-' i}}">{{option.label}}</label>
+    id={{(concat 'radio-slider-option-' this.elementId '-' i)}}
+  />
+  <label
+    for='{{concat "radio-slider-option-" this.elementId "-" i}}'
+  >{{option.label}}</label>
 {{/each}}

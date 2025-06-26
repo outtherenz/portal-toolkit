@@ -1,1 +1,5 @@
-export { default, formatDuration, parseDuration } from 'portal-toolkit/helpers/format-duration';
+export {
+  default,
+  formatDuration,
+  parseDuration,
+} from 'portal-toolkit/helpers/format-duration';

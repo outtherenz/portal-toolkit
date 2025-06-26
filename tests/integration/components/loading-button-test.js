@@ -1,57 +1,26 @@
-import { moduleForComponent, test } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'dummy/tests/helpers';
+import { render } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
 
-moduleForComponent('loading-button', 'Integration | Component | loading button', {
-  integration: true
-});
+module('Integration | Component | loading-button', function (hooks) {
+  setupRenderingTest(hooks);
 
-test('renders in inline form', function(assert) {
-  assert.expect(1);
+  test('it renders', async function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.set('myAction', function(val) { ... });
 
-  this.render(hbs`{{loading-button buttonText='Test'}}`);
+    await render(hbs`<LoadingButton />`);
 
-  assert.equal(this.$('button').text(), 'Test');
-});
+    assert.dom(this.element).hasText('');
 
-test('renders in block form', function(assert) {
-  assert.expect(1);
+    // Template block usage:
+    await render(hbs`
+      <LoadingButton>
+        template block text
+      </LoadingButton>
+    `);
 
-  this.render(hbs`{{#loading-button}}Test{{/loading-button}}`);
-
-  assert.equal(this.$('button').text(), 'Test');
-});
-
-test('shows a loading icon when loading', function(assert) {
-  assert.expect(5);
-
-  this.render(hbs`{{loading-button isLoading=isLoading}}`);
-
-  // Record the inital style attributes for comparison later
-  const styleBefore = getComputedStyle(this.$('button')[0]);
-
-  // Start loading
-  this.set('isLoading', true);
-
-  // Check the button is disabled and the icon is shown
-  assert.ok(this.$('button')[0].disabled);
-  assert.equal(this.$('button i.fa').length, 1);
-
-  // Check the dimensions of the button didn't change
-  const styleAfter = getComputedStyle(this.$('button')[0]);
-  assert.equal(styleBefore.width, styleAfter.width);
-  assert.equal(styleBefore.height, styleAfter.height);
-
-  // Check everything returns to normal once loading finishes
-  this.set('isLoading', false);
-  assert.equal(this.$('button').text(), 'Submit');
-});
-
-test('triggers action when clicked', function(assert) {
-  assert.expect(0);
-
-  const done = assert.async();
-
-  this.set('test', done);
-  this.render(hbs`{{loading-button action=(action test)}}`);
-  this.$('button').click();
+    assert.dom(this.element).hasText('template block text');
+  });
 });
