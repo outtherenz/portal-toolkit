@@ -4,7 +4,7 @@ import Ember from 'ember';
 import FileField from 'ember-uploader/components/file-field';
 
 export default FileField.extend({
-  attributeBindings: [ 'accept' ],
+  attributeBindings: ['accept'],
 
   change(event) {
     /*
@@ -20,5 +20,5 @@ export default FileField.extend({
     if (!isEmpty(files)) {
       reader.readAsText(files[0]);
     }
-  }
+  },
 });

@@ -1,9 +1,28 @@
-import { moduleForComponent, test } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
-import wait from 'ember-test-helpers/wait';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'dummy/tests/helpers';
+import { render } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
 
-moduleForComponent('date-picker', 'Integration | Component | date picker', {
-  integration: true
+module('Integration | Component | date-picker', function (hooks) {
+  setupRenderingTest(hooks);
+
+  test('it renders', async function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.set('myAction', function(val) { ... });
+
+    await render(hbs`<DatePicker />`);
+
+    assert.dom(this.element).hasText('');
+
+    // Template block usage:
+    await render(hbs`
+      <DatePicker>
+        template block text
+      </DatePicker>
+    `);
+
+    assert.dom(this.element).hasText('template block text');
+  });
 });
 
 test('it renders all parts of the UI', function(assert) {

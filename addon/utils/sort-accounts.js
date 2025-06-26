@@ -1,11 +1,15 @@
 import { get } from '@ember/object';
 
-export default function sortAccounts(accounts = [], sortKey = 'sortIndex', categoryKey = 'category') {
+export default function sortAccounts(
+  accounts = [],
+  sortKey = 'sortIndex',
+  categoryKey = 'category'
+) {
   const profitAndLoss = [];
   const balanceSheet = [];
   const other = [];
 
-  accounts.forEach(target => {
+  accounts.forEach((target) => {
     const category = get(target, categoryKey);
 
     switch (category) {
@@ -25,6 +29,6 @@ export default function sortAccounts(accounts = [], sortKey = 'sortIndex', categ
   return [
     ...profitAndLoss.sortBy(sortKey),
     ...balanceSheet.sortBy(sortKey),
-    ...other.sortBy(sortKey)
+    ...other.sortBy(sortKey),
   ];
 }

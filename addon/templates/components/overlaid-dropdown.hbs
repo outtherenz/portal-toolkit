@@ -1,28 +1,31 @@
-{{!-- The loading button component is being used so that it can pass through the disabled property --}}
-{{#loading-button
-  class=(concat 'overlaid-dropdown__button ' buttonClasses)
-  action=(action 'onButtonClick')
-  focusOut=(action set 'focused' false)
-  disabled=disabled
-}}
-  {{#if buttonText}}
-    {{{buttonText}}}
+{{! The loading button component is being used so that it can pass through the disabled property }}
+<LoadingButton
+  class={{(concat 'overlaid-dropdown__button ' @buttonClasses)}}
+  @action={{action 'onButtonClick'}}
+  {{on 'focusOut' (fn (mut this.focused) false)}}
+  disabled={{@disabled}}
+>
+  {{#if @buttonText}}
+    {{{@buttonText}}}
   {{/if}}
-  {{#if buttonIcon}}
-    {{fa-icon icon=buttonIcon}}
+  {{#if @buttonIcon}}
+    <FaIcon @icon={{@buttonIcon}} />
   {{/if}}
-{{/loading-button}}
+</LoadingButton>
 
-{{!-- Hide dropdown body instead of destroying it so that click actions can be carried out --}}
-{{!-- Defaults to align left, only other option is align='right' --}}
-<div class="overlaid-dropdown__body {{if (eq align 'right') 'overlaid-dropdown__body--right'}} {{if (not showDropdown) 'overlaid-dropdown__body--hidden'}}"
+{{! Hide dropdown body instead of destroying it so that click actions can be carried out }}
+{{! Defaults to align left, only other option is align='right' }}
+<div
+  class='overlaid-dropdown__body
+    {{if (eq @align "right") "overlaid-dropdown__body--right"}}
+    {{unless this.showDropdown "overlaid-dropdown__body--hidden"}}'
   onmousedown={{action 'holdFocus'}}
   ontouchstart={{action 'holdFocus'}}
 >
-  {{!-- Title is bold, padded, and has a border on the bottom --}}
-  {{#if title}}
-    <div class="overlaid-dropdown__title">{{title}}</div>
+  {{! Title is bold, padded, and has a border on the bottom }}
+  {{#if @title}}
+    <div class='overlaid-dropdown__title'>{{@title}}</div>
   {{/if}}
 
-  {{yield showDropdown}}
+  {{yield this.showDropdown}}
 </div>

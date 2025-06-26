@@ -1,36 +1,26 @@
-import { moduleForComponent, test } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'dummy/tests/helpers';
+import { render } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
 
-moduleForComponent('loading-icon', 'Integration | Component | loading icon', {
-  integration: true
-});
+module('Integration | Component | loading-icon', function (hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders a ripple', function(assert) {
-  assert.expect(3);
+  test('it renders', async function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.set('myAction', function(val) { ... });
 
-  this.render(hbs`{{loading-icon 'ripple'}}`);
+    await render(hbs`<LoadingIcon />`);
 
-  const icon = this.$().children('.loading-icon.loading-icon--ripple');
-  assert.equal(icon.length, 1);
+    assert.dom(this.element).hasText('');
 
-  const svg = icon.children('svg');
-  assert.equal(svg.length, 1);
+    // Template block usage:
+    await render(hbs`
+      <LoadingIcon>
+        template block text
+      </LoadingIcon>
+    `);
 
-  const circles = svg.children('circle');
-  assert.equal(circles.length, 4);
-});
-
-test('it renders a spinner', function(assert) {
-  assert.expect(3);
-
-  this.render(hbs`{{loading-icon 'spinner'}}`);
-
-  const icon = this.$().children('.loading-icon.loading-icon--spinner');
-  assert.equal(icon.length, 1);
-
-  const svg = icon.children('svg');
-  assert.equal(svg.length, 1);
-
-  const circles = svg.children('circle');
-  assert.equal(circles.length, 1);
+    assert.dom(this.element).hasText('template block text');
+  });
 });

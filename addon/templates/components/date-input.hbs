@@ -1,23 +1,24 @@
-{{#if isActive}}
-  {{input
-    value=(moment-format date 'YYYY-MM-DD')
+{{#if this.isActive}}
+  <Input
+    @type='date'
+    @value={{moment-format @date 'YYYY-MM-DD'}}
     class='select-box-replacement select-box-replacement--stretched date-input__display select-box-replacement--date-input'
-    key-up=(action 'handleDateInput')
-    type='date'
-  }}
+    {{on 'keyup' (action 'handleDateInput')}}
+  />
 
-  {{date-picker
-    date=date
-    select=(action 'selectAndDeactivate')
-    class="date-input__picker date-picker--stretched"
-  }}
+  <DatePicker
+    @date={{@date}}
+    @select={{action 'selectAndDeactivate'}}
+    class='date-input__picker date-picker--stretched'
+  />
+
 {{else}}
   <div
-    class="select-box-replacement select-box-replacement--stretched date-input__display"
-    onfocus={{action (toggle 'isActive' this)}}
-    tabindex="0"
-    {{action (toggle 'isActive' this)}}
+    class='select-box-replacement select-box-replacement--stretched date-input__display'
+    onfocus={{action 'toggle'}}
+    tabindex='0'
+    {{action 'toggle'}}
   >
-    {{if date (moment-format date format) placeholder}}
+    {{if @date (moment-format @date @format) this.placeholder}}
   </div>
 {{/if}}

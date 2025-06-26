@@ -3,5 +3,5 @@ import layout from '../templates/components/info-popup';
 
 export default Component.extend({
   tagName: '',
-  layout
+  layout,
 });

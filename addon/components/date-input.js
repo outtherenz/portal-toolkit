@@ -1,8 +1,8 @@
 import Component from '@ember/component';
 import { next } from '@ember/runloop';
-import moment from 'moment';
 import $ from 'jquery';
-import { set, get, observer } from '@ember/object';
+import moment from 'moment';
+import { set, observer } from '@ember/object';
 import layout from '../templates/components/date-input';
 
 export default Component.extend({
@@ -10,14 +10,15 @@ export default Component.extend({
 
   placeholder: 'Please select a Date',
 
-  classNames: [ 'date-input' ],
+  classNames: ['date-input'],
 
   isActive: false,
   format: 'dddd, D MMMM YYYY',
 
   didInsertElement() {
-    const element = get(this, 'elementId');
-    $(window).on('keydown keyup click blur', event => {
+    this._super(...arguments);
+    const element = this.elementId;
+    $(window).on('keydown keyup click blur', (event) => {
       const { target, key } = event;
       const isTarget = $(`#${element}`).is(target);
       const hasTarget = $(`#${element}`).has(target).length !== 0;
@@ -34,23 +35,26 @@ export default Component.extend({
   },
 
   willDestroyElement() {
+    this._super(...arguments);
     // remove our listener
     $(window).off('keydown keyup click blur');
   },
 
-  focusDateInput: observer('isActive', function() {
-    if (get(this, 'isActive')) next(() => this.$('input').focus());
+  focusDateInput: observer('isActive', function () {
+    if (this.isActive) next(() => this.element.querySelector('input').focus());
   }),
 
   actions: {
     selectAndDeactivate(date) {
       this.toggleProperty('isActive');
-      this.sendAction('select', date);
+      this.select(date);
     },
     handleDateInput(value) {
-      const date = moment(value, 'YYYY-MM-DD').toDate();
-
-      if (date.getTime()) this.sendAction('select', date);
-    }
-  }
+      const date = moment(value.target.value, 'YYYY-MM-DD').toDate();
+      if (date.getTime()) this.select(date);
+    },
+    toggle() {
+      this.toggleProperty('isActive');
+    },
+  },
 });

@@ -8,7 +8,8 @@
   flex: 0 0 auto;
   border-right: 1px solid $ptl-border-color;
 
-  ul, ol {
+  ul,
+  ol {
     padding: $desktop-gutter/2 0 $desktop-gutter/2 $desktop-gutter/2;
     margin: 0;
   }
@@ -31,7 +32,7 @@
 
     &.active,
     &:hover {
-      background-color: tint(desaturate($alert-blue, 30%), 90%);
+      // background-color: tint(desaturate($alert-blue, 30%), 90%);
       text-decoration: none;
       position: relative;
     }

@@ -11,38 +11,19 @@
 # Misc
 /.sass-cache
 /connect.lock
-/coverage/*
+/coverage/
 /libpeerconnection.log
-npm-debug.log
-testem.log
-dump.rdb
-.DS_Store
-clean_ember-cli.js
-start guide.txt
-output for bower install after clean script.txt
+/npm-debug.log*
+/testem.log
+/yarn-error.log
 
-# Sublime Text
-*.sublime-*
+# ember-try
+/.node_modules.ember-try/
+/bower.json.ember-try
+/npm-shrinkwrap.json.ember-try
+/package.json.ember-try
+/package-lock.json.ember-try
+/yarn.lock.ember-try
 
-# Webstorm
-.idea*
-
-## File-based project format:
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
+# broccoli-debug
+/DEBUG/

@@ -1,7 +1,7 @@
-{{#each sortedContent as |item|}}
-  {{#if hasBlock}}
+{{#each this.sortedContent as |item|}}
+  {{#if (has-block)}}
     {{yield item}}
   {{else}}
-    <li data-id={{item.id}}>{{get item property}}</li>
+    <li data-id={{item.id}}>{{get item @property}}</li>
   {{/if}}
 {{/each}}

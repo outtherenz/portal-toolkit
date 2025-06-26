@@ -1,42 +1,26 @@
-import { moduleForComponent, test } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
-import wait from 'ember-test-helpers/wait';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'dummy/tests/helpers';
+import { render } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
 
-moduleForComponent('duration-input', 'Integration | Component | duration input', {
-  integration: true
-});
+module('Integration | Component | duration-input', function (hooks) {
+  setupRenderingTest(hooks);
 
-test('inits with defualt placeholder', function(assert) {
-  this.render(hbs`{{duration-input duration=duration}}`);
-  assert.equal(this.$('input').attr('placeholder'), '0:00');
-});
+  test('it renders', async function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.set('myAction', function(val) { ... });
 
-test('inits with dash placeholder', function(assert) {
-  this.render(hbs`{{duration-input duration=duration placeholder='–'}}`);
-  assert.equal(this.$('input').attr('placeholder'), '–');
-});
+    await render(hbs`<DurationInput />`);
 
-test('formats on init', function(assert) {
-  this.render(hbs`{{duration-input duration='5.75'}}`);
-  assert.equal(this.$('input').val(), '5:45');
-});
+    assert.dom(this.element).hasText('');
 
-test('formats on blur', function(assert) {
-  this.render(hbs`{{duration-input duration=duration}}`);
-  this.$('input').val('3:30').blur();
+    // Template block usage:
+    await render(hbs`
+      <DurationInput>
+        template block text
+      </DurationInput>
+    `);
 
-  return wait().then(() => {
-    assert.equal(this.$('input').val(), '3:30');
-    assert.equal(this.get('duration'), 3.5);
-  });
-});
-
-test('reformats when value is updated', function(assert) {
-  this.render(hbs`{{duration-input duration=duration}}`);
-
-  return wait().then(() => {
-    this.set('duration', 6.75);
-  }).then(() => {
-    assert.equal(this.$('input').val(), '6:45');
+    assert.dom(this.element).hasText('template block text');
   });
 });

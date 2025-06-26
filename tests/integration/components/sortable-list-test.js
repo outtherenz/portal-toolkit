@@ -1,21 +1,28 @@
-import { moduleForComponent, test, skip } from 'ember-qunit';
-import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'dummy/tests/helpers';
+import { render } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
 
-moduleForComponent('sortable-list', 'Integration | Component | sortable list', {
-  integration: true,
+module('Integration | Component | sortable-list', function (hooks) {
+  setupRenderingTest(hooks);
 
-  beforeEach() {
-    var content = [
-      { name: 'john', value: '1' },
-      { name: 'ben', value: '2' },
-      { name: 'greg', value: '3' },
-      { name: 'fraser', value: '4' },
-      { name: 'janyk', value: '5' },
-      { name: 'steve', value: '6' }
-    ];
+  test('it renders', async function (assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.set('myAction', function(val) { ... });
 
-    this.set('content', content);
-  }
+    await render(hbs`<SortableList />`);
+
+    assert.dom(this.element).hasText('');
+
+    // Template block usage:
+    await render(hbs`
+      <SortableList>
+        template block text
+      </SortableList>
+    `);
+
+    assert.dom(this.element).hasText('template block text');
+  });
 });
 
 test('it renders all our content correctly', function(assert) {

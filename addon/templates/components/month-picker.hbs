@@ -1,40 +1,93 @@
-{{#unless compact}}
-  <button class='subdued' {{action 'prevYear'}}>«</button>
-  <button class='subdued' {{action 'prevMonth'}}>‹</button>
-
-  <div class="inputs">
-    {{#x-select value=selectedMonth action=(action (mut selectedMonth)) class=(if dark 'select-box select-box--dark month' 'select-box month') as |xs|}}
-      {{#xs.option value="01"}}January{{/xs.option}}
-      {{#xs.option value="02"}}February{{/xs.option}}
-      {{#xs.option value="03"}}March{{/xs.option}}
-      {{#xs.option value="04"}}April{{/xs.option}}
-      {{#xs.option value="05"}}May{{/xs.option}}
-      {{#xs.option value="06"}}June{{/xs.option}}
-      {{#xs.option value="07"}}July{{/xs.option}}
-      {{#xs.option value="08"}}August{{/xs.option}}
-      {{#xs.option value="09"}}September{{/xs.option}}
-      {{#xs.option value="10"}}October{{/xs.option}}
-      {{#xs.option value="11"}}November{{/xs.option}}
-      {{#xs.option value="12"}}December{{/xs.option}}
-    {{/x-select}}
-
-    {{#x-select value=selectedYear action=(action (mut selectedYear)) class=(if dark 'select-box select-box--dark year' 'select-box year') as |xs|}}
-      {{#each yearList as |year|}}
-        {{#xs.option value=year}}{{year}}{{/xs.option}}
-      {{/each}}
-    {{/x-select}}
-  </div>
-
-  <button class='subdued' {{action 'nextMonth'}}>›</button>
-  <button class='subdued' {{action 'nextYear'}}>»</button>
-{{else}}
-  <label class="month-picker__input-label" for="month-picker__input">
-    <span class="month-picker__display">
-      <span class="month-picker__month">{{moment-format period 'MMM' 'YYYY-MM'}}</span>
-      <span class="month-picker__year">{{moment-format period 'YYYY' 'YYYY-MM'}}</span>
+{{#if @compact}}
+  <label class='month-picker__input-label' for='month-picker__input'>
+    <span class='month-picker__display'>
+      <span class='month-picker__month'>{{moment-format
+          @period
+          'MMM'
+          'YYYY-MM'
+        }}</span>
+      <span class='month-picker__year'>{{moment-format
+          @period
+          'YYYY'
+          'YYYY-MM'
+        }}</span>
     </span>
-    {{fa-icon 'calendar'}}
+    <FaIcon @icon='calendar' />
   </label>
 
-  {{input type="month" value=period class="month-picker__input" id="month-picker__input"}}
-{{/unless}}
+  <Input
+    @type='month'
+    @value={{@period}}
+    class='month-picker__input'
+    id='month-picker__input'
+  />
+{{else}}
+  <button class='subdued' type="button" {{action 'prevYear'}}>«</button>
+  <button class='subdued' type="button" {{action 'prevMonth'}}>‹</button>
+
+  <div class='inputs'>
+    <select
+      class={{if
+        this.dark
+        'select-box select-box--dark month'
+        'select-box month'
+      }}
+      onchange={{action 'onChangeMonth'}}
+    >
+      <option value='01' selected={{eq this.selectedMonth '01'}}>
+        January
+      </option>
+      <option value='02' selected={{eq this.selectedMonth '02'}}>
+        February
+      </option>
+      <option value='03' selected={{eq this.selectedMonth '03'}}>
+        March
+      </option>
+      <option value='04' selected={{eq this.selectedMonth '04'}}>
+        April
+      </option>
+      <option value='05' selected={{eq this.selectedMonth '05'}}>
+        May
+      </option>
+      <option value='06' selected={{eq this.selectedMonth '06'}}>
+        June
+      </option>
+      <option value='07' selected={{eq this.selectedMonth '07'}}>
+        July
+      </option>
+      <option value='08' selected={{eq this.selectedMonth '08'}}>
+        August
+      </option>
+      <option value='09' selected={{eq this.selectedMonth '09'}}>
+        September
+      </option>
+      <option value='10' selected={{eq this.selectedMonth '10'}}>
+        October
+      </option>
+      <option value='11' selected={{eq this.selectedMonth '11'}}>
+        November
+      </option>
+      <option value='12' selected={{eq this.selectedMonth '12'}}>
+        December
+      </option>
+    </select>
+
+    <select
+      class={{if
+        this.dark
+        'select-box select-box--dark year'
+        'select-box year'
+      }}
+      onchange={{action 'onChangeYear'}}
+    >
+      {{#each this.yearList as |year|}}
+        <option value={{year}} selected={{eq this.selectedYear year}}>
+          {{year}}
+        </option>
+      {{/each}}
+    </select>
+  </div>
+
+  <button class='subdued' type="button" {{action 'nextMonth'}}>›</button>
+  <button class='subdued' type="button" {{action 'nextYear'}}>»</button>
+{{/if}}

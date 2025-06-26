@@ -9,8 +9,8 @@ export default Component.extend({
   // Default only. Bind your YYYY-MM string to this.
   period: moment().format('YYYY-MM'),
 
-  classNames: [ 'month-picker' ],
-  classNameBindings: [ 'closedPeriod', 'dark:month-picker--dark' ],
+  classNames: ['month-picker'],
+  classNameBindings: ['closedPeriod', 'dark:month-picker--dark'],
 
   selectedMonth: computed('period', {
     get() {
@@ -20,25 +20,31 @@ export default Component.extend({
       const current = get(this, 'period');
       set(this, 'period', current.substr(0, 5) + value);
       return value;
-    }
+    },
   }),
 
   selectedYear: computed('period', {
     get() {
-      const period = get(this, 'period');
-      return typeof period === 'string' ? period.substr(0, 4) : String(moment().year());
+      const period = this.period;
+      return typeof period === 'string'
+        ? period.substr(0, 4)
+        : String(moment().year());
     },
     set(key, year) {
-      const current = moment(get(this, 'period'), 'YYYY-MM');
-      const month = current.isValid() ? current.format('MM') : moment().format('MM');
-      year = moment(year, 'YYYY').isValid() ? String(year) : moment().format('YYYY');
+      const current = moment(this.period, 'YYYY-MM');
+      const month = current.isValid()
+        ? current.format('MM')
+        : moment().format('MM');
+      year = moment(year, 'YYYY').isValid()
+        ? String(year)
+        : moment().format('YYYY');
       set(this, 'period', `${year}-${month}`);
       return year;
-    }
+    },
   }),
 
-  yearList: computed('period', function() {
-    const selected = moment(get(this, 'period').substr(0, 4), 'YYYY');
+  yearList: computed('period', function () {
+    const selected = moment(this.period.substr(0, 4), 'YYYY');
     let start = moment([moment().year() - 8]);
     let end = moment([moment().year() + 2]);
 
@@ -60,12 +66,22 @@ export default Component.extend({
   }),
 
   changePeriod(diff, type) {
-    const current = get(this, 'period');
-    const updated = moment(current, 'YYYY-MM').add(diff, type).format('YYYY-MM');
+    const current = this.period;
+    const updated = moment(current, 'YYYY-MM')
+      .add(diff, type)
+      .format('YYYY-MM');
     set(this, 'period', updated);
   },
 
   actions: {
+    onChangeMonth(event) {
+      set(this, 'selectedMonth', event.target.value);
+    },
+
+    onChangeYear(event) {
+      set(this, 'selectedYear', event.target.value);
+    },
+
     prevYear() {
       this.changePeriod(-1, 'year');
     },
@@ -80,6 +96,6 @@ export default Component.extend({
 
     nextYear() {
       this.changePeriod(1, 'year');
-    }
-  }
+    },
+  },
 });
